@@ -1,5 +1,5 @@
 import { serviceCards, referenceTeaser, treeBlock, partnerStrip } from "../blocks.mjs";
-import { services, projects, certificate, partners } from "../data.mjs";
+import { services, projects, certificate, partners } from "../content/index.mjs";
 
 /* Rumpf der Startseite. Die drei Raster (Leistungen, Referenzteaser,
    Zertifizierung) entstehen aus den Daten in data.mjs – alles andere steht

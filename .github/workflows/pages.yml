@@ -1,0 +1,62 @@
+# Veröffentlicht den Entwurf auf GitHub Pages.
+#
+# Einmalig einzurichten: Repository → Settings → Pages → Source: "GitHub Actions".
+# Danach läuft dieser Ablauf bei jedem Push und die Seite steht unter
+#   https://<konto>.github.io/<repository>/
+#
+# Der Ablauf legt zusätzlich eine robots.txt an, die Suchmaschinen aussperrt –
+# ein Entwurf soll dem echten Auftritt keine Konkurrenz in der Suche machen.
+# Beim Umzug auf die eigene Domain entfällt dieser Schritt.
+
+name: Seite veröffentlichen
+
+on:
+  push:
+    branches:
+      - main
+      - claude/fervent-bohr-hhqlzx
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  bauen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Seiten erzeugen
+        run: npm run build
+
+      - name: Veröffentlichungsordner packen
+        run: |
+          mkdir -p _site
+          cp *.html _site/
+          cp -r assets _site/
+          printf 'User-agent: *\nDisallow: /\n' > _site/robots.txt
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  veroeffentlichen:
+    needs: bauen
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

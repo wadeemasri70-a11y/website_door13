@@ -1,0 +1,13 @@
+{
+  "name": "falke-tuerautomation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Statischer Webauftritt für Falke Türautomation – ohne Abhängigkeiten.",
+  "type": "module",
+  "scripts": {
+    "build": "node build/build.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,4 +1,4 @@
-import { nav, company } from "./nav.mjs";
+import { nav, company } from "./content/index.mjs";
 
 const logoMark = `
       <img class="brand__logo" src="assets/img/logo-falke.png"

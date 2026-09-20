@@ -13,31 +13,35 @@ Skripte – `index.html` im Browser öffnen genügt.
 ## Aufbau
 
 ```
-build/                  Seitengenerator (Node, nur zur Entwicklung)
-  nav.mjs               Navigation + Firmendaten – eine Quelle für alle Seiten
-  layout.mjs            Kopf, Topbar, Navigation, Fußzeile
-  blocks.mjs            Wiederverwendbare Inhaltsbausteine
-  data.mjs              Leistungen, Referenzprojekte, Partner, Zertifizierung
-  pages/home.mjs        Rumpf der Startseite
-  build.mjs             schreibt die HTML-Dateien
-  pngtool.py            PNG-Werkzeug (helle Logofassung, Favicon)
-  upscale.sh / .html    rechnet Fotos im Browser hoch und schärft nach
+build/                     Seitengenerator (Node, nur zur Entwicklung)
+  content/                 die Inhalte, getrennt nach Thema
+    company.mjs            Firmendaten + Navigation
+    services.mjs           die sechs Leistungsbereiche
+    projects.mjs           Referenzprojekte
+    partners.mjs           Partner & Mitgliedschaften
+    certificate.mjs        Zertifizierung (Planet Tree)
+    index.mjs              Sammelstelle für alle Inhalte
+  pages/                   je ein Modul pro Seitengruppe
+    start.mjs  home.mjs    Startseite
+    leistungen.mjs         Übersicht, 6 Leistungsseiten, Wartungsanfrage
+    referenzen.mjs  unternehmen.mjs  kontakt.mjs  rechtliches.mjs
+  layout.mjs               Kopf, Topbar, Navigation, Fußzeile
+  blocks.mjs               wiederverwendbare Inhaltsbausteine
+  build.mjs                Läufer: schreibt alle Seiten
+  pngtool.py               PNG-Werkzeug (helle Logofassung, Favicon)
+  upscale.sh / .html       rechnet Fotos hoch und schärft nach
 
-assets/css/tokens.css   Palette, Rollen (Themen), Typografie, Raum, Bewegung
-assets/css/base.css     Reset, Typografie, Layout-Primitive, Buttons, Reveals
-assets/css/layout.css   Topbar, Kopfzeile, Navigation, Fußzeile
-assets/css/content.css  Hero, Abschnitte, Karten, Text, Projekte, Kontakt
-assets/css/van.css      Bühne und Aussehen des 3-D-Transporters
+assets/css/tokens.css      Palette, Rollen (Themen), Typografie, Raum, Bewegung
+assets/css/base.css        Reset, Typografie, Layout-Primitive, Buttons
+assets/css/layout.css      Topbar, Kopfzeile, Navigation, Fußzeile
+assets/css/content.css     Hero, Abschnitte, Karten, Text, Projekte, Kontakt
+assets/css/van.css         Bühne und Aussehen des 3-D-Transporters
 
-assets/js/theme.js      Tag-/Nachtthema (ohne defer im <head>)
-assets/js/van.js        baut den Transporter, fährt ihn am Scroll entlang
-assets/js/main.js       Kopfzeile, Navigation, Reveals, Formular
+assets/js/theme.js         Tag-/Nachtthema (ohne defer im <head>)
+assets/js/van.js           baut den Transporter, fährt ihn am Scroll entlang
+assets/js/main.js          Kopfzeile, Navigation, Reveals, Formular
 
-index.html              Startseite
-leistungen.html         Unser Angebot + 6 Leistungsseiten
-referenzen.html         Projekte des bestehenden Auftritts
-ueber-uns / team / karriere / stellen / downloads / kontakt /
-wartungsanfrage / impressum / datenschutz
+18 erzeugte HTML-Dateien im Wurzelverzeichnis
 ```
 
 ## Seiten erzeugen
@@ -46,12 +50,17 @@ Die 18 Seiten teilen sich Kopf, Navigation und Footer. Geändert wird deshalb
 nicht die einzelne HTML-Datei, sondern der Generator:
 
 ```bash
-node build/build.mjs      # schreibt alle .html-Dateien neu
+npm run build             # schreibt alle .html-Dateien neu
 ```
 
-* Navigation und Firmendaten: `build/nav.mjs`
-* Texte der Leistungs- und Referenzseiten: `build/data.mjs`
-* Rumpf der Startseite: `build/_home-raw.html`
+Es gibt keine Abhängigkeiten – `npm install` ist nicht nötig, Node ab Version 18
+genügt. Eine neue Seite entsteht, indem ein Steckbrief
+(`{ slug, title, description, body }`) in eines der Module unter `build/pages/`
+aufgenommen wird; `build.mjs` findet sie von selbst.
+
+* Navigation und Firmendaten: `build/content/company.mjs`
+* Texte der Leistungs- und Referenzseiten: `build/content/`
+* Rumpf der Startseite: `build/pages/home.mjs`
 
 Die erzeugten Dateien liegen flach im Wurzelverzeichnis (`leistung-schiebetueren.html`),
 damit sie ohne Server – auch per Doppelklick – funktionieren. Auf dem Webserver
@@ -159,9 +168,18 @@ durch echte Anlagenfotos ersetzt werden.
 
 ## Veröffentlichen
 
-Alles ist statisch: Ordner auf beliebigen Webspace legen (oder GitHub Pages,
-Netlify, Vercel). `index.html` ist der Einstieg. Fehlende Unterseiten
-(`/impressum/`, `/datenschutz/`) sind im Footer bereits verlinkt.
+Alles ist statisch – der Ordner läuft auf jedem Webspace.
+
+**GitHub Pages** ist vorbereitet: `.github/workflows/pages.yml` baut die Seiten
+bei jedem Push und veröffentlicht sie. Einmalig einschalten unter
+*Settings → Pages → Source: GitHub Actions*; danach steht der Entwurf unter
+`https://<konto>.github.io/<repository>/`. Der Ablauf legt dort eine
+`robots.txt` ab, die Suchmaschinen aussperrt, damit der Entwurf dem echten
+Auftritt keine Konkurrenz in der Suche macht.
+
+**Eigene Domain:** Dateien hochladen, `index.html` ist der Einstieg. Sprechende
+Adressen wie `/leistung/schiebetueren/` lassen sich per Rewrite auf die flachen
+Dateinamen abbilden.
 
 ---
 

@@ -1,5 +1,5 @@
 import { arrowIcon } from "./layout.mjs";
-import { company } from "./nav.mjs";
+import { company } from "./content/index.mjs";
 
 const esc = (s) => String(s).replace(/&(?![a-z#0-9]+;)/g, "&amp;");
 
@@ -225,22 +225,29 @@ ${c.facts.map((f) => `            <div><b>${f.b}</b><span>${f.span}</span></div>
 /* ---- Partnerleiste ------------------------------------------------------ */
 
 export function partnerStrip(partners, { heading = "Partner & Mitgliedschaften" } = {}) {
-  const items = partners.map((p) => {
-    /* Sobald die Logodatei vorliegt, ersetzt sie die Textplakette –
-       dazu in data.mjs nur `file` setzen. */
+  /* Sobald die Logodatei vorliegt, ersetzt sie die Textplakette –
+     dazu in content/partners.mjs nur `file` setzen. */
+  const plate = (p, hidden) => {
     const body = p.file
-      ? `<img src="${p.file}" alt="${esc(p.name)} – ${esc(p.note)}" loading="lazy">`
+      ? `<img src="${p.file}" alt="${hidden ? "" : esc(p.name) + " – " + esc(p.note)}" loading="lazy">`
       : `<span class="partner__name">${p.name}</span>
-          <span class="partner__note">${p.note}</span>`;
-    return `        <li class="partner${p.file ? " partner--logo" : ""}" style="--partner-color:${p.color}">
-          ${body}
-        </li>`;
-  }).join("\n");
+            <span class="partner__note">${p.note}</span>`;
+    return `          <li class="partner${p.file ? " partner--logo" : ""}" style="--partner-color:${p.color}"${hidden ? ' aria-hidden="true"' : ""}>
+            ${body}
+          </li>`;
+  };
+
+  /* Dreifach ausgelegt: so läuft das Band nahtlos, auch auf breiten Schirmen */
+  const lauf = [false, true, true]
+    .map((hidden) => partners.map((p) => plate(p, hidden)).join("\n"))
+    .join("\n");
 
   return `      <div class="partners" data-reveal>
         <p class="partners__label">${heading}</p>
-        <ul class="partners__list">
-${items}
-        </ul>
+        <div class="partners__viewport">
+          <ul class="partners__track">
+${lauf}
+          </ul>
+        </div>
       </div>`;
 }

@@ -533,7 +533,7 @@
   gap: var(--sp-6);
   align-items: center;
 }
-@media (min-width: 60rem) { .partners { grid-template-columns: auto minmax(0, 1fr); gap: var(--sp-9); } }
+@media (min-width: 60rem) { .partners { grid-template-columns: auto minmax(0, 1fr); gap: var(--sp-7); } }
 
 .partners__label {
   font-size: var(--step--2);
@@ -544,11 +544,27 @@
   max-width: 12ch;
 }
 
-.partners__list {
+/* Laufband wie im bestehenden Auftritt: die Reihe wandert langsam nach
+   links, bei Mausberührung hält sie an. Der Inhalt liegt dreifach vor,
+   damit der Übergang nahtlos ist. */
+.partners__viewport {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+.partners__track {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: var(--sp-4) clamp(1.5rem, 1rem + 3vw, 4rem);
+  gap: clamp(1.25rem, 1rem + 2vw, 3rem);
+  width: max-content;
+  padding-block: var(--sp-2);
+  animation: partner-marquee 34s linear infinite;
+}
+.partners:hover .partners__track,
+.partners:focus-within .partners__track { animation-play-state: paused; }
+
+@keyframes partner-marquee {
+  to { transform: translateX(calc(-100% / 3)); }
 }
 
 .partner {
@@ -581,3 +597,13 @@
   color: var(--fg-strong);
 }
 .partner__note { font-size: var(--step--2); color: var(--fg-muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .partners__track {
+    animation: none;
+    flex-wrap: wrap;
+    width: auto;
+  }
+  .partners__track .partner[aria-hidden="true"] { display: none; }
+  .partners__viewport { -webkit-mask-image: none; mask-image: none; }
+}
