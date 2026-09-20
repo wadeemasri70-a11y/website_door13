@@ -294,7 +294,7 @@ export function map({ hoehe = "" } = {}) {
           <p class="map__adresse">${company.name}<br>${m.address}</p>
           <button class="btn btn--accent" type="button" data-map-load>Karte laden</button>
           <p class="map__hinweis">
-            Beim Laden wird eine Verbindung zu Google aufgebaut.
+            Beim Laden wird eine Verbindung zu Google Maps aufgebaut.
             <a href="${m.link}" target="_blank" rel="noopener">In Google Maps öffnen</a>
           </p>
         </div>

@@ -120,12 +120,21 @@ Ein weiteres Thema entsteht, indem der Rollenblock unter
 ## Karte
 
 Die Karte auf Startseite und Kontaktseite lädt **erst auf Klick**. Vorher steht
-dort eine graue Vorschau mit Anschrift, Stecknadel und dem Hinweis, dass beim
-Laden eine Verbindung zu Google entsteht – die in Deutschland übliche
-Zwei-Klick-Lösung. Wer nicht klickt, sendet nichts an Google; der Link
-„In Google Maps öffnen“ funktioniert auch ohne Schlüssel.
+dort eine graue Vorschau mit Anschrift und Stecknadel sowie der Hinweis, dass
+beim Laden eine Verbindung zu Google entsteht – die in Deutschland übliche
+Zwei-Klick-Lösung. Wer nicht klickt, sendet nichts an Google.
 
-**Schlüssel eintragen** in `build/content/company.mjs`:
+Danach gibt es zwei Ausbaustufen, je nachdem ob ein Schlüssel hinterlegt ist:
+
+**Ohne Schlüssel (Standard).** Es erscheint die offizielle Google-Maps-Einbettung
+(`maps.google.com/…&output=embed`) mit Marker auf der Anschrift. Grau wird sie
+über einen CSS-Filter (`grayscale`), im Nachtthema zusätzlich invertiert.
+Kein Konto, keine Abrechnung, keine Einrichtung.
+
+**Mit Schlüssel.** Steht in `build/content/company.mjs` ein `maps.key`, wird
+stattdessen die Maps-JavaScript-API geladen: echte Kartenfarben statt Filter
+(`STIL_HELL` / `STIL_DUNKEL` in `assets/js/map.js`), Stecknadel im Markenrot,
+Zoomregler, und die Anschrift wird beim Laden geokodiert.
 
 ```js
 maps: {
@@ -136,19 +145,9 @@ maps: {
 }
 ```
 
-Der Schlüssel stammt aus der Google Cloud Console. Dort braucht es
-*Maps JavaScript API* (Darstellung) und *Geocoding API* (findet die Anschrift
-beim Laden) sowie ein hinterlegtes Abrechnungskonto; das monatliche Freikontingent
-deckt eine Firmenseite locker ab. **Schlüssel unbedingt auf die eigene Domain
-beschränken** (HTTP-Referrer), sonst kann ihn jeder verwenden.
-
-Bleibt `key` leer, öffnet der Knopf statt der eingebetteten Karte einfach
-Google Maps in einem neuen Tab – die Seite funktioniert also auch ohne
-Schlüssel.
-
-Die Kartenfarben liegen in `assets/js/map.js` (`STIL_HELL`, `STIL_DUNKEL`):
-graue Flächen, weiße Straßen, keine Symbole, Stecknadel im Markenrot. Die Karte
-wechselt mit dem Thema mit.
+Der Schlüssel stammt aus der Google Cloud Console (*Maps JavaScript API* und
+*Geocoding API* aktivieren, Abrechnungskonto hinterlegen). **Unbedingt auf die
+eigene Domain beschränken** (HTTP-Referrer), sonst kann ihn jeder verwenden.
 
 ## Partner
 

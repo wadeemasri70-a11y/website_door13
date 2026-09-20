@@ -49,10 +49,26 @@
     return document.documentElement.getAttribute("data-theme") === "dark";
   }
 
+  function rahmen(box) {
+    var frame = document.createElement("iframe");
+    frame.className = "map__frame";
+    frame.src =
+      "https://maps.google.com/maps?q=" +
+      encodeURIComponent(box.dataset.address) +
+      "&z=" + (parseInt(box.dataset.zoom, 10) || 15) +
+      "&hl=de&output=embed";
+    frame.loading = "lazy";
+    frame.title = box.dataset.title + " auf Google Maps";
+    frame.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+    frame.allowFullscreen = true;
+    box.querySelector("[data-map-canvas]").appendChild(frame);
+    box.classList.add("map--aktiv", "map--rahmen");
+  }
+
   function laden(box) {
     var schluessel = box.dataset.mapsKey;
     if (!schluessel) {
-      window.open(box.dataset.mapsLink, "_blank", "noopener");
+      rahmen(box);
       return;
     }
 
