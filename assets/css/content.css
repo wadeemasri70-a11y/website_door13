@@ -4,7 +4,7 @@
   min-height: 100svh;
   display: grid;
   align-items: center;
-  padding-top: calc(var(--header-h) + var(--topbar-h) + clamp(2.5rem, 6vh, 4.5rem));
+  padding-top: calc(var(--header-gross) + var(--topbar-h) + clamp(2.5rem, 6vh, 4.5rem));
   padding-bottom: clamp(3rem, 7vh, 5rem);
   background: var(--bg-contrast);
   color: var(--fg-on-contrast);
@@ -83,7 +83,7 @@
 /* Kopf der Unterseiten */
 .page-hero {
   position: relative;
-  padding-top: calc(var(--header-h) + var(--topbar-h) + clamp(3rem, 6vw, 6rem));
+  padding-top: calc(var(--header-gross) + var(--topbar-h) + clamp(3rem, 6vw, 6rem));
   padding-bottom: clamp(2.5rem, 5vw, 5rem);
   background: var(--bg-contrast);
   color: var(--fg-on-contrast);
@@ -356,7 +356,7 @@
 .tree__sheet img:hover { transform: rotate(0deg) scale(1.02); }
 .tree__body p { font-size: var(--step-1); line-height: var(--lh-loose); color: var(--fg-muted); }
 .tree__body p + p { margin-top: var(--sp-4); }
-.tree__body strong { color: var(--fg-strong); }
+.tree__body strong { color: var(--planet); }
 .tree__facts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr));
@@ -370,7 +370,7 @@
   font-size: var(--step-2);
   font-weight: 700;
   letter-spacing: var(--ls-head);
-  color: var(--fg-strong);
+  color: var(--planet);
 }
 .tree__facts span { display: block; margin-top: var(--sp-1); font-size: var(--step--1); color: var(--fg-muted); }
 .tree__partner { width: 84px; height: auto; margin-top: var(--sp-7); }

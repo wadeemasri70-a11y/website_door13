@@ -163,6 +163,18 @@ Die Karte auf der Startseite zeigt nicht die Anschrift, sondern das Gebiet:
 und setzt sie in Prozent; bei Größenänderung wird neu gerechnet. Damit Punkte
 und Karte zusammenbleiben, nimmt die Einbettung hier keine Mauseingaben an.
 
+## Kopfzeile
+
+Am Seitenanfang steht die Kopfzeile hoch und trägt das Logo groß, mit Luft
+darunter, bevor der Hero beginnt. Nach rund 80 Pixeln Scrollweg setzt
+`assets/js/main.js` die Klasse `is-stuck`; Leiste und Logo fahren auf ihr
+kompaktes Maß zurück und die Leiste bekommt Milchglas und Haarlinie. Gesteuert
+wird das über vier Token – `--header-gross`/`--header-h` und
+`--logo-gross`/`--logo-h`; die gerade gültige Höhe steht als `--kopf-jetzt` auf
+der Kopfzeile, damit das Menü auf schmalen Geräten in beiden Zuständen direkt
+darunter aufgeht. Der Hero rechnet mit der großen Höhe, Ankersprünge mit der
+kleinen.
+
 ## Schiebetür vor dem Kontakt
 
 Der Kontaktbereich liegt hinter einem Türportal: zwei Flügel aus Milchglas,
@@ -188,6 +200,13 @@ verschieben sich über `translate3d`, der Melder wechselt bei `--open > 0.06`
 auf Rot. Gerechnet wird nur, solange der Abschnitt sichtbar ist
 (`IntersectionObserver` plus `requestAnimationFrame`). Bei
 `prefers-reduced-motion` steht die Tür von vornherein offen.
+
+## Planet Tree
+
+Der Abschnitt zur Baumpflanzung trägt das Grün des Partners: `--planet`
+(`#197F15` am Tag, `#6BC85F` in der Nacht) färbt jedes fett gesetzte Wort im
+Text und die drei Eckdaten. Der Wert ist aus dem Logo `partner-planet-tree.png`
+ausgelesen und trifft damit den Rahmen der Urkunde daneben.
 
 ## Partner
 

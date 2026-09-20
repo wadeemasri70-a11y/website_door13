@@ -4,6 +4,8 @@
   --red-600: #c22724;
   --red-300: #ff6c5c;
   --red-tint: rgba(224, 28, 14, 0.12);
+  --gruen-600: #197F15;
+  --gruen-300: #6BC85F;
 
   --grey-900: #0b0c0d;
   --grey-800: #121415;
@@ -41,6 +43,8 @@
   --accent-ink: var(--red-600);
   --accent-tint: var(--red-tint);
   --accent-gradient: linear-gradient(96deg, var(--red-600) 10%, var(--red-500) 90%);
+
+  --planet: var(--gruen-600);
 
   --btn-solid-bg: var(--grey-900);
   --btn-solid-fg: var(--white);
@@ -112,6 +116,9 @@
 
   --topbar-h: 38px;
   --header-h: 72px;
+  --header-gross: clamp(92px, 7vw, 124px);
+  --logo-h: 44px;
+  --logo-gross: clamp(56px, 4.4vw, 78px);
 
   /* Form */
   --radius-xs: 4px;
@@ -131,6 +138,14 @@
   --dur-1: 0.3s;
   --dur-2: 0.6s;
   --dur-3: 1.2s;
+}
+
+@media (max-width: 35rem) {
+  :root {
+    --header-gross: 82px;
+    --logo-gross: 46px;
+    --logo-h: 34px;
+  }
 }
 
 /* Große Bildschirme: mehr Fläche statt mehr Rand.
@@ -183,6 +198,8 @@
 
   --accent-ink: var(--red-300);
   --accent-gradient: linear-gradient(96deg, var(--red-500) 10%, var(--red-300) 90%);
+
+  --planet: var(--gruen-300);
 
   --btn-solid-bg: var(--white);
   --btn-solid-fg: var(--grey-900);
