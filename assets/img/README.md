@@ -36,10 +36,20 @@ als Beispielbild auf den Leistungsseiten:
 | `volksbank-koeln-bonn.jpg` | Volksbank Köln Bonn | `20240716_142920402_iOS` |
 | `bayarena-leverkusen.jpg` | BayArena Leverkusen | `20250219_154333067_iOS` |
 
-**Achtung:** Das sind die verkleinerten Fassungen aus der Mediathek
-(225 × 300 bzw. 300 × 225 px). Für große Darstellungen bitte die Originale
-nachliefern – mindestens 1600 px Kantenlänge, als JPG oder WebP auf ≤ 300 KB
-komprimiert. Die Zuordnung steht in `build/data.mjs`.
+Die Dateien im Ordner sind auf 750 px hochgerechnet (2,5×, mit
+Unschärfemaske nachgeschärft) – erzeugt mit `build/upscale.sh`. Die
+unveränderten Vorlagen aus der Mediathek liegen unter `referenz/original/`.
+
+**Wichtig:** Hochrechnen erfindet keine Details, es macht die Kanten nur
+sauberer. Die echten Originale liegen in der WordPress-Mediathek
+(`…-2048x1536.jpg`, `…-scaled.jpg`) – sobald sie vorliegen, ersetzen sie
+diese Dateien. Ziel: mindestens 1600 px Kantenlänge, JPG oder WebP,
+auf ≤ 300 KB komprimiert. Die Zuordnung steht in `build/data.mjs`.
+
+```bash
+build/upscale.sh <quelle> <ziel> [faktor] [qualität] [schärfe]
+build/upscale.sh foto.jpg assets/img/referenz/foto.jpg 2.5 0.85 0.6
+```
 
 ## Partnerlogos
 

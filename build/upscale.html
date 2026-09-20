@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>upscale</title>
+<body style="margin:0;background:#fff">
+<pre id="out" style="font:10px/1.1 monospace;word-break:break-all;white-space:pre-wrap">warte…</pre>
+<script>
+/* Vergrößert ein Bild im Browser: zweistufiges Hochskalieren mit
+   hochwertiger Interpolation, danach eine leichte Unschärfemaske.
+   Ergebnis wird als data-URL in den DOM geschrieben und außen abgeholt. */
+const q = new URLSearchParams(location.search);
+const src = q.get("src");
+const scale = parseFloat(q.get("scale") || "2");
+const quality = parseFloat(q.get("q") || "0.86");
+const amount = parseFloat(q.get("sharpen") || "0.55");
+
+const img = new Image();
+img.onload = function () {
+  const w = Math.round(img.naturalWidth * scale);
+  const h = Math.round(img.naturalHeight * scale);
+
+  /* In zwei Schritten skalieren – das hält Kanten ruhiger als ein Sprung */
+  let cur = document.createElement("canvas");
+  cur.width = Math.round(img.naturalWidth * Math.sqrt(scale));
+  cur.height = Math.round(img.naturalHeight * Math.sqrt(scale));
+  let ctx = cur.getContext("2d");
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
+  ctx.drawImage(img, 0, 0, cur.width, cur.height);
+
+  const out = document.createElement("canvas");
+  out.width = w; out.height = h;
+  const octx = out.getContext("2d");
+  octx.imageSmoothingEnabled = true;
+  octx.imageSmoothingQuality = "high";
+  octx.drawImage(cur, 0, 0, w, h);
+
+  /* Unschärfemaske: Original minus weichgezeichnete Fassung, dazuaddiert */
+  const sharp = octx.getImageData(0, 0, w, h);
+  const blurCanvas = document.createElement("canvas");
+  blurCanvas.width = w; blurCanvas.height = h;
+  const bctx = blurCanvas.getContext("2d");
+  bctx.filter = "blur(1.1px)";
+  bctx.drawImage(out, 0, 0);
+  const blur = bctx.getImageData(0, 0, w, h);
+
+  const a = sharp.data, b = blur.data;
+  for (let i = 0; i < a.length; i += 4) {
+    for (let c = 0; c < 3; c++) {
+      const v = a[i + c] + amount * (a[i + c] - b[i + c]);
+      a[i + c] = v < 0 ? 0 : v > 255 ? 255 : v;
+    }
+  }
+  octx.putImageData(sharp, 0, 0);
+
+  document.getElementById("out").textContent =
+    w + "x" + h + "|" + out.toDataURL("image/jpeg", quality);
+};
+img.onerror = function () { document.getElementById("out").textContent = "FEHLER: " + src; };
+img.src = src;
+</script>

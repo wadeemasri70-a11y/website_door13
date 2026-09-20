@@ -21,6 +21,7 @@ build/                  Seitengenerator (Node, nur zur Entwicklung)
   pages/home.mjs        Rumpf der Startseite
   build.mjs             schreibt die HTML-Dateien
   pngtool.py            PNG-Werkzeug (helle Logofassung, Favicon)
+  upscale.sh / .html    rechnet Fotos im Browser hoch und schärft nach
 
 assets/css/tokens.css   Palette, Rollen (Themen), Typografie, Raum, Bewegung
 assets/css/base.css     Reset, Typografie, Layout-Primitive, Buttons, Reveals
