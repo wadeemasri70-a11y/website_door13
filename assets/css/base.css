@@ -13,8 +13,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
-  color: var(--ink-800);
+  background: var(--bg-1);
+  color: var(--fg);
   font-family: var(--font-sans);
   font-size: var(--step-0);
   line-height: var(--lh-base);
@@ -28,6 +28,7 @@ body {
 
 h1, h2, h3, h4 {
   margin: 0;
+  color: var(--fg-strong);
   font-weight: 650;
   line-height: var(--lh-snug);
   letter-spacing: var(--ls-head);
@@ -85,14 +86,13 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .shell--narrow { width: min(100% - var(--gutter) * 2, var(--container-narrow)); }
 
 .section { padding-block: var(--section-y); position: relative; }
-.section--dark { background: var(--ink-900); color: var(--steel-200); }
-.section--dark h2, .section--dark h3 { color: #fff; }
-.section--paper { background: var(--paper); }
-.section--white { background: var(--white); }
+.section--dark { background: var(--bg-contrast); color: var(--fg-on-contrast); }
+.section--paper { background: var(--bg-1); }
+.section--white { background: var(--bg-2); }
 
 .section__head { max-width: var(--measure); margin-bottom: clamp(2.25rem, 1.4rem + 3.4vw, 4rem); }
-.section__head p { margin-top: var(--sp-5); color: var(--steel-500); font-size: var(--step-1); line-height: var(--lh-loose); }
-.section--dark .section__head p { color: var(--steel-400); }
+.section__head p { margin-top: var(--sp-5); color: var(--fg-muted); font-size: var(--step-1); line-height: var(--lh-loose); }
+.section--dark .section__head p { color: var(--fg-muted-on-contrast); }
 
 /* Eyebrow / Kapitälchen-Label – gibt jedem Abschnitt einen ruhigen Auftakt */
 .eyebrow {
@@ -104,7 +104,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
   font-weight: 600;
   letter-spacing: var(--ls-caps);
   text-transform: uppercase;
-  color: var(--signal-600);
+  color: var(--accent-ink);
 }
 .eyebrow::before {
   content: "";
@@ -112,15 +112,13 @@ button, input, textarea, select { font: inherit; color: inherit; }
   background: var(--signal);
   border-radius: 2px;
 }
-.section--dark .eyebrow { color: var(--signal-300); }
-
-.lede { font-size: var(--step-1); line-height: var(--lh-loose); color: var(--steel-500); max-width: var(--measure); }
+.lede { font-size: var(--step-1); line-height: var(--lh-loose); color: var(--fg-muted); max-width: var(--measure); }
 
 /* ---- Buttons ------------------------------------------------------------ */
 
 .btn {
-  --btn-bg: var(--ink-900);
-  --btn-fg: #fff;
+  --btn-bg: var(--btn-solid-bg);
+  --btn-fg: var(--btn-solid-fg);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -145,12 +143,10 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .btn--signal:hover { --btn-bg: var(--signal-600); }
 .btn--ghost {
   --btn-bg: transparent;
-  --btn-fg: var(--ink-800);
+  --btn-fg: var(--fg-strong);
   border-color: var(--line-strong);
 }
-.btn--ghost:hover { --btn-bg: rgba(13,18,27,.04); }
-.section--dark .btn--ghost, .hero .btn--ghost { --btn-fg: #fff; border-color: rgba(255,255,255,.26); }
-.section--dark .btn--ghost:hover, .hero .btn--ghost:hover { --btn-bg: rgba(255,255,255,.08); }
+.btn--ghost:hover { --btn-bg: color-mix(in srgb, currentColor 8%, transparent); }
 .btn__icon { width: 1.05em; height: 1.05em; flex: none; }
 
 /* Link mit Unterstrich-Animation */
@@ -159,7 +155,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
   align-items: center;
   gap: var(--sp-2);
   font-weight: 600;
-  color: var(--ink-900);
+  color: var(--fg-strong);
   background-image: linear-gradient(var(--signal), var(--signal));
   background-size: 0% 2px;
   background-position: 0 100%;
@@ -168,7 +164,6 @@ button, input, textarea, select { font: inherit; color: inherit; }
   transition: background-size var(--dur-2) var(--ease-out), color var(--dur-1) var(--ease-out);
 }
 .link-line:hover { background-size: 100% 2px; }
-.section--dark .link-line { color: #fff; }
 
 /* ---- Scroll-Reveal (eine ruhige Geste, kein Konfetti) ------------------- */
 .js [data-reveal] {

@@ -37,6 +37,14 @@ Das Logo steckt zusätzlich inline in `index.html` (Kopfzeile, Footer) und in
 `assets/js/van.js` (Konstante `LOGO`, die Beschriftung des Transporters).
 Beim Austausch gegen das Original alle drei Stellen anpassen.
 
+## Zertifikate
+
+`zertifikat-1.svg` … `zertifikat-4.svg` sind Platzhalter im A4-Hochformat und
+tragen sichtbar den Hinweis „Platzhalter“. Gegen Scans der echten Urkunden
+tauschen (JPG oder PNG, Hochformat, mindestens 1200 px hoch, ≤ 400 KB) und im
+Abschnitt „Qualifikationen“ in `index.html` Titel und Aussteller eintragen.
+Der Dateiname darf sich ändern – dann `href` und `src` der Karte mitziehen.
+
 ## Fotos vom Team oder von Anlagen
 
 Noch nicht eingebaut, aber vorgesehen: Der Abschnitt „Unternehmen“ nimmt ohne

@@ -20,6 +20,30 @@
     }
   }
 
+  /* ---- Tag- / Nachtthema -------------------------------------------------
+     Voreinstellung folgt dem System; die Wahl bleibt im Browser gespeichert. */
+  const themeBtn = document.querySelector("[data-theme-toggle]");
+  if (themeBtn) {
+    const root = document.documentElement;
+    const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+    const current = function () {
+      const set = root.getAttribute("data-theme");
+      return set === "light" || set === "dark" ? set : (systemDark.matches ? "dark" : "light");
+    };
+    const label = function () {
+      themeBtn.setAttribute("aria-label",
+        current() === "dark" ? "Zum hellen Design wechseln" : "Zum dunklen Design wechseln");
+    };
+    themeBtn.addEventListener("click", function () {
+      const next = current() === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("falke-theme", next); } catch (e) {}
+      label();
+    });
+    systemDark.addEventListener && systemDark.addEventListener("change", label);
+    label();
+  }
+
   /* ---- Mobile Navigation ------------------------------------------------ */
   const toggle = document.querySelector("[data-nav-toggle]");
   const nav = document.querySelector("[data-nav]");

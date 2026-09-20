@@ -51,6 +51,31 @@ index.html?p=0.45           friert die Inszenierung bei 45 % ein
 index.html?solo=1&p=0.45    zeigt nur die Bühne (praktisch für Screenshots)
 ```
 
+## Tag- und Nachtthema
+
+Die Seite hat zwei vollwertige Themen. `assets/css/tokens.css` definiert erst die
+Palette, darüber eine **Rollen-Ebene** (`--bg-1`, `--fg`, `--bg-contrast`,
+`--card-bg`, `--stage-bg` …). Alle Bausteine greifen nur auf diese Rollen zu –
+ein Thema ist damit ein Satz Variablen, kein zweites Stylesheet.
+
+* Voreinstellung folgt dem Betriebssystem (`prefers-color-scheme`).
+* Der Schalter im Header setzt `data-theme="light"` oder `"dark"` auf `<html>`
+  und merkt sich die Wahl im Browser (`localStorage`, Schlüssel `falke-theme`).
+* Ein winziges Skript im `<head>` setzt das Thema vor dem ersten Bild – kein
+  Aufblitzen der falschen Farben.
+
+Ein neues Thema (z. B. ein Kundenthema) entsteht, indem der Rollenblock unter
+`:root[data-theme="…"]` kopiert und mit anderen Werten gefüllt wird.
+
+## Zertifikate
+
+Der Abschnitt „Qualifikationen“ zeigt vier Nachweise als Dokumentkarten;
+ein Klick öffnet die volle Datei. Die mitgelieferten
+`assets/img/zertifikat-1…4.svg` sind **ausdrücklich als Platzhalter markiert** –
+sie müssen gegen die echten Urkunden getauscht und Titel und Aussteller im
+HTML eingetragen werden. Weitere Karten entstehen durch Duplizieren eines
+`<li class="cert">`.
+
 ## Anpassen
 
 **Farben, Schrift, Abstände** stehen ausschließlich in `assets/css/tokens.css`.
@@ -93,6 +118,10 @@ Netlify, Vercel). `index.html` ist der Einstieg. Fehlende Unterseiten
 ## دليل سريع (بالعربي)
 
 - كل شي ستاتيك: بتفتح `index.html` بالمتصفّح مباشرة، بدون build وبدون مكتبات.
+- في ثيمين كاملين (نهاري وليلي). الافتراضي بيتبع إعداد الجهاز، وزر الشمس/القمر
+  بالهيدر بيبدّل وبيتذكّر الاختيار. كل الألوان أدوار (roles) بملف `tokens.css`.
+- قسم الشهادات جاهز: بدّل `assets/img/zertifikat-1…4.svg` بالشهادات الحقيقية
+  واكتب العنوان والجهة المانحة بالـHTML.
 - السيارة ثلاثية الأبعاد مبنية بـ CSS 3D (مش WebGL) — أخفّ وبتشتغل على كل الأجهزة.
   بعد أول scroll بتتحوّل من رسمة مسطّحة لمجسّم بيدور حواليه.
 - الألوان والخطوط والمسافات كلها بملف واحد: `assets/css/tokens.css`.

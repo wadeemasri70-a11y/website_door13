@@ -27,9 +27,51 @@
   --signal-300: #ffa06b;
   --signal-tint: rgba(255, 106, 31, 0.12);
 
+  /* ---- Rollen: Tag- und Nachtthema --------------------------------------
+     Alle Bausteine greifen NUR auf diese Rollen zu, nie auf die Palette.
+     Voreinstellung folgt dem Betriebssystem; der Schalter im Header setzt
+     data-theme="light" | "dark" auf <html>.                                  */
+  --bg-1: var(--paper);            /* Seitengrund / ruhige Abschnitte */
+  --bg-2: var(--white);            /* abgesetzte Abschnitte */
+  --bg-contrast: #e9edf5;          /* Hero, Bühne, Footer, Kontrastflächen */
+  --card-bg: var(--white);
+  --card-border: rgba(13, 18, 27, 0.10);
+
+  --fg: #1b2433;
+  --fg-strong: #0b1017;
+  --fg-muted: var(--steel-500);
+  --fg-on-contrast: #16202e;
+  --fg-muted-on-contrast: #56657a;
+
   --line: rgba(13, 18, 27, 0.10);
   --line-strong: rgba(13, 18, 27, 0.18);
-  --line-dark: rgba(255, 255, 255, 0.10);
+  --line-on-contrast: rgba(13, 18, 27, 0.13);
+
+  --accent-ink: var(--signal-600);   /* Signalfarbe als Textfarbe */
+  --accent-gradient: linear-gradient(96deg, var(--signal-600) 10%, var(--signal) 90%);
+  --btn-solid-bg: #0b1017;
+  --btn-solid-fg: #ffffff;
+
+  --glass: rgba(255, 255, 255, 0.86);
+  --header-fg: #16202e;
+  --nav-panel-bg: rgba(248, 250, 252, 0.98);
+  --nav-panel-fg: #0b1017;
+
+  --hero-bg:
+    radial-gradient(70% 60% at 78% 16%, rgba(255, 106, 31, 0.18), transparent 62%),
+    radial-gradient(60% 55% at 10% 84%, rgba(80, 130, 210, 0.16), transparent 66%),
+    linear-gradient(180deg, #fdfdff 0%, #e7ecf4 68%, #dfe5ef 100%);
+  --hero-line: rgba(13, 18, 27, 0.07);
+  --hero-sheen: rgba(255, 255, 255, 0.55);
+
+  --stage-bg: linear-gradient(180deg, #fbfcfe 0%, #e6ebf3 48%, #dde3ee 100%);
+  --stage-glow: rgba(255, 106, 31, 0.16);
+  --stage-grid: rgba(13, 18, 27, 0.10);
+  --stage-scrim: rgba(240, 243, 248, 0.86);
+
+  --map-bg: #dfe5ef;
+  --map-grid: rgba(13, 18, 27, 0.07);
+  --map-fg: #16202e;
 
   /* ---- Typografie ------------------------------------------------------
      Fluid Type Scale (Major Third ~1.25 bei großen Viewports).
@@ -112,4 +154,95 @@
 
 @media (prefers-reduced-motion: reduce) {
   :root { --dur-1: 0.01ms; --dur-2: 0.01ms; --dur-3: 0.01ms; }
+}
+
+/* Nachtthema – gleiche Rollen, andere Werte */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-1: #0b0f17;
+    --bg-2: #121926;
+    --bg-contrast: #070a0f;
+    --card-bg: #151d2b;
+    --card-border: rgba(255, 255, 255, 0.09);
+
+    --fg: #c6d0de;
+    --fg-strong: #ffffff;
+    --fg-muted: #8b98ab;
+    --fg-on-contrast: #dde3ec;
+    --fg-muted-on-contrast: #7d8a9c;
+
+    --line: rgba(255, 255, 255, 0.10);
+    --line-strong: rgba(255, 255, 255, 0.20);
+    --line-on-contrast: rgba(255, 255, 255, 0.10);
+
+    --accent-ink: var(--signal-300);
+    --accent-gradient: linear-gradient(96deg, var(--signal) 10%, var(--signal-300) 90%);
+    --btn-solid-bg: #ffffff;
+    --btn-solid-fg: #0b1017;
+
+    --glass: rgba(10, 14, 21, 0.82);
+    --header-fg: #ffffff;
+    --nav-panel-bg: rgba(9, 12, 18, 0.97);
+    --nav-panel-fg: #ffffff;
+
+    --hero-bg:
+      radial-gradient(70% 60% at 78% 18%, rgba(255, 106, 31, 0.20), transparent 62%),
+      radial-gradient(60% 55% at 12% 82%, rgba(60, 110, 190, 0.22), transparent 66%),
+      linear-gradient(180deg, #070a10, #0c1119 70%, #080b11);
+    --hero-line: rgba(255, 255, 255, 0.07);
+    --hero-sheen: rgba(255, 255, 255, 0.05);
+
+    --stage-bg: linear-gradient(180deg, #05070b 0%, #0b1019 46%, #0d1420 100%);
+    --stage-glow: rgba(255, 106, 31, 0.16);
+    --stage-grid: rgba(255, 255, 255, 0.09);
+    --stage-scrim: rgba(6, 9, 14, 0.82);
+
+    --map-bg: var(--ink-800);
+    --map-grid: rgba(255, 255, 255, 0.05);
+    --map-fg: #ffffff;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg-1: #0b0f17;
+  --bg-2: #121926;
+  --bg-contrast: #070a0f;
+  --card-bg: #151d2b;
+  --card-border: rgba(255, 255, 255, 0.09);
+
+  --fg: #c6d0de;
+  --fg-strong: #ffffff;
+  --fg-muted: #8b98ab;
+  --fg-on-contrast: #dde3ec;
+  --fg-muted-on-contrast: #7d8a9c;
+
+  --line: rgba(255, 255, 255, 0.10);
+  --line-strong: rgba(255, 255, 255, 0.20);
+  --line-on-contrast: rgba(255, 255, 255, 0.10);
+
+  --accent-ink: var(--signal-300);
+  --accent-gradient: linear-gradient(96deg, var(--signal) 10%, var(--signal-300) 90%);
+  --btn-solid-bg: #ffffff;
+  --btn-solid-fg: #0b1017;
+
+  --glass: rgba(10, 14, 21, 0.82);
+  --header-fg: #ffffff;
+  --nav-panel-bg: rgba(9, 12, 18, 0.97);
+  --nav-panel-fg: #ffffff;
+
+  --hero-bg:
+    radial-gradient(70% 60% at 78% 18%, rgba(255, 106, 31, 0.20), transparent 62%),
+    radial-gradient(60% 55% at 12% 82%, rgba(60, 110, 190, 0.22), transparent 66%),
+    linear-gradient(180deg, #070a10, #0c1119 70%, #080b11);
+  --hero-line: rgba(255, 255, 255, 0.07);
+  --hero-sheen: rgba(255, 255, 255, 0.05);
+
+  --stage-bg: linear-gradient(180deg, #05070b 0%, #0b1019 46%, #0d1420 100%);
+  --stage-glow: rgba(255, 106, 31, 0.16);
+  --stage-grid: rgba(255, 255, 255, 0.09);
+  --stage-scrim: rgba(6, 9, 14, 0.82);
+
+  --map-bg: var(--ink-800);
+  --map-grid: rgba(255, 255, 255, 0.05);
+  --map-fg: #ffffff;
 }

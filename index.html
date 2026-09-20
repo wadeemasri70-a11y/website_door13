@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Falke Türautomation – Automatische Türen, Wartung &amp; 24-h-Service im Rheinland</title>
 <meta name="description" content="Falke Türautomation aus Bedburg wartet, repariert und modernisiert automatische Türen, Brandschutztüren, Feststellanlagen und Tore – herstellerunabhängig im Raum Köln, Düsseldorf, Bonn und Aachen.">
-<meta name="theme-color" content="#080b11">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#080b11" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://falke-tuerautomation.de/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_DE">
@@ -17,7 +18,16 @@
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/components.css">
 <link rel="stylesheet" href="assets/css/van.css">
-<script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
+<script>
+(function () {
+  var root = document.documentElement;
+  root.className = root.className.replace("no-js", "js");
+  try {
+    var saved = localStorage.getItem("falke-theme");
+    if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+  } catch (e) {}
+})();
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -57,6 +67,7 @@
     <nav class="nav" id="nav" aria-label="Hauptnavigation" data-nav>
       <a href="#leistungen">Leistungen</a>
       <a href="#wartung">Wartung</a>
+      <a href="#zertifikate">Zertifikate</a>
       <a href="#referenzen">Referenzen</a>
       <a href="#ablauf">Ablauf</a>
       <a href="#unternehmen">Unternehmen</a>
@@ -70,6 +81,16 @@
         </svg>
         <span>02272 908 92 70</span>
       </a>
+      <button class="theme-toggle" type="button" data-theme-toggle
+              aria-label="Zwischen hellem und dunklem Design wechseln">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.6v2.2m0 14.4v2.2M2.6 12h2.2m14.4 0h2.2M5.3 5.3l1.6 1.6m10.2 10.2 1.6 1.6m0-13.4-1.6 1.6M6.9 17.1l-1.6 1.6" stroke-linecap="round"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z" stroke-linejoin="round"/>
+        </svg>
+      </button>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-nav-toggle>
         <span></span><span class="visually-hidden">Menü</span>
       </button>
@@ -285,8 +306,62 @@
     </div>
   </section>
 
+  <!-- ========================= ZERTIFIKATE =========================
+       Platzhalter: assets/img/zertifikat-1…4.svg gegen Scans der echten
+       Urkunden tauschen (JPG/PNG/PDF-Export, Hochformat) und Titel sowie
+       Aussteller unten eintragen. Weitere Karten einfach duplizieren.       -->
+  <section class="section section--paper" id="zertifikate">
+    <div class="shell">
+      <div class="section__head" data-reveal>
+        <p class="eyebrow">Qualifikationen</p>
+        <h2>Zertifikate und Nachweise – auf Verlangen jederzeit vorlegbar.</h2>
+        <p>Wer an Fluchtwegtüren, Brandschutz und Feststellanlagen arbeitet, muss es
+           belegen können. Unsere Nachweise liegen digital vor und begleiten jedes Protokoll.</p>
+      </div>
+
+      <ul class="certs">
+        <li class="cert" data-reveal>
+          <a class="cert__sheet" href="assets/img/zertifikat-1.svg" target="_blank" rel="noopener">
+            <img src="assets/img/zertifikat-1.svg" alt="Zertifikat 1 – Platzhalter" loading="lazy" width="595" height="842">
+          </a>
+          <div>
+            <h3>Zertifikat 1 – Titel eintragen</h3>
+            <p>Aussteller · Jahr</p>
+          </div>
+        </li>
+        <li class="cert" data-reveal style="--reveal-delay:80ms">
+          <a class="cert__sheet" href="assets/img/zertifikat-2.svg" target="_blank" rel="noopener">
+            <img src="assets/img/zertifikat-2.svg" alt="Zertifikat 2 – Platzhalter" loading="lazy" width="595" height="842">
+          </a>
+          <div>
+            <h3>Zertifikat 2 – Titel eintragen</h3>
+            <p>Aussteller · Jahr</p>
+          </div>
+        </li>
+        <li class="cert" data-reveal style="--reveal-delay:160ms">
+          <a class="cert__sheet" href="assets/img/zertifikat-3.svg" target="_blank" rel="noopener">
+            <img src="assets/img/zertifikat-3.svg" alt="Zertifikat 3 – Platzhalter" loading="lazy" width="595" height="842">
+          </a>
+          <div>
+            <h3>Zertifikat 3 – Titel eintragen</h3>
+            <p>Aussteller · Jahr</p>
+          </div>
+        </li>
+        <li class="cert" data-reveal style="--reveal-delay:240ms">
+          <a class="cert__sheet" href="assets/img/zertifikat-4.svg" target="_blank" rel="noopener">
+            <img src="assets/img/zertifikat-4.svg" alt="Zertifikat 4 – Platzhalter" loading="lazy" width="595" height="842">
+          </a>
+          <div>
+            <h3>Zertifikat 4 – Titel eintragen</h3>
+            <p>Aussteller · Jahr</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
   <!-- ========================= REFERENZEN ========================= -->
-  <section class="section section--paper" id="referenzen">
+  <section class="section section--white" id="referenzen">
     <div class="shell">
       <div class="section__head" data-reveal>
         <p class="eyebrow">Referenzen</p>
