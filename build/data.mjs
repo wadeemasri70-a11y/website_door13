@@ -169,6 +169,17 @@ export const services = [
       "Protokoll, Prüfplakette und Eintrag ins Prüfbuch"
     ],
     norms: ["DIN EN 16005", "DIN 18650", "DIN 14677", "ASR A1.7", "DGUV Vorschrift 3"],
+    extra: {
+      eyebrow: "Obendrauf",
+      h2: "Ein Wartungsvertrag, ein Baum.",
+      lead: "Für jeden abgeschlossenen Wartungsvertrag pflanzen wir gemeinsam mit Planet Tree einen Baum im Hessen Forst – mit Urkunde, Standort und Koordinaten.",
+      image: {
+        src: "assets/img/zertifikat-planet-tree.png",
+        alt: "Musterurkunde: ein gepflanzter Baum im Hessen Forst",
+        caption: "Musterurkunde, wie sie unsere Vertragskundinnen und -kunden erhalten.",
+        ratio: "3 / 4"
+      }
+    },
     image: { src: "assets/img/referenz/bayarena-leverkusen.jpg", alt: "Automatiktür in der Gastronomie der BayArena Leverkusen", caption: "Projektbeispiel: dormakaba ED 250 F, BayArena Leverkusen." }
   }
 ];

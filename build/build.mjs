@@ -27,7 +27,15 @@ out("leistungen", page({
       lead: "Sechs Leistungsbereiche, ein Ansprechpartner. Wir betreuen Bestandsanlagen genauso sorgfältig wie neue Projekte – herstellerunabhängig und nach Norm.",
       actions: [{ href: "kontakt.html", label: "Beratung anfragen" }, { href: "referenzen.html", label: "Referenzen ansehen" }]
     }),
-    B.section({ variant: "paper", html: B.serviceCards(services) }),
+    B.section({
+      variant: "paper",
+      html: B.media({
+        src: "assets/img/referenz/volksbank-koeln-bonn.jpg",
+        alt: "Automatische Schiebetüranlage der Volksbank Köln Bonn",
+        caption: "Schiebetüranlage mit GEZE ECdrive, Volksbank Köln Bonn.",
+        ratio: "16 / 10"
+      }) + "\n" + B.serviceCards(services)
+    }),
     B.section({
       variant: "white", id: "partner",
       html: B.partnerStrip(partners)
@@ -63,6 +71,11 @@ for (const s of services) {
         variant: "dark", eyebrow: "Normen", h2: s.checksTitle,
         html: B.checks(s.checks) + "\n" + B.norms(s.norms)
       }),
+      s.extra ? B.section({
+        variant: "white",
+        eyebrow: s.extra.eyebrow, h2: s.extra.h2, lead: s.extra.lead,
+        html: B.media(s.extra.image)
+      }) : "",
       B.ctaBand({
         h2: "Passt das zu Ihrer Anlage?",
         p: "Schildern Sie uns kurz Fabrikat und Standort – wir melden uns in der Regel am selben Werktag mit einer Einschätzung.",
@@ -144,7 +157,12 @@ out("ueber-uns", page({
         "Unser Schwerpunkt liegt dort, wo andere abwinken: bei Bestandsanlagen. Wir halten Anlagen am Laufen, statt sie vorschnell zu ersetzen – das ist wirtschaftlicher für Sie und ehrlicher gegenüber dem, was verbaut ist.",
         "Weil wir herstellerunabhängig arbeiten, betreuen wir ganze Liegenschaften aus einer Hand: GEZE, dormakaba, Assa Abloy und weitere Fabrikate stehen bei uns auf derselben Wartungsliste.",
         "Zu unseren Auftraggebern zählen unter anderem die RWTH Aachen, der Rhein-Sieg-Kreis und die Stadt Köln, dazu Kliniken, Schulen, Kulturbauten, Banken und Industriebetriebe."
-      ]) + "\n" + B.facts([
+      ]) + "\n" + B.media({
+        src: "assets/img/referenz/ordnungsamt-stolberg.jpg",
+        alt: "Neue Aluminium-Türanlage am Ordnungsamt Stolberg",
+        caption: "Aus einem unserer Projekte: Eingangsbereich Ordnungsamt Stolberg.",
+        ratio: "4 / 3"
+      }) + "\n" + B.facts([
         { b: "2020", span: "gegründet von René Falke" },
         { b: "11", span: "Mitarbeitende im Team" },
         { b: "7", span: "Servicetechniker im Außendienst" },
@@ -216,7 +234,12 @@ out("karriere", page({
         "Herstellerschulungen auf gängige Fabrikate",
         "Unbefristet, mit planbaren Arbeitszeiten",
         "Kurze Wege: Der Chef fährt selbst mit"
-      ], "Was wir bieten")
+      ], "Was wir bieten") + "\n" + B.media({
+        src: "assets/img/referenz/bayarena-leverkusen.jpg",
+        alt: "Montage eines Automatiktürantriebs in der BayArena Leverkusen",
+        caption: "Ein Arbeitstag bei uns: Montage in der BayArena Leverkusen.",
+        ratio: "16 / 10"
+      })
     }),
     B.ctaBand({
       h2: "Klingt nach Ihnen?",
