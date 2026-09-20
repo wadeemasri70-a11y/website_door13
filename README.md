@@ -105,9 +105,12 @@ zweites Stylesheet.
 * **Die Seite startet immer hell.** Die Systemeinstellung wird bewusst nicht
   ausgewertet: Wer nichts anklickt, sieht überall dasselbe.
 * Der Schalter im Kopf setzt `data-theme="dark"` auf `<html>` und merkt sich die
-  Wahl – in `localStorage` und zusätzlich in einem Cookie. Das Cookie springt
-  ein, wenn der Speicher gesperrt ist (privates Fenster, eingebettete Vorschau);
-  so bleibt die Wahl auch beim Seitenwechsel erhalten.
+  Wahl dreifach abgesichert:
+  1. `localStorage` – der Normalfall,
+  2. Cookie – wenn der Speicher gesperrt ist (privates Fenster),
+  3. Adresszeile – wenn beides scheitert (eingebettete Vorschauen mit
+     abgeschotteter Herkunft). Dann tragen die internen Verweise die Wahl als
+     `?theme=dark` weiter, und die Seite bleibt auch beim Wechsel dunkel.
 * `assets/js/theme.js` steht **ohne `defer`** im `<head>` und setzt das Thema
   vor dem ersten Bild – sonst blitzt die falsche Fassung auf.
 
