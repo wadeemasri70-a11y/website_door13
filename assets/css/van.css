@@ -296,6 +296,7 @@
 .beacon { position: absolute; left: 0; top: 0; transform-style: preserve-3d; }
 .beacon__dome {
   position: absolute; left: 0; top: 0;
+  opacity: var(--vol, 0);
   background: linear-gradient(180deg, #ffb069, #ff6a1f);
   border-radius: 40% 40% 6px 6px;
   box-shadow: 0 0 26px rgba(255,120,40, calc(.85 * var(--depth, 0)));
