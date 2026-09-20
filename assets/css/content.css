@@ -823,26 +823,35 @@
               border-color var(--dur-1) var(--ease-out),
               transform var(--dur-1) var(--ease-out);
 }
-.sozial__link svg { display: block; place-self: center; width: 21px; height: 21px; }
+.sozial__link svg { display: block; place-self: center; width: 21px; height: 21px; fill: currentColor; }
 .sozial__link:hover { transform: translateY(-2px); }
 .sozial__link:focus-visible { transform: translateY(-2px); }
 
 .sozial__link--facebook:hover { color: #1877F2; border-color: #1877F2; }
+.sozial__link--facebook:hover svg { fill: #1877F2; }
 .sozial__link--facebook:focus-visible { color: #1877F2; border-color: #1877F2; }
+.sozial__link--facebook:focus-visible svg { fill: #1877F2; }
 
 .sozial__link--instagram:hover { color: #DD2A7B; border-color: #DD2A7B; }
+.sozial__link--instagram:hover svg { fill: #DD2A7B; }
 .sozial__link--instagram:focus-visible { color: #DD2A7B; border-color: #DD2A7B; }
+.sozial__link--instagram:focus-visible svg { fill: #DD2A7B; }
 
 .sozial__link--youtube:hover { color: #FF0000; border-color: #FF0000; }
+.sozial__link--youtube:hover svg { fill: #FF0000; }
 .sozial__link--youtube:focus-visible { color: #FF0000; border-color: #FF0000; }
+.sozial__link--youtube:focus-visible svg { fill: #FF0000; }
 
 .sozial__link--linkedin:hover { color: #0A66C2; border-color: #0A66C2; }
+.sozial__link--linkedin:hover svg { fill: #0A66C2; }
 .sozial__link--linkedin:focus-visible { color: #0A66C2; border-color: #0A66C2; }
+.sozial__link--linkedin:focus-visible svg { fill: #0A66C2; }
 .sozial__link--instagram:hover rect,
 .sozial__link--instagram:hover circle {
   stroke: url(#instagram-verlauf);
   fill: none;
 }
+.sozial__link--instagram:hover svg { fill: none; }
 .sozial__link--instagram:focus-visible rect,
 .sozial__link--instagram:focus-visible circle {
   stroke: url(#instagram-verlauf);
