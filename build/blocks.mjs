@@ -226,7 +226,7 @@ ${c.facts.map((f) => `            <div><b data-zahl>${f.b}</b><span>${f.span}</s
 }
 
 export function herstellerGitter() {
-  const zeichen = hersteller.map((h, i) => `        <li class="marke${h.farbig ? " marke--farbig" : ""}" data-reveal style="--marke-h:${h.faktor || 1}${i ? `;--reveal-delay:${(i % 3) * 70}ms` : ""}">
+  const zeichen = hersteller.map((h, i) => `        <li class="marke" data-reveal style="--marke-h:${h.faktor || 1}${i ? `;--reveal-delay:${(i % 3) * 70}ms` : ""}">
           <img src="${h.file}" alt="${esc(h.name)}" loading="lazy" decoding="async">
         </li>`).join("\n");
   return `      <ul class="marken">

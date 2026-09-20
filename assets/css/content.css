@@ -838,6 +838,11 @@
   margin-top: var(--sp-5);
 }
 
+:root[data-theme="dark"] .sozial__link {
+  --sozial-ruhe: rgba(255, 255, 255, 0.78);
+  --sozial-rand: rgba(255, 255, 255, 0.28);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .sozial__link:hover, .sozial__link:focus-visible { transform: none; }
 }
@@ -901,7 +906,7 @@
   height: calc(clamp(34px, 4.6vw, 58px) * var(--marke-h, 1));
   width: auto;
   object-fit: contain;
-  transition: filter var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out);
+  transition: filter 0.12s var(--ease-out), transform 0.12s var(--ease-out);
 }
 .marke:hover img {
   transform: translateY(-2px);
@@ -909,15 +914,14 @@
           drop-shadow(0 7px 16px color-mix(in srgb, var(--neon) 58%, transparent));
 }
 
-:root[data-theme="dark"] .marke:not(.marke--farbig) img {
-  filter: brightness(0) invert(1);
-  opacity: 0.9;
+:root[data-theme="dark"] .marke img {
+  filter: drop-shadow(0 0 7px rgba(255, 255, 255, 0.38))
+          drop-shadow(0 0 2px rgba(255, 255, 255, 0.55));
 }
-:root[data-theme="dark"] .marke:not(.marke--farbig):hover img {
-  opacity: 1;
-  filter: brightness(0) invert(1)
-          drop-shadow(0 0 5px color-mix(in srgb, var(--neon) 72%, transparent))
-          drop-shadow(0 7px 16px color-mix(in srgb, var(--neon) 58%, transparent));
+:root[data-theme="dark"] .marke:hover img {
+  filter: drop-shadow(0 0 7px rgba(255, 255, 255, 0.38))
+          drop-shadow(0 0 5px color-mix(in srgb, var(--neon) 80%, transparent))
+          drop-shadow(0 7px 16px color-mix(in srgb, var(--neon) 62%, transparent));
 }
 
 .marken__hinweis {

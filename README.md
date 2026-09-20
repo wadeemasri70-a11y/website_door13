@@ -35,10 +35,11 @@ assets/css/tokens.css      Palette, Rollen (Themen), Typografie, Raum, Bewegung
 assets/css/base.css        Reset, Typografie, Layout-Primitive, Buttons
 assets/css/layout.css      Topbar, Kopfzeile, Navigation, Fußzeile
 assets/css/content.css     Hero, Abschnitte, Karten, Text, Projekte, Kontakt
-assets/css/van.css         Bühne und Aussehen des 3-D-Transporters
+assets/css/buehne.css      Bühne des Scroll-Akts (Licht, Boden, Vorspann, Punkte)
+assets/css/tuer-akt.css    Die Tür, die sich beim Scrollen zusammensetzt
 
 assets/js/theme.js         Tag-/Nachtthema (ohne defer im <head>)
-assets/js/van.js           baut den Transporter, fährt ihn am Scroll entlang
+assets/js/tuer-akt.js      setzt die Tür am Scroll entlang zusammen
 assets/js/map.js           Karte auf Klick, Einsatzgebiet mit leuchtenden Punkten
 assets/js/doors.js         Schiebetür am Seitenende, öffnet auf Annäherung
 assets/js/main.js          Kopfzeile, Navigation, Reveals, Formular
@@ -250,6 +251,25 @@ Die Strecke läuft dreispaltig und quadratisch: `grid-template-columns:
 repeat(3, minmax(0, 1fr))`, jedes Bild `aspect-ratio: 1 / 1` mit
 `object-fit: cover`. Unter 52rem sind es zwei Spalten, unter 30rem eine.
 
+## Der Scroll-Akt
+
+Auf der Startseite baut sich beim Scrollen eine automatische Schiebetür auf:
+Laufschiene, Pfosten, Antriebsbalken, Melder, dann die beiden Glasflügel. Der
+Melder springt auf Rot, die Flügel fahren auseinander, und zum Schluss läuft das
+Portal auf den Betrachter zu – man geht hindurch.
+
+`assets/js/tuer-akt.js` rechnet den Scrollstand in einen Wert von 0 bis 1 um und
+teilt ihn in Abschnitte auf; jedes Bauteil bekommt seinen eigenen Abschnitt als
+eigene Eigenschaft (`--schiene`, `--pfosten`, `--balken`, `--sensor`, `--strom`,
+`--fluegel`, `--offen`, `--durch`). Das Aussehen steht vollständig in
+`assets/css/tuer-akt.css`; wer die Reihenfolge ändern will, verschiebt in der
+Tabelle `teile` die Zahlenpaare.
+
+Der frühere 3-D-Transporter ist aus der Seite heraus und liegt als
+eigenständige Datei unter `export/servicefahrzeug-3d.html` – eine einzelne
+HTML-Datei mit allem darin, die sich ohne weitere Dateien in jede andere Seite
+übernehmen lässt.
+
 ## Bilder auf den Projektkacheln
 
 Die Kacheln auf Startseite und Referenzen bekommen ihr Foto als
@@ -294,10 +314,9 @@ Bei Mausberührung legt sich ein weiches gelbes Leuchten (`--neon`) um die
 Konturen und läuft nach unten aus – zwei `drop-shadow`, eines mittig, eines um
 sieben Pixel versetzt.
 
-Im Nachtthema werden die Zeichen zu weißen Silhouetten
-(`brightness(0) invert(1)`), sonst verschwinden die dunklen Schriftzüge.
-Ausgenommen sind Zeichen mit `farbig: true` – Hörmann etwa steht auf einem
-eigenen blauen Feld und würde als Silhouette zu einem weißen Block.
+Die Zeichen behalten in beiden Themen ihre eigenen Farben. Im Nachtthema liegt
+ein weicher weißer Schein darunter, damit sich auch dunkle Schriftzüge wie
+TORMAX vom Hintergrund lösen.
 
 ## Partner
 

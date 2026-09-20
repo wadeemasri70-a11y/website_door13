@@ -1,0 +1,138 @@
+.montage {
+  --schiene: 0;
+  --pfosten: 0;
+  --balken: 0;
+  --sensor: 0;
+  --strom: 0;
+  --fluegel: 0;
+  --offen: 0;
+  --durch: 0;
+
+  position: relative;
+  width: min(44rem, 82%);
+  aspect-ratio: 4 / 3.1;
+  margin-inline: auto;
+  transform-origin: 50% 62%;
+  transform: scale(calc(1 + 0.5 * var(--durch)));
+  opacity: calc(1 - 0.9 * var(--durch));
+  will-change: transform, opacity;
+}
+
+.montage__durchgang {
+  position: absolute;
+  inset: 20% 12% 4% 12%;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--accent) 16%, transparent),
+    color-mix(in srgb, var(--bg-2) 94%, transparent) 60%);
+  opacity: calc(var(--fluegel) * 0.9);
+}
+
+.montage__schiene {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 4%;
+  height: 10px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #8d9192, #4f5455);
+  box-shadow: 0 8px 18px -10px rgba(11, 12, 13, 0.55);
+  transform: translateX(calc(-130% * (1 - var(--schiene))));
+  opacity: var(--schiene);
+}
+
+.montage__pfosten {
+  position: absolute;
+  bottom: 4%;
+  width: 3.4%;
+  height: 84%;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #6b6f70, #3a3e3f);
+  transform-origin: 50% 100%;
+  transform: scaleY(var(--pfosten));
+  opacity: var(--pfosten);
+}
+.montage__pfosten--links { left: 8%; }
+.montage__pfosten--rechts { right: 8%; }
+
+.montage__balken {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 8%;
+  height: 12%;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #2b2f30, #16191a);
+  box-shadow: 0 14px 26px -16px rgba(11, 12, 13, 0.7);
+  transform: translateY(calc(-260% * (1 - var(--balken))));
+  opacity: var(--balken);
+}
+.montage__balken::after {
+  content: "";
+  position: absolute;
+  inset: 34% 6% auto 6%;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.montage__sensor {
+  position: absolute;
+  left: 50%;
+  top: 20.5%;
+  width: 26%;
+  height: 3.6%;
+  display: grid;
+  place-items: center;
+  border-radius: 0 0 3px 3px;
+  background: linear-gradient(180deg, #16191a, #0d0f10);
+  transform: translateX(-50%) scaleX(var(--sensor));
+  opacity: var(--sensor);
+}
+.montage__led {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) calc(var(--strom) * 100%), #4a4f50);
+  box-shadow: 0 0 calc(10px * var(--strom)) calc(2px * var(--strom)) rgba(224, 28, 14, 0.75);
+}
+
+.montage__fluegel {
+  position: absolute;
+  top: 20%;
+  bottom: 4%;
+  width: 42.5%;
+  border: 1px solid color-mix(in srgb, var(--fg-strong) 14%, transparent);
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.10) 38%, rgba(255, 255, 255, 0.30) 62%, rgba(255, 255, 255, 0.08) 100%),
+    color-mix(in srgb, var(--bg-contrast) 62%, transparent);
+  backdrop-filter: blur(6px) saturate(115%);
+  -webkit-backdrop-filter: blur(6px) saturate(115%);
+  opacity: var(--fluegel);
+}
+.montage__fluegel::after {
+  content: "";
+  position: absolute;
+  top: 40%;
+  bottom: 40%;
+  width: 3px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--fg-strong) 24%, transparent);
+}
+.montage__fluegel--links {
+  left: 8.4%;
+  transform: translateX(calc(-150% * (1 - var(--fluegel)) - 94% * var(--offen)));
+}
+.montage__fluegel--links::after { right: 10px; }
+.montage__fluegel--rechts {
+  right: 8.4%;
+  transform: translateX(calc(150% * (1 - var(--fluegel)) + 94% * var(--offen)));
+}
+.montage__fluegel--rechts::after { left: 10px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .montage { transform: none; opacity: 1; }
+  .montage__fluegel { opacity: 1; }
+  .montage__fluegel--links { transform: translateX(-94%); }
+  .montage__fluegel--rechts { transform: translateX(94%); }
+}

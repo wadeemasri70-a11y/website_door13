@@ -118,7 +118,8 @@ export function page({ slug, title, description, active = "", body, bodyClass = 
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/layout.css">
 <link rel="stylesheet" href="assets/css/content.css">
-<link rel="stylesheet" href="assets/css/van.css">
+<link rel="stylesheet" href="assets/css/buehne.css">
+<link rel="stylesheet" href="assets/css/tuer-akt.css">
 <script src="assets/js/theme.js"></script>${isHome ? `
 <script type="application/ld+json">
 {
@@ -246,7 +247,7 @@ ${sozialLeiste({ klasse: "sozial--fuss", einzug: "        " })}
   </div>
 </footer>
 
-<script src="assets/js/van.js" defer></script>
+<script src="assets/js/tuer-akt.js" defer></script>
 <script src="assets/js/map.js" defer></script>
 <script src="assets/js/doors.js" defer></script>
 <script src="assets/js/zahlen.js" defer></script>

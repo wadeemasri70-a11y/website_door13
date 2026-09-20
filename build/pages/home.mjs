@@ -40,39 +40,37 @@ ${partnerStrip(partners)}
       <div class="stage__floor" aria-hidden="true"></div>
 
       <div class="stage__intro" data-intro>
-        <p class="eyebrow">Unser Servicefahrzeug</p>
-        <h2 id="act-title">Unser Servicewagen – einmal rundherum.</h2>
-        <p>Sieben Techniker, voll ausgerüstete Transporter, Ersatzteile an Bord.
-           Meistens ist die Tür am selben Tag wieder in Betrieb.</p>
+        <p class="eyebrow">Montage Schritt für Schritt</p>
+        <h2 id="act-title">So entsteht eine automatische Schiebetür.</h2>
+        <p>Schiene, Pfosten, Antrieb, Melder, Flügel – und am Ende geht sie auf.
+           Scrollen Sie sich durch die Montage.</p>
       </div>
 
-      <div class="stage__scene" data-scene aria-hidden="true"></div>
-
-      <div class="van-fallback">
-        <svg viewBox="0 0 960 420" role="img" aria-label="Servicefahrzeug von Falke Türautomation">
-          <rect x="60" y="90" width="620" height="230" rx="14" fill="#f4f5f6"/>
-          <path d="M680 200h120l30 40v80H680z" fill="#e4e6e7"/>
-          <path d="M680 200 760 120h-80z" fill="#1c1f20"/>
-          <rect x="60" y="250" width="740" height="70" fill="#e01c0e"/>
-          <rect x="60" y="300" width="740" height="20" fill="#1c1f20"/>
-          <circle cx="250" cy="330" r="56" fill="#14191f"/><circle cx="250" cy="330" r="24" fill="#8d9192"/>
-          <circle cx="700" cy="330" r="56" fill="#14191f"/><circle cx="700" cy="330" r="24" fill="#8d9192"/>
-        </svg>
-        <img src="assets/img/logo-falke.png" alt="" width="600" height="200">
+      <div class="stage__scene" data-scene aria-hidden="true">
+        <div class="montage" data-montage>
+          <span class="montage__durchgang"></span>
+          <span class="montage__schiene"></span>
+          <span class="montage__pfosten montage__pfosten--links"></span>
+          <span class="montage__pfosten montage__pfosten--rechts"></span>
+          <span class="montage__balken"></span>
+          <span class="montage__sensor"><i class="montage__led"></i></span>
+          <span class="montage__fluegel montage__fluegel--links"></span>
+          <span class="montage__fluegel montage__fluegel--rechts"></span>
+        </div>
       </div>
 
       <div class="hotspots">
-        <div class="hotspot" style="left:7%;top:26%" data-from="0.18" data-to="0.52">
-          <b>Eigene Techniker</b>
-          <span>Kein Subunternehmer: sieben Servicetechniker, ein Disponent, feste Ansprechpartner.</span>
+        <div class="hotspot" style="left:7%;top:24%" data-from="0.10" data-to="0.34">
+          <b>Schiene und Pfosten</b>
+          <span>Alles beginnt am Boden: Die Laufschiene wird ausgerichtet, dann stehen die Pfosten im Lot.</span>
         </div>
-        <div class="hotspot" style="right:7%;top:38%" data-from="0.40" data-to="0.72">
-          <b>Ersatzteile an Bord</b>
-          <span>Gängige Antriebe, Sensoren und Verschleißteile fahren mit – das spart den zweiten Termin.</span>
+        <div class="hotspot" style="right:7%;top:36%" data-from="0.32" data-to="0.62">
+          <b>Antrieb und Melder</b>
+          <span>Der Antrieb kommt in den Balken, darunter der Melder – er erkennt, wer sich nähert.</span>
         </div>
-        <div class="hotspot" style="left:11%;bottom:22%" data-from="0.62" data-to="0.94">
-          <b>Herstellerunabhängig</b>
-          <span>GEZE, dormakaba, Assa Abloy und mehr – Ihr gesamter Anlagenbestand aus einer Hand.</span>
+        <div class="hotspot" style="left:11%;bottom:22%" data-from="0.60" data-to="0.96">
+          <b>Flügel und Abnahme</b>
+          <span>Die Glasflügel werden eingehängt, Kräfte und Laufwege geprüft – erst dann geht sie auf.</span>
         </div>
       </div>
 

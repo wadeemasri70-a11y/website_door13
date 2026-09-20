@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="de" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Servicefahrzeug in 3D – Scroll-Animation</title>
+<style>
+:root {
+  /* Palette */
+  --red-500: #e01c0e;
+  --red-600: #c22724;
+  --red-300: #ff6c5c;
+  --red-tint: rgba(224, 28, 14, 0.12);
+  --gruen-600: #197F15;
+  --gruen-300: #6BC85F;
+  --gruen-melder: #25BE5A;
+  --gelb-neon: #F0B429;
+
+  --grey-900: #0b0c0d;
+  --grey-800: #121415;
+  --grey-700: #1a1d1e;
+  --grey-600: #24282a;
+  --grey-500: #4f5455;
+  --grey-400: #575a5b;
+  --grey-300: #8d9192;
+  --grey-200: #cbcecf;
+  --grey-100: #eaebec;
+  --grey-050: #f4f5f6;
+  --white: #ffffff;
+
+  /* Rollen: Tagthema */
+  color-scheme: light;
+
+  --bg-1: var(--grey-050);
+  --bg-2: var(--white);
+  --bg-contrast: var(--grey-100);
+  --card-bg: var(--white);
+  --card-border: rgba(11, 12, 13, 0.11);
+
+  --fg: var(--grey-600);
+  --fg-strong: var(--grey-900);
+  --fg-muted: var(--grey-400);
+  --fg-on-contrast: #1c1f20;
+  --fg-muted-on-contrast: #5c6162;
+
+  --line: rgba(11, 12, 13, 0.11);
+  --line-strong: rgba(11, 12, 13, 0.20);
+  --line-on-contrast: rgba(11, 12, 13, 0.14);
+
+  --accent: var(--red-500);
+  --accent-strong: var(--red-600);
+  --accent-ink: var(--red-600);
+  --accent-tint: var(--red-tint);
+  --accent-gradient: linear-gradient(96deg, var(--red-600) 10%, var(--red-500) 90%);
+
+  --planet: var(--gruen-600);
+  --melder-frei: var(--gruen-melder);
+  --neon: var(--gelb-neon);
+
+  --btn-solid-bg: var(--grey-900);
+  --btn-solid-fg: var(--white);
+
+  --glass: rgba(255, 255, 255, 0.86);
+  --header-fg: #1c1f20;
+  --nav-panel-bg: rgba(250, 250, 251, 0.98);
+  --nav-panel-fg: var(--grey-900);
+
+  --hero-bg:
+    radial-gradient(70% 60% at 78% 16%, rgba(224, 28, 14, 0.14), transparent 62%),
+    radial-gradient(60% 55% at 10% 84%, rgba(120, 125, 127, 0.16), transparent 66%),
+    linear-gradient(180deg, #fdfdfd 0%, #eceded 68%, #e3e4e5 100%);
+  --hero-line: rgba(11, 12, 13, 0.07);
+  --hero-sheen: rgba(255, 255, 255, 0.55);
+
+  --stage-bg: linear-gradient(180deg, #fcfcfc 0%, #eaebec 48%, #e0e1e2 100%);
+  --stage-glow: rgba(224, 28, 14, 0.14);
+  --stage-grid: rgba(11, 12, 13, 0.11);
+  --stage-scrim: rgba(241, 242, 243, 0.88);
+
+  --map-bg: #e0e1e2;
+  --map-grid: rgba(11, 12, 13, 0.08);
+  --map-fg: #1c1f20;
+
+  /* Typografie */
+  --font-sans: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --step--2: clamp(0.70rem, 0.68rem + 0.10vw, 0.76rem);
+  --step--1: clamp(0.82rem, 0.79rem + 0.16vw, 0.92rem);
+  --step-0:  clamp(1.00rem, 0.97rem + 0.17vw, 1.09rem);
+  --step-1:  clamp(1.19rem, 1.13rem + 0.30vw, 1.38rem);
+  --step-2:  clamp(1.41rem, 1.31rem + 0.50vw, 1.75rem);
+  --step-3:  clamp(1.68rem, 1.50rem + 0.86vw, 2.22rem);
+  --step-4:  clamp(2.00rem, 1.71rem + 1.40vw, 2.81rem);
+  --step-5:  clamp(2.37rem, 1.92rem + 2.20vw, 3.58rem);
+  --step-6:  clamp(2.81rem, 2.11rem + 3.45vw, 4.55rem);
+
+  --lh-tight: 1.04;
+  --lh-snug: 1.18;
+  --lh-base: 1.65;
+  --lh-loose: 1.75;
+
+  --ls-mega: -0.035em;
+  --ls-head: -0.022em;
+  --ls-base: -0.004em;
+  --ls-caps: 0.14em;
+
+  --measure: 64ch;
+
+  /* Raum */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 2.5rem;
+  --sp-8: 3rem;
+  --sp-9: 4rem;
+  --sp-10: 5rem;
+
+  --section-y: clamp(4.5rem, 3rem + 7vw, 9rem);
+  --gutter: clamp(1.15rem, 0.6rem + 2.6vw, 2.75rem);
+  --container: 78rem;
+  --container-narrow: 54rem;
+
+  --topbar-h: 38px;
+  --header-h: 72px;
+  --header-gross: clamp(92px, 7vw, 124px);
+  --logo-h: 44px;
+  --logo-gross: clamp(56px, 4.4vw, 78px);
+
+  /* Form */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(8, 9, 10, 0.06), 0 2px 8px rgba(8, 9, 10, 0.04);
+  --shadow-md: 0 2px 4px rgba(8, 9, 10, 0.05), 0 12px 28px -12px rgba(8, 9, 10, 0.20);
+  --shadow-lg: 0 4px 10px rgba(8, 9, 10, 0.06), 0 30px 60px -24px rgba(8, 9, 10, 0.35);
+
+  /* Bewegung */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-1: 0.3s;
+  --dur-2: 0.6s;
+  --dur-3: 1.2s;
+}
+
+@media (max-width: 35rem) {
+  :root {
+    --header-gross: 82px;
+    --logo-gross: 46px;
+    --logo-h: 34px;
+  }
+}
+
+/* Große Bildschirme: mehr Fläche statt mehr Rand.
+   Die Wurzelgröße wächst mit, deshalb skalieren Schrift, Raum und Breite
+   gemeinsam – die rem-Werte in den Medienabfragen bleiben davon unberührt. */
+@media (min-width: 100rem) {
+  html { font-size: 17px; }
+  :root {
+    --container: 84rem;
+    --container-narrow: 58rem;
+    --gutter: 3rem;
+  }
+}
+
+@media (min-width: 120rem) {
+  html { font-size: 18px; }
+  :root {
+    --container: 88rem;
+    --gutter: 3.5rem;
+  }
+}
+
+@media (min-width: 160rem) {
+  html { font-size: 19px; }
+  :root {
+    --container: 92rem;
+    --gutter: 4rem;
+  }
+}
+
+/* Nachtthema */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg-1: #0d0e0f;
+  --bg-2: #151718;
+  --bg-contrast: #070808;
+  --card-bg: #191b1c;
+  --card-border: rgba(255, 255, 255, 0.09);
+
+  --fg: #c9cccd;
+  --fg-strong: var(--white);
+  --fg-muted: var(--grey-300);
+  --fg-on-contrast: #dfe1e2;
+  --fg-muted-on-contrast: #82878a;
+
+  --line: rgba(255, 255, 255, 0.10);
+  --line-strong: rgba(255, 255, 255, 0.20);
+  --line-on-contrast: rgba(255, 255, 255, 0.10);
+
+  --accent-ink: var(--red-300);
+  --accent-gradient: linear-gradient(96deg, var(--red-500) 10%, var(--red-300) 90%);
+
+  --planet: var(--gruen-300);
+
+  --btn-solid-bg: var(--white);
+  --btn-solid-fg: var(--grey-900);
+
+  --glass: rgba(10, 14, 21, 0.82);
+  --header-fg: var(--white);
+  --nav-panel-bg: rgba(9, 12, 18, 0.97);
+  --nav-panel-fg: var(--white);
+
+  --hero-bg:
+    radial-gradient(70% 60% at 78% 18%, rgba(224, 28, 14, 0.22), transparent 62%),
+    radial-gradient(60% 55% at 12% 82%, rgba(90, 95, 97, 0.20), transparent 66%),
+    linear-gradient(180deg, #060707, #0d0f10 70%, #070808);
+  --hero-line: rgba(255, 255, 255, 0.07);
+  --hero-sheen: rgba(255, 255, 255, 0.05);
+
+  --stage-bg: linear-gradient(180deg, #050606 0%, #0f1112 46%, #121415 100%);
+  --stage-glow: rgba(224, 28, 14, 0.18);
+  --stage-grid: rgba(255, 255, 255, 0.09);
+  --stage-scrim: rgba(7, 8, 8, 0.84);
+
+  --map-bg: var(--grey-800);
+  --map-grid: rgba(255, 255, 255, 0.05);
+  --map-fg: var(--white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-1: 0.01ms; --dur-2: 0.01ms; --dur-3: 0.01ms; }
+}
+
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg-1);
+  color: var(--fg);
+  font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.6;
+}
+h2 { margin: 0; font-size: var(--step-4); line-height: 1.12; letter-spacing: var(--ls-head); color: var(--fg-strong); }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-5);
+  font-size: var(--step--2); font-weight: 600; letter-spacing: var(--ls-caps);
+  text-transform: uppercase; color: var(--accent-ink);
+}
+.eyebrow::before { content: ""; flex: none; width: 28px; height: 2px; background: var(--accent); border-radius: 2px; }
+.vorspann, .nachspann {
+  max-width: 46rem; margin: 0 auto; padding: 18vh var(--sp-6);
+  color: var(--fg-muted); font-size: var(--step-0);
+}
+
+/* Der Transporter */
+
+.act {
+  position: relative;
+  background: var(--bg-contrast);
+  color: var(--fg-on-contrast);
+
+  height: 360vh;
+}
+
+.act__stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  isolation: isolate;
+}
+.stage__light,
+.stage__floor,
+.van-fallback,
+.hotspots { grid-area: 1 / 1 / -1 / -1; }
+
+/* Bühne */
+
+.stage__light {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 90% at 50% 8%,
+      color-mix(in srgb, var(--stage-glow) calc(100% * var(--depth, 0)), transparent) 0%, transparent 55%),
+    radial-gradient(90% 70% at 50% 62%, rgba(120, 160, 220, 0.12) 0%, transparent 60%),
+    var(--stage-bg);
+  z-index: 0;
+}
+
+.stage__floor {
+  position: absolute;
+  left: 50%;
+  bottom: -2vh;
+  width: 260vmax;
+  height: 70vh;
+  transform: translateX(-50%) perspective(620px) rotateX(74deg);
+  transform-origin: 50% 100%;
+  opacity: calc(0.55 * var(--depth, 0));
+  background:
+    repeating-linear-gradient(90deg, var(--stage-grid) 0 1px, transparent 1px 90px),
+    repeating-linear-gradient(0deg, var(--stage-grid) 0 1px, transparent 1px 90px);
+  -webkit-mask-image: radial-gradient(60% 70% at 50% 100%, #000 10%, transparent 72%);
+          mask-image: radial-gradient(60% 70% at 50% 100%, #000 10%, transparent 72%);
+  z-index: 0;
+}
+
+/* Bühnentext */
+
+.stage__intro {
+  grid-row: 1;
+  position: relative;
+  z-index: 3;
+  width: min(100% - var(--gutter) * 2, var(--container));
+  margin-inline: auto;
+  padding-top: calc(var(--topbar-h) + var(--header-h) + clamp(1.75rem, 5vh, 3.5rem));
+  padding-bottom: clamp(1.5rem, 4vh, 3rem);
+  pointer-events: none;
+  opacity: var(--intro-opacity, 1);
+  transform: translateY(calc(-24px * var(--p, 0)));
+}
+.stage__intro h2 {
+  font-size: var(--step-5);
+  letter-spacing: var(--ls-mega);
+  max-width: 18ch;
+}
+.stage__intro p {
+  margin-top: var(--sp-4);
+  max-width: 46ch;
+  color: var(--fg-muted-on-contrast);
+  font-size: var(--step-1);
+  line-height: var(--lh-loose);
+}
+
+.stage__hint {
+  position: absolute;
+  z-index: 3;
+  bottom: clamp(1rem, 2.5vh, 2rem);
+  left: max(var(--gutter), calc(50% - var(--container) / 2));
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-size: var(--step--2);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--fg-muted-on-contrast);
+  opacity: var(--hint-opacity, 1);
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+.stage__hint .mouse {
+  width: 22px; height: 34px;
+  border: 1.5px solid currentColor;
+  border-radius: var(--radius-pill);
+  position: relative;
+}
+.stage__hint .mouse::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 7px;
+  width: 3px; height: 7px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: var(--accent);
+  animation: wheelHint 1.8s var(--ease-in-out) infinite;
+}
+@keyframes wheelHint {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  60% { transform: translateY(9px); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .stage__hint .mouse::after { animation: none; } }
+
+/* Perspektive & Fahrzeugwurzel */
+
+.stage__scene {
+  grid-row: 2;
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  padding-bottom: clamp(4rem, 11vh, 6.5rem);
+  transform: translateY(calc(-1 * var(--scene-shift, 0px)));
+  perspective: var(--persp, 2600px);
+  perspective-origin: 50% 46%;
+}
+
+.van {
+  position: relative;
+  width: 0; height: 0;
+  transform-style: preserve-3d;
+  transform:
+    scale(var(--s, 1))
+    translate3d(var(--dx, 0px), var(--dy, 0px), 0)
+    rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg))
+    rotateZ(var(--rz, 0deg));
+  will-change: transform;
+}
+
+.f {
+  position: absolute;
+  left: 0; top: 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  background: var(--fill, #fff);
+}
+
+.f::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--shade, none);
+  opacity: var(--depth, 0);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.f--vol { opacity: var(--vol, 0); }
+
+.f--body     { --fill: #f3f5f8; }
+.f--roof     { --fill: #ffffff; --shade: linear-gradient(180deg, rgba(255,255,255,.9), rgba(180,196,214,.45)); }
+.f--far      { --fill: #c9d2dd; --shade: linear-gradient(180deg, rgba(12,18,28,.30), rgba(12,18,28,.05)); }
+.f--nose     { --fill: #e4e9ef; --shade: linear-gradient(180deg, rgba(255,255,255,.55), rgba(20,28,40,.18)); }
+.f--rear     { --fill: #d7dee6; --shade: linear-gradient(180deg, rgba(12,18,28,.22), rgba(12,18,28,.02)); }
+.f--dark     { --fill: #182230; }
+.f--glass    { --fill: #1b2634; }
+.f--skirt    { --fill: #20293a; }
+
+.f--side {
+  --fill: #f7f9fb;
+  --shade: linear-gradient(176deg, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 34%, rgba(18,26,38,.10) 76%, rgba(18,26,38,.22) 100%);
+  overflow: hidden;
+  box-shadow: inset 0 0 0 calc(1.5px * var(--flat, 1)) rgba(10, 14, 22, .85);
+}
+
+.detail { position: absolute; }
+.detail--glass {
+  background: linear-gradient(200deg, #2b3a4e 0%, #16202c 46%, #33455c 100%);
+  border-radius: 6px 10px 6px 4px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.22);
+}
+.detail--windshield {
+  background: linear-gradient(190deg, #3d5068 0%, #1a2432 55%, #2c3b4f 100%);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.28);
+}
+.detail--seam { background: rgba(21, 30, 44, .16); }
+.detail--arch {
+  background: #10151f;
+  border-radius: 999px 999px 0 0;
+}
+.detail--skirt { background: linear-gradient(180deg, #232e40, #131a25); }
+.detail--handle { background: #98a4b4; border-radius: 3px; }
+.detail--light {
+  background: linear-gradient(180deg, #fff6e6, #ffd39b);
+  border-radius: 4px;
+  box-shadow: 0 0 14px rgba(255, 210, 150, calc(.75 * var(--depth, 0)));
+}
+.detail--tail {
+  background: linear-gradient(180deg, #ff8d6b, #d6261a);
+  border-radius: 4px;
+  box-shadow: 0 0 12px rgba(255, 70, 40, calc(.6 * var(--depth, 0)));
+}
+.detail--grille {
+  background: repeating-linear-gradient(180deg, #2a3546 0 3px, #1a2331 3px 7px);
+  border-radius: 4px;
+}
+.detail--plate {
+  background: #eef2f6;
+  border-radius: 3px;
+  display: grid;
+  place-items: center;
+  font: 700 11px/1 var(--font-mono);
+  color: #2a3546;
+  letter-spacing: .06em;
+}
+
+.livery { position: absolute; inset: 0; overflow: hidden; }
+.livery__sweep {
+  position: absolute;
+  left: -6%;
+  bottom: -14%;
+  width: 118%;
+  height: 62%;
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent-strong) 62%, #8f1a13 100%);
+  transform: skewY(-5.5deg);
+}
+.livery__sweep--dark {
+  background: linear-gradient(100deg, #16202d, #0b1017);
+  height: 40%;
+  bottom: -12%;
+  transform: skewY(-5.5deg);
+}
+.livery__logo { position: absolute; }
+.livery__logo svg { width: 100%; height: auto; }
+.livery__claim {
+  position: absolute;
+  font-weight: 650;
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: #0b1017;
+  white-space: nowrap;
+}
+.livery__contact {
+  position: absolute;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  letter-spacing: .02em;
+}
+
+.wheel { position: absolute; left: 0; top: 0; transform-style: preserve-3d; }
+.wheel__hub {
+  position: absolute; left: 0; top: 0;
+  transform-style: preserve-3d;
+  transform: rotateZ(var(--spin, 0deg));
+}
+.wheel__tread {
+  position: absolute; left: 0; top: 0;
+  background: #14191f;
+  backface-visibility: hidden;
+}
+.wheel__disc {
+  position: absolute; left: 0; top: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 42% 38%, #6a7382 0 16%, #39414d 17% 33%, #1b2029 34% 62%, #11151b 63% 100%);
+  box-shadow: inset 0 0 0 3px #0d1116;
+}
+.wheel__disc::before {
+  content: "";
+  position: absolute;
+  inset: 26%;
+  border-radius: 50%;
+  background:
+    conic-gradient(from 0deg, #cfd6df 0 8%, #8d96a3 8% 16%, #cfd6df 16% 24%, #8d96a3 24% 32%,
+                   #cfd6df 32% 40%, #8d96a3 40% 48%, #cfd6df 48% 56%, #8d96a3 56% 64%,
+                   #cfd6df 64% 72%, #8d96a3 72% 80%, #cfd6df 80% 88%, #8d96a3 88% 100%);
+  box-shadow: inset 0 0 0 2px rgba(20,25,32,.6);
+}
+
+.beacon { position: absolute; left: 0; top: 0; transform-style: preserve-3d; }
+.beacon__dome {
+  position: absolute; left: 0; top: 0;
+  opacity: var(--vol, 0);
+  background: linear-gradient(180deg, #ff8d7f, var(--accent));
+  border-radius: 40% 40% 6px 6px;
+  box-shadow: 0 0 26px rgba(224, 28, 14, calc(.85 * var(--depth, 0)));
+}
+
+.van-shadow {
+  position: absolute; left: 0; top: 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,.72), rgba(0,0,0,.28) 58%, transparent 78%);
+  filter: blur(10px);
+  opacity: calc(.75 * var(--depth, 0));
+}
+
+/* Hotspots */
+
+.hotspots {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+.hotspot {
+  position: absolute;
+  max-width: 18rem;
+  padding: var(--sp-3) var(--sp-4);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: color-mix(in srgb, var(--bg-contrast) 74%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out);
+}
+.hotspot.is-on { opacity: 1; transform: none; }
+.hotspot b {
+  display: block;
+  font-size: var(--step--1);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--fg-strong);
+}
+.hotspot span {
+  display: block;
+  margin-top: var(--sp-2);
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--fg-muted-on-contrast);
+}
+
+/* Fallback ohne JavaScript */
+.van-fallback { position: relative; z-index: 2; width: min(92%, 900px); }
+.van-fallback img {
+  position: absolute;
+  left: 12%;
+  top: 26%;
+  width: 26%;
+  height: auto;
+}
+.js .van-fallback { display: none; }
+
+@media (max-width: 860px) {
+  .act { height: 300vh; }
+  .stage__intro h2 { font-size: var(--step-4); }
+  .stage__intro p { display: none; }
+  .stage__scene { padding-bottom: clamp(10rem, 34vh, 15rem); }
+
+  .hotspots {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: var(--sp-3);
+    padding: 0 var(--gutter) clamp(3.5rem, 12vh, 6rem);
+    background: linear-gradient(180deg, transparent 52%, var(--stage-scrim) 80%);
+  }
+  .hotspot {
+    position: static;
+    max-width: none;
+    opacity: .2;
+    transform: none;
+    transition: opacity var(--dur-2) var(--ease-out);
+  }
+  .hotspot.is-on { opacity: 1; }
+  .hotspot span { display: block; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .act { height: auto; }
+  .act__stage {
+    position: relative;
+    display: block;
+    height: auto;
+    padding-block: var(--section-y);
+  }
+  .act__stage > * { grid-area: auto; }
+  .stage__floor, .stage__hint { display: none; }
+  .stage__intro {
+    position: relative;
+    padding-top: 0;
+    transform: none;
+    opacity: 1;
+  }
+  .stage__scene {
+    position: relative;
+    height: clamp(20rem, 46vw, 30rem);
+    margin-top: var(--sp-8);
+  }
+  .hotspots {
+    position: static;
+    display: grid;
+    gap: var(--sp-6);
+    grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+    width: min(100% - var(--gutter) * 2, var(--container));
+    margin: var(--sp-9) auto 0;
+  }
+  .hotspot { position: static; max-width: none; opacity: 1; transform: none; }
+  .hotspot span { display: block; }
+}
+
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.replace("no-js", "js");</script>
+
+<div class="vorspann">
+  <p class="eyebrow">Scroll-Animation</p>
+  <h2>Nach unten scrollen.</h2>
+  <p>Das Fahrzeug ist reines CSS: rund sechzig Flächen, die eine Geometrietabelle
+     in JavaScript aufspannt. Der Scrollstand steuert Drehung, Größe und Tiefe.</p>
+</div>
+
+  <section class="act" data-act aria-labelledby="act-title">
+    <div class="act__stage" data-stage>
+
+      <div class="stage__light" aria-hidden="true"></div>
+      <div class="stage__floor" aria-hidden="true"></div>
+
+      <div class="stage__intro" data-intro>
+        <p class="eyebrow">Unser Servicefahrzeug</p>
+        <h2 id="act-title">Unser Servicewagen – einmal rundherum.</h2>
+        <p>Sieben Techniker, voll ausgerüstete Transporter, Ersatzteile an Bord.
+           Meistens ist die Tür am selben Tag wieder in Betrieb.</p>
+      </div>
+
+      <div class="stage__scene" data-scene aria-hidden="true"></div>
+
+      <div class="van-fallback">
+        <svg viewBox="0 0 960 420" role="img" aria-label="Servicefahrzeug von Falke Türautomation">
+          <rect x="60" y="90" width="620" height="230" rx="14" fill="#f4f5f6"/>
+          <path d="M680 200h120l30 40v80H680z" fill="#e4e6e7"/>
+          <path d="M680 200 760 120h-80z" fill="#1c1f20"/>
+          <rect x="60" y="250" width="740" height="70" fill="#e01c0e"/>
+          <rect x="60" y="300" width="740" height="20" fill="#1c1f20"/>
+          <circle cx="250" cy="330" r="56" fill="#14191f"/><circle cx="250" cy="330" r="24" fill="#8d9192"/>
+          <circle cx="700" cy="330" r="56" fill="#14191f"/><circle cx="700" cy="330" r="24" fill="#8d9192"/>
+        </svg>
+        <img src="assets/img/logo-falke.png" alt="" width="600" height="200">
+      </div>
+
+      <div class="hotspots">
+        <div class="hotspot" style="left:7%;top:26%" data-from="0.18" data-to="0.52">
+          <b>Eigene Techniker</b>
+          <span>Kein Subunternehmer: sieben Servicetechniker, ein Disponent, feste Ansprechpartner.</span>
+        </div>
+        <div class="hotspot" style="right:7%;top:38%" data-from="0.40" data-to="0.72">
+          <b>Ersatzteile an Bord</b>
+          <span>Gängige Antriebe, Sensoren und Verschleißteile fahren mit – das spart den zweiten Termin.</span>
+        </div>
+        <div class="hotspot" style="left:11%;bottom:22%" data-from="0.62" data-to="0.94">
+          <b>Herstellerunabhängig</b>
+          <span>GEZE, dormakaba, Assa Abloy und mehr – Ihr gesamter Anlagenbestand aus einer Hand.</span>
+        </div>
+      </div>
+
+      <p class="stage__hint" data-hint><span class="mouse" aria-hidden="true"></span> Scrollen</p>
+    </div>
+  </section>
+
+<div class="nachspann">
+  <p>Ende der Animation.</p>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  const G = {
+    L: 600, H: 300, W: 230,
+    hoodL: 120, hoodTop: -10,
+    bumperL: 28,
+    R: 60, TW: 44,
+    axleFront: 225, axleRear: -180,
+    seg: 14
+  };
+  G.frontX = G.L / 2;
+  G.noseX = G.frontX + G.hoodL;
+  G.bottomY = G.H / 2;
+  G.topY = -G.H / 2;
+  G.axleY = G.bottomY + 28;
+  G.groundY = G.axleY + G.R;
+  G.halfW = G.W / 2;
+
+  G.wsDx = G.hoodL;
+  G.wsDy = G.hoodTop - G.topY;
+  G.wsLen = Math.hypot(G.wsDx, G.wsDy);
+  G.wsAngle = -(90 - (Math.atan2(G.wsDy, G.wsDx) * 180) / Math.PI);
+
+  const NS = "http://www.w3.org/2000/svg";
+
+  const LOGO = '<img src="assets/img/logo-falke.png" alt="" width="600" height="200" style="width:100%;height:auto">';
+
+  const px = (n) => n + "px";
+  const clamp01 = (n) => (n < 0 ? 0 : n > 1 ? 1 : n);
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+  const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+  const seg = (p, a, b) => clamp01((p - a) / (b - a));
+
+  function el(tag, cls, parent) {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+
+  function panel(parent, cls, w, h, cx, cy, cz, rot) {
+    const n = el("div", "f " + cls, parent);
+    n.style.width = px(w);
+    n.style.height = px(h);
+    n.style.marginLeft = px(-w / 2);
+    n.style.marginTop = px(-h / 2);
+    n.style.transform = `translate3d(${px(cx)}, ${px(cy)}, ${px(cz)}) ` + (rot || "");
+    return n;
+  }
+
+  function boxSolid(parent, opts) {
+    const { x = 0, y = 0, z = 0, l, h, w, cls = "f--dark", skipBottom = true } = opts;
+    const out = {};
+    out.near = panel(parent, cls, l, h, x, y, z + w / 2, "");
+    out.far = panel(parent, cls + " f--vol", l, h, x, y, z - w / 2, "rotateY(180deg)");
+    out.front = panel(parent, cls + " f--vol", w, h, x + l / 2, y, z, "rotateY(90deg)");
+    out.back = panel(parent, cls + " f--vol", w, h, x - l / 2, y, z, "rotateY(-90deg)");
+    out.top = panel(parent, cls + " f--vol", l, w, x, y - h / 2, z, "rotateX(90deg)");
+    if (!skipBottom) out.bottom = panel(parent, cls + " f--vol", l, w, x, y + h / 2, z, "rotateX(-90deg)");
+    return out;
+  }
+
+  function detail(parent, cls, w, h, left, top, extra) {
+    const n = el("div", "detail " + cls, parent);
+    n.style.width = px(w);
+    n.style.height = px(h);
+    n.style.left = px(left);
+    n.style.top = px(top);
+    if (extra) n.setAttribute("style", n.getAttribute("style") + ";" + extra);
+    return n;
+  }
+
+  function buildVan(root) {
+    const van = el("div", "van", root);
+
+    const sh = el("div", "van-shadow", van);
+    sh.style.width = px(1000);
+    sh.style.height = px(300);
+    sh.style.marginLeft = px(-500);
+    sh.style.marginTop = px(-150);
+    sh.style.transform = `translate3d(${px(30)}, ${px(G.groundY + 6)}, 0) rotateX(90deg)`;
+
+    panel(van, "f--roof f--vol", G.L, G.W, 0, G.topY, 0, "rotateX(90deg)");
+    panel(van, "f--dark f--vol", G.L + G.hoodL + G.bumperL, G.W, (G.hoodL + G.bumperL) / 2, G.bottomY, 0, "rotateX(-90deg)");
+    const rear = panel(van, "f--rear f--vol", G.W, G.H, -G.frontX, 0, 0, "rotateY(-90deg)");
+    panel(van, "f--far f--vol", G.L, G.H, 0, 0, -G.halfW, "rotateY(180deg)");
+    const nearSide = panel(van, "f--side", G.L, G.H, 0, 0, G.halfW, "");
+
+    const hoodH = G.bottomY - G.hoodTop;
+    const hoodCx = G.frontX + G.hoodL / 2;
+    const hoodCy = G.hoodTop + hoodH / 2;
+    panel(van, "f--roof f--vol", G.hoodL, G.W, hoodCx, G.hoodTop, 0, "rotateX(90deg)");
+    const noseFace = panel(van, "f--nose f--vol", G.W, hoodH, G.noseX, hoodCy, 0, "rotateY(90deg)");
+    const hoodNear = panel(van, "f--side", G.hoodL, hoodH, hoodCx, hoodCy, G.halfW, "");
+    panel(van, "f--far f--vol", G.hoodL, hoodH, hoodCx, hoodCy, -G.halfW, "rotateY(180deg)");
+
+    const wsCx = (G.frontX + G.noseX) / 2;
+    const wsCy = (G.topY + G.hoodTop) / 2;
+    panel(van, "f--glass f--vol detail--windshield", G.W - 14, G.wsLen,
+      wsCx, wsCy, 0, `rotateZ(${G.wsAngle}deg) rotateY(90deg)`);
+
+    [G.halfW + 0.4, -(G.halfW + 0.4)].forEach(function (zz, i) {
+      const t = panel(van, "f--glass" + (i ? " f--vol" : ""), G.hoodL, G.wsDy, wsCx, wsCy, zz,
+        i ? "rotateY(180deg)" : "");
+      t.style.clipPath = i ? "polygon(100% 0, 100% 100%, 0 100%)" : "polygon(0 0, 100% 100%, 0 100%)";
+      t.style.background = "linear-gradient(200deg, #3b4d63, #16202c)";
+    });
+
+    boxSolid(van, {
+      x: G.noseX + G.bumperL / 2, y: G.bottomY - 30, z: 0,
+      l: G.bumperL, h: 62, w: G.W + 12, cls: "f--skirt"
+    });
+    [G.halfW + 26, -(G.halfW + 26)].forEach(function (zz) {
+      boxSolid(van, { x: G.frontX - 26, y: -46, z: zz, l: 16, h: 44, w: 26, cls: "f--skirt" });
+      boxSolid(van, { x: G.frontX - 26, y: -20, z: zz - Math.sign(zz) * 14, l: 8, h: 10, w: 28, cls: "f--skirt" });
+    });
+    boxSolid(van, { x: 120, y: G.topY - 15, z: 0, l: 104, h: 30, w: 148, cls: "f--skirt" });
+    const dome = el("div", "beacon__dome", van);
+    dome.style.width = px(96);
+    dome.style.height = px(120);
+    dome.style.marginLeft = px(-48);
+    dome.style.marginTop = px(-60);
+    dome.style.transform = `translate3d(${px(120)}, ${px(G.topY - 31)}, 0) rotateX(90deg)`;
+
+    liverySide(nearSide, hoodNear);
+    liveryNose(noseFace, hoodH);
+    liveryRear(rear);
+
+    const wheels = [];
+    [G.axleFront, G.axleRear].forEach(function (ax) {
+      wheels.push(wheel(van, ax, G.axleY, G.halfW - G.TW / 2 - 1));
+    });
+
+    return { van: van, wheels: wheels };
+  }
+
+  function liverySide(side, hoodSide) {
+    const lx = (x) => x + G.L / 2;
+    const ly = (y) => y + G.H / 2;
+
+    const liv = el("div", "livery", side);
+    el("div", "livery__sweep livery__sweep--dark", liv);
+    el("div", "livery__sweep", liv);
+
+    detail(side, "detail--skirt", G.L, 30, 0, G.H - 30);
+
+    detail(side, "detail--glass", 122, 92, lx(150), ly(-128), "border-radius:6px 16px 6px 6px");
+    detail(side, "detail--seam", 2, G.H - 46, lx(128), 10);
+    detail(side, "detail--seam", 2, G.H - 46, lx(282), 10);
+    detail(side, "detail--handle", 28, 7, lx(158), ly(-6));
+
+    detail(side, "detail--seam", 2, G.H - 60, lx(-70), 16);
+    detail(side, "detail--handle", 24, 6, lx(-60), ly(-10));
+
+    [G.axleFront, G.axleRear].forEach(function (ax) {
+      const r = 78;
+      detail(side, "detail--arch", r * 2, r, lx(ax) - r, G.H - r + 4);
+    });
+
+    const logo = el("div", "livery__logo", liv);
+    logo.style.cssText = `left:${px(lx(-252))};top:${px(ly(-126))};width:${px(246)}`;
+    logo.innerHTML = LOGO;
+
+    const claim = el("div", "livery__claim", liv);
+    claim.textContent = "Wir öffnen Türen";
+    claim.style.cssText = `left:${px(lx(-246))};top:${px(ly(-28))};font-size:16px;color:#4f5455`;
+
+    const contact = el("div", "livery__contact", liv);
+    contact.innerHTML =
+      '02272 908 92 70 <span style="font-size:.72em;opacity:.9">&nbsp;·&nbsp; falke-tuerautomation.de</span>';
+    contact.style.cssText = `left:${px(lx(-252))};top:${px(ly(52))};font-size:21px`;
+
+    detail(hoodSide, "detail--skirt", G.hoodL, 24, 0, G.bottomY - G.hoodTop - 24);
+  }
+
+  function liveryNose(nose, h) {
+    const w = G.W;
+    detail(nose, "", w, 12, 0, 26, "background:linear-gradient(90deg,var(--accent),var(--accent-strong));opacity:.92");
+    detail(nose, "detail--grille", 150, 30, (w - 150) / 2, 46);
+    detail(nose, "detail--light", 46, 20, 14, 42, "border-radius:4px 10px 10px 4px");
+    detail(nose, "detail--light", 46, 20, w - 60, 42, "border-radius:10px 4px 4px 10px");
+    detail(nose, "detail--plate", 80, 20, (w - 80) / 2, h - 44).textContent = "BM·FA 13";
+  }
+
+  function liveryRear(rear) {
+    const w = G.W, h = G.H;
+    detail(rear, "detail--seam", 3, h - 30, w / 2 - 1.5, 12);
+    detail(rear, "detail--glass", 78, 54, 16, 28, "border-radius:5px");
+    detail(rear, "detail--glass", 78, 54, w - 94, 28, "border-radius:5px");
+    detail(rear, "detail--tail", 22, 50, 10, h - 120);
+    detail(rear, "detail--tail", 22, 50, w - 32, h - 120);
+    detail(rear, "detail--plate", 80, 20, (w - 80) / 2, h - 48).textContent = "BM·FA 13";
+    detail(rear, "detail--handle", 36, 8, w / 2 - 46, h / 2 + 10);
+    detail(rear, "detail--handle", 36, 8, w / 2 + 10, h / 2 + 10);
+    detail(rear, "", w - 40, 34, 20, h - 92,
+      "background:linear-gradient(90deg,var(--accent),var(--accent-strong));border-radius:3px");
+  }
+
+  function wheel(parent, x, y, z) {
+    const w = el("div", "wheel", parent);
+    w.style.transform = `translate3d(${px(x)}, ${px(y)}, ${px(z)})`;
+    const hub = el("div", "wheel__hub", w);
+
+    const R = G.R, TW = G.TW, N = G.seg;
+    const segW = (2 * Math.PI * R) / N * 1.08;
+    for (let i = 0; i < N; i++) {
+      const s = el("div", "wheel__tread", hub);
+      s.style.width = px(segW);
+      s.style.height = px(TW);
+      s.style.marginLeft = px(-segW / 2);
+      s.style.marginTop = px(-TW / 2);
+      s.style.transform = `rotateZ(${(360 / N) * i}deg) translateY(${px(R)}) rotateX(-90deg)`;
+      s.style.background = i % 2 ? "#14191f" : "#1a2027";
+    }
+    [TW / 2, -TW / 2].forEach((zz, i) => {
+      const d = el("div", "wheel__disc", hub);
+      d.style.width = px(R * 2);
+      d.style.height = px(R * 2);
+      d.style.marginLeft = px(-R);
+      d.style.marginTop = px(-R);
+      d.style.transform = `translateZ(${px(zz)})` + (i ? " rotateY(180deg)" : "");
+    });
+    return w;
+  }
+
+  function init() {
+    const act = document.querySelector("[data-act]");
+    if (!act) return;
+    const stage = act.querySelector("[data-stage]");
+    const scene = act.querySelector("[data-scene]");
+    const hint = act.querySelector("[data-hint]");
+    const intro = act.querySelector("[data-intro]");
+    const hotspots = Array.prototype.slice.call(act.querySelectorAll("[data-from]"));
+    if (!scene) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const built = buildVan(scene);
+    const van = built.van;
+
+    let baseScale = 1, introHeight = 0;
+    function measure() {
+      const vw = scene.clientWidth || window.innerWidth;
+      const vh = stage.clientHeight || window.innerHeight;
+      introHeight = intro ? intro.offsetHeight : 0;
+      const narrow = vw < 860;
+      baseScale = Math.min((vw * (narrow ? 0.86 : 0.80)) / 1020, (vh * (narrow ? 0.50 : 0.58)) / 470);
+      baseScale = Math.max(0.14, Math.min(baseScale, 0.92));
+    }
+
+    function renderStatic() {
+      measure();
+      van.style.setProperty("--s", baseScale * 0.92);
+      stage.style.setProperty("--scene-shift", "0px");
+      stage.style.setProperty("--depth", 1);
+      stage.style.setProperty("--vol", 1);
+      stage.style.setProperty("--flat", 0);
+      stage.style.setProperty("--persp", "2400px");
+      van.style.setProperty("--ry", "-27deg");
+      van.style.setProperty("--rx", "-9deg");
+      van.style.setProperty("--dy", "-20px");
+      hotspots.forEach((h) => h.classList.add("is-on"));
+    }
+
+    if (reduced.matches) {
+      renderStatic();
+      return;
+    }
+
+    let target = 0, current = 0, raf = 0, visible = true, running = false;
+
+    function readProgress() {
+      const rect = act.getBoundingClientRect();
+      const total = act.offsetHeight - stage.clientHeight;
+      target = total > 0 ? clamp01(-rect.top / total) : 0;
+    }
+
+    function apply(p) {
+      const unfold = easeOut(seg(p, 0.05, 0.34));
+
+      const turnA = easeInOut(seg(p, 0.05, 0.40));
+      const turnB = easeInOut(seg(p, 0.42, 0.66));
+      const turnC = easeInOut(seg(p, 0.66, 0.90));
+      const settle = easeOut(seg(p, 0.90, 1.0));
+
+      const ry = lerp(0, -30, turnA) + lerp(0, -24, turnB) + lerp(0, 86, turnC) + lerp(0, -58, settle);
+      const rx = lerp(0, -9, unfold) + lerp(0, -3, turnC);
+      const rz = lerp(0, -0.6, easeInOut(seg(p, 0.34, 0.62)));
+
+      stage.style.setProperty("--depth", unfold.toFixed(4));
+      stage.style.setProperty("--vol", easeOut(seg(p, 0.05, 0.15)).toFixed(4));
+      stage.style.setProperty("--flat", (1 - easeOut(seg(p, 0.02, 0.16))).toFixed(4));
+      stage.style.setProperty("--persp", Math.round(lerp(7000, 2300, unfold)) + "px");
+
+      van.style.setProperty("--ry", ry.toFixed(2) + "deg");
+      van.style.setProperty("--rx", rx.toFixed(2) + "deg");
+      van.style.setProperty("--rz", rz.toFixed(2) + "deg");
+      van.style.setProperty("--s", (baseScale * lerp(0.74, 1.0, easeOut(seg(p, 0.10, 0.52)))).toFixed(4));
+      van.style.setProperty("--dx", Math.round(lerp(10, 80, easeInOut(seg(p, 0.1, 1)))) + "px");
+      van.style.setProperty("--dy",
+        (-26 + Math.sin(p * 46) * 1.6 * unfold).toFixed(2) + "px");
+
+      const spin = p * 2200;
+      for (let i = 0; i < built.wheels.length; i++) {
+        built.wheels[i].firstChild.style.transform = "rotateZ(" + spin.toFixed(1) + "deg)";
+      }
+
+      const introFade = easeOut(seg(p, 0.10, 0.28));
+      if (intro) {
+        intro.style.setProperty("--intro-opacity", (1 - introFade).toFixed(3));
+        intro.style.setProperty("--p", p.toFixed(3));
+      }
+      stage.style.setProperty("--scene-shift", (introHeight * introFade * 0.5).toFixed(1) + "px");
+      if (hint) hint.style.setProperty("--hint-opacity", (1 - clamp01(p * 14)).toFixed(3));
+
+      for (let i = 0; i < hotspots.length; i++) {
+        const h = hotspots[i];
+        const from = parseFloat(h.dataset.from), to = parseFloat(h.dataset.to);
+        h.classList.toggle("is-on", p >= from && p <= to);
+      }
+    }
+
+    function tick() {
+      raf = 0;
+      current = lerp(current, target, 0.14);
+      if (Math.abs(current - target) < 0.0002) current = target;
+      apply(current);
+      if (visible && Math.abs(current - target) > 0.0002) schedule();
+      else running = false;
+    }
+    function schedule() {
+      if (!raf) { running = true; raf = requestAnimationFrame(tick); }
+    }
+    function onScroll() {
+      readProgress();
+      if (visible) schedule();
+    }
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        if (visible) { readProgress(); schedule(); }
+        else if (raf) { cancelAnimationFrame(raf); raf = 0; running = false; }
+      }, { rootMargin: "120px" }).observe(act);
+    }
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden && raf) { cancelAnimationFrame(raf); raf = 0; }
+      else { readProgress(); schedule(); }
+    });
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", function () { measure(); readProgress(); schedule(); });
+    reduced.addEventListener && reduced.addEventListener("change", function (e) {
+      if (e.matches) { if (raf) cancelAnimationFrame(raf); renderStatic(); }
+    });
+
+    measure();
+    readProgress();
+    current = target;
+    apply(current);
+
+    const q = new URLSearchParams(location.search);
+    if (q.has("p")) {
+      const fixed = clamp01(parseFloat(q.get("p")) || 0);
+      window.removeEventListener("scroll", onScroll);
+
+      if (q.get("solo") === "1") {
+        Array.prototype.forEach.call(
+          document.querySelectorAll("body > header, body > footer, main > section"),
+          function (n) { if (n !== act) n.style.display = "none"; }
+        );
+        act.style.height = "100vh";
+        document.body.insertBefore(act, document.body.firstChild);
+      } else {
+        if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+        const total = act.offsetHeight - stage.clientHeight;
+        window.scrollTo(0, act.offsetTop + total * fixed);
+      }
+      current = target = fixed;
+      apply(fixed);
+      window.addEventListener("scroll", function () { apply(fixed); }, { passive: true });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+
+</script>
+</body>
+</html>
