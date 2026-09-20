@@ -201,7 +201,7 @@ ${services.map((s, i) => `        <article class="card" data-reveal${i ? ` style
 
 export function referenceTeaser(projects) {
   return `      <div class="refs">
-${projects.slice(0, 3).map((p, i) => `        <article class="ref" data-reveal${i ? ` style="--reveal-delay:${i * 80}ms"` : ""} style="--ref-img:url('${p.img}')">
+${projects.slice(0, 3).map((p, i) => `        <article class="ref" data-reveal style="background-image:url('${p.img}')${i ? `;--reveal-delay:${i * 80}ms` : ""}">
           <span class="ref__tag">${p.tag}</span>
           <h3>${p.title.split(":")[0]}</h3>
           <p>${p.text.slice(0, 130)}…</p>

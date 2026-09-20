@@ -238,6 +238,14 @@ nachgeschärft, wobei die EXIF-Daten (samt GPS) wegfallen.
 Die Bildunterschriften beschreiben, was zu sehen ist; wer die Aufnahmen kennt,
 sollte sie durchgehen und genauer fassen.
 
+## Bilder auf den Projektkacheln
+
+Die Kacheln auf Startseite und Referenzen bekommen ihr Foto als
+`style="background-image:url(…)"` direkt am Element – **nicht** über eine
+eigene Eigenschaft. Chromium löst einen relativen Pfad in einer eigenen
+Eigenschaft gegen das Stylesheet auf, in dem `var()` steht, also gegen
+`assets/css/`; die Kachel bliebe dann schwarz.
+
 ## Zahlen, die hochlaufen
 
 Jede fett gesetzte Kennzahl trägt `data-zahl`. `assets/js/zahlen.js` zerlegt den

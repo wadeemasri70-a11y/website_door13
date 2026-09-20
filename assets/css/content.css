@@ -279,7 +279,7 @@
   isolation: isolate;
 
   background-color: var(--grey-700);
-  background-image: var(--ref-img, linear-gradient(140deg, #1c2636 0%, #0f1622 100%));
+  background-image: linear-gradient(140deg, #1c2636 0%, #0f1622 100%);
   background-size: cover;
   background-position: center;
 }
