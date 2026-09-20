@@ -1,5 +1,5 @@
-import { serviceCards, referenceTeaser, treeBlock, partnerStrip } from "../blocks.mjs";
-import { services, projects, certificate, partners } from "../content/index.mjs";
+import { serviceCards, referenceTeaser, treeBlock, partnerStrip, certificateCards, bandImage } from "../blocks.mjs";
+import { services, projects, certificate, qualifications, partners } from "../content/index.mjs";
 
 /* Rumpf der Startseite. Die drei Raster (Leistungen, Referenzteaser,
    Zertifizierung) entstehen aus den Daten in data.mjs – alles andere steht
@@ -150,16 +150,22 @@ ${serviceCards(services)}
   </section>
 
   <!-- ======================== ZERTIFIZIERUNG ========================
-       Inhalt und Urkunde stammen aus dem bestehenden Auftritt
-       (Partnerschaft mit Planet Tree). Weitere Nachweise lassen sich
-       über build/data.mjs als zusätzliche Karten ergänzen.            -->
+       Urkunden und Schulungsnachweise; die Dateien liegen in
+       assets/img/zertifikat/, gepflegt in build/content/certificate.mjs. -->
   <section class="section section--paper" id="zertifizierung">
     <div class="shell">
       <div class="section__head" data-reveal>
         <p class="eyebrow">Zertifizierung</p>
+        <h2>Geprüft, geschult, nachgewiesen.</h2>
+        <p>Wer an Fluchtwegtüren, Brandschutz und automatischen Anlagen arbeitet, muss es
+           belegen können. Unsere Nachweise liegen digital vor – ein Klick öffnet die Urkunde.</p>
+      </div>
+
+${certificateCards(qualifications)}
+
+      <div class="section__head" data-reveal style="margin-top:var(--sp-10)">
+        <p class="eyebrow">Nachhaltigkeit</p>
         <h2>Ein Wartungsvertrag. Ein Baum.</h2>
-        <p>Für jeden abgeschlossenen Wartungsvertrag pflanzen wir gemeinsam mit unserem
-           Partner Planet Tree einen Baum – mit Urkunde, Standort und Koordinaten.</p>
       </div>
 
 ${treeBlock(certificate)}
@@ -179,6 +185,16 @@ ${treeBlock(certificate)}
 ${referenceTeaser(projects)}
         </div>
   </section>
+
+  <!-- ========================= TEAM-BILDBAND ========================= -->
+${bandImage({
+  src: "assets/img/team-fuhrpark.jpg",
+  alt: "Das Team von Falke Türautomation vor den Servicefahrzeugen",
+  width: 1890, height: 512,
+  eyebrow: "Das Team",
+  h2: "Elf Kolleginnen und Kollegen. Sieben davon im Servicefahrzeug.",
+  lead: "Kein Callcenter, kein Subunternehmer: Sie sprechen mit der Disposition – und es kommt jemand, der Ihre Anlage kennt."
+})}
 
   <!-- =========================== ABLAUF =========================== -->
   <section class="section section--dark" id="ablauf">

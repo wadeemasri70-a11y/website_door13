@@ -20,10 +20,10 @@ export const pages = [
           "Weil wir herstellerunabhängig arbeiten, betreuen wir ganze Liegenschaften aus einer Hand: GEZE, dormakaba, Assa Abloy und weitere Fabrikate stehen bei uns auf derselben Wartungsliste.",
           "Zu unseren Auftraggebern zählen unter anderem die RWTH Aachen, der Rhein-Sieg-Kreis und die Stadt Köln, dazu Kliniken, Schulen, Kulturbauten, Banken und Industriebetriebe."
         ]) + "\n" + B.media({
-          src: "assets/img/referenz/ordnungsamt-stolberg.jpg",
-          alt: "Neue Aluminium-Türanlage am Ordnungsamt Stolberg",
-          caption: "Aus einem unserer Projekte: Eingangsbereich Ordnungsamt Stolberg.",
-          ratio: "4 / 3"
+          src: "assets/img/ueber-uns.jpg",
+          alt: "Servicetechniker von Falke Türautomation bei der Arbeit und vor dem Firmenfahrzeug",
+          caption: "Unsere Technik und unsere Leute – beides kommt zu Ihnen ins Haus.",
+          ratio: "1 / 1"
         }) + "\n" + B.facts([
           { b: "2020", span: "gegründet von René Falke" },
           { b: "11", span: "Mitarbeitende im Team" },
@@ -65,6 +65,11 @@ export const pages = [
           </article>
         </div>
         <!-- Teamfotos: hier je Person ein Bild einsetzen (assets/img/team-*.jpg) -->`
+      }),
+      B.bandImage({
+        src: "assets/img/team-fuhrpark.jpg",
+        alt: "Das Team von Falke Türautomation vor den Servicefahrzeugen",
+        width: 1890, height: 512
       }),
       B.ctaBand({
         h2: "Lust, bei uns mitzufahren?",

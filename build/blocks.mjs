@@ -251,3 +251,39 @@ ${lauf}
         </div>
       </div>`;
 }
+
+/* ---- Zertifikate -------------------------------------------------------- */
+
+export function certificateCards(items) {
+  return `      <ul class="certs">
+${items.map((c, i) => `        <li class="cert" data-reveal${i ? ` style="--reveal-delay:${i * 80}ms"` : ""}>
+          <a class="cert__sheet" href="${c.file}" target="_blank" rel="noopener">
+            <img src="${c.file}" alt="${esc(c.alt)}" loading="lazy">
+          </a>
+          <div>
+            <h3>${c.title}</h3>
+            <p>${c.meta}</p>
+          </div>
+        </li>`).join("\n")}
+      </ul>`;
+}
+
+/* ---- Bildband über die volle Breite ------------------------------------- */
+
+export function bandImage({ src, alt, width, height, eyebrow, h2, lead }) {
+  const kopf = eyebrow || h2 || lead
+    ? `    <div class="shell">
+      <div class="bandbild__kopf" data-reveal>
+        ${eyebrow ? `<p class="eyebrow">${eyebrow}</p>` : ""}
+        ${h2 ? `<h2>${h2}</h2>` : ""}
+        ${lead ? `<p>${lead}</p>` : ""}
+      </div>
+    </div>`
+    : "";
+  return `  <section class="bandbild">
+${kopf}
+    <figure class="bandbild__bild">
+      <img src="${src}" alt="${esc(alt)}" width="${width}" height="${height}" loading="lazy" decoding="async">
+    </figure>
+  </section>`;
+}

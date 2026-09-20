@@ -587,9 +587,18 @@
   height: 3px;
   background: var(--partner-color, var(--accent));
 }
+.partner--logo {
+  padding: var(--sp-4) var(--sp-6);
+  background: #fff;                 /* die Logos tragen weißen Grund */
+  border-color: rgba(11, 12, 13, 0.12);
+}
 .partner--logo::before { display: none; }
+.partner--logo img {
+  height: clamp(30px, 4vw, 42px);
+  width: auto;
+  object-fit: contain;
+}
 .partner:hover { border-color: var(--line-strong); transform: translateY(-2px); }
-.partner img { max-height: 42px; width: auto; }
 .partner__name {
   font-size: var(--step-1);
   font-weight: 800;
@@ -606,4 +615,44 @@
   }
   .partners__track .partner[aria-hidden="true"] { display: none; }
   .partners__viewport { -webkit-mask-image: none; mask-image: none; }
+}
+
+/* ---- Zertifikate --------------------------------------------------------- */
+.certs {
+  display: grid;
+  gap: clamp(1rem, 0.6rem + 1.6vw, 1.75rem);
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+.cert { display: flex; flex-direction: column; gap: var(--sp-4); }
+.cert__sheet {
+  display: block;
+  aspect-ratio: 1 / 1.414;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);
+}
+.cert__sheet:hover { transform: translateY(-5px) rotate(-0.6deg); box-shadow: var(--shadow-lg); }
+.cert__sheet img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.cert h3 { font-size: var(--step-0); line-height: 1.35; }
+.cert p { margin-top: var(--sp-2); font-size: var(--step--1); color: var(--fg-muted); }
+
+/* ---- Bildband über die volle Breite -------------------------------------- */
+.bandbild { padding-block: var(--section-y) 0; background: var(--bg-2); }
+.bandbild__kopf { max-width: var(--measure); margin-bottom: clamp(2rem, 1.5rem + 2vw, 3.5rem); }
+.bandbild__kopf p:last-child {
+  margin-top: var(--sp-5);
+  font-size: var(--step-1);
+  line-height: var(--lh-loose);
+  color: var(--fg-muted);
+}
+.bandbild__bild { margin: 0; }
+.bandbild__bild img {
+  width: 100%;
+  height: auto;
+  max-height: clamp(18rem, 34vw, 30rem);
+  object-fit: cover;
+  object-position: center;
 }

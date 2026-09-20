@@ -30,7 +30,7 @@ export const services = [
       "Übergabe und Einweisung des Kunden"
     ],
     norms: ["DIN 18650", "DIN EN 16005", "ASR A1.7", "DIN 18040 (Barrierefreiheit)"],
-    image: { src: "assets/img/referenz/volksbank-koeln-bonn.jpg", alt: "Automatische Schiebetüranlage der Volksbank Köln Bonn", caption: "Projektbeispiel: Schiebetüranlage mit GEZE ECdrive, Volksbank Köln Bonn." }
+    image: { src: "assets/img/leistung/schiebetueren.jpg", alt: "Zwei Servicetechniker montieren eine automatische Schiebetüranlage", caption: "Montage einer Schiebetüranlage im laufenden Geschäftsbetrieb." }
   },
   {
     slug: "leistung-drehtuerantriebe",
@@ -86,7 +86,7 @@ export const services = [
       "Ersatzteilverfügbarkeit statt Insellösung"
     ],
     norms: ["EltVTR", "DIN EN 179 / 1125", "DIN EN 16005", "DSGVO-konforme Protokollierung"],
-    image: { src: "assets/img/referenz/ordnungsamt-stolberg.jpg", alt: "Neue Aluminium-Türanlage am Ordnungsamt Stolberg", caption: "Projektbeispiel: Eingangsbereich Ordnungsamt Stolberg." }
+    image: { src: "assets/img/leistung/zutrittskontrolle.jpg", alt: "Zutrittslösung an einer automatischen Türanlage", caption: "Zutritt und Türtechnik werden zusammen geplant – sonst streiten sie an der Tür." }
   },
   {
     slug: "leistung-rettungswegsysteme",
@@ -114,7 +114,7 @@ export const services = [
       "Mängel dokumentiert, priorisiert und beseitigt"
     ],
     norms: ["DIN 14677", "EltVTR", "DIN EN 179", "DIN EN 1125", "ASR A2.3"],
-    image: { src: "assets/img/referenz/heinrich-hanselmann-schule.jpg", alt: "Automatische Schiebetüranlage am Haupteingang der Heinrich-Hanselmann-Schule", caption: "Projektbeispiel: Haupteingang Heinrich-Hanselmann-Schule." }
+    image: { src: "assets/img/leistung/rettungswegsysteme.jpg", alt: "Fluchttür mit Rettungswegsicherung", caption: "Rettungswegtechnik fällt nur auf, wenn sie fehlt." }
   },
   {
     slug: "leistung-obentuerschliesser",
@@ -142,7 +142,7 @@ export const services = [
       "Der Standflügel schließt vor dem Gangflügel"
     ],
     norms: ["DIN EN 1154", "DIN EN 1158", "DIN 18040", "DIN 14677"],
-    image: { src: "assets/img/referenz/gymnasium-schleiden.jpg", alt: "Nachgerüstete Doppelflügeltür im Gymnasium Schleiden", caption: "Projektbeispiel: Doppelflügeltür mit Schließfolgeregelung, Gymnasium Schleiden." }
+    image: { src: "assets/img/leistung/obentuerschliesser.jpg", alt: "Obentürschließer mit Gleitschiene an einer Tür", caption: "Größe, Montageart und Einstellung entscheiden – nicht der Katalog." }
   },
   {
     slug: "leistung-pruefung-wartung",
@@ -181,6 +181,6 @@ export const services = [
         ratio: "3 / 4"
       }
     },
-    image: { src: "assets/img/referenz/bayarena-leverkusen.jpg", alt: "Automatiktür in der Gastronomie der BayArena Leverkusen", caption: "Projektbeispiel: dormakaba ED 250 F, BayArena Leverkusen." }
+    image: { src: "assets/img/leistung/pruefung-wartung.jpg", alt: "Servicetechniker bei der wiederkehrenden Prüfung einer Türanlage", caption: "Jede Prüfung endet mit Protokoll, Mängelliste und Prüfplakette." }
   }
 ];

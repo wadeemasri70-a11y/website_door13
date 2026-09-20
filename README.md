@@ -116,10 +116,10 @@ Ein weiteres Thema entsteht, indem der Rollenblock unter
 
 ## Partner
 
-Die Leiste „Partner & Mitgliedschaften“ steht direkt unter dem Hero und in der
-Leistungsübersicht. Gepflegt wird sie in `build/data.mjs` (`partners`). Solange
-`file` leer ist, zeigt die Leiste eine Textplakette in gleicher Form; sobald ein
-Pfad eingetragen ist, erscheint das Logo:
+Die Leiste „Partner & Mitgliedschaften“ läuft als Band direkt unter dem Hero und
+in der Leistungsübersicht – bei Mausberührung hält sie an. Gepflegt wird sie in
+`build/content/partners.mjs`. Ist `file` leer, zeigt die Leiste eine Textplakette
+in gleicher Form; mit Pfad erscheint das Logo:
 
 ```js
 { name: "GEZE", note: "Servicepartner", file: "assets/img/partner/geze.png" }
@@ -127,11 +127,14 @@ Pfad eingetragen ist, erscheint das Logo:
 
 ## Zertifizierung
 
-Der Abschnitt „Zertifizierung“ auf der Startseite zeigt die Partnerschaft mit
-Planet Tree: je Wartungsvertrag ein Baum im Hessen Forst, mit Musterurkunde und
-Partnerlogo aus dem bestehenden Auftritt. Inhalt und Kennzahlen stehen in
-`build/data.mjs` unter `certificate`; weitere Nachweise lassen sich dort
-ergänzen.
+Der Abschnitt „Zertifizierung“ auf der Startseite zeigt zuerst die
+Sachkundenachweise (FTA, GEZE, Hörmann) als Dokumentkarten – ein Klick öffnet
+die Urkunde – und darunter die Partnerschaft mit Planet Tree: je
+Wartungsvertrag ein Baum im Hessen Forst. Beides steht in
+`build/content/certificate.mjs`.
+
+**Vor dem Livegang prüfen:** Die Urkunden zeigen Namen und Unterschriften der
+Kolleginnen und Kollegen.
 
 ## Anpassen
 

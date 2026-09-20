@@ -53,11 +53,35 @@ build/upscale.sh foto.jpg assets/img/referenz/foto.jpg 2.5 0.85 0.6
 
 ## Partnerlogos
 
-Die Logos der Partner (FAT – Fachverband Türautomation, MARX, WÜRTH,
-GEZE) fehlen noch. Dateien nach `assets/img/partner/` legen (PNG oder SVG,
-transparenter Hintergrund, Höhe mindestens 84 px) und in `build/data.mjs`
-beim jeweiligen Eintrag als `file` eintragen. Bis dahin zeigt die Leiste
-Textplaketten.
+`partner/fta.jpg`, `partner/marx.png`, `partner/wuerth.jpg`, `partner/geze.png`
+– unverändert aus dem bestehenden Auftritt. Gepflegt in
+`build/content/partners.mjs`; ein weiterer Partner ist ein weiterer Eintrag.
+Die Logos tragen weißen Grund, deshalb stehen sie auf weißen Plaketten – so
+wirken sie in beiden Themen gleich.
+
+## Team und Leistungen
+
+| Datei | Verwendung |
+|---|---|
+| `team-fuhrpark.jpg` | Bildband auf Startseite und Teamseite (1890 × 512) |
+| `ueber-uns.jpg` | Seite „Wir stellen uns vor“ |
+| `leistung/schiebetueren.jpg` … | je ein Foto auf den sechs Leistungsseiten |
+
+Die Leistungsfotos kamen als 2000 px breite Originale und wurden mit
+`build/upscale.sh` auf 1400 px gerechnet; das Panorama stammt aus einem
+Bildschirmfoto und liegt als JPEG vor. Gibt es das Original in höherer
+Auflösung, ersetzt es die Datei ohne weitere Änderung.
+
+## Zertifikate
+
+`zertifikat/fta-sachkunde.jpg`, `zertifikat/geze-gs262.jpg`,
+`zertifikat/hoermann-t30.jpg` – Sachkundenachweise und Herstellerschulungen,
+gepflegt in `build/content/certificate.mjs`. Ein Klick auf die Karte öffnet
+die Urkunde in voller Größe.
+
+**Zu prüfen:** Die Urkunden zeigen Namen und Unterschriften. Vor dem Livegang
+mit den betroffenen Kolleginnen und Kollegen abstimmen, ob sie so öffentlich
+stehen sollen – alternativ die Namen unkenntlich machen.
 
 ## Zertifizierung
 
