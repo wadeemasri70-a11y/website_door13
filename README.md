@@ -39,6 +39,8 @@ assets/css/van.css         Bühne und Aussehen des 3-D-Transporters
 
 assets/js/theme.js         Tag-/Nachtthema (ohne defer im <head>)
 assets/js/van.js           baut den Transporter, fährt ihn am Scroll entlang
+assets/js/map.js           Karte auf Klick, Einsatzgebiet mit leuchtenden Punkten
+assets/js/doors.js         Schiebetür am Seitenende, öffnet auf Annäherung
 assets/js/main.js          Kopfzeile, Navigation, Reveals, Formular
 
 18 erzeugte HTML-Dateien im Wurzelverzeichnis
@@ -148,6 +150,28 @@ maps: {
 Der Schlüssel stammt aus der Google Cloud Console (*Maps JavaScript API* und
 *Geocoding API* aktivieren, Abrechnungskonto hinterlegen). **Unbedingt auf die
 eigene Domain beschränken** (HTTP-Referrer), sonst kann ihn jeder verwenden.
+
+### Einsatzgebiet
+
+Die Karte auf der Startseite zeigt nicht die Anschrift, sondern das Gebiet:
+`map({ variante: "region" })`. Über der Einbettung liegen die Orte aus
+`maps.region.orte` als leuchtende Punkte – Bedburg als heller Sitzpunkt, die
+übrigen im Markenrot mit Pulsring. Die Positionen rechnet `weltpunkt()` in
+`assets/js/map.js` über die Mercator-Projektion aus Mittelpunkt und Zoomstufe
+und setzt sie in Prozent; bei Größenänderung wird neu gerechnet. Damit Punkte
+und Karte zusammenbleiben, nimmt die Einbettung hier keine Mauseingaben an.
+
+## Schiebetür am Seitenende
+
+Unter der Fußzeile jeder Seite steht ein Türportal: zwei Flügel aus Milchglas,
+Bodenschiene, Sensorleiste mit Melder. Beim Herunterscrollen fahren die Flügel
+auseinander und geben Telefonnummer und E-Mail frei – wie ein Eingang, der auf
+den Melder reagiert. `assets/js/doors.js` liest den Abstand zum unteren
+Bildrand, glättet ihn und schreibt ihn als `--open` (0 bis 1); die Flügel
+verschieben sich über `translate3d`, der Melder wechselt bei `--open > 0.06`
+auf Rot. Gerechnet wird nur, solange der Abschnitt sichtbar ist
+(`IntersectionObserver` plus `requestAnimationFrame`). Bei
+`prefers-reduced-motion` steht die Tür von vornherein offen.
 
 ## Partner
 

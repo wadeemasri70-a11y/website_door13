@@ -49,12 +49,49 @@
     return document.documentElement.getAttribute("data-theme") === "dark";
   }
 
+  function weltpunkt(lat, lng, zoom) {
+    var kachel = 256 * Math.pow(2, zoom);
+    var sinus = Math.sin((lat * Math.PI) / 180);
+    sinus = Math.min(Math.max(sinus, -0.9999), 0.9999);
+    return {
+      x: ((lng + 180) / 360) * kachel,
+      y: (0.5 - Math.log((1 + sinus) / (1 - sinus)) / (4 * Math.PI)) * kachel
+    };
+  }
+
+  function punkteSetzen(box) {
+    var liste = box.querySelector("[data-map-punkte]");
+    if (!liste || !box.dataset.orte) return;
+
+    var orte = JSON.parse(box.dataset.orte);
+    var zoom = parseFloat(box.dataset.zoom) || 9;
+    var mitte = weltpunkt(parseFloat(box.dataset.lat), parseFloat(box.dataset.lng), zoom);
+    var breite = box.clientWidth;
+    var hoehe = box.clientHeight;
+
+    liste.innerHTML = "";
+    orte.forEach(function (ort) {
+      var punkt = weltpunkt(ort.lat, ort.lng, zoom);
+      var links = breite / 2 + (punkt.x - mitte.x);
+      var oben = hoehe / 2 + (punkt.y - mitte.y);
+      if (links < 12 || links > breite - 12 || oben < 12 || oben > hoehe - 12) return;
+
+      var eintrag = document.createElement("li");
+      eintrag.className = "map__punkt" + (ort.sitz ? " map__punkt--sitz" : "");
+      eintrag.style.left = ((links / breite) * 100).toFixed(2) + "%";
+      eintrag.style.top = ((oben / hoehe) * 100).toFixed(2) + "%";
+      eintrag.innerHTML = '<i></i><b>' + ort.name + "</b>";
+      liste.appendChild(eintrag);
+    });
+  }
+
   function rahmen(box) {
     var frame = document.createElement("iframe");
     frame.className = "map__frame";
     frame.src =
-      "https://maps.google.com/maps?q=" +
-      encodeURIComponent(box.dataset.address) +
+      "https://maps.google.com/maps?ll=" +
+      encodeURIComponent(box.dataset.lat + "," + box.dataset.lng) +
+      "&q=" + encodeURIComponent(box.dataset.ziel) +
       "&z=" + (parseInt(box.dataset.zoom, 10) || 15) +
       "&hl=de&output=embed";
     frame.loading = "lazy";
@@ -63,6 +100,11 @@
     frame.allowFullscreen = true;
     box.querySelector("[data-map-canvas]").appendChild(frame);
     box.classList.add("map--aktiv", "map--rahmen");
+
+    if (box.dataset.variante === "region") {
+      punkteSetzen(box);
+      window.addEventListener("resize", function () { punkteSetzen(box); });
+    }
   }
 
   function laden(box) {

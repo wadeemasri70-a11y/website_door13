@@ -183,12 +183,18 @@
       </form>
           </div>
       <div class="map map--breit" data-map data-reveal
+           data-variante="adresse"
            data-maps-key=""
            data-address="Kasterer Str. 12, 50181 Bedburg"
-           data-lat="51" data-lng="6.5667" data-zoom="15"
+           data-ziel="Kasterer Str. 12, 50181 Bedburg"
+           data-lat="51"
+           data-lng="6.5667"
+           data-zoom="15"
+           data-orte=""
            data-title="Falke Türautomation"
            data-maps-link="https://www.google.com/maps/search/?api=1&query=Kasterer+Str.+12,+50181+Bedburg">
         <div class="map__canvas" data-map-canvas></div>
+        <ul class="map__punkte" data-map-punkte></ul>
         <div class="map__vorschau">
           <svg class="map__pin" viewBox="0 0 44 58" aria-hidden="true">
             <path d="M22 57S41 34.8 41 21.9C41 10.4 32.5 1 22 1S3 10.4 3 21.9C3 34.8 22 57 22 57z"
@@ -206,6 +212,24 @@
     </div>
   </section>
 </main>
+
+<section class="tuer" data-doors aria-labelledby="tuer-titel">
+  <div class="tuer__sensor" aria-hidden="true"><span class="tuer__led"></span></div>
+  <div class="tuer__rahmen">
+    <div class="tuer__inhalt">
+      <p class="eyebrow">Kontakt</p>
+      <h2 id="tuer-titel">Sprechen wir über Ihre Türen.</h2>
+      <p>Mo – Fr, 8:00 – 16:30 Uhr erreichen Sie unsere Disposition direkt.</p>
+      <div class="tuer__aktionen">
+        <a class="btn btn--accent" href="tel:+4922729089270">02272 / 908 927 0</a>
+        <a class="btn btn--ghost" href="mailto:info@falke-tuerautomation.de">info@falke-tuerautomation.de</a>
+      </div>
+    </div>
+    <div class="tuer__fluegel tuer__fluegel--links" aria-hidden="true"></div>
+    <div class="tuer__fluegel tuer__fluegel--rechts" aria-hidden="true"></div>
+    <div class="tuer__schiene" aria-hidden="true"></div>
+  </div>
+</section>
 
 <footer class="site-footer">
   <div class="shell">
@@ -262,6 +286,7 @@
 
 <script src="assets/js/van.js" defer></script>
 <script src="assets/js/map.js" defer></script>
+<script src="assets/js/doors.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 </body>
 </html>

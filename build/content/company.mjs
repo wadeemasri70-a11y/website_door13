@@ -50,6 +50,18 @@ export const company = {
     lat: 51.0,
     lng: 6.5667,
     zoom: 15,
-    link: "https://www.google.com/maps/search/?api=1&query=Kasterer+Str.+12,+50181+Bedburg"
+    link: "https://www.google.com/maps/search/?api=1&query=Kasterer+Str.+12,+50181+Bedburg",
+    region: {
+      lat: 50.98,
+      lng: 6.59,
+      zoom: 9,
+      orte: [
+        { name: "Bedburg", lat: 51.0, lng: 6.5667, sitz: true },
+        { name: "Düsseldorf", lat: 51.2277, lng: 6.7735 },
+        { name: "Köln", lat: 50.9375, lng: 6.9603 },
+        { name: "Bonn", lat: 50.7374, lng: 7.0982 },
+        { name: "Aachen", lat: 50.7753, lng: 6.0839 }
+      ]
+    }
   }
 };

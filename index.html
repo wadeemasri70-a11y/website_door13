@@ -518,20 +518,26 @@
           </ul>
         </div>
 
-      <div class="map" data-map data-reveal
+      <div class="map map--region" data-map data-reveal
+           data-variante="region"
            data-maps-key=""
            data-address="Kasterer Str. 12, 50181 Bedburg"
-           data-lat="51" data-lng="6.5667" data-zoom="15"
+           data-ziel="50.98,6.59"
+           data-lat="50.98"
+           data-lng="6.59"
+           data-zoom="9"
+           data-orte="[{&quot;name&quot;:&quot;Bedburg&quot;,&quot;lat&quot;:51,&quot;lng&quot;:6.5667,&quot;sitz&quot;:true},{&quot;name&quot;:&quot;Düsseldorf&quot;,&quot;lat&quot;:51.2277,&quot;lng&quot;:6.7735},{&quot;name&quot;:&quot;Köln&quot;,&quot;lat&quot;:50.9375,&quot;lng&quot;:6.9603},{&quot;name&quot;:&quot;Bonn&quot;,&quot;lat&quot;:50.7374,&quot;lng&quot;:7.0982},{&quot;name&quot;:&quot;Aachen&quot;,&quot;lat&quot;:50.7753,&quot;lng&quot;:6.0839}]"
            data-title="Falke Türautomation"
            data-maps-link="https://www.google.com/maps/search/?api=1&query=Kasterer+Str.+12,+50181+Bedburg">
         <div class="map__canvas" data-map-canvas></div>
+        <ul class="map__punkte" data-map-punkte></ul>
         <div class="map__vorschau">
           <svg class="map__pin" viewBox="0 0 44 58" aria-hidden="true">
             <path d="M22 57S41 34.8 41 21.9C41 10.4 32.5 1 22 1S3 10.4 3 21.9C3 34.8 22 57 22 57z"
                   fill="var(--accent)" stroke="var(--bg-2)" stroke-width="2"/>
             <circle cx="22" cy="21.5" r="7" fill="var(--bg-2)"/>
           </svg>
-          <p class="map__adresse">Falke Türautomation<br>Kasterer Str. 12, 50181 Bedburg</p>
+          <p class="map__adresse">Einsatzgebiet: Köln, Düsseldorf, Bonn, Aachen</p>
           <button class="btn btn--accent" type="button" data-map-load>Karte laden</button>
           <p class="map__hinweis">
             Beim Laden wird eine Verbindung zu Google Maps aufgebaut.
@@ -626,6 +632,24 @@
   </section>
 </main>
 
+<section class="tuer" data-doors aria-labelledby="tuer-titel">
+  <div class="tuer__sensor" aria-hidden="true"><span class="tuer__led"></span></div>
+  <div class="tuer__rahmen">
+    <div class="tuer__inhalt">
+      <p class="eyebrow">Kontakt</p>
+      <h2 id="tuer-titel">Sprechen wir über Ihre Türen.</h2>
+      <p>Mo – Fr, 8:00 – 16:30 Uhr erreichen Sie unsere Disposition direkt.</p>
+      <div class="tuer__aktionen">
+        <a class="btn btn--accent" href="tel:+4922729089270">02272 / 908 927 0</a>
+        <a class="btn btn--ghost" href="mailto:info@falke-tuerautomation.de">info@falke-tuerautomation.de</a>
+      </div>
+    </div>
+    <div class="tuer__fluegel tuer__fluegel--links" aria-hidden="true"></div>
+    <div class="tuer__fluegel tuer__fluegel--rechts" aria-hidden="true"></div>
+    <div class="tuer__schiene" aria-hidden="true"></div>
+  </div>
+</section>
+
 <footer class="site-footer">
   <div class="shell">
     <div class="footer__grid">
@@ -681,6 +705,7 @@
 
 <script src="assets/js/van.js" defer></script>
 <script src="assets/js/map.js" defer></script>
+<script src="assets/js/doors.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 </body>
 </html>

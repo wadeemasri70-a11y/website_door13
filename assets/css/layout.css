@@ -242,3 +242,128 @@
 }
 
 /* Mehrseitigkeit */
+
+/* Schiebetür am Seitenende */
+.tuer {
+  --open: 0;
+  position: relative;
+  padding-block: clamp(4rem, 9vh, 7rem) clamp(2rem, 5vh, 4rem);
+  background: var(--bg-contrast);
+  overflow: hidden;
+}
+
+.tuer__sensor {
+  position: relative;
+  z-index: 2;
+  width: min(100% - var(--gutter) * 2, var(--container));
+  margin: 0 auto clamp(1rem, 2vh, 1.75rem);
+  display: flex;
+  justify-content: center;
+}
+.tuer__sensor::before {
+  content: "";
+  width: clamp(7rem, 22vw, 11rem);
+  height: 14px;
+  border-radius: 4px 4px 2px 2px;
+  background: linear-gradient(180deg, #2b2f30, #16191a);
+  box-shadow: 0 6px 14px -6px rgba(11, 12, 13, .5);
+}
+.tuer__led {
+  position: absolute;
+  top: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4a4f50;
+  transition: background var(--dur-1) var(--ease-out), box-shadow var(--dur-1) var(--ease-out);
+}
+.tuer--offen .tuer__led {
+  background: var(--accent);
+  box-shadow: 0 0 10px 2px rgba(224, 28, 14, .75);
+}
+
+.tuer__rahmen {
+  position: relative;
+  width: min(100% - var(--gutter) * 2, var(--container));
+  margin-inline: auto;
+  min-height: clamp(17rem, 34vh, 24rem);
+  display: grid;
+  place-items: center;
+  padding: clamp(2rem, 5vw, 4rem) var(--gutter);
+  border: 1px solid var(--line-on-contrast);
+  border-radius: var(--radius-lg);
+  background: var(--bg-1);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.tuer__inhalt {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 44ch;
+  opacity: calc(0.25 + 0.75 * var(--open));
+}
+.tuer__inhalt h2 { font-size: var(--step-3); }
+.tuer__inhalt > p {
+  margin-top: var(--sp-4);
+  color: var(--fg-muted);
+  font-size: var(--step-0);
+}
+.tuer__aktionen {
+  margin-top: var(--sp-6);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  justify-content: center;
+}
+
+.tuer__fluegel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 50.5%;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, .34) 0%, rgba(255, 255, 255, .08) 38%, rgba(255, 255, 255, .26) 62%, rgba(255, 255, 255, .06) 100%),
+    color-mix(in srgb, var(--bg-contrast) 72%, transparent);
+  backdrop-filter: blur(7px) saturate(115%);
+  -webkit-backdrop-filter: blur(7px) saturate(115%);
+  will-change: transform;
+}
+.tuer__fluegel::after {
+  content: "";
+  position: absolute;
+  top: 12%;
+  bottom: 12%;
+  width: 3px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--fg-strong) 22%, transparent);
+}
+.tuer__fluegel--links {
+  left: 0;
+  border-right: 1px solid color-mix(in srgb, var(--fg-strong) 12%, transparent);
+  transform: translate3d(calc(-100% * var(--open)), 0, 0);
+}
+.tuer__fluegel--links::after { right: 14px; }
+.tuer__fluegel--rechts {
+  right: 0;
+  border-left: 1px solid color-mix(in srgb, var(--fg-strong) 12%, transparent);
+  transform: translate3d(calc(100% * var(--open)), 0, 0);
+}
+.tuer__fluegel--rechts::after { left: 14px; }
+
+.tuer__schiene {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 6px;
+  z-index: 3;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--fg-strong) 16%, transparent), transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tuer__fluegel { display: none; }
+  .tuer__inhalt { opacity: 1; }
+}

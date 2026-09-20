@@ -242,7 +242,7 @@ ${bandImage({
           </ul>
         </div>
 
-${map()}
+${map({ variante: "region" })}
         </div>
       </div>
     </div>

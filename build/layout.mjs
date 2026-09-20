@@ -119,6 +119,24 @@ ${navMarkup(active)}
 ${body}
 </main>
 
+<section class="tuer" data-doors aria-labelledby="tuer-titel">
+  <div class="tuer__sensor" aria-hidden="true"><span class="tuer__led"></span></div>
+  <div class="tuer__rahmen">
+    <div class="tuer__inhalt">
+      <p class="eyebrow">Kontakt</p>
+      <h2 id="tuer-titel">Sprechen wir über Ihre Türen.</h2>
+      <p>${company.hours} erreichen Sie unsere Disposition direkt.</p>
+      <div class="tuer__aktionen">
+        <a class="btn btn--accent" href="tel:${company.phoneHref}">${company.phone}</a>
+        <a class="btn btn--ghost" href="mailto:${company.mail}">${company.mail}</a>
+      </div>
+    </div>
+    <div class="tuer__fluegel tuer__fluegel--links" aria-hidden="true"></div>
+    <div class="tuer__fluegel tuer__fluegel--rechts" aria-hidden="true"></div>
+    <div class="tuer__schiene" aria-hidden="true"></div>
+  </div>
+</section>
+
 <footer class="site-footer">
   <div class="shell">
     <div class="footer__grid">
@@ -170,6 +188,7 @@ ${body}
 
 <script src="assets/js/van.js" defer></script>
 <script src="assets/js/map.js" defer></script>
+<script src="assets/js/doors.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 </body>
 </html>

@@ -2,6 +2,7 @@ import { arrowIcon } from "./layout.mjs";
 import { company } from "./content/index.mjs";
 
 const esc = (s) => String(s).replace(/&(?![a-z#0-9]+;)/g, "&amp;");
+const attr = (s) => esc(s).replace(/</g, "&lt;").replace(/"/g, "&quot;");
 
 export function pageHero({ eyebrow, h1, lead, actions = [] }) {
   const btns = actions.map((a, i) =>
@@ -276,22 +277,34 @@ ${kopf}
   </section>`;
 }
 
-export function map({ hoehe = "" } = {}) {
+export function map({ hoehe = "", variante = "adresse" } = {}) {
   const m = company.maps;
-  return `      <div class="map${hoehe ? " map--" + hoehe : ""}" data-map data-reveal
+  const region = variante === "region";
+  const ziel = region
+    ? `${m.region.lat},${m.region.lng}`
+    : m.address;
+  return `      <div class="map${hoehe ? " map--" + hoehe : ""}${region ? " map--region" : ""}" data-map data-reveal
+           data-variante="${variante}"
            data-maps-key="${m.key}"
            data-address="${esc(m.address)}"
-           data-lat="${m.lat}" data-lng="${m.lng}" data-zoom="${m.zoom}"
+           data-ziel="${esc(ziel)}"
+           data-lat="${region ? m.region.lat : m.lat}"
+           data-lng="${region ? m.region.lng : m.lng}"
+           data-zoom="${region ? m.region.zoom : m.zoom}"
+           data-orte="${region ? attr(JSON.stringify(m.region.orte)) : ""}"
            data-title="${esc(company.name)}"
            data-maps-link="${m.link}">
         <div class="map__canvas" data-map-canvas></div>
+        <ul class="map__punkte" data-map-punkte></ul>
         <div class="map__vorschau">
           <svg class="map__pin" viewBox="0 0 44 58" aria-hidden="true">
             <path d="M22 57S41 34.8 41 21.9C41 10.4 32.5 1 22 1S3 10.4 3 21.9C3 34.8 22 57 22 57z"
                   fill="var(--accent)" stroke="var(--bg-2)" stroke-width="2"/>
             <circle cx="22" cy="21.5" r="7" fill="var(--bg-2)"/>
           </svg>
-          <p class="map__adresse">${company.name}<br>${m.address}</p>
+          <p class="map__adresse">${region
+            ? "Einsatzgebiet: Köln, Düsseldorf, Bonn, Aachen"
+            : company.name + "<br>" + m.address}</p>
           <button class="btn btn--accent" type="button" data-map-load>Karte laden</button>
           <p class="map__hinweis">
             Beim Laden wird eine Verbindung zu Google Maps aufgebaut.
