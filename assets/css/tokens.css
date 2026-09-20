@@ -120,9 +120,9 @@
 
   --topbar-h: 38px;
   --header-h: 72px;
-  --header-gross: clamp(92px, 7vw, 124px);
-  --logo-h: 44px;
-  --logo-gross: clamp(56px, 4.4vw, 78px);
+  --header-gross: clamp(104px, 8vw, 140px);
+  --logo-h: 52px;
+  --logo-gross: clamp(66px, 5.2vw, 92px);
 
   /* Form */
   --radius-xs: 4px;
@@ -146,9 +146,9 @@
 
 @media (max-width: 35rem) {
   :root {
-    --header-gross: 82px;
-    --logo-gross: 46px;
-    --logo-h: 34px;
+    --header-gross: 92px;
+    --logo-gross: 54px;
+    --logo-h: 38px;
   }
 }
 
