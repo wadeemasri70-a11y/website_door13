@@ -1,0 +1,115 @@
+/* =========================================================================
+   Design Tokens – Falke Türautomation
+   Eine Quelle der Wahrheit für Farbe, Typografie, Raster, Abstand, Bewegung.
+   ========================================================================= */
+
+:root {
+  /* ---- Farbe ---------------------------------------------------------- */
+  --ink-900: #080b11;
+  --ink-800: #0d121b;
+  --ink-700: #141b27;
+  --ink-600: #1d2736;
+  --ink-500: #2a3648;
+
+  --steel-500: #5d6b7f;
+  --steel-400: #7d8a9c;
+  --steel-300: #a7b2c0;
+  --steel-200: #cbd3dd;
+  --steel-100: #e6eaf0;
+
+  --paper: #f5f7fa;
+  --paper-warm: #fbfcfd;
+  --white: #ffffff;
+
+  /* Signalfarbe: Technik, Sicherheit, Notdienst */
+  --signal: #ff6a1f;
+  --signal-600: #e8551a;
+  --signal-300: #ffa06b;
+  --signal-tint: rgba(255, 106, 31, 0.12);
+
+  --line: rgba(13, 18, 27, 0.10);
+  --line-strong: rgba(13, 18, 27, 0.18);
+  --line-dark: rgba(255, 255, 255, 0.10);
+
+  /* ---- Typografie ------------------------------------------------------
+     Fluid Type Scale (Major Third ~1.25 bei großen Viewports).
+     Ein Schriftsystem, zwei Gewichte pro Rolle – mehr braucht es nicht.     */
+  --font-sans: "Inter", "InterVariable", system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+    Consolas, monospace;
+
+  --step--2: clamp(0.70rem, 0.68rem + 0.10vw, 0.76rem);
+  --step--1: clamp(0.82rem, 0.79rem + 0.16vw, 0.92rem);
+  --step-0:  clamp(1.00rem, 0.97rem + 0.17vw, 1.09rem);
+  --step-1:  clamp(1.19rem, 1.13rem + 0.30vw, 1.38rem);
+  --step-2:  clamp(1.41rem, 1.31rem + 0.50vw, 1.75rem);
+  --step-3:  clamp(1.68rem, 1.50rem + 0.86vw, 2.22rem);
+  --step-4:  clamp(2.00rem, 1.71rem + 1.40vw, 2.81rem);
+  --step-5:  clamp(2.37rem, 1.92rem + 2.20vw, 3.58rem);
+  --step-6:  clamp(2.81rem, 2.11rem + 3.45vw, 4.55rem);
+  --step-7:  clamp(3.34rem, 2.26rem + 5.30vw, 5.78rem);
+
+  --lh-tight: 1.04;
+  --lh-snug: 1.18;
+  --lh-base: 1.65;
+  --lh-loose: 1.75;
+
+  --ls-mega: -0.035em;   /* große Headlines enger setzen */
+  --ls-head: -0.022em;
+  --ls-base: -0.004em;
+  --ls-caps: 0.14em;     /* Kapitälchen / Labels weit setzen */
+
+  --measure: 64ch;       /* optimale Zeilenlänge für Fließtext */
+  --measure-tight: 46ch;
+
+  /* ---- Raum ------------------------------------------------------------
+     4-px-Basis, harmonisch gestuft. Sections atmen über --section-y.        */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 2.5rem;
+  --sp-8: 3rem;
+  --sp-9: 4rem;
+  --sp-10: 5rem;
+  --sp-11: 6.5rem;
+  --sp-12: 8rem;
+
+  --section-y: clamp(4.5rem, 3rem + 7vw, 9rem);
+  --gutter: clamp(1.15rem, 0.6rem + 2.6vw, 2.75rem);
+  --container: 78rem;
+  --container-narrow: 54rem;
+
+  /* ---- Form ------------------------------------------------------------ */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(8, 11, 17, 0.06),
+               0 2px 8px rgba(8, 11, 17, 0.04);
+  --shadow-md: 0 2px 4px rgba(8, 11, 17, 0.05),
+               0 12px 28px -12px rgba(8, 11, 17, 0.20);
+  --shadow-lg: 0 4px 10px rgba(8, 11, 17, 0.06),
+               0 30px 60px -24px rgba(8, 11, 17, 0.35);
+
+  /* ---- Bewegung --------------------------------------------------------
+     Eine Bewegungssprache: drei Dauern, drei Kurven. Nie linear.            */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  --dur-1: 0.3s;
+  --dur-2: 0.6s;
+  --dur-3: 1.2s;
+
+  --header-h: 72px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-1: 0.01ms; --dur-2: 0.01ms; --dur-3: 0.01ms; }
+}

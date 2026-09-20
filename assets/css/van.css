@@ -1,0 +1,406 @@
+/* =========================================================================
+   Der Transporter – flache Illustration, die beim ersten Scroll
+   in einen 3-D-Körper aufklappt. CSS-3D, kein WebGL, keine Bibliothek.
+   Gesteuert über --p (0…1 Scroll-Fortschritt) aus assets/js/van.js.
+   ========================================================================= */
+
+.act {
+  position: relative;
+  background: var(--ink-900);
+  color: #fff;
+  /* Scroll-Strecke der Inszenierung; mobil kürzer (s. unten) */
+  height: 360vh;
+}
+
+.act__stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  display: grid;
+  grid-template-areas: "stage";
+  place-items: center;
+  isolation: isolate;
+}
+.act__stage > * { grid-area: stage; }
+
+/* ---- Bühne: Licht, Horizont, Raster ------------------------------------ */
+
+.stage__light {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 90% at 50% 8%, rgba(255, 106, 31, calc(0.16 * var(--depth, 0))) 0%, transparent 55%),
+    radial-gradient(90% 70% at 50% 62%, rgba(120, 160, 220, 0.14) 0%, transparent 60%),
+    linear-gradient(180deg, #05070b 0%, #0b1019 46%, #11182333 100%);
+  z-index: 0;
+}
+
+/* Perspektivischer Boden – erscheint erst mit der Tiefe */
+.stage__floor {
+  position: absolute;
+  left: 50%;
+  bottom: -2vh;
+  width: 260vmax;
+  height: 70vh;
+  transform: translateX(-50%) perspective(620px) rotateX(74deg);
+  transform-origin: 50% 100%;
+  opacity: calc(0.55 * var(--depth, 0));
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.10) 0 1px, transparent 1px 90px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.08) 0 1px, transparent 1px 90px);
+  -webkit-mask-image: radial-gradient(60% 70% at 50% 100%, #000 10%, transparent 72%);
+          mask-image: radial-gradient(60% 70% at 50% 100%, #000 10%, transparent 72%);
+  z-index: 0;
+}
+
+/* ---- Bühnentext -------------------------------------------------------- */
+
+.stage__intro {
+  position: relative;
+  z-index: 3;
+  width: min(100% - var(--gutter) * 2, var(--container));
+  margin-inline: auto;
+  align-self: start;
+  padding-top: clamp(5.5rem, 4rem + 9vh, 9rem);
+  pointer-events: none;
+  opacity: var(--intro-opacity, 1);
+  transform: translateY(calc(-30px * var(--p, 0)));
+}
+.stage__intro h2 {
+  font-size: var(--step-5);
+  letter-spacing: var(--ls-mega);
+  max-width: 18ch;
+}
+.stage__intro p {
+  margin-top: var(--sp-5);
+  max-width: 44ch;
+  color: var(--steel-300);
+  font-size: var(--step-1);
+}
+
+.stage__hint {
+  position: absolute;
+  z-index: 3;
+  bottom: clamp(1.25rem, 3vh, 2.5rem);
+  left: 50%;
+  translate: -50% 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-size: var(--step--2);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--steel-400);
+  opacity: var(--hint-opacity, 1);
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+.stage__hint .mouse {
+  width: 22px; height: 34px;
+  border: 1.5px solid var(--steel-500);
+  border-radius: var(--radius-pill);
+  position: relative;
+}
+.stage__hint .mouse::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 7px;
+  width: 3px; height: 7px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: var(--signal);
+  animation: wheelHint 1.8s var(--ease-in-out) infinite;
+}
+@keyframes wheelHint {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  60% { transform: translateY(9px); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .stage__hint .mouse::after { animation: none; } }
+
+/* ---- Perspektive & Fahrzeugwurzel -------------------------------------- */
+
+.stage__scene {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  perspective: var(--persp, 2600px);
+  perspective-origin: 50% 44%;
+}
+
+.van {
+  position: relative;
+  width: 0; height: 0;
+  transform-style: preserve-3d;
+  transform:
+    scale(var(--s, 1))
+    translate3d(var(--dx, 0px), var(--dy, 0px), 0)
+    rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg))
+    rotateZ(var(--rz, 0deg));
+  will-change: transform;
+}
+
+.f {
+  position: absolute;
+  left: 0; top: 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  background: var(--fill, #fff);
+}
+/* Bake-Light: Flächen bekommen ihre Helligkeit erst mit der Tiefe */
+.f::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--shade, none);
+  opacity: var(--depth, 0);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Alles außer der nahen Seitenfläche blendet beim Aufklappen zügig ein –
+   solange die Drehung noch klein ist, sind diese Flächen ohnehin kaum sichtbar. */
+.f--vol { opacity: var(--vol, 0); }
+
+/* Karosserie */
+.f--body     { --fill: #f3f5f8; }
+.f--roof     { --fill: #ffffff; --shade: linear-gradient(180deg, rgba(255,255,255,.9), rgba(180,196,214,.45)); }
+.f--far      { --fill: #c9d2dd; --shade: linear-gradient(180deg, rgba(12,18,28,.30), rgba(12,18,28,.05)); }
+.f--nose     { --fill: #e4e9ef; --shade: linear-gradient(180deg, rgba(255,255,255,.55), rgba(20,28,40,.18)); }
+.f--rear     { --fill: #d7dee6; --shade: linear-gradient(180deg, rgba(12,18,28,.22), rgba(12,18,28,.02)); }
+.f--dark     { --fill: #182230; }
+.f--glass    { --fill: #1b2634; }
+.f--skirt    { --fill: #20293a; }
+
+/* Nahe Seite: Träger der Lackierung */
+.f--side {
+  --fill: #f7f9fb;
+  --shade: linear-gradient(176deg, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 34%, rgba(18,26,38,.10) 76%, rgba(18,26,38,.22) 100%);
+  overflow: hidden;
+  box-shadow: inset 0 0 0 calc(1.5px * var(--flat, 1)) rgba(10, 14, 22, .85);
+}
+
+/* Fenster, Bögen, Fugen: 2-D-Details auf den Flächen */
+.detail { position: absolute; }
+.detail--glass {
+  background: linear-gradient(200deg, #2b3a4e 0%, #16202c 46%, #33455c 100%);
+  border-radius: 6px 10px 6px 4px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.22);
+}
+.detail--windshield {
+  background: linear-gradient(190deg, #3d5068 0%, #1a2432 55%, #2c3b4f 100%);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.28);
+}
+.detail--seam { background: rgba(21, 30, 44, .16); }
+.detail--arch {
+  background: #10151f;
+  border-radius: 999px 999px 0 0;
+}
+.detail--skirt { background: linear-gradient(180deg, #232e40, #131a25); }
+.detail--handle { background: #98a4b4; border-radius: 3px; }
+.detail--light {
+  background: linear-gradient(180deg, #fff6e6, #ffd39b);
+  border-radius: 4px;
+  box-shadow: 0 0 14px rgba(255, 210, 150, calc(.75 * var(--depth, 0)));
+}
+.detail--tail {
+  background: linear-gradient(180deg, #ff8d6b, #d6261a);
+  border-radius: 4px;
+  box-shadow: 0 0 12px rgba(255, 70, 40, calc(.6 * var(--depth, 0)));
+}
+.detail--grille {
+  background: repeating-linear-gradient(180deg, #2a3546 0 3px, #1a2331 3px 7px);
+  border-radius: 4px;
+}
+.detail--plate {
+  background: #eef2f6;
+  border-radius: 3px;
+  display: grid;
+  place-items: center;
+  font: 700 11px/1 var(--font-mono);
+  color: #2a3546;
+  letter-spacing: .06em;
+}
+
+/* Signal-Lackierung */
+.livery { position: absolute; inset: 0; overflow: hidden; }
+.livery__sweep {
+  position: absolute;
+  left: -6%;
+  bottom: -14%;
+  width: 118%;
+  height: 62%;
+  background: linear-gradient(100deg, var(--signal) 0%, var(--signal-600) 62%, #b93d10 100%);
+  transform: skewY(-5.5deg);
+}
+.livery__sweep--dark {
+  background: linear-gradient(100deg, #16202d, #0b1017);
+  height: 40%;
+  bottom: -12%;
+  transform: skewY(-5.5deg);
+}
+.livery__logo { position: absolute; }
+.livery__logo svg { width: 100%; height: auto; }
+.livery__claim {
+  position: absolute;
+  font-weight: 650;
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: #0b1017;
+  white-space: nowrap;
+}
+.livery__contact {
+  position: absolute;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  letter-spacing: .02em;
+}
+
+/* Räder */
+.wheel { position: absolute; left: 0; top: 0; transform-style: preserve-3d; }
+.wheel__hub {
+  position: absolute; left: 0; top: 0;
+  transform-style: preserve-3d;
+  transform: rotateZ(var(--spin, 0deg));
+}
+.wheel__tread {
+  position: absolute; left: 0; top: 0;
+  background: #14191f;
+  backface-visibility: hidden;
+}
+.wheel__disc {
+  position: absolute; left: 0; top: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 42% 38%, #6a7382 0 16%, #39414d 17% 33%, #1b2029 34% 62%, #11151b 63% 100%);
+  box-shadow: inset 0 0 0 3px #0d1116;
+}
+.wheel__disc::before {
+  content: "";
+  position: absolute;
+  inset: 26%;
+  border-radius: 50%;
+  background:
+    conic-gradient(from 0deg, #cfd6df 0 8%, #8d96a3 8% 16%, #cfd6df 16% 24%, #8d96a3 24% 32%,
+                   #cfd6df 32% 40%, #8d96a3 40% 48%, #cfd6df 48% 56%, #8d96a3 56% 64%,
+                   #cfd6df 64% 72%, #8d96a3 72% 80%, #cfd6df 80% 88%, #8d96a3 88% 100%);
+  box-shadow: inset 0 0 0 2px rgba(20,25,32,.6);
+}
+
+/* Rundumleuchte */
+.beacon { position: absolute; left: 0; top: 0; transform-style: preserve-3d; }
+.beacon__dome {
+  position: absolute; left: 0; top: 0;
+  background: linear-gradient(180deg, #ffb069, #ff6a1f);
+  border-radius: 40% 40% 6px 6px;
+  box-shadow: 0 0 26px rgba(255,120,40, calc(.85 * var(--depth, 0)));
+}
+
+/* Bodenschatten */
+.van-shadow {
+  position: absolute; left: 0; top: 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,.72), rgba(0,0,0,.28) 58%, transparent 78%);
+  filter: blur(10px);
+  opacity: calc(.75 * var(--depth, 0));
+}
+
+/* ---- Hotspots: was der Wagen mitbringt --------------------------------- */
+
+.hotspots {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+.hotspot {
+  position: absolute;
+  max-width: 17rem;
+  padding-left: var(--sp-4);
+  border-left: 2px solid var(--signal);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out);
+}
+.hotspot.is-on { opacity: 1; transform: none; }
+.hotspot b {
+  display: block;
+  font-size: var(--step--1);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: #fff;
+}
+.hotspot span {
+  display: block;
+  margin-top: var(--sp-2);
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--steel-400);
+}
+
+/* ---- Fallback ohne JavaScript ------------------------------------------ */
+.van-fallback { z-index: 2; width: min(92%, 900px); }
+.js .van-fallback { display: none; }
+.js .act__stage .stage__scene { display: grid; }
+
+@media (max-width: 860px) {
+  .act { height: 300vh; }
+  .stage__intro h2 { font-size: var(--step-4); }
+  /* Auf schmalen Geräten stapeln die Hinweise unten statt frei zu schweben */
+  .hotspots {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: var(--sp-3);
+    padding: 0 var(--gutter) clamp(3.5rem, 12vh, 6rem);
+    background: linear-gradient(180deg, transparent 52%, rgba(6, 9, 14, .82) 80%);
+  }
+  .hotspot {
+    position: static;
+    max-width: none;
+    opacity: .2;
+    transform: none;
+    transition: opacity var(--dur-2) var(--ease-out);
+  }
+  .hotspot.is-on { opacity: 1; }
+  .hotspot span { display: block; }
+}
+
+/* Reduzierte Bewegung: eine ruhige, feste 3-D-Ansicht statt Scroll-Ballett */
+@media (prefers-reduced-motion: reduce) {
+  .act { height: auto; }
+  .act__stage {
+    position: relative;
+    display: block;
+    height: auto;
+    padding-block: var(--section-y);
+  }
+  .act__stage > * { grid-area: auto; }
+  .stage__floor, .stage__hint { display: none; }
+  .stage__intro {
+    position: relative;
+    padding-top: 0;
+    transform: none;
+    opacity: 1;
+  }
+  .stage__scene {
+    position: relative;
+    height: clamp(20rem, 46vw, 30rem);
+    margin-top: var(--sp-8);
+  }
+  .hotspots {
+    position: static;
+    display: grid;
+    gap: var(--sp-6);
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    width: min(100% - var(--gutter) * 2, var(--container));
+    margin: var(--sp-9) auto 0;
+  }
+  .hotspot { position: static; max-width: none; opacity: 1; transform: none; }
+  .hotspot span { display: block; }
+}
