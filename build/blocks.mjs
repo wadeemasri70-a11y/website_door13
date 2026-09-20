@@ -1,5 +1,5 @@
 import { arrowIcon, tuerPortal, sozialLeiste } from "./layout.mjs";
-import { company, galerie } from "./content/index.mjs";
+import { company, galerie, hersteller } from "./content/index.mjs";
 
 export { tuerPortal, sozialLeiste };
 
@@ -223,6 +223,17 @@ ${c.facts.map((f) => `            <div><b data-zahl>${f.b}</b><span>${f.span}</s
           <img class="tree__partner" src="${c.partner}" alt="Planet Tree – offizieller Partner" loading="lazy" width="205" height="206">
         </div>
       </div>`;
+}
+
+export function herstellerGitter() {
+  const kacheln = hersteller.map((h, i) => `        <li class="marke${h.file ? "" : " marke--text"}" data-reveal${i ? ` style="--reveal-delay:${(i % 4) * 60}ms"` : ""}>
+          ${h.file
+            ? `<img src="${h.file}" alt="${esc(h.name)}" width="960" height="540" loading="lazy" decoding="async">`
+            : `<span>${h.name}</span>`}
+        </li>`).join("\n");
+  return `      <ul class="marken">
+${kacheln}
+      </ul>`;
 }
 
 export function galerieBlock() {

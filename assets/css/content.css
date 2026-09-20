@@ -879,3 +879,51 @@
 @media (prefers-reduced-motion: reduce) {
   .galerie__bild:hover img, .galerie__bild:focus-visible img { transform: none; }
 }
+
+/* Fabrikate */
+.marken {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.85rem, 0.4rem + 1.4vw, 1.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (max-width: 62rem) { .marken { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 40rem) { .marken { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.marke {
+  aspect-ratio: 16 / 9;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  transition: border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out);
+}
+.marke img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.marke:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+}
+.marke--text {
+  background: var(--card-bg);
+  padding: var(--sp-4);
+  text-align: center;
+}
+.marke--text span {
+  font-size: var(--step--1);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--fg-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marke:hover { transform: none; }
+}

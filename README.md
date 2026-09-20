@@ -271,6 +271,23 @@ Der Abschnitt zur Baumpflanzung trägt das Grün des Partners: `--planet`
 Text und die drei Eckdaten. Der Wert ist aus dem Logo `partner-planet-tree.png`
 ausgelesen und trifft damit den Rahmen der Urkunde daneben.
 
+## Fabrikate
+
+Der Abschnitt „Herstellerunabhängig“ zeigt statt einer Wortliste acht Kacheln im
+Format 16:9. Gepflegt wird die Reihe in `build/content/hersteller.mjs`; ohne
+`file` erscheint der Name als Textkachel (Record, „weitere auf Anfrage“).
+
+Die Dateien entstehen mit `build/kachel.sh <quelle> <ziel> [breite]`: Das
+Werkzeug schneidet den Rand um das Zeichen weg, legt es mittig auf eine weiße
+16:9-Fläche und hält überall denselben Abstand zum Rand. Damit wirken die
+Zeichen optisch gleich groß, obwohl die Vorlagen unterschiedlich beschnitten
+waren.
+
+Die Reihenfolge ist nach Farbe gesetzt: HÖRMANN (Orange auf Blau) und TORMAX
+(rote Sterne) sind die kräftigsten und stehen weder neben- noch untereinander.
+Die Kachel bleibt in beiden Themen weiß, sonst verschwinden die dunklen
+Schriftzüge im Nachtmodus.
+
 ## Partner
 
 Die Leiste „Partner & Mitgliedschaften“ läuft als Band direkt unter dem Hero und

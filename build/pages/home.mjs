@@ -1,4 +1,4 @@
-import { serviceCards, referenceTeaser, treeBlock, partnerStrip, certificateCards, bandImage, map, tuerPortal } from "../blocks.mjs";
+import { serviceCards, referenceTeaser, treeBlock, partnerStrip, certificateCards, bandImage, map, tuerPortal, herstellerGitter } from "../blocks.mjs";
 import { services, projects, certificate, qualifications, partners } from "../content/index.mjs";
 
 export function homeBody() {
@@ -132,10 +132,7 @@ ${serviceCards(services)}
         <p>Wir sind an keine Marke gebunden. Das heißt: eine Wartungsliste, ein Vertrag,
            ein Techniker – auch wenn in Ihrem Gebäude fünf verschiedene Fabrikate hängen.</p>
       </div>
-      <ul class="makers" data-reveal>
-        <li>GEZE</li><li>dormakaba</li><li>Assa Abloy</li><li>Record</li>
-        <li>Tormax</li><li>Besam</li><li>Hörmann</li><li>weitere auf Anfrage</li>
-      </ul>
+${herstellerGitter()}
     </div>
   </section>
 
