@@ -226,14 +226,13 @@ ${c.facts.map((f) => `            <div><b data-zahl>${f.b}</b><span>${f.span}</s
 }
 
 export function herstellerGitter() {
-  const kacheln = hersteller.map((h, i) => `        <li class="marke${h.file ? "" : " marke--text"}" data-reveal${i ? ` style="--reveal-delay:${(i % 4) * 60}ms"` : ""}>
-          ${h.file
-            ? `<img src="${h.file}" alt="${esc(h.name)}" width="960" height="540" loading="lazy" decoding="async">`
-            : `<span>${h.name}</span>`}
+  const zeichen = hersteller.map((h, i) => `        <li class="marke${h.farbig ? " marke--farbig" : ""}" data-reveal style="--marke-h:${h.faktor || 1}${i ? `;--reveal-delay:${(i % 3) * 70}ms` : ""}">
+          <img src="${h.file}" alt="${esc(h.name)}" loading="lazy" decoding="async">
         </li>`).join("\n");
   return `      <ul class="marken">
-${kacheln}
-      </ul>`;
+${zeichen}
+      </ul>
+      <p class="marken__hinweis" data-reveal>Record und weitere Fabrikate betreuen wir ebenso – sprechen Sie uns an.</p>`;
 }
 
 export function galerieBlock() {

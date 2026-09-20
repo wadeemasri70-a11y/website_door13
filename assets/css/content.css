@@ -888,49 +888,46 @@
 .marken {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--sp-4);
+  align-items: center;
+  gap: clamp(1.75rem, 1rem + 3vw, 3.75rem);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.marke {
-  display: grid;
-  place-items: center;
-  padding: var(--sp-4) var(--sp-6);
-  border: 1px solid rgba(11, 12, 13, 0.12);
-  border-radius: var(--radius-md);
-  background: #ffffff;
-  overflow: hidden;
-  transition: border-color var(--dur-1) var(--ease-out),
-              box-shadow var(--dur-1) var(--ease-out),
-              transform var(--dur-1) var(--ease-out);
-}
+.marke { display: grid; place-items: center; }
 .marke img {
   display: block;
-  height: clamp(30px, 4vw, 42px);
+  height: calc(clamp(34px, 4.6vw, 58px) * var(--marke-h, 1));
   width: auto;
   object-fit: contain;
+  transition: filter var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out);
 }
-.marke:hover {
-  border-color: color-mix(in srgb, var(--neon) 55%, transparent);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--neon) 22%, transparent),
-              0 0 16px -1px color-mix(in srgb, var(--neon) 45%, transparent);
+.marke:hover img {
   transform: translateY(-2px);
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--neon) 72%, transparent))
+          drop-shadow(0 7px 16px color-mix(in srgb, var(--neon) 58%, transparent));
 }
-.marke--text {
-  background: var(--card-bg);
-  border-color: var(--card-border);
+
+:root[data-theme="dark"] .marke:not(.marke--farbig) img {
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
 }
-.marke--text span {
-  display: block;
-  padding-block: calc(clamp(30px, 4vw, 42px) / 2 - 0.65em);
+:root[data-theme="dark"] .marke:not(.marke--farbig):hover img {
+  opacity: 1;
+  filter: brightness(0) invert(1)
+          drop-shadow(0 0 5px color-mix(in srgb, var(--neon) 72%, transparent))
+          drop-shadow(0 7px 16px color-mix(in srgb, var(--neon) 58%, transparent));
+}
+
+.marken__hinweis {
+  margin-top: clamp(1.75rem, 1rem + 2vw, 2.75rem);
   font-size: var(--step--1);
-  font-weight: 600;
   color: var(--fg-muted);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marke:hover { transform: none; }
+  .marke:hover img { transform: none; }
+}
 }
 }

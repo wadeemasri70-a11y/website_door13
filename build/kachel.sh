@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 CHROME=${CHROME:-/opt/pw-browsers/chromium-1194/chrome-linux/chrome}
-SRC=$(readlink -f "$1"); DST="$2"; W=${3:-1280}; LX=${4:-0.14}; LY=${5:-0.20}; ART=${6:-breit}
+SRC=$(readlink -f "$1"); DST="$2"; W=${3:-1280}; LX=${4:-0.14}; LY=${5:-0.20}; ART=${6:-breit}; GRUND=${7:-weiss}
 HTML=$(readlink -f "$(dirname "$0")/kachel.html")
 "$CHROME" --headless=new --no-sandbox --disable-gpu --allow-file-access-from-files \
   --virtual-time-budget=10000 --dump-dom \
-  "file://$HTML?src=file://$SRC&w=$W&luftx=$LX&lufty=$LY&art=$ART" 2>/dev/null \
+  "file://$HTML?src=file://$SRC&w=$W&luftx=$LX&lufty=$LY&art=$ART&grund=$GRUND" 2>/dev/null \
   | python3 -c "
 import sys, re, base64, pathlib
 dom = sys.stdin.read()

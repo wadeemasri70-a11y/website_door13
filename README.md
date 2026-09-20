@@ -277,23 +277,27 @@ ausgelesen und trifft damit den Rahmen der Urkunde daneben.
 
 ## Fabrikate
 
-Der Abschnitt „Herstellerunabhängig“ zeigt statt einer Wortliste Plaketten in
-derselben Form und Größe wie die Partnerleiste am Seitenanfang – Platte 76 px
-hoch, Zeichen 42 px –, nur laufen sie nicht als Band, sondern brechen in Zeilen
-um. Gepflegt wird die Reihe in `build/content/hersteller.mjs`; ohne `file`
-erscheint der Name als Textplakette (Record, „weitere auf Anfrage“).
+Der Abschnitt „Herstellerunabhängig“ zeigt die Zeichen frei auf der Seite, ohne
+Platte darum. Gepflegt wird die Reihe in `build/content/hersteller.mjs`.
 
 Die Dateien entstehen mit `build/kachel.sh <quelle> <ziel> <höhe> <luftx>
-<lufty> eng`: Das Werkzeug schneidet den Rand um das Zeichen weg und legt es
-mittig auf eine weiße Fläche mit gleichem Abstand ringsum. Damit wirken die
-Zeichen optisch gleich groß, obwohl die Vorlagen unterschiedlich beschnitten
-waren. Ohne `eng` entsteht stattdessen eine 16:9-Fläche.
+<lufty> eng frei`: Das Werkzeug schneidet den Rand um das Zeichen weg, legt es
+mittig auf eine Fläche mit gleichem Abstand ringsum und macht Weiß am Ende
+durchsichtig. Nur so kann das Leuchten den Konturen folgen statt einem Kasten.
 
-Bei Mausberührung legt sich ein weiches gelbes Leuchten um die Plakette
-(`--neon`). Die Reihenfolge ist nach Farbe gesetzt: HÖRMANN (Orange auf Blau)
-und TORMAX (rote Sterne) sind die kräftigsten und stehen weder neben- noch
-untereinander. Die Plakette bleibt in beiden Themen weiß, sonst verschwinden
-die dunklen Schriftzüge im Nachtmodus.
+`faktor` gleicht die optische Masse an: Bei gleicher Höhe wirkt ein langer
+Schriftzug wie „dormakaba“ deutlich schwerer als ein kompaktes Zeichen wie
+„TORMAX“. Der Wert liegt zwischen Höhen- und Flächengleichheit
+(`sqrt(1/sqrt(Seitenverhältnis))`, auf GEZE bezogen).
+
+Bei Mausberührung legt sich ein weiches gelbes Leuchten (`--neon`) um die
+Konturen und läuft nach unten aus – zwei `drop-shadow`, eines mittig, eines um
+sieben Pixel versetzt.
+
+Im Nachtthema werden die Zeichen zu weißen Silhouetten
+(`brightness(0) invert(1)`), sonst verschwinden die dunklen Schriftzüge.
+Ausgenommen sind Zeichen mit `farbig: true` – Hörmann etwa steht auf einem
+eigenen blauen Feld und würde als Silhouette zu einem weißen Block.
 
 ## Partner
 

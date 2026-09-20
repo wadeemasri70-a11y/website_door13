@@ -7,6 +7,7 @@
 const q = new URLSearchParams(location.search);
 const src = q.get("src");
 const art = q.get("art") || "breit";
+const grund = q.get("grund") || "weiss";
 const breite = parseInt(q.get("w") || "1280", 10);
 const luftX = parseFloat(q.get("luftx") || "0.14");
 const luftY = parseFloat(q.get("lufty") || "0.20");
@@ -68,6 +69,17 @@ img.onload = function () {
   const zielH = Math.round(feld.h * faktor);
   kctx.drawImage(roh, feld.x, feld.y, feld.w, feld.h,
     Math.round((kachel.width - zielW) / 2), Math.round((kachel.height - zielH) / 2), zielW, zielH);
+
+  if (grund === "frei") {
+    const bild = kctx.getImageData(0, 0, kachel.width, kachel.height);
+    const px = bild.data;
+    for (let i = 0; i < px.length; i += 4) {
+      const m = Math.min(px[i], px[i + 1], px[i + 2]);
+      if (m > 246) px[i + 3] = 0;
+      else if (m > 214) px[i + 3] = Math.round(255 * (246 - m) / 32);
+    }
+    kctx.putImageData(bild, 0, 0);
+  }
 
   document.getElementById("out").textContent =
     kachel.width + "x" + kachel.height + "|" + kachel.toDataURL("image/png");
