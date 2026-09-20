@@ -19,7 +19,7 @@
   function messen() {
     var kasten = tuer.getBoundingClientRect();
     var hoehe = window.innerHeight || 800;
-    var weg = hoehe * 1.25;
+    var weg = hoehe * 0.95;
     var fortschritt = (hoehe - kasten.top) / weg;
     ziel = fortschritt < 0 ? 0 : fortschritt > 1 ? 1 : fortschritt;
   }
@@ -31,7 +31,7 @@
 
   function takt() {
     raf = 0;
-    stand += (ziel - stand) * 0.055;
+    stand += (ziel - stand) * 0.095;
     if (Math.abs(ziel - stand) < 0.0008) stand = ziel;
     anwenden();
     if (sichtbar && stand !== ziel) planen();

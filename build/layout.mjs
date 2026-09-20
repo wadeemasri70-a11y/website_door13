@@ -14,12 +14,15 @@ export const arrowIcon = `<svg class="btn__icon" viewBox="0 0 24 24" fill="none"
             <path d="M5 12h13m-5-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>`;
 
-function navMarkup(active) {
+function navMarkup(active, seite) {
   return nav.map((item) => {
     const current = item.key === active || item.href === active ? ' aria-current="true"' : "";
     if (!item.children) return `      <a href="${item.href}"${current}>${item.label}</a>`;
     const sub = item.children
-      .map((c) => `          <li><a href="${c.href}">${c.label}</a></li>`)
+      .map((c) => {
+        const hier = c.href === seite ? ' aria-current="page"' : "";
+        return `          <li><a href="${c.href}"${hier}>${c.label}</a></li>`;
+      })
       .join("\n");
     return `      <div class="nav__group">
         <a href="${item.href}"${current} aria-haspopup="true">${item.label}
@@ -116,7 +119,7 @@ export function page({ slug, title, description, active = "", body, bodyClass = 
     <a class="brand" href="index.html" aria-label="${company.name} – Startseite">${logoMark}</a>
 
     <nav class="nav" id="nav" aria-label="Hauptnavigation" data-nav>
-${navMarkup(active)}
+${navMarkup(active, slug + ".html")}
       <a class="nav__contact" href="kontakt.html">Kontakt</a>
     </nav>
 

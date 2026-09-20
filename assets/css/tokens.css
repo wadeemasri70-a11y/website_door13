@@ -133,6 +133,34 @@
   --dur-3: 1.2s;
 }
 
+/* Große Bildschirme: mehr Fläche statt mehr Rand.
+   Die Wurzelgröße wächst mit, deshalb skalieren Schrift, Raum und Breite
+   gemeinsam – die rem-Werte in den Medienabfragen bleiben davon unberührt. */
+@media (min-width: 100rem) {
+  html { font-size: 17px; }
+  :root {
+    --container: 84rem;
+    --container-narrow: 58rem;
+    --gutter: 3rem;
+  }
+}
+
+@media (min-width: 120rem) {
+  html { font-size: 18px; }
+  :root {
+    --container: 88rem;
+    --gutter: 3.5rem;
+  }
+}
+
+@media (min-width: 160rem) {
+  html { font-size: 19px; }
+  :root {
+    --container: 92rem;
+    --gutter: 4rem;
+  }
+}
+
 /* Nachtthema */
 :root[data-theme="dark"] {
   color-scheme: dark;

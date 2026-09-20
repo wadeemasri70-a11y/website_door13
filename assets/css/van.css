@@ -400,7 +400,7 @@
     position: static;
     display: grid;
     gap: var(--sp-6);
-    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
     width: min(100% - var(--gutter) * 2, var(--container));
     margin: var(--sp-9) auto 0;
   }
