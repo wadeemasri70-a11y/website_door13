@@ -77,12 +77,15 @@ const wartungsanfrage = {
         h1: "Wartung anfragen – in zwei Minuten erledigt.",
         lead: "Sagen Sie uns, welche Anlagen Sie betreiben und wo sie stehen. Wir prüfen die Fristen, schlagen ein Intervall vor und nennen den Preis."
       }),
-      B.section({
-        variant: "paper",
-        html: `      <div class="contact">
+      B.tuerPortal({
+        weit: true,
+        html: B.section({
+          variant: "paper",
+          html: `      <div class="contact">
   ${B.contactData()}
   ${B.form({ id: "wartung", kind: "wartung" })}
         </div>`
+        })
       })
     ].join("\n\n")
 };

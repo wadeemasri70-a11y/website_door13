@@ -11,13 +11,16 @@ export const pages = [
           h1: "Sagen Sie uns, welche Tür Ärger macht.",
           lead: "Beschreiben Sie Anlage und Standort – wir melden uns in der Regel am selben Werktag mit einer Einschätzung zurück."
         }),
-        B.section({
-          variant: "paper",
-          html: `      <div class="contact">
+        B.tuerPortal({
+          weit: true,
+          html: B.section({
+            variant: "paper",
+            html: `      <div class="contact">
     ${B.contactData()}
     ${B.form({ id: "kontakt", kind: "kontakt" })}
           </div>
 ${B.map({ hoehe: "breit" })}`
+          })
         })
       ].join("\n\n")
   }

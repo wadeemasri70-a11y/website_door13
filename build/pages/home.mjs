@@ -1,4 +1,4 @@
-import { serviceCards, referenceTeaser, treeBlock, partnerStrip, certificateCards, bandImage, map } from "../blocks.mjs";
+import { serviceCards, referenceTeaser, treeBlock, partnerStrip, certificateCards, bandImage, map, tuerPortal } from "../blocks.mjs";
 import { services, projects, certificate, qualifications, partners } from "../content/index.mjs";
 
 export function homeBody() {
@@ -248,84 +248,84 @@ ${map({ variante: "region" })}
     </div>
   </section>
 
-  <section class="section section--paper" id="kontakt">
-    <div class="shell">
-      <div class="section__head" data-reveal>
-        <p class="eyebrow">Beratung &amp; Kontakt</p>
-        <h2>Sagen Sie uns, welche Tür Ärger macht.</h2>
-        <p>Beschreiben Sie Anlage und Standort – wir melden uns in der Regel am selben Werktag
-           mit einer Einschätzung zurück.</p>
-      </div>
+${tuerPortal({ weit: true, html: `    <section class="section section--paper" id="kontakt">
+      <div class="shell">
+        <div class="section__head" data-reveal>
+          <p class="eyebrow">Beratung &amp; Kontakt</p>
+          <h2>Sagen Sie uns, welche Tür Ärger macht.</h2>
+          <p>Beschreiben Sie Anlage und Standort – wir melden uns in der Regel am selben Werktag
+             mit einer Einschätzung zurück.</p>
+        </div>
 
-      <div class="contact">
-        <dl class="contact__data" data-reveal>
-          <div class="contact__row">
-            <dt>Telefon</dt>
-            <dd><a class="link-line" href="tel:+4922729089270">02272 908 92 70</a>
-              <small>Mobil / Notdienst: <a href="tel:+4915116567504">0151 165 675 04</a></small></dd>
-          </div>
-          <div class="contact__row">
-            <dt>E-Mail</dt>
-            <dd><a class="link-line" href="mailto:info@falke-tuerautomation.de">info@falke-tuerautomation.de</a></dd>
-          </div>
-          <div class="contact__row">
-            <dt>Anschrift</dt>
-            <dd>Kasterer Str. 12<small>50181 Bedburg</small></dd>
-          </div>
-          <div class="contact__row">
-            <dt>Sprechzeiten</dt>
-            <dd>Mo – Fr, 8:00 – 16:30 Uhr<small>Störungsannahme darüber hinaus telefonisch</small></dd>
-          </div>
-        </dl>
+        <div class="contact">
+          <dl class="contact__data" data-reveal>
+            <div class="contact__row">
+              <dt>Telefon</dt>
+              <dd><a class="link-line" href="tel:+4922729089270">02272 908 92 70</a>
+                <small>Mobil / Notdienst: <a href="tel:+4915116567504">0151 165 675 04</a></small></dd>
+            </div>
+            <div class="contact__row">
+              <dt>E-Mail</dt>
+              <dd><a class="link-line" href="mailto:info@falke-tuerautomation.de">info@falke-tuerautomation.de</a></dd>
+            </div>
+            <div class="contact__row">
+              <dt>Anschrift</dt>
+              <dd>Kasterer Str. 12<small>50181 Bedburg</small></dd>
+            </div>
+            <div class="contact__row">
+              <dt>Sprechzeiten</dt>
+              <dd>Mo – Fr, 8:00 – 16:30 Uhr<small>Störungsannahme darüber hinaus telefonisch</small></dd>
+            </div>
+          </dl>
 
-        <form class="form" data-reveal data-form novalidate>
-          <div class="field--row">
-            <div class="field">
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" autocomplete="name" required>
+          <form class="form" data-reveal data-form novalidate>
+            <div class="field--row">
+              <div class="field">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="firma">Firma / Objekt</label>
+                <input id="firma" name="firma" type="text" autocomplete="organization">
+              </div>
+            </div>
+            <div class="field--row">
+              <div class="field">
+                <label for="email">E-Mail</label>
+                <input id="email" name="email" type="email" autocomplete="email" required>
+              </div>
+              <div class="field">
+                <label for="telefon">Telefon</label>
+                <input id="telefon" name="telefon" type="tel" autocomplete="tel">
+              </div>
             </div>
             <div class="field">
-              <label for="firma">Firma / Objekt</label>
-              <input id="firma" name="firma" type="text" autocomplete="organization">
+              <label for="anliegen">Anliegen</label>
+              <select id="anliegen" name="anliegen">
+                <option>Wartungsvertrag / wiederkehrende Prüfung</option>
+                <option>Störung / Reparatur</option>
+                <option>Neue Anlage / Angebot</option>
+                <option>Modernisierung bestehender Antriebe</option>
+                <option>Sonstiges</option>
+              </select>
             </div>
-          </div>
-          <div class="field--row">
             <div class="field">
-              <label for="email">E-Mail</label>
-              <input id="email" name="email" type="email" autocomplete="email" required>
+              <label for="nachricht">Nachricht</label>
+              <textarea id="nachricht" name="nachricht" placeholder="Fabrikat, Standort, seit wann besteht die Störung?" required></textarea>
             </div>
-            <div class="field">
-              <label for="telefon">Telefon</label>
-              <input id="telefon" name="telefon" type="tel" autocomplete="tel">
-            </div>
-          </div>
-          <div class="field">
-            <label for="anliegen">Anliegen</label>
-            <select id="anliegen" name="anliegen">
-              <option>Wartungsvertrag / wiederkehrende Prüfung</option>
-              <option>Störung / Reparatur</option>
-              <option>Neue Anlage / Angebot</option>
-              <option>Modernisierung bestehender Antriebe</option>
-              <option>Sonstiges</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="nachricht">Nachricht</label>
-            <textarea id="nachricht" name="nachricht" placeholder="Fabrikat, Standort, seit wann besteht die Störung?" required></textarea>
-          </div>
-          <p class="form__status" data-form-status hidden role="status"></p>
-          <button class="btn btn--accent" type="submit">
-            Anfrage senden
-            <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M5 12h13m-5-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <p class="form__note">
-            Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung der Anfrage zu.
-            Hinweise dazu in der Datenschutzerklärung.
-          </p>
-        </form>
+            <p class="form__status" data-form-status hidden role="status"></p>
+            <button class="btn btn--accent" type="submit">
+              Anfrage senden
+              <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M5 12h13m-5-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <p class="form__note">
+              Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung der Anfrage zu.
+              Hinweise dazu in der Datenschutzerklärung.
+            </p>
+          </form>
+        </div>
       </div>
-    </div>
-  </section>`;
+    </section>` })}`;
 }

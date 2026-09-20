@@ -88,12 +88,13 @@
   function rahmen(box) {
     var frame = document.createElement("iframe");
     frame.className = "map__frame";
-    frame.src =
-      "https://maps.google.com/maps?ll=" +
-      encodeURIComponent(box.dataset.lat + "," + box.dataset.lng) +
-      "&q=" + encodeURIComponent(box.dataset.ziel) +
-      "&z=" + (parseInt(box.dataset.zoom, 10) || 15) +
-      "&hl=de&output=embed";
+    frame.src = box.dataset.embed
+      ? box.dataset.embed
+      : "https://maps.google.com/maps?ll=" +
+        encodeURIComponent(box.dataset.lat + "," + box.dataset.lng) +
+        "&q=" + encodeURIComponent(box.dataset.ziel) +
+        "&z=" + (parseInt(box.dataset.zoom, 10) || 15) +
+        "&hl=de&output=embed";
     frame.loading = "lazy";
     frame.title = box.dataset.title + " auf Google Maps";
     frame.setAttribute("referrerpolicy", "no-referrer-when-downgrade");

@@ -324,6 +324,7 @@
   bottom: 0;
   z-index: 2;
   width: 50.5%;
+  pointer-events: none;
   background:
     linear-gradient(115deg, rgba(255, 255, 255, .34) 0%, rgba(255, 255, 255, .08) 38%, rgba(255, 255, 255, .26) 62%, rgba(255, 255, 255, .06) 100%),
     color-mix(in srgb, var(--bg-contrast) 72%, transparent);
@@ -362,6 +363,27 @@
   z-index: 3;
   background: linear-gradient(180deg, color-mix(in srgb, var(--fg-strong) 16%, transparent), transparent);
 }
+
+.tuer--weit {
+  padding-block: clamp(2.5rem, 6vh, 4.5rem) clamp(2rem, 5vh, 3.5rem);
+  background: var(--bg-2);
+}
+.tuer--weit .tuer__rahmen {
+  min-height: 0;
+  display: block;
+  place-items: stretch;
+  padding: 0;
+  background: transparent;
+}
+.tuer--weit .tuer__inhalt {
+  max-width: none;
+  text-align: start;
+  opacity: 1;
+}
+.tuer--weit .tuer__inhalt .section {
+  padding-block: clamp(2.75rem, 6vh, 4.5rem);
+}
+.tuer--weit .tuer__fluegel::after { top: 44%; bottom: 44%; }
 
 @media (prefers-reduced-motion: reduce) {
   .tuer__fluegel { display: none; }

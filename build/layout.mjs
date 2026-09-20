@@ -32,6 +32,30 @@ ${sub}
   }).join("\n");
 }
 
+export function tuerPortal({ html, weit = false, id = "" }) {
+  return `<section class="tuer${weit ? " tuer--weit" : ""}" data-doors${id ? ` id="${id}"` : ""}>
+  <div class="tuer__sensor" aria-hidden="true"><span class="tuer__led"></span></div>
+  <div class="tuer__rahmen">
+    <div class="tuer__inhalt">
+${html}
+    </div>
+    <div class="tuer__fluegel tuer__fluegel--links" aria-hidden="true"></div>
+    <div class="tuer__fluegel tuer__fluegel--rechts" aria-hidden="true"></div>
+    <div class="tuer__schiene" aria-hidden="true"></div>
+  </div>
+</section>`;
+}
+
+const tuerAbschluss = tuerPortal({
+  html: `      <p class="eyebrow">Kontakt</p>
+      <h2>Sprechen wir über Ihre Türen.</h2>
+      <p>${company.hours} erreichen Sie unsere Disposition direkt.</p>
+      <div class="tuer__aktionen">
+        <a class="btn btn--accent" href="tel:${company.phoneHref}">${company.phone}</a>
+        <a class="btn btn--ghost" href="mailto:${company.mail}">${company.mail}</a>
+      </div>`
+});
+
 export function page({ slug, title, description, active = "", body, bodyClass = "" }) {
   const isHome = slug === "index";
   return `<!DOCTYPE html>
@@ -119,23 +143,7 @@ ${navMarkup(active)}
 ${body}
 </main>
 
-<section class="tuer" data-doors aria-labelledby="tuer-titel">
-  <div class="tuer__sensor" aria-hidden="true"><span class="tuer__led"></span></div>
-  <div class="tuer__rahmen">
-    <div class="tuer__inhalt">
-      <p class="eyebrow">Kontakt</p>
-      <h2 id="tuer-titel">Sprechen wir über Ihre Türen.</h2>
-      <p>${company.hours} erreichen Sie unsere Disposition direkt.</p>
-      <div class="tuer__aktionen">
-        <a class="btn btn--accent" href="tel:${company.phoneHref}">${company.phone}</a>
-        <a class="btn btn--ghost" href="mailto:${company.mail}">${company.mail}</a>
-      </div>
-    </div>
-    <div class="tuer__fluegel tuer__fluegel--links" aria-hidden="true"></div>
-    <div class="tuer__fluegel tuer__fluegel--rechts" aria-hidden="true"></div>
-    <div class="tuer__schiene" aria-hidden="true"></div>
-  </div>
-</section>
+${body.includes("data-doors") ? "" : tuerAbschluss}
 
 <footer class="site-footer">
   <div class="shell">

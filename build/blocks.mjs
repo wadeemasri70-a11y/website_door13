@@ -1,5 +1,7 @@
-import { arrowIcon } from "./layout.mjs";
+import { arrowIcon, tuerPortal } from "./layout.mjs";
 import { company } from "./content/index.mjs";
+
+export { tuerPortal };
 
 const esc = (s) => String(s).replace(/&(?![a-z#0-9]+;)/g, "&amp;");
 const attr = (s) => esc(s).replace(/</g, "&lt;").replace(/"/g, "&quot;");
@@ -292,6 +294,7 @@ export function map({ hoehe = "", variante = "adresse" } = {}) {
            data-lng="${region ? m.region.lng : m.lng}"
            data-zoom="${region ? m.region.zoom : m.zoom}"
            data-orte="${region ? attr(JSON.stringify(m.region.orte)) : ""}"
+           data-embed="${region ? "" : attr(m.embed)}"
            data-title="${esc(company.name)}"
            data-maps-link="${m.link}">
         <div class="map__canvas" data-map-canvas></div>

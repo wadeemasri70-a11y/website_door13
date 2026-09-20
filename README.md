@@ -128,10 +128,12 @@ Zwei-Klick-Lösung. Wer nicht klickt, sendet nichts an Google.
 
 Danach gibt es zwei Ausbaustufen, je nachdem ob ein Schlüssel hinterlegt ist:
 
-**Ohne Schlüssel (Standard).** Es erscheint die offizielle Google-Maps-Einbettung
-(`maps.google.com/…&output=embed`) mit Marker auf der Anschrift. Grau wird sie
-über einen CSS-Filter (`grayscale`), im Nachtthema zusätzlich invertiert.
-Kein Konto, keine Abrechnung, keine Einrichtung.
+**Ohne Schlüssel (Standard).** Für die Anschrift steht in `maps.embed` die
+offizielle Einbettungsadresse aus Google Maps (*Teilen → Karte einbetten*), die
+den Betrieb punktgenau trifft. Fehlt sie, baut `assets/js/map.js` die Adresse aus
+Koordinaten und Zoomstufe zusammen. Grau wird die Karte über einen CSS-Filter
+(`grayscale`), im Nachtthema zusätzlich invertiert. Kein Konto, keine
+Abrechnung, keine Einrichtung.
 
 **Mit Schlüssel.** Steht in `build/content/company.mjs` ein `maps.key`, wird
 stattdessen die Maps-JavaScript-API geladen: echte Kartenfarben statt Filter
@@ -161,12 +163,21 @@ Die Karte auf der Startseite zeigt nicht die Anschrift, sondern das Gebiet:
 und setzt sie in Prozent; bei Größenänderung wird neu gerechnet. Damit Punkte
 und Karte zusammenbleiben, nimmt die Einbettung hier keine Mauseingaben an.
 
-## Schiebetür am Seitenende
+## Schiebetür vor dem Kontakt
 
-Unter der Fußzeile jeder Seite steht ein Türportal: zwei Flügel aus Milchglas,
+Der Kontaktbereich liegt hinter einem Türportal: zwei Flügel aus Milchglas,
 Bodenschiene, Sensorleiste mit Melder. Beim Herunterscrollen fahren die Flügel
-auseinander und geben Telefonnummer und E-Mail frei – wie ein Eingang, der auf
-den Melder reagiert. `assets/js/doors.js` liest den Abstand zum unteren
+auseinander und geben den Abschnitt frei – wie ein Eingang, der auf den Melder
+reagiert.
+
+Gebaut wird das Portal mit `tuerPortal({ html, weit })` aus `build/layout.mjs`.
+Seiten mit eigenem Kontaktabschnitt (Startseite, Kontakt, Wartungsanfrage) legen
+ihn mit `weit: true` selbst in das Portal – dort rahmt die Tür „Beratung &
+Kontakt“ samt Formular und Karte. Alle übrigen Seiten bekommen vom Layout ein
+schmales Portal mit Telefon und E-Mail ans Seitenende; es entfällt automatisch,
+sobald eine Seite schon ein `data-doors` mitbringt. Die Flügel nehmen keine
+Mauseingaben an, das Formular bleibt also auch hinter geschlossener Tür
+bedienbar. `assets/js/doors.js` liest den Abstand zum unteren
 Bildrand, glättet ihn und schreibt ihn als `--open` (0 bis 1); die Flügel
 verschieben sich über `translate3d`, der Melder wechselt bei `--open > 0.06`
 auf Rot. Gerechnet wird nur, solange der Abschnitt sichtbar ist
