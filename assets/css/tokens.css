@@ -150,6 +150,7 @@
   --dur-3: 1.2s;
 
   --header-h: 72px;
+  --topbar-h: 38px;
 }
 
 @media (prefers-reduced-motion: reduce) {

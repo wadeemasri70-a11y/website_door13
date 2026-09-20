@@ -121,7 +121,7 @@
   .header__phone span { display: none; }
   .nav {
     position: fixed;
-    inset: var(--header-h) 0 auto 0;
+    inset: calc(var(--header-h) + var(--topbar-h)) 0 auto 0;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
@@ -143,7 +143,7 @@
   min-height: 100svh;
   display: grid;
   align-items: center;
-  padding-top: calc(var(--header-h) + var(--sp-8));
+  padding-top: calc(var(--header-h) + var(--topbar-h) + var(--sp-8));
   padding-bottom: var(--sp-10);
   background: var(--bg-contrast);
   color: var(--fg-on-contrast);
@@ -541,3 +541,224 @@
   padding-top: var(--sp-6);
   font-size: var(--step--2);
 }
+
+/* =========================================================================
+   Mehrseitigkeit: Topbar, Dropdowns, Unterseiten-Bausteine
+   ========================================================================= */
+
+/* ---- Topbar (Öffnungszeiten, Telefon, Kontakt) --------------------------- */
+.topbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 101;
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  background: var(--bg-contrast);
+  color: var(--fg-muted-on-contrast);
+  border-bottom: 1px solid var(--line-on-contrast);
+  font-size: var(--step--2);
+}
+.topbar__inner {
+  width: min(100% - var(--gutter) * 2, var(--container));
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+}
+.topbar__hours { margin-right: auto; letter-spacing: 0.04em; }
+.topbar__phone { display: inline-flex; align-items: center; gap: var(--sp-2); font-weight: 600; }
+.topbar__phone:hover, .topbar__cta:hover { color: var(--signal); }
+.topbar__cta {
+  font-weight: 650;
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+.site-header { top: var(--topbar-h); }
+
+/* ---- Dropdown-Navigation ------------------------------------------------- */
+.nav__group { position: relative; }
+.nav__group > a { display: inline-flex; align-items: center; gap: 4px; }
+.nav__chevron { width: 14px; height: 14px; opacity: .6; transition: transform var(--dur-1) var(--ease-out); }
+.nav__group:hover .nav__chevron, .nav__group:focus-within .nav__chevron { transform: rotate(180deg); }
+.nav__panel {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: -18px;
+  min-width: 16rem;
+  padding: var(--sp-3);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out), visibility var(--dur-1);
+}
+.nav__group:hover .nav__panel, .nav__group:focus-within .nav__panel {
+  opacity: 1; visibility: visible; transform: none;
+}
+.nav__panel::before { content: ""; position: absolute; inset: -14px 0 100% 0; }
+.nav__panel a {
+  display: block;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--step--1);
+  color: var(--fg);
+  opacity: 1;
+}
+.nav__panel a::after { display: none; }
+.nav__panel a:hover { background: var(--signal-tint); color: var(--accent-ink); }
+.nav__contact { display: none; }
+
+@media (max-width: 960px) {
+  .topbar__hours { display: none; }
+  .nav__panel {
+    position: static;
+    opacity: 1; visibility: visible; transform: none;
+    min-width: 0;
+    margin: 0 0 var(--sp-3);
+    padding: 0 0 0 var(--sp-4);
+    border: 0; border-left: 2px solid var(--line);
+    background: transparent;
+    box-shadow: none;
+  }
+  .nav__panel a { padding: var(--sp-2) 0; font-size: var(--step-0); }
+  .nav__group > a { padding: var(--sp-4) 0; border-bottom: 1px solid var(--line); }
+  .nav__chevron { display: none; }
+  .nav__contact { display: block; }
+}
+
+/* ---- Unterseiten-Kopf ---------------------------------------------------- */
+.page-hero {
+  position: relative;
+  padding-top: calc(var(--header-h) + var(--topbar-h) + clamp(3rem, 6vw, 6rem));
+  padding-bottom: clamp(2.5rem, 5vw, 5rem);
+  background: var(--bg-contrast);
+  color: var(--fg-on-contrast);
+  overflow: hidden;
+}
+.page-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--hero-bg);
+  opacity: .9;
+}
+.page-hero > .shell { position: relative; z-index: 1; }
+.page-hero h1 { font-size: var(--step-5); max-width: 20ch; }
+.page-hero__lead {
+  margin-top: var(--sp-5);
+  max-width: 58ch;
+  font-size: var(--step-1);
+  line-height: var(--lh-loose);
+  color: var(--fg-muted-on-contrast);
+}
+
+/* ---- Fließtext ----------------------------------------------------------- */
+.prose { max-width: var(--measure); }
+.prose p + p { margin-top: var(--sp-5); }
+.prose p { font-size: var(--step-1); line-height: var(--lh-loose); color: var(--fg-muted); }
+.prose strong { color: var(--fg-strong); }
+.prose a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---- Häkchenliste -------------------------------------------------------- */
+.checks h3 { margin-bottom: var(--sp-5); font-size: var(--step-2); }
+.checks ul { display: grid; gap: var(--sp-4); max-width: var(--measure); }
+.checks li {
+  position: relative;
+  padding-left: var(--sp-8);
+  font-size: var(--step-0);
+  line-height: 1.55;
+}
+.checks li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.1em;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--signal-tint);
+}
+.checks li::after {
+  content: "";
+  position: absolute;
+  left: 7px; top: 0.42em;
+  width: 8px; height: 4px;
+  border-left: 2px solid var(--signal);
+  border-bottom: 2px solid var(--signal);
+  transform: rotate(-45deg);
+}
+
+/* ---- Bild mit Bildunterschrift ------------------------------------------- */
+.media { margin: var(--sp-8) 0 0; }
+.media img {
+  width: 100%;
+  aspect-ratio: var(--media-ratio, 4 / 3);
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--card-border);
+  background: var(--bg-2);
+}
+.media figcaption {
+  margin-top: var(--sp-3);
+  font-size: var(--step--2);
+  color: var(--fg-muted);
+}
+
+/* ---- Projektliste (Referenzen) ------------------------------------------- */
+.projects { display: grid; gap: clamp(1.5rem, 1rem + 2vw, 2.5rem); }
+.project {
+  display: grid;
+  gap: clamp(1.25rem, 1rem + 2vw, 2.5rem);
+  align-items: center;
+  padding: clamp(1.25rem, 1rem + 1.5vw, 2rem);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  transition: transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);
+}
+.project:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+@media (min-width: 52rem) { .project { grid-template-columns: 22rem minmax(0, 1fr); } }
+.project__img {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md);
+  background: var(--ink-700) center / cover no-repeat;
+}
+.project h2 { margin-top: var(--sp-4); font-size: var(--step-2); }
+.project p { margin-top: var(--sp-4); color: var(--fg-muted); line-height: var(--lh-loose); }
+.project__date {
+  margin-top: var(--sp-4);
+  font-size: var(--step--2);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.project .ref__tag { background: var(--signal-tint); color: var(--accent-ink); backdrop-filter: none; }
+
+/* ---- Downloads ----------------------------------------------------------- */
+.downloads { display: grid; gap: var(--sp-3); max-width: 48rem; }
+.downloads a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--sp-2) var(--sp-4);
+  padding: var(--sp-5);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  font-weight: 600;
+  transition: border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out);
+}
+.downloads a:hover { border-color: var(--signal); transform: translateX(4px); }
+.downloads small { font-weight: 400; color: var(--fg-muted); }
+
+/* ---- Kontaktstreifen ----------------------------------------------------- */
+.contact-strip {
+  display: grid;
+  gap: var(--sp-7);
+  align-items: center;
+}
+@media (min-width: 56rem) { .contact-strip { grid-template-columns: minmax(0, 1fr) auto; } }
+.contact-strip__actions { display: flex; flex-wrap: wrap; gap: var(--sp-4); }

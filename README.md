@@ -13,7 +13,17 @@ Skripte – `index.html` im Browser öffnen genügt.
 ## Aufbau
 
 ```
-index.html              Die komplette Seite (Semantik, Inhalte, JSON-LD)
+build/                  Seitengenerator (Node, nur zur Entwicklung)
+  nav.mjs               Navigation + Firmendaten – eine Quelle für alle Seiten
+  layout.mjs            Kopf, Topbar, Navigation, Footer
+  blocks.mjs            Wiederverwendbare Inhaltsbausteine
+  data.mjs              Leistungen, Referenzprojekte, Zertifikate
+  build.mjs             schreibt die HTML-Dateien
+  _home-raw.html        Rumpf der Startseite (Marker für generierte Raster)
+index.html              Startseite (Semantik, Inhalte, JSON-LD)
+leistungen.html         Unser Angebot + 6 Leistungsseiten
+referenzen.html         Projekte (Inhalte des bestehenden Auftritts)
+ueber-uns/team/karriere/stellen/downloads/kontakt/impressum/datenschutz
 assets/css/tokens.css   Farbe, Typo-Skala, Abstände, Bewegung – eine Quelle der Wahrheit
 assets/css/base.css     Reset, Typografie-Rhythmus, Layout-Primitive, Buttons, Reveals
 assets/css/components.css  Header, Hero, Karten, Referenzen, Ablauf, Kontakt, Footer
@@ -22,6 +32,24 @@ assets/js/van.js        Baut den Transporter aus CSS-3-D-Flächen und fährt ihn
 assets/js/main.js       Header, Navigation, Reveals, Formular
 assets/img/             Logo, Favicon, Platzhalter für Referenzbilder
 ```
+
+## Seiten erzeugen
+
+Die 18 Seiten teilen sich Kopf, Navigation und Footer. Geändert wird deshalb
+nicht die einzelne HTML-Datei, sondern der Generator:
+
+```bash
+node build/build.mjs      # schreibt alle .html-Dateien neu
+```
+
+* Navigation und Firmendaten: `build/nav.mjs`
+* Texte der Leistungs- und Referenzseiten: `build/data.mjs`
+* Rumpf der Startseite: `build/_home-raw.html`
+
+Die erzeugten Dateien liegen flach im Wurzelverzeichnis (`leistung-schiebetueren.html`),
+damit sie ohne Server – auch per Doppelklick – funktionieren. Auf dem Webserver
+lassen sich daraus über Rewrites wieder sprechende Adressen bauen
+(`/leistung/schiebetueren/`).
 
 ## Der 3-D-Transporter
 
