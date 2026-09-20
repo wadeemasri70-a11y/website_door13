@@ -201,6 +201,31 @@ auf Rot. Gerechnet wird nur, solange der Abschnitt sichtbar ist
 (`IntersectionObserver` plus `requestAnimationFrame`). Bei
 `prefers-reduced-motion` steht die Tür von vornherein offen.
 
+## Soziale Netzwerke
+
+Unter den Kontaktdaten und über der Fußzeile steht eine Leiste mit vier
+Zeichen: Facebook, Instagram, YouTube, LinkedIn. Im Ruhezustand sind sie grau
+und in einem Ring gefasst; bei Mausberührung oder Tastaturfokus nehmen Zeichen
+und Ring die Hausfarbe des jeweiligen Dienstes an – Instagram über einen
+Verlauf, der einmal pro Seite in `<svg class="verlaeufe">` definiert ist.
+
+Gepflegt wird die Leiste in `build/content/company.mjs`:
+
+```js
+social: [
+  { key: "facebook", name: "Facebook", url: "https://www.facebook.com/…" },
+  …
+]
+```
+
+**Solange `url` leer ist, steht das Zeichen ohne Verweis da** – sichtbar, aber
+nicht anklickbar. Sobald die Adressen der Profile eingetragen sind, werden
+automatisch Verweise daraus, die in einem neuen Tab öffnen.
+
+Die Zeichen sind als Pfade in `build/layout.mjs` (`sozialZeichen`) hinterlegt
+und den bekannten Marken nachgezeichnet. Wer es ganz genau will, ersetzt sie
+durch die offiziellen Dateien aus den Presse-Kits der vier Anbieter.
+
 ## Planet Tree
 
 Der Abschnitt zur Baumpflanzung trägt das Grün des Partners: `--planet`

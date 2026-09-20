@@ -1,7 +1,7 @@
-import { arrowIcon, tuerPortal } from "./layout.mjs";
+import { arrowIcon, tuerPortal, sozialLeiste } from "./layout.mjs";
 import { company } from "./content/index.mjs";
 
-export { tuerPortal };
+export { tuerPortal, sozialLeiste };
 
 const esc = (s) => String(s).replace(/&(?![a-z#0-9]+;)/g, "&amp;");
 const attr = (s) => esc(s).replace(/</g, "&lt;").replace(/"/g, "&quot;");
@@ -162,7 +162,8 @@ ${options.map((o) => `            <option>${o}</option>`).join("\n")}
 }
 
 export function contactData() {
-  return `      <dl class="contact__data" data-reveal>
+  return `      <div class="contact__spalte" data-reveal>
+        <dl class="contact__data">
         <div class="contact__row">
           <dt>Telefon</dt>
           <dd><a class="link-line" href="tel:${company.phoneHref}">${company.phone}</a>
@@ -180,7 +181,9 @@ export function contactData() {
           <dt>Sprechzeiten</dt>
           <dd>${company.hours}<small>Störungsannahme darüber hinaus telefonisch</small></dd>
         </div>
-      </dl>`;
+        </dl>
+${sozialLeiste({ titel: "Folgen Sie uns", einzug: "        " })}
+      </div>`;
 }
 
 export function serviceCards(services) {

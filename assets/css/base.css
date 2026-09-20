@@ -91,6 +91,8 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .section__head p { margin-top: var(--sp-5); color: var(--fg-muted); font-size: var(--step-1); line-height: var(--lh-loose); }
 .section--dark .section__head p { color: var(--fg-muted-on-contrast); }
 
+.verlaeufe { position: absolute; width: 0; height: 0; overflow: hidden; }
+
 .eyebrow {
   display: inline-flex;
   align-items: center;
