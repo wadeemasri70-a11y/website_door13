@@ -1,4 +1,17 @@
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+
 import { nav, company } from "./content/index.mjs";
+
+const stempelPuffer = new Map();
+
+function stempel(pfad) {
+  if (!stempelPuffer.has(pfad)) {
+    const kurz = createHash("sha1").update(readFileSync(pfad)).digest("hex").slice(0, 8);
+    stempelPuffer.set(pfad, `${pfad}?v=${kurz}`);
+  }
+  return stempelPuffer.get(pfad);
+}
 
 const logoMark = `
       <img class="brand__logo" src="assets/img/logo-falke.png"
@@ -114,13 +127,13 @@ export function page({ slug, title, description, active = "", body, bodyClass = 
 <link rel="icon" href="assets/img/favicon-falke.png" type="image/png">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&display=swap">
-<link rel="stylesheet" href="assets/css/tokens.css">
-<link rel="stylesheet" href="assets/css/base.css">
-<link rel="stylesheet" href="assets/css/layout.css">
-<link rel="stylesheet" href="assets/css/content.css">
-<link rel="stylesheet" href="assets/css/buehne.css">
-<link rel="stylesheet" href="assets/css/tuer-akt.css">
-<script src="assets/js/theme.js"></script>${isHome ? `
+<link rel="stylesheet" href="${stempel("assets/css/tokens.css")}">
+<link rel="stylesheet" href="${stempel("assets/css/base.css")}">
+<link rel="stylesheet" href="${stempel("assets/css/layout.css")}">
+<link rel="stylesheet" href="${stempel("assets/css/content.css")}">
+<link rel="stylesheet" href="${stempel("assets/css/buehne.css")}">
+<link rel="stylesheet" href="${stempel("assets/css/tuer-akt.css")}">
+<script src="${stempel("assets/js/theme.js")}"></script>${isHome ? `
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -247,11 +260,11 @@ ${sozialLeiste({ klasse: "sozial--fuss", einzug: "        " })}
   </div>
 </footer>
 
-<script src="assets/js/tuer-akt.js" defer></script>
-<script src="assets/js/map.js" defer></script>
-<script src="assets/js/doors.js" defer></script>
-<script src="assets/js/zahlen.js" defer></script>
-<script src="assets/js/main.js" defer></script>
+<script src="${stempel("assets/js/tuer-akt.js")}" defer></script>
+<script src="${stempel("assets/js/map.js")}" defer></script>
+<script src="${stempel("assets/js/doors.js")}" defer></script>
+<script src="${stempel("assets/js/zahlen.js")}" defer></script>
+<script src="${stempel("assets/js/main.js")}" defer></script>
 </body>
 </html>
 `;

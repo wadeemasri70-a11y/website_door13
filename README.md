@@ -47,6 +47,15 @@ assets/js/main.js          Kopfzeile, Navigation, Reveals, Formular
 18 erzeugte HTML-Dateien im Wurzelverzeichnis
 ```
 
+## Stand der Dateien im Browser
+
+Jede Stilvorlage und jedes Skript trägt im `<link>` beziehungsweise `<script>`
+einen Stempel aus den ersten acht Zeichen des SHA-1 über den Dateiinhalt
+(`stempel()` in `build/layout.mjs`), etwa
+`assets/css/content.css?v=f6a2e7d4`. Ändert sich der Inhalt, ändert sich der
+Stempel – Browser und Zwischenspeicher holen die Datei dann von selbst neu.
+Ohne das bleibt nach einer Änderung leicht die alte Fassung stehen.
+
 ## Seiten erzeugen
 
 Die 18 Seiten teilen sich Kopf, Navigation und Footer. Geändert wird deshalb
@@ -310,9 +319,12 @@ Schriftzug wie „dormakaba“ deutlich schwerer als ein kompaktes Zeichen wie
 „TORMAX“. Der Wert liegt zwischen Höhen- und Flächengleichheit
 (`sqrt(1/sqrt(Seitenverhältnis))`, auf GEZE bezogen).
 
+Die sechs Zeichen stehen in einer Reihe über die volle Breite
+(`justify-content: space-between`) und brechen erst unter 48rem um.
+
 Bei Mausberührung legt sich ein weiches gelbes Leuchten (`--neon`) um die
 Konturen und läuft nach unten aus – zwei `drop-shadow`, eines mittig, eines um
-sieben Pixel versetzt.
+sieben Pixel versetzt. Der Übergang dauert 0,12 Sekunden.
 
 Die Zeichen behalten in beiden Themen ihre eigenen Farben. Im Nachtthema liegt
 ein weicher weißer Schein darunter, damit sich auch dunkle Schriftzüge wie
