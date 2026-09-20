@@ -1,14 +1,10 @@
-/* =========================================================================
-   Der Transporter – flache Illustration, die beim ersten Scroll
-   in einen 3-D-Körper aufklappt. CSS-3D, kein WebGL, keine Bibliothek.
-   Gesteuert über --p (0…1 Scroll-Fortschritt) aus assets/js/van.js.
-   ========================================================================= */
+/* Der Transporter */
 
 .act {
   position: relative;
   background: var(--bg-contrast);
   color: var(--fg-on-contrast);
-  /* Scroll-Strecke der Inszenierung; mobil kürzer (s. unten) */
+
   height: 360vh;
 }
 
@@ -19,13 +15,15 @@
   height: 100svh;
   overflow: hidden;
   display: grid;
-  grid-template-areas: "stage";
-  place-items: center;
+  grid-template-rows: auto minmax(0, 1fr);
   isolation: isolate;
 }
-.act__stage > * { grid-area: stage; }
+.stage__light,
+.stage__floor,
+.van-fallback,
+.hotspots { grid-area: 1 / 1 / -1 / -1; }
 
-/* ---- Bühne: Licht, Horizont, Raster ------------------------------------ */
+/* Bühne */
 
 .stage__light {
   position: absolute;
@@ -38,7 +36,6 @@
   z-index: 0;
 }
 
-/* Perspektivischer Boden – erscheint erst mit der Tiefe */
 .stage__floor {
   position: absolute;
   left: 50%;
@@ -56,18 +53,19 @@
   z-index: 0;
 }
 
-/* ---- Bühnentext -------------------------------------------------------- */
+/* Bühnentext */
 
 .stage__intro {
+  grid-row: 1;
   position: relative;
   z-index: 3;
   width: min(100% - var(--gutter) * 2, var(--container));
   margin-inline: auto;
-  align-self: start;
-  padding-top: clamp(5.5rem, 4rem + 9vh, 9rem);
+  padding-top: calc(var(--topbar-h) + var(--header-h) + clamp(1.75rem, 5vh, 3.5rem));
+  padding-bottom: clamp(1.5rem, 4vh, 3rem);
   pointer-events: none;
   opacity: var(--intro-opacity, 1);
-  transform: translateY(calc(-30px * var(--p, 0)));
+  transform: translateY(calc(-24px * var(--p, 0)));
 }
 .stage__intro h2 {
   font-size: var(--step-5);
@@ -75,18 +73,18 @@
   max-width: 18ch;
 }
 .stage__intro p {
-  margin-top: var(--sp-5);
-  max-width: 44ch;
+  margin-top: var(--sp-4);
+  max-width: 46ch;
   color: var(--fg-muted-on-contrast);
   font-size: var(--step-1);
+  line-height: var(--lh-loose);
 }
 
 .stage__hint {
   position: absolute;
   z-index: 3;
-  bottom: clamp(1.25rem, 3vh, 2.5rem);
-  left: 50%;
-  translate: -50% 0;
+  bottom: clamp(1rem, 2.5vh, 2rem);
+  left: max(var(--gutter), calc(50% - var(--container) / 2));
   display: inline-flex;
   align-items: center;
   gap: var(--sp-3);
@@ -119,17 +117,18 @@
 }
 @media (prefers-reduced-motion: reduce) { .stage__hint .mouse::after { animation: none; } }
 
-/* ---- Perspektive & Fahrzeugwurzel -------------------------------------- */
+/* Perspektive & Fahrzeugwurzel */
 
 .stage__scene {
+  grid-row: 2;
   position: relative;
   z-index: 2;
-  width: 100%;
-  height: 100%;
   display: grid;
   place-items: center;
+  padding-bottom: clamp(4rem, 11vh, 6.5rem);
+  transform: translateY(calc(-1 * var(--scene-shift, 0px)));
   perspective: var(--persp, 2600px);
-  perspective-origin: 50% 44%;
+  perspective-origin: 50% 46%;
 }
 
 .van {
@@ -152,7 +151,7 @@
   backface-visibility: hidden;
   background: var(--fill, #fff);
 }
-/* Bake-Light: Flächen bekommen ihre Helligkeit erst mit der Tiefe */
+
 .f::after {
   content: "";
   position: absolute;
@@ -163,11 +162,8 @@
   border-radius: inherit;
 }
 
-/* Alles außer der nahen Seitenfläche blendet beim Aufklappen zügig ein –
-   solange die Drehung noch klein ist, sind diese Flächen ohnehin kaum sichtbar. */
 .f--vol { opacity: var(--vol, 0); }
 
-/* Karosserie */
 .f--body     { --fill: #f3f5f8; }
 .f--roof     { --fill: #ffffff; --shade: linear-gradient(180deg, rgba(255,255,255,.9), rgba(180,196,214,.45)); }
 .f--far      { --fill: #c9d2dd; --shade: linear-gradient(180deg, rgba(12,18,28,.30), rgba(12,18,28,.05)); }
@@ -177,7 +173,6 @@
 .f--glass    { --fill: #1b2634; }
 .f--skirt    { --fill: #20293a; }
 
-/* Nahe Seite: Träger der Lackierung */
 .f--side {
   --fill: #f7f9fb;
   --shade: linear-gradient(176deg, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 34%, rgba(18,26,38,.10) 76%, rgba(18,26,38,.22) 100%);
@@ -185,7 +180,6 @@
   box-shadow: inset 0 0 0 calc(1.5px * var(--flat, 1)) rgba(10, 14, 22, .85);
 }
 
-/* Fenster, Bögen, Fugen: 2-D-Details auf den Flächen */
 .detail { position: absolute; }
 .detail--glass {
   background: linear-gradient(200deg, #2b3a4e 0%, #16202c 46%, #33455c 100%);
@@ -227,7 +221,6 @@
   letter-spacing: .06em;
 }
 
-/* Signal-Lackierung */
 .livery { position: absolute; inset: 0; overflow: hidden; }
 .livery__sweep {
   position: absolute;
@@ -262,7 +255,6 @@
   letter-spacing: .02em;
 }
 
-/* Räder */
 .wheel { position: absolute; left: 0; top: 0; transform-style: preserve-3d; }
 .wheel__hub {
   position: absolute; left: 0; top: 0;
@@ -293,7 +285,6 @@
   box-shadow: inset 0 0 0 2px rgba(20,25,32,.6);
 }
 
-/* Rundumleuchte */
 .beacon { position: absolute; left: 0; top: 0; transform-style: preserve-3d; }
 .beacon__dome {
   position: absolute; left: 0; top: 0;
@@ -303,7 +294,6 @@
   box-shadow: 0 0 26px rgba(224, 28, 14, calc(.85 * var(--depth, 0)));
 }
 
-/* Bodenschatten */
 .van-shadow {
   position: absolute; left: 0; top: 0;
   border-radius: 50%;
@@ -312,7 +302,7 @@
   opacity: calc(.75 * var(--depth, 0));
 }
 
-/* ---- Hotspots: was der Wagen mitbringt --------------------------------- */
+/* Hotspots */
 
 .hotspots {
   position: absolute;
@@ -349,7 +339,7 @@
   color: var(--fg-muted-on-contrast);
 }
 
-/* ---- Fallback ohne JavaScript ------------------------------------------ */
+/* Fallback ohne JavaScript */
 .van-fallback { position: relative; z-index: 2; width: min(92%, 900px); }
 .van-fallback img {
   position: absolute;
@@ -363,7 +353,9 @@
 @media (max-width: 860px) {
   .act { height: 300vh; }
   .stage__intro h2 { font-size: var(--step-4); }
-  /* Auf schmalen Geräten stapeln die Hinweise unten statt frei zu schweben */
+  .stage__intro p { display: none; }
+  .stage__scene { padding-bottom: clamp(10rem, 34vh, 15rem); }
+
   .hotspots {
     display: flex;
     flex-direction: column;
@@ -383,7 +375,6 @@
   .hotspot span { display: block; }
 }
 
-/* Reduzierte Bewegung: eine ruhige, feste 3-D-Ansicht statt Scroll-Ballett */
 @media (prefers-reduced-motion: reduce) {
   .act { height: auto; }
   .act__stage {

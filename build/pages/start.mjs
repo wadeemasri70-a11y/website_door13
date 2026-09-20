@@ -1,7 +1,5 @@
 import { homeBody } from "./home.mjs";
 
-/* Steckbrief der Startseite – ihr Rumpf steht in home.mjs. */
-
 export const pages = [
   {
     slug: "index",

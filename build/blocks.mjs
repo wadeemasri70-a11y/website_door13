@@ -37,7 +37,7 @@ export function cards(items) {
           ${c.h3 ? `<h3>${c.h3}</h3>` : ""}
           ${c.p ? `<p>${c.p}</p>` : ""}
           ${c.list ? `<ul>${c.list.map((l) => `<li>${l}</li>`).join("")}</ul>` : ""}
-          ${c.href ? `<p style="margin-top:var(--sp-5)"><a class="link-line" href="${c.href}">${c.linkLabel || "Mehr erfahren"} →</a></p>` : ""}
+          ${c.href ? `<p class="more"><a class="link-line" href="${c.href}">${c.linkLabel || "Mehr erfahren"} →</a></p>` : ""}
         </article>`).join("\n");
   return `      <div class="grid grid--3">
 ${body}
@@ -59,12 +59,11 @@ ${items.map((i) => `          <li>${i}</li>`).join("\n")}
       </div>`;
 }
 
-/* Bild-Slot: zeigt bis zum Austausch einen beschrifteten Platzhalter */
 export function media({ src, alt, caption = "", ratio = "4 / 3", note = "" }) {
   return `      <figure class="media" data-reveal style="--media-ratio:${ratio}">
         <img src="${src}" alt="${esc(alt)}" loading="lazy" decoding="async">
         ${caption ? `<figcaption>${caption}</figcaption>` : ""}
-        ${note ? `<!-- ${note} -->` : ""}
+        ${note ? `` : ""}
       </figure>`;
 }
 
@@ -101,7 +100,7 @@ export function contactStrip() {
         <div>
           <p class="eyebrow">Direkter Draht</p>
           <h2>Lieber kurz anrufen?</h2>
-          <p class="lede" style="color:var(--fg-muted-on-contrast)">
+          <p class="lede lede--on-contrast">
             ${company.hours} erreichen Sie unsere Disposition direkt.
             Außerhalb der Zeiten nehmen wir Störungen telefonisch auf.
           </p>
@@ -181,8 +180,6 @@ export function contactData() {
       </dl>`;
 }
 
-/* ---- Raster der Startseite ---------------------------------------------- */
-
 export function serviceCards(services) {
   return `      <div class="grid grid--3">
 ${services.map((s, i) => `        <article class="card" data-reveal${i ? ` style="--reveal-delay:${(i % 3) * 80}ms"` : ""}>
@@ -191,7 +188,7 @@ ${services.map((s, i) => `        <article class="card" data-reveal${i ? ` style
           </div>
           <h3>${s.nav}</h3>
           <p>${s.lead}</p>
-          <p style="margin-top:var(--sp-5)"><a class="link-line" href="${s.slug}.html">Zur Leistung →</a></p>
+          <p class="more"><a class="link-line" href="${s.slug}.html">Zur Leistung →</a></p>
         </article>`).join("\n")}
       </div>`;
 }
@@ -204,7 +201,7 @@ ${projects.slice(0, 3).map((p, i) => `        <article class="ref" data-reveal${
           <p>${p.text.slice(0, 130)}…</p>
         </article>`).join("\n")}
       </div>
-      <p style="margin-top:var(--sp-7)"><a class="btn btn--ghost" href="referenzen.html">Alle Projekte ansehen</a></p>`;
+      <p class="more more--wide"><a class="btn btn--ghost" href="referenzen.html">Alle Projekte ansehen</a></p>`;
 }
 
 export function treeBlock(c) {
@@ -222,11 +219,7 @@ ${c.facts.map((f) => `            <div><b>${f.b}</b><span>${f.span}</span></div>
       </div>`;
 }
 
-/* ---- Partnerleiste ------------------------------------------------------ */
-
 export function partnerStrip(partners, { heading = "Partner & Mitgliedschaften" } = {}) {
-  /* Sobald die Logodatei vorliegt, ersetzt sie die Textplakette –
-     dazu in content/partners.mjs nur `file` setzen. */
   const plate = (p, hidden) => {
     const body = p.file
       ? `<img src="${p.file}" alt="${hidden ? "" : esc(p.name) + " – " + esc(p.note)}" loading="lazy">`
@@ -237,7 +230,6 @@ export function partnerStrip(partners, { heading = "Partner & Mitgliedschaften" 
           </li>`;
   };
 
-  /* Dreifach ausgelegt: so läuft das Band nahtlos, auch auf breiten Schirmen */
   const lauf = [false, true, true]
     .map((hidden) => partners.map((p) => plate(p, hidden)).join("\n"))
     .join("\n");
@@ -252,8 +244,6 @@ ${lauf}
       </div>`;
 }
 
-/* ---- Zertifikate -------------------------------------------------------- */
-
 export function certificateCards(items) {
   return `      <ul class="certs">
 ${items.map((c, i) => `        <li class="cert" data-reveal${i ? ` style="--reveal-delay:${i * 80}ms"` : ""}>
@@ -267,8 +257,6 @@ ${items.map((c, i) => `        <li class="cert" data-reveal${i ? ` style="--reve
         </li>`).join("\n")}
       </ul>`;
 }
-
-/* ---- Bildband über die volle Breite ------------------------------------- */
 
 export function bandImage({ src, alt, width, height, eyebrow, h2, lead }) {
   const kopf = eyebrow || h2 || lead

@@ -1,9 +1,6 @@
 import * as B from "../blocks.mjs";
 import { company } from "../content/index.mjs";
 
-/* Impressum und Datenschutz: Struktur und Gestaltung. Der rechtsverbindliche
-   Text ist aus dem bestehenden Auftritt zu übernehmen. */
-
 function rechtsseite(slug, titel, ueberschrift, hinweis) {
   return {
     slug,

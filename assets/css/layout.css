@@ -1,9 +1,4 @@
-/* =========================================================================
-   Falke Türautomation – Seitengerüst
-   Topbar, Kopfzeile, Navigation, Fußzeile.
-   ========================================================================= */
-
-/* ---- Topbar ------------------------------------------------------------------ */
+/* Topbar */
 .topbar {
   position: fixed;
   inset: 0 0 auto 0;
@@ -33,7 +28,7 @@
   color: var(--accent-ink);
 }
 
-/* ---- Kopfzeile --------------------------------------------------------------- */
+/* Kopfzeile */
 .site-header {
   position: fixed;
   top: var(--topbar-h);
@@ -162,7 +157,7 @@
   .nav a::after { display: none; }
 }
 
-/* ---- Dropdown-Navigation ----------------------------------------------------- */
+/* Dropdown-Navigation */
 .nav__group { position: relative; }
 .nav__group > a { display: inline-flex; align-items: center; gap: 4px; }
 .nav__chevron { width: 14px; height: 14px; opacity: .6; transition: transform var(--dur-1) var(--ease-out); }
@@ -216,7 +211,7 @@
   .nav__contact { display: block; }
 }
 
-/* ---- Fußzeile ---------------------------------------------------------------- */
+/* Fußzeile */
 .site-footer { background: var(--bg-contrast); color: var(--fg-muted-on-contrast); padding-block: var(--sp-10) var(--sp-7); }
 .site-footer a:hover { color: var(--fg-strong); }
 .footer__grid {
@@ -235,6 +230,7 @@
 }
 .footer__grid li + li { margin-top: var(--sp-2); }
 .footer__grid p { max-width: 34ch; font-size: var(--step--1); line-height: var(--lh-loose); }
+.footer__claim { margin-top: var(--sp-5); }
 .footer__brand { color: var(--fg-strong); }
 .footer__bottom {
   display: flex;
@@ -245,7 +241,4 @@
   font-size: var(--step--2);
 }
 
-/* =========================================================================
-   Mehrseitigkeit: Topbar, Dropdowns, Unterseiten-Bausteine
-   ========================================================================= */
-
+/* Mehrseitigkeit */

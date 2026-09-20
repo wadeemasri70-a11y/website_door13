@@ -1,7 +1,5 @@
 import * as B from "../blocks.mjs";
 
-/* Beratung und Kontakt. */
-
 export const pages = [
   {
       slug: "kontakt", active: "kontakt.html",

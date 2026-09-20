@@ -1,13 +1,3 @@
-# Veröffentlicht den Entwurf auf GitHub Pages.
-#
-# Einmalig einzurichten: Repository → Settings → Pages → Source: "GitHub Actions".
-# Danach läuft dieser Ablauf bei jedem Push und die Seite steht unter
-#   https://<konto>.github.io/<repository>/
-#
-# Der Ablauf legt zusätzlich eine robots.txt an, die Suchmaschinen aussperrt –
-# ein Entwurf soll dem echten Auftritt keine Konkurrenz in der Suche machen.
-# Beim Umzug auf die eigene Domain entfällt dieser Schritt.
-
 name: Seite veröffentlichen
 
 on:

@@ -1,50 +1,37 @@
-/* =========================================================================
-   van.js – baut den Service-Transporter aus CSS-3-D-Flächen und fährt ihn
-   am Scroll-Fortschritt entlang. Keine Abhängigkeiten, kein WebGL.
-
-   Achsen (Fahrzeug-Mittelpunkt = Ursprung):
-     x  Länge   (+x = Front)      y  Höhe (+y = unten)     z  Breite (+z = Kamera)
-   ========================================================================= */
-
 (function () {
   "use strict";
 
-  /* ---- Geometrie (px im Fahrzeug-Maßstab, per --s skaliert) ------------- */
   const G = {
-    L: 600, H: 300, W: 230,        // Kastenaufbau (Länge, Höhe, Breite)
-    hoodL: 120, hoodTop: -10,      // Motorhaube
+    L: 600, H: 300, W: 230,
+    hoodL: 120, hoodTop: -10,
     bumperL: 28,
-    R: 60, TW: 44,                 // Rad: Radius, Breite
+    R: 60, TW: 44,
     axleFront: 225, axleRear: -180,
-    seg: 14                        // Segmente pro Reifen
+    seg: 14
   };
-  G.frontX = G.L / 2;                    // 300
-  G.noseX = G.frontX + G.hoodL;          // 420
-  G.bottomY = G.H / 2;                   // 150
-  G.topY = -G.H / 2;                     // -150
-  G.axleY = G.bottomY + 28;              // 178
-  G.groundY = G.axleY + G.R;             // 238
-  G.halfW = G.W / 2;                     // 115
-  /* Windschutzscheibe: von der Dachvorderkante zur Haubenvorderkante */
-  G.wsDx = G.hoodL;                      // 120
-  G.wsDy = G.hoodTop - G.topY;           // 140
+  G.frontX = G.L / 2;
+  G.noseX = G.frontX + G.hoodL;
+  G.bottomY = G.H / 2;
+  G.topY = -G.H / 2;
+  G.axleY = G.bottomY + 28;
+  G.groundY = G.axleY + G.R;
+  G.halfW = G.W / 2;
+
+  G.wsDx = G.hoodL;
+  G.wsDy = G.hoodTop - G.topY;
   G.wsLen = Math.hypot(G.wsDx, G.wsDy);
   G.wsAngle = -(90 - (Math.atan2(G.wsDy, G.wsDx) * 180) / Math.PI);
 
   const NS = "http://www.w3.org/2000/svg";
 
-  /* Falke-Markenzeichen für die Fahrzeugbeschriftung (Platzhalter –
-     gegen das Original-Logo in assets/img/ austauschbar). */
-  /* Fahrzeugbeschriftung: das Original-Logo */
   const LOGO = '<img src="assets/img/logo-falke.png" alt="" width="600" height="200" style="width:100%;height:auto">';
 
-  /* ---- kleine Helfer ----------------------------------------------------- */
   const px = (n) => n + "px";
   const clamp01 = (n) => (n < 0 ? 0 : n > 1 ? 1 : n);
   const lerp = (a, b, t) => a + (b - a) * t;
   const easeOut = (t) => 1 - Math.pow(1 - t, 3);
   const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-  /* Fortschritt eines Teilabschnitts [a,b] → 0…1 */
+
   const seg = (p, a, b) => clamp01((p - a) / (b - a));
 
   function el(tag, cls, parent) {
@@ -54,7 +41,6 @@
     return n;
   }
 
-  /* Eine Fläche: Größe, Mittelpunkt, Drehung um den eigenen Mittelpunkt. */
   function panel(parent, cls, w, h, cx, cy, cz, rot) {
     const n = el("div", "f " + cls, parent);
     n.style.width = px(w);
@@ -65,7 +51,6 @@
     return n;
   }
 
-  /* Ein Quader aus fünf bis sechs Flächen */
   function boxSolid(parent, opts) {
     const { x = 0, y = 0, z = 0, l, h, w, cls = "f--dark", skipBottom = true } = opts;
     const out = {};
@@ -88,12 +73,9 @@
     return n;
   }
 
-  /* ---- Aufbau ------------------------------------------------------------ */
-
   function buildVan(root) {
     const van = el("div", "van", root);
 
-    /* Bodenschatten */
     const sh = el("div", "van-shadow", van);
     sh.style.width = px(1000);
     sh.style.height = px(300);
@@ -101,28 +83,25 @@
     sh.style.marginTop = px(-150);
     sh.style.transform = `translate3d(${px(30)}, ${px(G.groundY + 6)}, 0) rotateX(90deg)`;
 
-    /* --- Kastenaufbau ---------------------------------------------------- */
     panel(van, "f--roof f--vol", G.L, G.W, 0, G.topY, 0, "rotateX(90deg)");
     panel(van, "f--dark f--vol", G.L + G.hoodL + G.bumperL, G.W, (G.hoodL + G.bumperL) / 2, G.bottomY, 0, "rotateX(-90deg)");
     const rear = panel(van, "f--rear f--vol", G.W, G.H, -G.frontX, 0, 0, "rotateY(-90deg)");
     panel(van, "f--far f--vol", G.L, G.H, 0, 0, -G.halfW, "rotateY(180deg)");
     const nearSide = panel(van, "f--side", G.L, G.H, 0, 0, G.halfW, "");
 
-    /* --- Motorhaube ------------------------------------------------------- */
-    const hoodH = G.bottomY - G.hoodTop;             // 160
-    const hoodCx = G.frontX + G.hoodL / 2;           // 360
-    const hoodCy = G.hoodTop + hoodH / 2;            // 70
+    const hoodH = G.bottomY - G.hoodTop;
+    const hoodCx = G.frontX + G.hoodL / 2;
+    const hoodCy = G.hoodTop + hoodH / 2;
     panel(van, "f--roof f--vol", G.hoodL, G.W, hoodCx, G.hoodTop, 0, "rotateX(90deg)");
     const noseFace = panel(van, "f--nose f--vol", G.W, hoodH, G.noseX, hoodCy, 0, "rotateY(90deg)");
     const hoodNear = panel(van, "f--side", G.hoodL, hoodH, hoodCx, hoodCy, G.halfW, "");
     panel(van, "f--far f--vol", G.hoodL, hoodH, hoodCx, hoodCy, -G.halfW, "rotateY(180deg)");
 
-    /* --- Windschutzscheibe: geneigte Fläche + Seitenansicht --------------- */
     const wsCx = (G.frontX + G.noseX) / 2;
     const wsCy = (G.topY + G.hoodTop) / 2;
     panel(van, "f--glass f--vol detail--windshield", G.W - 14, G.wsLen,
       wsCx, wsCy, 0, `rotateZ(${G.wsAngle}deg) rotateY(90deg)`);
-    /* Dreieck in der Silhouette – auch im flachen Zustand sichtbar */
+
     [G.halfW + 0.4, -(G.halfW + 0.4)].forEach(function (zz, i) {
       const t = panel(van, "f--glass" + (i ? " f--vol" : ""), G.hoodL, G.wsDy, wsCx, wsCy, zz,
         i ? "rotateY(180deg)" : "");
@@ -130,7 +109,6 @@
       t.style.background = "linear-gradient(200deg, #3b4d63, #16202c)";
     });
 
-    /* --- Stoßfänger, Spiegel, Rundumleuchte ------------------------------- */
     boxSolid(van, {
       x: G.noseX + G.bumperL / 2, y: G.bottomY - 30, z: 0,
       l: G.bumperL, h: 62, w: G.W + 12, cls: "f--skirt"
@@ -147,12 +125,10 @@
     dome.style.marginTop = px(-60);
     dome.style.transform = `translate3d(${px(120)}, ${px(G.topY - 31)}, 0) rotateX(90deg)`;
 
-    /* --- Lackierung ------------------------------------------------------- */
     liverySide(nearSide, hoodNear);
     liveryNose(noseFace, hoodH);
     liveryRear(rear);
 
-    /* --- Räder ------------------------------------------------------------ */
     const wheels = [];
     [G.axleFront, G.axleRear].forEach(function (ax) {
       wheels.push(wheel(van, ax, G.axleY, G.halfW - G.TW / 2 - 1));
@@ -161,35 +137,29 @@
     return { van: van, wheels: wheels };
   }
 
-  /* Seitenansicht: Fenster, Radläufe, Schweller, Logo, Kontakt */
   function liverySide(side, hoodSide) {
-    const lx = (x) => x + G.L / 2;       // Fahrzeug-x → lokale Koordinate
+    const lx = (x) => x + G.L / 2;
     const ly = (y) => y + G.H / 2;
 
     const liv = el("div", "livery", side);
     el("div", "livery__sweep livery__sweep--dark", liv);
     el("div", "livery__sweep", liv);
 
-    /* Schweller */
     detail(side, "detail--skirt", G.L, 30, 0, G.H - 30);
 
-    /* Fahrerhaus: Seitenscheibe, Türfugen, Griff */
     detail(side, "detail--glass", 122, 92, lx(150), ly(-128), "border-radius:6px 16px 6px 6px");
     detail(side, "detail--seam", 2, G.H - 46, lx(128), 10);
     detail(side, "detail--seam", 2, G.H - 46, lx(282), 10);
     detail(side, "detail--handle", 28, 7, lx(158), ly(-6));
 
-    /* Schiebetür-Fuge im Laderaum */
     detail(side, "detail--seam", 2, G.H - 60, lx(-70), 16);
     detail(side, "detail--handle", 24, 6, lx(-60), ly(-10));
 
-    /* Radläufe */
     [G.axleFront, G.axleRear].forEach(function (ax) {
       const r = 78;
       detail(side, "detail--arch", r * 2, r, lx(ax) - r, G.H - r + 4);
     });
 
-    /* Logo, Claim, Kontakt */
     const logo = el("div", "livery__logo", liv);
     logo.style.cssText = `left:${px(lx(-252))};top:${px(ly(-126))};width:${px(246)}`;
     logo.innerHTML = LOGO;
@@ -203,7 +173,6 @@
       '02272 908 92 70 <span style="font-size:.72em;opacity:.9">&nbsp;·&nbsp; falke-tuerautomation.de</span>';
     contact.style.cssText = `left:${px(lx(-252))};top:${px(ly(52))};font-size:21px`;
 
-    /* Motorhauben-Seite: Schweller fortführen */
     detail(hoodSide, "detail--skirt", G.hoodL, 24, 0, G.bottomY - G.hoodTop - 24);
   }
 
@@ -257,8 +226,6 @@
     return w;
   }
 
-  /* ---- Inszenierung ------------------------------------------------------ */
-
   function init() {
     const act = document.querySelector("[data-act]");
     if (!act) return;
@@ -273,28 +240,27 @@
     const built = buildVan(scene);
     const van = built.van;
 
-    let baseScale = 1, lift = 0;
+    let baseScale = 1, introHeight = 0;
     function measure() {
-      const vw = stage.clientWidth || window.innerWidth;
+      const vw = scene.clientWidth || window.innerWidth;
       const vh = stage.clientHeight || window.innerHeight;
-      /* Der Wagen misst rund 960 × 470 Einheiten inkl. Rädern */
+      introHeight = intro ? intro.offsetHeight : 0;
       const narrow = vw < 860;
-      baseScale = Math.min((vw * (narrow ? 0.88 : 0.92)) / 1020, (vh * (narrow ? 0.46 : 0.62)) / 470);
-      baseScale = Math.max(0.14, Math.min(baseScale, 1.05));
-      lift = narrow ? -0.10 * vh : 0;
+      baseScale = Math.min((vw * (narrow ? 0.86 : 0.80)) / 1020, (vh * (narrow ? 0.50 : 0.58)) / 470);
+      baseScale = Math.max(0.14, Math.min(baseScale, 0.92));
     }
 
-    /* Statische, ruhige Ansicht für prefers-reduced-motion */
     function renderStatic() {
       measure();
       van.style.setProperty("--s", baseScale * 0.92);
+      stage.style.setProperty("--scene-shift", "0px");
       stage.style.setProperty("--depth", 1);
       stage.style.setProperty("--vol", 1);
       stage.style.setProperty("--flat", 0);
       stage.style.setProperty("--persp", "2400px");
       van.style.setProperty("--ry", "-27deg");
       van.style.setProperty("--rx", "-9deg");
-      van.style.setProperty("--dy", "6px");
+      van.style.setProperty("--dy", "-20px");
       hotspots.forEach((h) => h.classList.add("is-on"));
     }
 
@@ -312,12 +278,11 @@
     }
 
     function apply(p) {
-      /* Akt 1 – Aufklappen: flach → Körper */
       const unfold = easeOut(seg(p, 0.05, 0.34));
-      /* Akt 2 – Umrundung */
-      const turnA = easeInOut(seg(p, 0.05, 0.40));   //   0° → -30°
-      const turnB = easeInOut(seg(p, 0.42, 0.66));   // -30° → -54°
-      const turnC = easeInOut(seg(p, 0.66, 0.90));   // -54° → +34°
+
+      const turnA = easeInOut(seg(p, 0.05, 0.40));
+      const turnB = easeInOut(seg(p, 0.42, 0.66));
+      const turnC = easeInOut(seg(p, 0.66, 0.90));
       const settle = easeOut(seg(p, 0.90, 1.0));
 
       const ry = lerp(0, -30, turnA) + lerp(0, -24, turnB) + lerp(0, 86, turnC) + lerp(0, -58, settle);
@@ -332,22 +297,22 @@
       van.style.setProperty("--ry", ry.toFixed(2) + "deg");
       van.style.setProperty("--rx", rx.toFixed(2) + "deg");
       van.style.setProperty("--rz", rz.toFixed(2) + "deg");
-      van.style.setProperty("--s", (baseScale * lerp(0.56, 1.0, easeOut(seg(p, 0.10, 0.52)))).toFixed(4));
-      van.style.setProperty("--dx", Math.round(lerp(-40, 40, easeInOut(seg(p, 0.1, 1)))) + "px");
+      van.style.setProperty("--s", (baseScale * lerp(0.74, 1.0, easeOut(seg(p, 0.10, 0.52)))).toFixed(4));
+      van.style.setProperty("--dx", Math.round(lerp(10, 80, easeInOut(seg(p, 0.1, 1)))) + "px");
       van.style.setProperty("--dy",
-        (lerp(330, 10, easeOut(seg(p, 0.14, 0.44))) + lift / Math.max(baseScale, 0.2) * unfold +
-         Math.sin(p * 46) * 1.6 * unfold).toFixed(2) + "px");
+        (-26 + Math.sin(p * 46) * 1.6 * unfold).toFixed(2) + "px");
 
-      /* Räder drehen mit dem Fortschritt – Vorwärtsfahrt nach rechts */
       const spin = p * 2200;
       for (let i = 0; i < built.wheels.length; i++) {
         built.wheels[i].firstChild.style.transform = "rotateZ(" + spin.toFixed(1) + "deg)";
       }
 
+      const introFade = easeOut(seg(p, 0.10, 0.28));
       if (intro) {
-        intro.style.setProperty("--intro-opacity", (1 - easeOut(seg(p, 0.10, 0.28))).toFixed(3));
+        intro.style.setProperty("--intro-opacity", (1 - introFade).toFixed(3));
         intro.style.setProperty("--p", p.toFixed(3));
       }
+      stage.style.setProperty("--scene-shift", (introHeight * introFade * 0.5).toFixed(1) + "px");
       if (hint) hint.style.setProperty("--hint-opacity", (1 - clamp01(p * 14)).toFixed(3));
 
       for (let i = 0; i < hotspots.length; i++) {
@@ -373,7 +338,6 @@
       if (visible) schedule();
     }
 
-    /* Nur rechnen, wenn die Bühne sichtbar ist */
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (entries) {
         visible = entries[0].isIntersecting;
@@ -397,12 +361,11 @@
     current = target;
     apply(current);
 
-    /* Debug-Haken: ?p=0.5 friert einen Zustand ein (für Screenshots) */
     const q = new URLSearchParams(location.search);
     if (q.has("p")) {
       const fixed = clamp01(parseFloat(q.get("p")) || 0);
       window.removeEventListener("scroll", onScroll);
-      /* ?solo=1 isoliert die Bühne (für Screenshots / Abnahme) */
+
       if (q.get("solo") === "1") {
         Array.prototype.forEach.call(
           document.querySelectorAll("body > header, body > footer, main > section"),

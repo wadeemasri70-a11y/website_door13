@@ -1,19 +1,5 @@
-/* =========================================================================
-   Falke Türautomation – Design Tokens
-   -------------------------------------------------------------------------
-   1. Palette   feste Markenwerte, nirgends direkt verwendet
-   2. Rollen    was die Bausteine tatsächlich benutzen (Tagthema)
-   3. Nachtthema  dieselben Rollen, andere Werte
-   4. Typografie, Raum, Form, Bewegung
-
-   Regel: Bausteine greifen ausschließlich auf Rollen zu (--bg-1, --fg, …).
-   Wer eine Farbe ändern will, ändert sie hier – und nur hier.
-   ========================================================================= */
-
 :root {
-  /* ---- 1. Palette ------------------------------------------------------
-     Rot und Grau sind am Original-Logo gemessen, die übrigen Werte stammen
-     aus dem Theme des bestehenden Auftritts.                              */
+  /* Palette */
   --red-500: #e01c0e;
   --red-600: #c22724;
   --red-300: #ff6c5c;
@@ -31,12 +17,12 @@
   --grey-050: #f4f5f6;
   --white: #ffffff;
 
-  /* ---- 2. Rollen: Tagthema (Voreinstellung) ---------------------------- */
+  /* Rollen: Tagthema */
   color-scheme: light;
 
-  --bg-1: var(--grey-050);          /* Seitengrund, ruhige Abschnitte */
-  --bg-2: var(--white);             /* abgesetzte Abschnitte */
-  --bg-contrast: var(--grey-100);   /* Topbar, Hero, Bühne, Footer */
+  --bg-1: var(--grey-050);
+  --bg-2: var(--white);
+  --bg-contrast: var(--grey-100);
   --card-bg: var(--white);
   --card-border: rgba(11, 12, 13, 0.11);
 
@@ -52,7 +38,7 @@
 
   --accent: var(--red-500);
   --accent-strong: var(--red-600);
-  --accent-ink: var(--red-600);     /* Signalfarbe als Textfarbe */
+  --accent-ink: var(--red-600);
   --accent-tint: var(--red-tint);
   --accent-gradient: linear-gradient(96deg, var(--red-600) 10%, var(--red-500) 90%);
 
@@ -80,9 +66,7 @@
   --map-grid: rgba(11, 12, 13, 0.08);
   --map-fg: #1c1f20;
 
-  /* ---- 4. Typografie ---------------------------------------------------
-     Montserrat wie im bestehenden Auftritt. Fließende Skala per clamp(),
-     Verhältnis rund 1,25 bei großen Viewports.                            */
+  /* Typografie */
   --font-sans: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -109,7 +93,7 @@
 
   --measure: 64ch;
 
-  /* ---- Raum ------------------------------------------------------------ */
+  /* Raum */
   --sp-1: 0.25rem;
   --sp-2: 0.5rem;
   --sp-3: 0.75rem;
@@ -129,7 +113,7 @@
   --topbar-h: 38px;
   --header-h: 72px;
 
-  /* ---- Form ------------------------------------------------------------ */
+  /* Form */
   --radius-xs: 4px;
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -141,7 +125,7 @@
   --shadow-md: 0 2px 4px rgba(8, 9, 10, 0.05), 0 12px 28px -12px rgba(8, 9, 10, 0.20);
   --shadow-lg: 0 4px 10px rgba(8, 9, 10, 0.06), 0 30px 60px -24px rgba(8, 9, 10, 0.35);
 
-  /* ---- Bewegung: drei Dauern, drei Kurven, nie linear ------------------- */
+  /* Bewegung */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --dur-1: 0.3s;
@@ -149,9 +133,7 @@
   --dur-3: 1.2s;
 }
 
-/* ---- 3. Nachtthema ------------------------------------------------------
-   Gilt nur, wenn es ausdrücklich gewählt wurde. Die Seite startet hell –
-   unabhängig von der Systemeinstellung.                                    */
+/* Nachtthema */
 :root[data-theme="dark"] {
   color-scheme: dark;
 

@@ -1,13 +1,8 @@
-/* =========================================================================
-   main.js – Header, Navigation, Reveals, Formular. Ohne Abhängigkeiten.
-   ========================================================================= */
-
 (function () {
   "use strict";
 
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---- Header: Zustand beim Scrollen ------------------------------------ */
   const header = document.querySelector("[data-header]");
   if (header) {
     const sentinel = document.createElement("div");
@@ -20,7 +15,6 @@
     }
   }
 
-  /* ---- Mobile Navigation ------------------------------------------------ */
   const toggle = document.querySelector("[data-nav-toggle]");
   const nav = document.querySelector("[data-nav]");
   if (toggle && nav) {
@@ -43,7 +37,6 @@
     });
   }
 
-  /* ---- Scroll-Reveal ----------------------------------------------------- */
   const revealables = document.querySelectorAll("[data-reveal]");
   if (reduced || !("IntersectionObserver" in window)) {
     revealables.forEach(function (n) { n.classList.add("is-in"); });
@@ -57,13 +50,12 @@
       });
     }, { rootMargin: "0px 0px -12% 0px", threshold: 0.1 });
     revealables.forEach(function (n) { io.observe(n); });
-    /* Sicherheitsnetz: Inhalt darf nie dauerhaft unsichtbar bleiben */
+
     window.setTimeout(function () {
       revealables.forEach(function (n) { n.classList.add("is-in"); });
     }, 3000);
   }
 
-  /* ---- Aktiver Navigationspunkt ----------------------------------------- */
   const sections = Array.prototype.slice.call(
     document.querySelectorAll("main section[id]")
   );
@@ -85,9 +77,6 @@
     sections.forEach(function (s) { spy.observe(s); });
   }
 
-  /* ---- Formular ---------------------------------------------------------
-     Ohne Backend: die Anfrage wird als vorbereitete E-Mail geöffnet.
-     Für ein echtes Postfach hier den Endpoint eintragen (FORM_ENDPOINT).   */
   const FORM_ENDPOINT = "";
   const MAILTO = "info@falke-tuerautomation.de";
   const form = document.querySelector("[data-form]");
@@ -145,7 +134,6 @@
     });
   }
 
-  /* ---- Jahreszahl im Footer --------------------------------------------- */
   const year = document.querySelector("[data-year]");
   if (year) year.textContent = new Date().getFullYear();
 })();

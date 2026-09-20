@@ -1,5 +1,3 @@
-/* Die Navigation des bestehenden Auftritts – 1:1 übernommen,
-   nur die Adressen zeigen auf die neuen statischen Dateien. */
 export const nav = [
   {
     label: "Leistungen", href: "leistungen.html",

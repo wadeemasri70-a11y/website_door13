@@ -1,13 +1,3 @@
-/* =========================================================================
-   Seitengenerator
-   -------------------------------------------------------------------------
-   Jedes Seitenmodul liefert eine Liste von Steckbriefen
-   ({ slug, title, description, active, body }); layout.mjs baut daraus die
-   fertige Seite, dieser Läufer schreibt sie ins Wurzelverzeichnis.
-
-       node build/build.mjs        (oder: npm run build)
-   ========================================================================= */
-
 import { writeFileSync } from "node:fs";
 import { page } from "./layout.mjs";
 

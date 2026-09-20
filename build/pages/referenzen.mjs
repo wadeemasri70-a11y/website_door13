@@ -1,8 +1,6 @@
 import * as B from "../blocks.mjs";
 import { projects } from "../content/index.mjs";
 
-/* Projektseite mit den Referenzen des bestehenden Auftritts. */
-
 export const pages = [
   {
       slug: "referenzen", active: "referenzen.html",
@@ -18,7 +16,6 @@ export const pages = [
           variant: "paper",
           html: `      <div class="projects">
     ${projects.map((p, i) => `        <article class="project" data-reveal${i ? ` style="--reveal-delay:${(i % 2) * 80}ms"` : ""}>
-              <!-- Originalbild der bestehenden Seite: ${p.orig} -->
               <div class="project__img" style="background-image:url('${p.img}')" role="img" aria-label="${p.alt}"></div>
               <div class="project__body">
                 <span class="ref__tag">${p.tag}</span>

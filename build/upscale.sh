@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# Skaliert ein Bild über den Browser hoch. Aufruf:
-#   build/upscale.sh <quelle> <ziel> [faktor] [qualität] [schärfe]
 set -euo pipefail
 CHROME=${CHROME:-/opt/pw-browsers/chromium-1194/chrome-linux/chrome}
 SRC=$(readlink -f "$1"); DST="$2"; SCALE=${3:-2}; Q=${4:-0.86}; SHARPEN=${5:-0.55}

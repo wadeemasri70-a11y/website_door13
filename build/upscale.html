@@ -4,9 +4,6 @@
 <body style="margin:0;background:#fff">
 <pre id="out" style="font:10px/1.1 monospace;word-break:break-all;white-space:pre-wrap">warte…</pre>
 <script>
-/* Vergrößert ein Bild im Browser: zweistufiges Hochskalieren mit
-   hochwertiger Interpolation, danach eine leichte Unschärfemaske.
-   Ergebnis wird als data-URL in den DOM geschrieben und außen abgeholt. */
 const q = new URLSearchParams(location.search);
 const src = q.get("src");
 const scale = parseFloat(q.get("scale") || "2");
@@ -18,8 +15,7 @@ img.onload = function () {
   const w = Math.round(img.naturalWidth * scale);
   const h = Math.round(img.naturalHeight * scale);
 
-  /* In zwei Schritten skalieren – das hält Kanten ruhiger als ein Sprung */
-  let cur = document.createElement("canvas");
+    let cur = document.createElement("canvas");
   cur.width = Math.round(img.naturalWidth * Math.sqrt(scale));
   cur.height = Math.round(img.naturalHeight * Math.sqrt(scale));
   let ctx = cur.getContext("2d");
@@ -34,8 +30,7 @@ img.onload = function () {
   octx.imageSmoothingQuality = "high";
   octx.drawImage(cur, 0, 0, w, h);
 
-  /* Unschärfemaske: Original minus weichgezeichnete Fassung, dazuaddiert */
-  const sharp = octx.getImageData(0, 0, w, h);
+    const sharp = octx.getImageData(0, 0, w, h);
   const blurCanvas = document.createElement("canvas");
   blurCanvas.width = w; blurCanvas.height = h;
   const bctx = blurCanvas.getContext("2d");

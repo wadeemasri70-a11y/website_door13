@@ -1,7 +1,3 @@
-/* Inhalte der Zertifizierung.
-   Die Urkunden liegen als Scans vor; ein Klick öffnet die volle Datei. */
-
-/* Sachkundenachweise und Herstellerschulungen */
 export const qualifications = [
   {
     file: "assets/img/zertifikat/fta-sachkunde.jpg",
@@ -23,7 +19,6 @@ export const qualifications = [
   }
 ];
 
-/* Ein Baum je Wartungsvertrag – Partnerschaft mit Planet Tree */
 export const certificate = {
   sheet: "assets/img/zertifikat-planet-tree.png",
   partner: "assets/img/partner-planet-tree.png",

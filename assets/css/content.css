@@ -1,16 +1,11 @@
-/* =========================================================================
-   Falke Türautomation – Inhaltsbausteine
-   Hero, Abschnitte, Karten, Text, Medien, Projekte, Kontakt.
-   ========================================================================= */
-
-/* ---- Hero der Startseite ----------------------------------------------------- */
+/* Hero der Startseite */
 .hero {
   position: relative;
   min-height: 100svh;
   display: grid;
   align-items: center;
-  padding-top: calc(var(--header-h) + var(--topbar-h) + var(--sp-8));
-  padding-bottom: var(--sp-10);
+  padding-top: calc(var(--header-h) + var(--topbar-h) + clamp(2.5rem, 6vh, 4.5rem));
+  padding-bottom: clamp(3rem, 7vh, 5rem);
   background: var(--bg-contrast);
   color: var(--fg-on-contrast);
   overflow: hidden;
@@ -21,7 +16,7 @@
   inset: 0;
   background: var(--hero-bg);
 }
-/* Angedeutete Schiebetür-Flügel als ruhige Tiefenebene */
+
 .hero__doors {
   position: absolute;
   inset: 0;
@@ -85,7 +80,7 @@
   color: var(--fg-muted-on-contrast);
 }
 
-/* ---- Kopf der Unterseiten ---------------------------------------------------- */
+/* Kopf der Unterseiten */
 .page-hero {
   position: relative;
   padding-top: calc(var(--header-h) + var(--topbar-h) + clamp(3rem, 6vw, 6rem));
@@ -111,7 +106,7 @@
   color: var(--fg-muted-on-contrast);
 }
 
-/* ---- Raster & Karten --------------------------------------------------------- */
+/* Raster & Karten */
 .grid { display: grid; gap: clamp(1rem, 0.5rem + 1.6vw, 1.75rem); }
 .grid--3 { grid-template-columns: 1fr; }
 .grid--2 { grid-template-columns: 1fr; }
@@ -172,7 +167,6 @@
   background: var(--accent);
 }
 
-/* Normenband */
 .norms {
   display: flex;
   flex-wrap: wrap;
@@ -190,14 +184,14 @@
 }
 .section--dark .norms li { border-color: var(--line-on-contrast); color: var(--fg-muted-on-contrast); }
 
-/* ---- Fließtext --------------------------------------------------------------- */
+/* Fließtext */
 .prose { max-width: var(--measure); }
 .prose p + p { margin-top: var(--sp-5); }
 .prose p { font-size: var(--step-1); line-height: var(--lh-loose); color: var(--fg-muted); }
 .prose strong { color: var(--fg-strong); }
 .prose a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; }
 
-/* ---- Häkchenliste ------------------------------------------------------------ */
+/* Häkchenliste */
 .checks h3 { margin-bottom: var(--sp-5); font-size: var(--step-2); }
 .checks ul { display: grid; gap: var(--sp-4); max-width: var(--measure); }
 .checks li {
@@ -224,7 +218,7 @@
   transform: rotate(-45deg);
 }
 
-/* ---- Bild mit Bildunterschrift ----------------------------------------------- */
+/* Bild mit Bildunterschrift */
 .media { margin: var(--sp-8) 0 0; max-width: 46rem; }
 .media:first-child { margin-top: 0; }
 .media img {
@@ -241,7 +235,7 @@
   color: var(--fg-muted);
 }
 
-/* ---- Kennzahlen -------------------------------------------------------------- */
+/* Kennzahlen */
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: var(--sp-6); }
 .stat { padding-top: var(--sp-5); border-top: 2px solid var(--line-on-contrast); }
 .stat b {
@@ -254,7 +248,7 @@
 }
 .stat span { display: block; margin-top: var(--sp-2); color: var(--fg-muted-on-contrast); font-size: var(--step--1); }
 
-/* ---- Herstellerliste --------------------------------------------------------- */
+/* Herstellerliste */
 .makers { display: flex; flex-wrap: wrap; gap: var(--sp-4) var(--sp-6); align-items: center; }
 .makers li {
   padding: var(--sp-3) var(--sp-5);
@@ -268,7 +262,7 @@
 }
 .makers li:hover { color: var(--fg-strong); border-color: var(--line-strong); }
 
-/* ---- Referenzkacheln (Startseite) -------------------------------------------- */
+/* Referenzkacheln (Startseite) */
 .refs { display: grid; gap: clamp(1rem, 0.6rem + 1.4vw, 1.5rem); grid-template-columns: 1fr; }
 @media (min-width: 44rem) { .refs { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 64rem) { .refs { grid-template-columns: repeat(3, 1fr); } }
@@ -283,7 +277,7 @@
   overflow: hidden;
   color: #fff;
   isolation: isolate;
-  /* Bild-Slot: --ref-img in index.html je Karte setzen */
+
   background-color: var(--grey-700);
   background-image: var(--ref-img, linear-gradient(140deg, #1c2636 0%, #0f1622 100%));
   background-size: cover;
@@ -313,7 +307,7 @@
 .ref h3 { font-size: var(--step-2); color: #fff; }
 .ref p { margin-top: var(--sp-3); color: var(--grey-200); font-size: var(--step--1); }
 
-/* ---- Projektliste (Referenzseite) -------------------------------------------- */
+/* Projektliste (Referenzseite) */
 .projects { display: grid; gap: clamp(1.5rem, 1rem + 2vw, 2.5rem); }
 .project {
   display: grid;
@@ -343,7 +337,7 @@
 }
 .project .ref__tag { background: var(--accent-tint); color: var(--accent-ink); backdrop-filter: none; }
 
-/* ---- Zertifizierung: ein Baum je Wartungsvertrag ----------------------------- */
+/* Zertifizierung */
 .tree {
   display: grid;
   gap: clamp(1.75rem, 1rem + 3vw, 3.5rem);
@@ -381,7 +375,7 @@
 .tree__facts span { display: block; margin-top: var(--sp-1); font-size: var(--step--1); color: var(--fg-muted); }
 .tree__partner { width: 84px; height: auto; margin-top: var(--sp-7); }
 
-/* ---- Ablauf in vier Schritten ------------------------------------------------ */
+/* Ablauf in vier Schritten */
 .steps { counter-reset: step; display: grid; gap: var(--sp-6); grid-template-columns: 1fr; }
 @media (min-width: 44rem) { .steps { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 72rem) { .steps { grid-template-columns: repeat(4, 1fr); } }
@@ -406,7 +400,7 @@
 .step h3 { font-size: var(--step-1); }
 .step p { margin-top: var(--sp-3); color: var(--fg-muted-on-contrast); font-size: var(--step--1); line-height: var(--lh-loose); }
 
-/* ---- Notdienst-Band ---------------------------------------------------------- */
+/* Notdienst-Band */
 .alarm {
   display: grid;
   gap: var(--sp-6);
@@ -423,7 +417,7 @@
 .alarm .btn { --btn-bg: #fff; --btn-fg: #0b1017; font-size: var(--step-0); }
 @media (max-width: 720px) { .alarm { grid-template-columns: 1fr; } }
 
-/* ---- Einsatzgebiet ----------------------------------------------------------- */
+/* Einsatzgebiet */
 .region { display: grid; gap: clamp(1.5rem, 1rem + 3vw, 3.5rem); grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); align-items: center; }
 .region__map {
   position: relative;
@@ -456,7 +450,7 @@
 }
 @media (prefers-reduced-motion: reduce) { .pin i { animation: none; } }
 
-/* ---- Downloads --------------------------------------------------------------- */
+/* Downloads */
 .downloads { display: grid; gap: var(--sp-3); max-width: 48rem; }
 .downloads a {
   display: flex;
@@ -473,7 +467,7 @@
 .downloads a:hover { border-color: var(--accent); transform: translateX(4px); }
 .downloads small { font-weight: 400; color: var(--fg-muted); }
 
-/* ---- Kontaktstreifen --------------------------------------------------------- */
+/* Kontaktstreifen */
 .contact-strip {
   display: grid;
   gap: var(--sp-7);
@@ -482,7 +476,7 @@
 @media (min-width: 56rem) { .contact-strip { grid-template-columns: minmax(0, 1fr) auto; } }
 .contact-strip__actions { display: flex; flex-wrap: wrap; gap: var(--sp-4); }
 
-/* ---- Kontakt & Formular ------------------------------------------------------ */
+/* Kontakt & Formular */
 .contact { display: grid; gap: clamp(2rem, 1rem + 4vw, 4rem); grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); }
 .contact__data { display: grid; gap: var(--sp-6); align-content: start; }
 .contact__row { display: grid; gap: var(--sp-1); padding-bottom: var(--sp-5); border-bottom: 1px solid var(--line); }
@@ -524,10 +518,10 @@
 }
 .form__status[hidden] { display: none; }
 
-/* ---- Schlanker Abschnitt ------------------------------------------------ */
+/* Schlanker Abschnitt */
 .section--slim { padding-block: clamp(2rem, 1.5rem + 2vw, 3.5rem); }
 
-/* ---- Partnerleiste ------------------------------------------------------ */
+/* Partnerleiste */
 .partners {
   display: grid;
   gap: var(--sp-6);
@@ -544,9 +538,6 @@
   max-width: 12ch;
 }
 
-/* Laufband wie im bestehenden Auftritt: die Reihe wandert langsam nach
-   links, bei Mausberührung hält sie an. Der Inhalt liegt dreifach vor,
-   damit der Übergang nahtlos ist. */
 .partners__viewport {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
@@ -579,7 +570,7 @@
   overflow: hidden;
   transition: border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out);
 }
-/* Schmaler Streifen in der Hausfarbe des Partners */
+
 .partner::before {
   content: "";
   position: absolute;
@@ -589,7 +580,7 @@
 }
 .partner--logo {
   padding: var(--sp-4) var(--sp-6);
-  background: #fff;                 /* die Logos tragen weißen Grund */
+  background: #fff;
   border-color: rgba(11, 12, 13, 0.12);
 }
 .partner--logo::before { display: none; }
@@ -617,7 +608,7 @@
   .partners__viewport { -webkit-mask-image: none; mask-image: none; }
 }
 
-/* ---- Zertifikate --------------------------------------------------------- */
+/* Zertifikate */
 .certs {
   display: grid;
   gap: clamp(1rem, 0.6rem + 1.6vw, 1.75rem);
@@ -639,7 +630,7 @@
 .cert h3 { font-size: var(--step-0); line-height: 1.35; }
 .cert p { margin-top: var(--sp-2); font-size: var(--step--1); color: var(--fg-muted); }
 
-/* ---- Bildband über die volle Breite -------------------------------------- */
+/* Bildband über die volle Breite */
 .bandbild { padding-block: var(--section-y) 0; background: var(--bg-2); }
 .bandbild__kopf { max-width: var(--measure); margin-bottom: clamp(2rem, 1.5rem + 2vw, 3.5rem); }
 .bandbild__kopf p:last-child {

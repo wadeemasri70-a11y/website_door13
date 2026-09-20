@@ -1,7 +1,5 @@
 import * as B from "../blocks.mjs";
 
-/* Über uns, Team, Karriere, offene Stellen, Downloads. */
-
 export const pages = [
   {
     slug: "ueber-uns", active: "ueber-uns.html",
@@ -64,7 +62,7 @@ export const pages = [
             <p>Im Rheinland unterwegs, mit Ersatzteilen an Bord und regelmäßig geschult auf die gängigen Fabrikate.</p>
           </article>
         </div>
-        <!-- Teamfotos: hier je Person ein Bild einsetzen (assets/img/team-*.jpg) -->`
+`
       }),
       B.bandImage({
         src: "assets/img/team-fuhrpark.jpg",
@@ -134,15 +132,15 @@ export const pages = [
               <li>Störungsbeseitigung im Rheinland</li>
               <li>Elektro-, Metall- oder Anlagentechnik – oder vergleichbare Praxis</li>
             </ul>
-            <p style="margin-top:var(--sp-5)"><a class="link-line" href="kontakt.html">Jetzt bewerben →</a></p>
+            <p class="more"><a class="link-line" href="kontakt.html">Jetzt bewerben →</a></p>
           </article>
           <article class="card" data-reveal style="--reveal-delay:80ms">
             <h3>Initiativbewerbung</h3>
             <p>Sie passen zu uns, aber gerade ist nichts ausgeschrieben? Schreiben Sie uns trotzdem – wir wachsen weiter.</p>
-            <p style="margin-top:var(--sp-5)"><a class="link-line" href="kontakt.html">Kontakt aufnehmen →</a></p>
+            <p class="more"><a class="link-line" href="kontakt.html">Kontakt aufnehmen →</a></p>
           </article>
         </div>
-        <!-- Weitere Ausschreibungen: Karte duplizieren -->`
+`
       })
     ].join("\n\n")
   },
@@ -159,7 +157,6 @@ export const pages = [
       B.section({
         variant: "paper",
         html: `      <ul class="downloads" data-reveal>
-          <!-- Dateien in assets/downloads/ ablegen und href anpassen -->
           <li><a href="#"><span>Betreiberpflichten automatischer Türen (PDF)</span><small>Platzhalter · Datei einsetzen</small></a></li>
           <li><a href="#"><span>Muster-Prüfprotokoll (PDF)</span><small>Platzhalter · Datei einsetzen</small></a></li>
           <li><a href="#"><span>Checkliste vor der Wartung (PDF)</span><small>Platzhalter · Datei einsetzen</small></a></li>

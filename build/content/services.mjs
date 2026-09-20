@@ -1,7 +1,3 @@
-/* Inhalte der sechs Leistungsbereiche.
-   Texte aus dem bestehenden Auftritt sind als solche gekennzeichnet;
-   alle übrigen sind Entwürfe und vor dem Livegang zu prüfen. */
-
 export const services = [
   {
     slug: "leistung-schiebetueren",

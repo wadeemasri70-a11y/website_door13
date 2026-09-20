@@ -1,20 +1,3 @@
-/* =========================================================================
-   Tag- und Nachtthema
-   -------------------------------------------------------------------------
-   Die Seite startet immer hell; die Systemeinstellung wird bewusst nicht
-   ausgewertet. Wer umschaltet, behält seine Wahl auf allen Seiten.
-
-   Gemerkt wird sie dreifach abgesichert:
-     1. localStorage – der Normalfall,
-     2. Cookie – wenn der Speicher gesperrt ist (privates Fenster),
-     3. Adresszeile – wenn beides nicht geht (eingebettete Vorschauen mit
-        abgeschotteter Herkunft). Dann trägt jeder interne Verweis die Wahl
-        als ?theme= weiter.
-
-   Dieses Skript steht ohne "defer" im <head>, damit das Thema vor dem ersten
-   Bild steht – sonst blitzt die falsche Fassung auf.
-   ========================================================================= */
-
 (function () {
   "use strict";
 
@@ -34,17 +17,16 @@
     try {
       var wert = gueltig(window.localStorage.getItem(KEY));
       if (wert) return wert;
-    } catch (e) { /* Speicher gesperrt */ }
+    } catch (e) {}
     var keks = /(?:^|;\s*)falke-theme=(light|dark)/.exec(document.cookie);
     return keks ? keks[1] : null;
   }
 
-  /* Versucht zu speichern und meldet, ob es geklappt hat. */
   function merken(wert) {
     try {
       window.localStorage.setItem(KEY, wert);
       if (window.localStorage.getItem(KEY) === wert) return true;
-    } catch (e) { /* weiter zum Cookie */ }
+    } catch (e) {}
     try {
       document.cookie = KEY + "=" + wert + ";path=/;max-age=31536000;samesite=lax";
       return document.cookie.indexOf(KEY + "=" + wert) !== -1;
@@ -62,7 +44,6 @@
     else root.removeAttribute("data-theme");
   }
 
-  /* Letzte Rückfallebene: die Wahl an alle internen Verweise hängen. */
   function verweiseMitnehmen(wert) {
     var links = document.querySelectorAll('a[href]');
     for (var i = 0; i < links.length; i++) {
@@ -78,7 +59,6 @@
     }
   }
 
-  /* Sofort, noch vor dem ersten Rendern */
   root.className = root.className.replace("no-js", "js");
   var ausAdresseGesetzt = ausAdresse();
   anwenden(ausAdresseGesetzt || ausSpeicher() || "light");

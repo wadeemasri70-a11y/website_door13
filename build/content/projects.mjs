@@ -1,8 +1,3 @@
-/* Inhalte der Referenzprojekte.
-   Texte aus dem bestehenden Auftritt sind als solche gekennzeichnet;
-   alle übrigen sind Entwürfe und vor dem Livegang zu prüfen. */
-
-/* Referenzprojekte – Titel und Texte der bestehenden Referenzseite */
 export const projects = [
   {
     title: "Vom Drehflügel zur Schiebetür: Haupteingang der Heinrich-Hanselmann-Schule",

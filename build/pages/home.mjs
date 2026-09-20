@@ -1,12 +1,8 @@
 import { serviceCards, referenceTeaser, treeBlock, partnerStrip, certificateCards, bandImage } from "../blocks.mjs";
 import { services, projects, certificate, qualifications, partners } from "../content/index.mjs";
 
-/* Rumpf der Startseite. Die drei Raster (Leistungen, Referenzteaser,
-   Zertifizierung) entstehen aus den Daten in data.mjs – alles andere steht
-   hier, weil es genau einmal vorkommt. */
 export function homeBody() {
-  return `  <!-- ============================ HERO ============================ -->
-  <section class="hero" id="top">
+  return `  <section class="hero" id="top">
     <div class="hero__doors" aria-hidden="true"><i></i><i></i></div>
     <div class="shell hero__inner">
       <p class="eyebrow">Türautomation im Rheinland · seit 2020</p>
@@ -35,14 +31,12 @@ export function homeBody() {
     </div>
   </section>
 
-  <!-- ========================== PARTNER ========================== -->
   <section class="section section--white section--slim" aria-label="Partner und Mitgliedschaften">
     <div class="shell">
 ${partnerStrip(partners)}
     </div>
   </section>
 
-  <!-- ==================== 3-D-AKT: DER SERVICEWAGEN ==================== -->
   <section class="act" data-act aria-labelledby="act-title">
     <div class="act__stage" data-stage>
 
@@ -58,7 +52,6 @@ ${partnerStrip(partners)}
 
       <div class="stage__scene" data-scene aria-hidden="true"></div>
 
-      <!-- Fallback ohne JavaScript: flache Seitenansicht -->
       <div class="van-fallback">
         <svg viewBox="0 0 960 420" role="img" aria-label="Servicefahrzeug von Falke Türautomation">
           <rect x="60" y="90" width="620" height="230" rx="14" fill="#f4f5f6"/>
@@ -91,7 +84,6 @@ ${partnerStrip(partners)}
     </div>
   </section>
 
-  <!-- ========================= LEISTUNGEN ========================= -->
   <section class="section section--paper" id="unser-angebot">
     <div class="shell">
       <div class="section__head" data-reveal>
@@ -105,7 +97,6 @@ ${serviceCards(services)}
         </div>
   </section>
 
-  <!-- ========================== WARTUNG ========================== -->
   <section class="section section--dark" id="normen-pflichten">
     <div class="shell">
       <div class="section__head" data-reveal>
@@ -133,7 +124,6 @@ ${serviceCards(services)}
     </div>
   </section>
 
-  <!-- ========================= HERSTELLER ========================= -->
   <section class="section section--white">
     <div class="shell">
       <div class="section__head" data-reveal>
@@ -149,9 +139,6 @@ ${serviceCards(services)}
     </div>
   </section>
 
-  <!-- ======================== ZERTIFIZIERUNG ========================
-       Urkunden und Schulungsnachweise; die Dateien liegen in
-       assets/img/zertifikat/, gepflegt in build/content/certificate.mjs. -->
   <section class="section section--paper" id="zertifizierung">
     <div class="shell">
       <div class="section__head" data-reveal>
@@ -163,7 +150,7 @@ ${serviceCards(services)}
 
 ${certificateCards(qualifications)}
 
-      <div class="section__head" data-reveal style="margin-top:var(--sp-10)">
+      <div class="section__head section__head--spaced" data-reveal>
         <p class="eyebrow">Nachhaltigkeit</p>
         <h2>Ein Wartungsvertrag. Ein Baum.</h2>
       </div>
@@ -172,7 +159,6 @@ ${treeBlock(certificate)}
     </div>
   </section>
 
-  <!-- ========================= REFERENZEN ========================= -->
   <section class="section section--white" id="referenzen">
     <div class="shell">
       <div class="section__head" data-reveal>
@@ -186,7 +172,6 @@ ${referenceTeaser(projects)}
         </div>
   </section>
 
-  <!-- ========================= TEAM-BILDBAND ========================= -->
 ${bandImage({
   src: "assets/img/team-fuhrpark.jpg",
   alt: "Das Team von Falke Türautomation vor den Servicefahrzeugen",
@@ -196,7 +181,6 @@ ${bandImage({
   lead: "Kein Callcenter, kein Subunternehmer: Sie sprechen mit der Disposition – und es kommt jemand, der Ihre Anlage kennt."
 })}
 
-  <!-- =========================== ABLAUF =========================== -->
   <section class="section section--dark" id="ablauf">
     <div class="shell">
       <div class="section__head" data-reveal>
@@ -224,7 +208,6 @@ ${bandImage({
     </div>
   </section>
 
-  <!-- ======================== NOTDIENSTBAND ======================== -->
   <section class="section section--white">
     <div class="shell">
       <div class="alarm" data-reveal>
@@ -243,14 +226,13 @@ ${bandImage({
     </div>
   </section>
 
-  <!-- ========================= UNTERNEHMEN ========================= -->
   <section class="section section--dark" id="ueber-uns">
     <div class="shell">
       <div class="region">
         <div data-reveal>
           <p class="eyebrow">Unternehmen &amp; Einsatzgebiet</p>
           <h2>Aus Bedburg – unterwegs im ganzen Rheinland.</h2>
-          <p class="lede" style="color:var(--steel-400);margin-top:var(--sp-5)">
+          <p class="lede lede--on-contrast more">
             René Falke hat das Unternehmen 2020 nach über zehn Jahren in der Türtechnik gegründet.
             Heute sind wir elf Kolleginnen und Kollegen, davon sieben Servicetechniker.
             Unser Schwerpunkt: Bestandsanlagen am Laufen halten, statt sie vorschnell zu ersetzen.
@@ -271,7 +253,6 @@ ${bandImage({
     </div>
   </section>
 
-  <!-- =========================== KONTAKT =========================== -->
   <section class="section section--paper" id="kontakt">
     <div class="shell">
       <div class="section__head" data-reveal>

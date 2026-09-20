@@ -1,9 +1,6 @@
 import * as B from "../blocks.mjs";
 import { services, partners } from "../content/index.mjs";
 
-/* Leistungsübersicht, die sechs Leistungsseiten und die Wartungsanfrage.
-   Die Detailseiten entstehen aus den Daten: gleiche Form, andere Inhalte. */
-
 const uebersicht = {
   slug: "leistungen", active: "leistungen.html",
   title: "Unser Angebot – Leistungen von Falke Türautomation",

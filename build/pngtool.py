@@ -1,6 +1,3 @@
-"""Kleines PNG-Werkzeug (nur für die Entwicklung, keine Abhängigkeiten).
-   Liest und schreibt 8-Bit-RGBA-PNGs – genug, um aus dem Original-Logo
-   eine helle Variante und ein Favicon zu erzeugen."""
 import zlib, struct
 
 def read(path):
@@ -34,7 +31,7 @@ def read(path):
                 pp = a+b-c; pa, pb, pc = abs(pp-a), abs(pp-b), abs(pp-c)
                 line[x] = (line[x] + (a if (pa <= pb and pa <= pc) else (b if pb <= pc else c))) & 255
         rows.append(line); prev = line
-    # alles nach RGBA vereinheitlichen
+
     out = bytearray()
     for line in rows:
         for x in range(w):

@@ -48,9 +48,6 @@ export function page({ slug, title, description, active = "", body, bodyClass = 
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${description}">
 <link rel="icon" href="assets/img/favicon-falke.png" type="image/png">
-<!-- Markenschrift des bestehenden Auftritts. VOR DEM LIVEGANG selbst hosten:
-     Dateien herunterladen, in assets/fonts/ legen, per @font-face einbinden und
-     die beiden Zeilen hier entfernen (DSGVO: Google Fonts lädt IP-Adressen). -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&display=swap">
 <link rel="stylesheet" href="assets/css/tokens.css">
@@ -127,7 +124,7 @@ ${body}
     <div class="footer__grid">
       <div>
         <a class="brand footer__brand" href="index.html">${logoMark}</a>
-        <p style="margin-top:var(--sp-5)">
+        <p class="footer__claim">
           Service, Wartung und Modernisierung automatischer Türsysteme, Rettungswegtechnik,
           Zutrittskontrolle und Türschließer – herstellerunabhängig im Rheinland.
         </p>
