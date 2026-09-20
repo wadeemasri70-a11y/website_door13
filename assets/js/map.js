@@ -95,10 +95,14 @@
         "&q=" + encodeURIComponent(box.dataset.ziel) +
         "&z=" + (parseInt(box.dataset.zoom, 10) || 15) +
         "&hl=de&output=embed";
-    frame.loading = "lazy";
     frame.title = box.dataset.title + " auf Google Maps";
     frame.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
     frame.allowFullscreen = true;
+
+    var wache = window.setTimeout(function () { scheitern(box, frame); }, 8000);
+    frame.addEventListener("load", function () { window.clearTimeout(wache); });
+    frame.addEventListener("error", function () { scheitern(box, frame); });
+
     box.querySelector("[data-map-canvas]").appendChild(frame);
     box.classList.add("map--aktiv", "map--rahmen");
 
@@ -106,6 +110,22 @@
       punkteSetzen(box);
       window.addEventListener("resize", function () { punkteSetzen(box); });
     }
+  }
+
+  function scheitern(box, frame) {
+    if (frame && frame.parentNode) frame.parentNode.removeChild(frame);
+    var liste = box.querySelector("[data-map-punkte]");
+    if (liste) liste.innerHTML = "";
+    box.classList.remove("map--aktiv", "map--rahmen", "map--laedt");
+    box.classList.add("map--fehler");
+
+    var hinweis = box.querySelector("[data-map-status]");
+    if (hinweis) {
+      hinweis.textContent = "Google Maps antwortet hier nicht – bitte über den Link unten öffnen.";
+      hinweis.hidden = false;
+    }
+    var knopf = box.querySelector("[data-map-load]");
+    if (knopf) knopf.textContent = "Erneut versuchen";
   }
 
   function laden(box) {
@@ -169,10 +189,7 @@
       encodeURIComponent(schluessel) +
       "&loading=async&callback=falkeMapBereit";
     skript.async = true;
-    skript.onerror = function () {
-      box.classList.remove("map--laedt");
-      box.classList.add("map--fehler");
-    };
+    skript.onerror = function () { scheitern(box); };
     document.head.appendChild(skript);
   }
 

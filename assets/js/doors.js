@@ -19,17 +19,21 @@
   function messen() {
     var kasten = tuer.getBoundingClientRect();
     var hoehe = window.innerHeight || 800;
-    var weg = hoehe * 0.72;
+    var weg = hoehe * 1.25;
     var fortschritt = (hoehe - kasten.top) / weg;
     ziel = fortschritt < 0 ? 0 : fortschritt > 1 ? 1 : fortschritt;
   }
 
-  function takt() {
-    raf = 0;
-    stand += (ziel - stand) * 0.16;
-    if (Math.abs(ziel - stand) < 0.0015) stand = ziel;
+  function anwenden() {
     tuer.style.setProperty("--open", stand.toFixed(4));
     tuer.classList.toggle("tuer--offen", stand > 0.06);
+  }
+
+  function takt() {
+    raf = 0;
+    stand += (ziel - stand) * 0.055;
+    if (Math.abs(ziel - stand) < 0.0008) stand = ziel;
+    anwenden();
     if (sichtbar && stand !== ziel) planen();
   }
 
@@ -54,5 +58,5 @@
   window.addEventListener("resize", beiScroll);
   messen();
   stand = ziel;
-  tuer.style.setProperty("--open", stand.toFixed(4));
+  anwenden();
 })();

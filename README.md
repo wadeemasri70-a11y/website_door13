@@ -177,7 +177,12 @@ Kontakt“ samt Formular und Karte. Alle übrigen Seiten bekommen vom Layout ein
 schmales Portal mit Telefon und E-Mail ans Seitenende; es entfällt automatisch,
 sobald eine Seite schon ein `data-doors` mitbringt. Die Flügel nehmen keine
 Mauseingaben an, das Formular bleibt also auch hinter geschlossener Tür
-bedienbar. `assets/js/doors.js` liest den Abstand zum unteren
+bedienbar.
+
+Wie weit die Tür offen steht, ergibt sich aus dem Abstand zum unteren
+Bildrand: `assets/js/doors.js` verteilt den Weg über 1,25 Bildschirmhöhen und
+zieht den Wert mit 5,5 % pro Bild nach. Beide Zahlen bestimmen das Tempo –
+kleiner heißt langsamer. `assets/js/doors.js` liest den Abstand zum unteren
 Bildrand, glättet ihn und schreibt ihn als `--open` (0 bis 1); die Flügel
 verschieben sich über `translate3d`, der Melder wechselt bei `--open > 0.06`
 auf Rot. Gerechnet wird nur, solange der Abschnitt sichtbar ist

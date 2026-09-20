@@ -309,6 +309,7 @@ export function map({ hoehe = "", variante = "adresse" } = {}) {
             ? "Einsatzgebiet: Köln, Düsseldorf, Bonn, Aachen"
             : company.name + "<br>" + m.address}</p>
           <button class="btn btn--accent" type="button" data-map-load>Karte laden</button>
+          <p class="map__fehler" data-map-status hidden role="status"></p>
           <p class="map__hinweis">
             Beim Laden wird eine Verbindung zu Google Maps aufgebaut.
             <a href="${m.link}" target="_blank" rel="noopener">In Google Maps öffnen</a>
