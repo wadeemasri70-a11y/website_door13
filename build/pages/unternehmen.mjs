@@ -30,6 +30,13 @@ export const pages = [
         ])
       }),
       B.section({
+        variant: "white",
+        eyebrow: "Einblicke",
+        h2: "So sieht unsere Arbeit aus.",
+        lead: "Montage, Wartung, Fuhrpark und das Team – ein Blick hinter die Kulissen.",
+        html: B.galerieBlock()
+      }),
+      B.section({
         variant: "dark", eyebrow: "Einsatzgebiet", h2: "Köln, Düsseldorf, Bonn, Aachen – und alles dazwischen.",
         html: B.norms(["Köln", "Düsseldorf", "Bonn", "Aachen", "Rhein-Erft-Kreis", "Rhein-Sieg-Kreis"])
       }),

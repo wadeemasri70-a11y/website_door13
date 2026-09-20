@@ -192,6 +192,7 @@ ${body.includes("data-doors") ? "" : tuerAbschluss}
           Service, Wartung und Modernisierung automatischer Türsysteme, Rettungswegtechnik,
           Zutrittskontrolle und Türschließer – herstellerunabhängig im Rheinland.
         </p>
+${sozialLeiste({ klasse: "sozial--fuss", einzug: "        " })}
       </div>
       <div>
         <h4>Leistungen</h4>
@@ -225,7 +226,6 @@ ${body.includes("data-doors") ? "" : tuerAbschluss}
         </ul>
       </div>
     </div>
-${sozialLeiste({ klasse: "sozial--fuss", titel: "Folgen Sie uns", einzug: "    " })}
     <div class="footer__bottom">
       <p>© <span data-year>2026</span> ${company.name} – ${company.owner}</p>
       <p><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
@@ -236,6 +236,7 @@ ${sozialLeiste({ klasse: "sozial--fuss", titel: "Folgen Sie uns", einzug: "    "
 <script src="assets/js/van.js" defer></script>
 <script src="assets/js/map.js" defer></script>
 <script src="assets/js/doors.js" defer></script>
+<script src="assets/js/zahlen.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 </body>
 </html>

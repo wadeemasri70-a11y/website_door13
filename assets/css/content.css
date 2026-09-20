@@ -796,9 +796,9 @@
   place-items: center;
   width: 44px;
   height: 44px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--sozial-rand, var(--line-strong));
   border-radius: var(--radius-pill);
-  color: var(--fg-muted);
+  color: var(--sozial-ruhe, var(--fg-muted));
   transition: color var(--dur-1) var(--ease-out),
               border-color var(--dur-1) var(--ease-out),
               transform var(--dur-1) var(--ease-out);
@@ -832,13 +832,54 @@
 }
 
 .sozial--fuss {
-  margin-top: var(--sp-7);
-}
-.sozial--fuss .sozial__link {
-  border-color: var(--line-on-contrast);
-  color: var(--fg-muted-on-contrast);
+  --sozial-rand: var(--line-on-contrast);
+  --sozial-ruhe: var(--fg-muted-on-contrast);
+  margin-top: var(--sp-5);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .sozial__link:hover, .sozial__link:focus-visible { transform: none; }
+}
+
+/* Einblicke */
+.galerie {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(17rem, 100%), 1fr));
+  gap: clamp(1rem, 0.5rem + 1.6vw, 1.75rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.galerie__stueck { min-width: 0; }
+.galerie__stueck--breit { grid-column: span 2; }
+@media (max-width: 40rem) { .galerie__stueck--breit { grid-column: auto; } }
+
+.galerie figure { margin: 0; }
+.galerie__bild {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--bg-2);
+  box-shadow: var(--shadow-sm);
+}
+.galerie__bild img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  transition: transform var(--dur-2) var(--ease-out);
+}
+.galerie__stueck--breit .galerie__bild img { aspect-ratio: 16 / 9; }
+.galerie__bild:hover img,
+.galerie__bild:focus-visible img { transform: scale(1.04); }
+.galerie figcaption {
+  margin-top: var(--sp-3);
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--fg-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .galerie__bild:hover img, .galerie__bild:focus-visible img { transform: none; }
 }

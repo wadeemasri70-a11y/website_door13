@@ -226,6 +226,28 @@ Die Zeichen sind als Pfade in `build/layout.mjs` (`sozialZeichen`) hinterlegt
 und den bekannten Marken nachgezeichnet. Wer es ganz genau will, ersetzt sie
 durch die offiziellen Dateien aus den Presse-Kits der vier Anbieter.
 
+## Einblicke (Über uns)
+
+Die Seite „Wir stellen uns vor“ trägt eine Bildstrecke aus zwölf Aufnahmen:
+Montage, Fuhrpark, Büro, Partner und Engagement. Gepflegt wird sie in
+`build/content/galerie.mjs` – Pfad, Alternativtext, Bildunterschrift und die
+Maße; `breit: true` lässt ein Bild über zwei Spalten laufen. Die Dateien liegen
+in `assets/img/ueber-uns/` und sind mit `build/upscale.sh` hochgerechnet und
+nachgeschärft, wobei die EXIF-Daten (samt GPS) wegfallen.
+
+Die Bildunterschriften beschreiben, was zu sehen ist; wer die Aufnahmen kennt,
+sollte sie durchgehen und genauer fassen.
+
+## Zahlen, die hochlaufen
+
+Jede fett gesetzte Kennzahl trägt `data-zahl`. `assets/js/zahlen.js` zerlegt den
+Text in Vorsatz, Zahl und Nachsatz – „24 h“, „1×“ und „seit 2021“ funktionieren
+damit genauso wie „2020“ –, setzt die Zahl auf null und lässt sie in 850 ms
+hochlaufen, sobald das Feld ins Bild kommt. Texte ohne Ziffern („Hessen Forst“)
+bleiben unangetastet. Bei `prefers-reduced-motion` passiert nichts, und wenn der
+Beobachter nach vier Sekunden nicht ausgelöst hat, steht die echte Zahl trotzdem
+da.
+
 ## Planet Tree
 
 Der Abschnitt zur Baumpflanzung trägt das Grün des Partners: `--planet`

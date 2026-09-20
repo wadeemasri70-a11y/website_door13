@@ -93,6 +93,8 @@ button, input, textarea, select { font: inherit; color: inherit; }
 
 .verlaeufe { position: absolute; width: 0; height: 0; overflow: hidden; }
 
+[data-zahl] { font-variant-numeric: tabular-nums; }
+
 .eyebrow {
   display: inline-flex;
   align-items: center;

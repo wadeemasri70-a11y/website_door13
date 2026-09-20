@@ -23,10 +23,10 @@ export function homeBody() {
       </div>
 
       <div class="hero__meta">
-        <div><b>11</b><span>Kolleginnen &amp; Kollegen</span></div>
-        <div><b>7</b><span>Servicetechniker</span></div>
-        <div><b>4</b><span>Regionen im Einsatz</span></div>
-        <div><b>24 h</b><span>Störungsannahme</span></div>
+        <div><b data-zahl>11</b><span>Kolleginnen &amp; Kollegen</span></div>
+        <div><b data-zahl>7</b><span>Servicetechniker</span></div>
+        <div><b data-zahl>4</b><span>Regionen im Einsatz</span></div>
+        <div><b data-zahl>24 h</b><span>Störungsannahme</span></div>
       </div>
     </div>
   </section>
@@ -108,10 +108,10 @@ ${serviceCards(services)}
       </div>
 
       <div class="stats" data-reveal>
-        <div class="stat"><b>2020</b><span>gegründet von René Falke</span></div>
-        <div class="stat"><b>11</b><span>Mitarbeitende im Team</span></div>
-        <div class="stat"><b>7</b><span>Servicetechniker im Außendienst</span></div>
-        <div class="stat"><b>1×</b><span>Prüfung pro Jahr, mindestens</span></div>
+        <div class="stat"><b data-zahl>2020</b><span>gegründet von René Falke</span></div>
+        <div class="stat"><b data-zahl>11</b><span>Mitarbeitende im Team</span></div>
+        <div class="stat"><b data-zahl>7</b><span>Servicetechniker im Außendienst</span></div>
+        <div class="stat"><b data-zahl>1×</b><span>Prüfung pro Jahr, mindestens</span></div>
       </div>
 
       <ul class="norms" data-reveal>

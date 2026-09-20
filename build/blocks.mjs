@@ -1,5 +1,5 @@
 import { arrowIcon, tuerPortal, sozialLeiste } from "./layout.mjs";
-import { company } from "./content/index.mjs";
+import { company, galerie } from "./content/index.mjs";
 
 export { tuerPortal, sozialLeiste };
 
@@ -72,7 +72,7 @@ export function media({ src, alt, caption = "", ratio = "4 / 3", note = "" }) {
 
 export function facts(items) {
   return `      <div class="stats" data-reveal>
-${items.map((f) => `        <div class="stat"><b>${f.b}</b><span>${f.span}</span></div>`).join("\n")}
+${items.map((f) => `        <div class="stat"><b data-zahl>${f.b}</b><span>${f.span}</span></div>`).join("\n")}
       </div>`;
 }
 
@@ -218,11 +218,25 @@ export function treeBlock(c) {
         <div class="tree__body">
 ${c.text.map((t) => `          <p>${t}</p>`).join("\n")}
           <div class="tree__facts">
-${c.facts.map((f) => `            <div><b>${f.b}</b><span>${f.span}</span></div>`).join("\n")}
+${c.facts.map((f) => `            <div><b data-zahl>${f.b}</b><span>${f.span}</span></div>`).join("\n")}
           </div>
           <img class="tree__partner" src="${c.partner}" alt="Planet Tree – offizieller Partner" loading="lazy" width="205" height="206">
         </div>
       </div>`;
+}
+
+export function galerieBlock() {
+  const stuecke = galerie.map((g, i) => `        <li class="galerie__stueck${g.breit ? " galerie__stueck--breit" : ""}"${i ? ` style="--reveal-delay:${(i % 3) * 70}ms"` : ""} data-reveal>
+          <figure>
+            <a class="galerie__bild" href="${g.src}" target="_blank" rel="noopener">
+              <img src="${g.src}" alt="${esc(g.alt)}" width="${g.mass[0]}" height="${g.mass[1]}" loading="lazy" decoding="async">
+            </a>
+            <figcaption>${g.text}</figcaption>
+          </figure>
+        </li>`).join("\n");
+  return `      <ul class="galerie">
+${stuecke}
+      </ul>`;
 }
 
 export function partnerStrip(partners, { heading = "Partner & Mitgliedschaften" } = {}) {
