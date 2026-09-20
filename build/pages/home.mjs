@@ -1,4 +1,4 @@
-import { serviceCards, referenceTeaser, treeBlock, partnerStrip, certificateCards, bandImage } from "../blocks.mjs";
+import { serviceCards, referenceTeaser, treeBlock, partnerStrip, certificateCards, bandImage, map } from "../blocks.mjs";
 import { services, projects, certificate, qualifications, partners } from "../content/index.mjs";
 
 export function homeBody() {
@@ -242,12 +242,7 @@ ${bandImage({
           </ul>
         </div>
 
-        <div class="region__map" data-reveal aria-label="Einsatzgebiet: Köln, Düsseldorf, Bonn, Aachen" role="img">
-          <div class="pin pin--hq" style="left:46%;top:44%"><i></i><b>Bedburg</b></div>
-          <div class="pin" style="left:62%;top:54%"><i></i><b>Köln</b></div>
-          <div class="pin" style="left:70%;top:26%"><i></i><b>Düsseldorf</b></div>
-          <div class="pin" style="left:64%;top:74%"><i></i><b>Bonn</b></div>
-          <div class="pin" style="left:22%;top:66%"><i></i><b>Aachen</b></div>
+${map()}
         </div>
       </div>
     </div>

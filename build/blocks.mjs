@@ -275,3 +275,28 @@ ${kopf}
     </figure>
   </section>`;
 }
+
+export function map({ hoehe = "" } = {}) {
+  const m = company.maps;
+  return `      <div class="map${hoehe ? " map--" + hoehe : ""}" data-map data-reveal
+           data-maps-key="${m.key}"
+           data-address="${esc(m.address)}"
+           data-lat="${m.lat}" data-lng="${m.lng}" data-zoom="${m.zoom}"
+           data-title="${esc(company.name)}"
+           data-maps-link="${m.link}">
+        <div class="map__canvas" data-map-canvas></div>
+        <div class="map__vorschau">
+          <svg class="map__pin" viewBox="0 0 44 58" aria-hidden="true">
+            <path d="M22 57S41 34.8 41 21.9C41 10.4 32.5 1 22 1S3 10.4 3 21.9C3 34.8 22 57 22 57z"
+                  fill="var(--accent)" stroke="var(--bg-2)" stroke-width="2"/>
+            <circle cx="22" cy="21.5" r="7" fill="var(--bg-2)"/>
+          </svg>
+          <p class="map__adresse">${company.name}<br>${m.address}</p>
+          <button class="btn btn--accent" type="button" data-map-load>Karte laden</button>
+          <p class="map__hinweis">
+            Beim Laden wird eine Verbindung zu Google aufgebaut.
+            <a href="${m.link}" target="_blank" rel="noopener">In Google Maps öffnen</a>
+          </p>
+        </div>
+      </div>`;
+}

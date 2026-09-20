@@ -16,7 +16,8 @@ export const pages = [
           html: `      <div class="contact">
     ${B.contactData()}
     ${B.form({ id: "kontakt", kind: "kontakt" })}
-          </div>`
+          </div>
+${B.map({ hoehe: "breit" })}`
         })
       ].join("\n\n")
   }

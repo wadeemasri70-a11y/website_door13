@@ -43,5 +43,13 @@ export const company = {
   mobileHref: "+4915116567504",
   mail: "info@falke-tuerautomation.de",
   hours: "Mo – Fr, 8:00 – 16:30 Uhr",
-  owner: "Rene Falke"
+  owner: "Rene Falke",
+  maps: {
+    key: "",
+    address: "Kasterer Str. 12, 50181 Bedburg",
+    lat: 51.0,
+    lng: 6.5667,
+    zoom: 15,
+    link: "https://www.google.com/maps/search/?api=1&query=Kasterer+Str.+12,+50181+Bedburg"
+  }
 };

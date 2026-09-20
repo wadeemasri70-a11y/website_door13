@@ -169,6 +169,7 @@ ${body}
 </footer>
 
 <script src="assets/js/van.js" defer></script>
+<script src="assets/js/map.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 </body>
 </html>
