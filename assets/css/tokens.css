@@ -7,6 +7,7 @@
   --gruen-600: #197F15;
   --gruen-300: #6BC85F;
   --gruen-melder: #25BE5A;
+  --gelb-neon: #F0B429;
 
   --grey-900: #0b0c0d;
   --grey-800: #121415;
@@ -47,6 +48,7 @@
 
   --planet: var(--gruen-600);
   --melder-frei: var(--gruen-melder);
+  --neon: var(--gelb-neon);
 
   --btn-solid-bg: var(--grey-900);
   --btn-solid-fg: var(--white);

@@ -6,8 +6,8 @@
 <script>
 const q = new URLSearchParams(location.search);
 const src = q.get("src");
+const art = q.get("art") || "breit";
 const breite = parseInt(q.get("w") || "1280", 10);
-const hoehe = Math.round(breite * 9 / 16);
 const luftX = parseFloat(q.get("luftx") || "0.14");
 const luftY = parseFloat(q.get("lufty") || "0.20");
 
@@ -44,25 +44,33 @@ img.onload = function () {
 
   const feld = rand(rctx.getImageData(0, 0, roh.width, roh.height).data, roh.width, roh.height);
 
+  const eng = art === "eng";
   const kachel = document.createElement("canvas");
-  kachel.width = breite;
-  kachel.height = hoehe;
+  if (eng) {
+    const faktorEng = breite / feld.h;
+    kachel.height = Math.round(breite + breite * luftY * 2);
+    kachel.width = Math.round(feld.w * faktorEng + breite * luftX * 2);
+  } else {
+    kachel.width = breite;
+    kachel.height = Math.round(breite * 9 / 16);
+  }
+  const hoehe = kachel.height;
   const kctx = kachel.getContext("2d");
   kctx.fillStyle = "#ffffff";
-  kctx.fillRect(0, 0, breite, hoehe);
+  kctx.fillRect(0, 0, kachel.width, kachel.height);
   kctx.imageSmoothingEnabled = true;
   kctx.imageSmoothingQuality = "high";
 
-  const platzX = breite * (1 - luftX * 2);
-  const platzY = hoehe * (1 - luftY * 2);
+  const platzX = kachel.width - (eng ? breite * luftX * 2 : breite * luftX * 2);
+  const platzY = kachel.height - (eng ? breite * luftY * 2 : hoehe * luftY * 2);
   const faktor = Math.min(platzX / feld.w, platzY / feld.h);
   const zielW = Math.round(feld.w * faktor);
   const zielH = Math.round(feld.h * faktor);
   kctx.drawImage(roh, feld.x, feld.y, feld.w, feld.h,
-    Math.round((breite - zielW) / 2), Math.round((hoehe - zielH) / 2), zielW, zielH);
+    Math.round((kachel.width - zielW) / 2), Math.round((kachel.height - zielH) / 2), zielW, zielH);
 
   document.getElementById("out").textContent =
-    breite + "x" + hoehe + "|" + kachel.toDataURL("image/png");
+    kachel.width + "x" + kachel.height + "|" + kachel.toDataURL("image/png");
 };
 img.onerror = function () { document.getElementById("out").textContent = "FEHLER"; };
 img.src = src;

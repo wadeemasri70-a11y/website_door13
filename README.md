@@ -207,8 +207,12 @@ heraus ist – `assets/js/main.js` setzt dafür die Klasse `tuer--frei`.
 
 ## Soziale Netzwerke
 
-Unter den Kontaktdaten und über der Fußzeile steht eine Leiste mit vier
-Zeichen: Facebook, Instagram, YouTube, LinkedIn. Im Ruhezustand sind sie grau
+Unter den Kontaktdaten und unter dem Claim in der Fußzeile steht eine Leiste
+mit vier Zeichen: Facebook, Instagram, YouTube, LinkedIn. Jedes trägt einen
+eigenen `viewBox`, der genau um sein Zeichen liegt (`sozialZeichen[…].feld`).
+Dadurch füllen alle vier dieselbe Fläche und sitzen auf derselben Achse – mit
+einem gemeinsamen `0 0 24 24` wären sie unterschiedlich groß und LinkedIn säße
+tiefer. Im Ruhezustand sind sie grau
 und in einem Ring gefasst; bei Mausberührung oder Tastaturfokus nehmen Zeichen
 und Ring die Hausfarbe des jeweiligen Dienstes an – Instagram über einen
 Verlauf, der einmal pro Seite in `<svg class="verlaeufe">` definiert ist.
@@ -273,20 +277,23 @@ ausgelesen und trifft damit den Rahmen der Urkunde daneben.
 
 ## Fabrikate
 
-Der Abschnitt „Herstellerunabhängig“ zeigt statt einer Wortliste acht Kacheln im
-Format 16:9. Gepflegt wird die Reihe in `build/content/hersteller.mjs`; ohne
-`file` erscheint der Name als Textkachel (Record, „weitere auf Anfrage“).
+Der Abschnitt „Herstellerunabhängig“ zeigt statt einer Wortliste Plaketten in
+derselben Form und Größe wie die Partnerleiste am Seitenanfang – Platte 76 px
+hoch, Zeichen 42 px –, nur laufen sie nicht als Band, sondern brechen in Zeilen
+um. Gepflegt wird die Reihe in `build/content/hersteller.mjs`; ohne `file`
+erscheint der Name als Textplakette (Record, „weitere auf Anfrage“).
 
-Die Dateien entstehen mit `build/kachel.sh <quelle> <ziel> [breite]`: Das
-Werkzeug schneidet den Rand um das Zeichen weg, legt es mittig auf eine weiße
-16:9-Fläche und hält überall denselben Abstand zum Rand. Damit wirken die
+Die Dateien entstehen mit `build/kachel.sh <quelle> <ziel> <höhe> <luftx>
+<lufty> eng`: Das Werkzeug schneidet den Rand um das Zeichen weg und legt es
+mittig auf eine weiße Fläche mit gleichem Abstand ringsum. Damit wirken die
 Zeichen optisch gleich groß, obwohl die Vorlagen unterschiedlich beschnitten
-waren.
+waren. Ohne `eng` entsteht stattdessen eine 16:9-Fläche.
 
-Die Reihenfolge ist nach Farbe gesetzt: HÖRMANN (Orange auf Blau) und TORMAX
-(rote Sterne) sind die kräftigsten und stehen weder neben- noch untereinander.
-Die Kachel bleibt in beiden Themen weiß, sonst verschwinden die dunklen
-Schriftzüge im Nachtmodus.
+Bei Mausberührung legt sich ein weiches gelbes Leuchten um die Plakette
+(`--neon`). Die Reihenfolge ist nach Farbe gesetzt: HÖRMANN (Orange auf Blau)
+und TORMAX (rote Sterne) sind die kräftigsten und stehen weder neben- noch
+untereinander. Die Plakette bleibt in beiden Themen weiß, sonst verschwinden
+die dunklen Schriftzüge im Nachtmodus.
 
 ## Partner
 

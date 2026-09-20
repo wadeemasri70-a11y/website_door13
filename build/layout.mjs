@@ -36,19 +36,32 @@ ${sub}
 }
 
 const sozialZeichen = {
-  facebook: `<path fill-rule="evenodd" d="M12 2.1a9.9 9.9 0 1 0 0 19.8 9.9 9.9 0 0 0 0-19.8zm1.29 10.83v6.87a9.9 9.9 0 0 1-2.5 0v-6.87H8.7v-2.6h2.09V8.55c0-2.06 1.24-3.2 3.13-3.2.9 0 1.84.16 1.84.16v2.02h-1.04c-1.02 0-1.34.64-1.34 1.29v1.51h2.28l-.36 2.6h-1.92z"/>`,
-  instagram: `<rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5.2" fill="none" stroke="currentColor" stroke-width="1.9"/>
+  facebook: {
+    feld: "2.1 2.1 19.8 19.8",
+    inhalt: `<path fill-rule="evenodd" d="M12 2.1a9.9 9.9 0 1 0 0 19.8 9.9 9.9 0 0 0 0-19.8zm1.29 10.83v6.87a9.9 9.9 0 0 1-2.5 0v-6.87H8.7v-2.6h2.09V8.55c0-2.06 1.24-3.2 3.13-3.2.9 0 1.84.16 1.84.16v2.02h-1.04c-1.02 0-1.34.64-1.34 1.29v1.51h2.28l-.36 2.6h-1.92z"/>`
+  },
+  instagram: {
+    feld: "2.25 2.25 19.5 19.5",
+    inhalt: `<rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5.2" fill="none" stroke="currentColor" stroke-width="1.9"/>
           <circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.9"/>
-          <circle cx="16.9" cy="7.1" r="1.25"/>`,
-  youtube: `<path fill-rule="evenodd" d="M21.58 7.19a2.52 2.52 0 0 0-1.77-1.78C18.25 5 12 5 12 5s-6.25 0-7.81.41A2.52 2.52 0 0 0 2.42 7.19 26.3 26.3 0 0 0 2 12c0 1.61.14 3.22.42 4.81a2.52 2.52 0 0 0 1.77 1.78C5.75 19 12 19 12 19s6.25 0 7.81-.41a2.52 2.52 0 0 0 1.77-1.78c.28-1.59.42-3.2.42-4.81s-.14-3.22-.42-4.81zM10.15 15.4V8.6L15.9 12l-5.75 3.4z"/>`,
-  linkedin: `<path d="M6.85 21H3.6V8.98h3.25V21zM5.22 7.54a1.9 1.9 0 1 1 0-3.79 1.9 1.9 0 0 1 0 3.79zM21 21h-3.24v-6.4c0-1.35-.49-2.27-1.68-2.27-.92 0-1.46.62-1.7 1.22-.09.21-.11.5-.11.8V21H11.1s.04-11.1 0-12.02h3.24v1.7c.43-.67 1.2-1.62 2.93-1.62 2.14 0 3.74 1.4 3.74 4.42V21z"/>`
+          <circle cx="16.9" cy="7.1" r="1.25"/>`
+  },
+  youtube: {
+    feld: "2 2 20 20",
+    inhalt: `<path fill-rule="evenodd" d="M21.58 7.19a2.52 2.52 0 0 0-1.77-1.78C18.25 5 12 5 12 5s-6.25 0-7.81.41A2.52 2.52 0 0 0 2.42 7.19 26.3 26.3 0 0 0 2 12c0 1.61.14 3.22.42 4.81a2.52 2.52 0 0 0 1.77 1.78C5.75 19 12 19 12 19s6.25 0 7.81-.41a2.52 2.52 0 0 0 1.77-1.78c.28-1.59.42-3.2.42-4.81s-.14-3.22-.42-4.81zM10.15 15.4V8.6L15.9 12l-5.75 3.4z"/>`
+  },
+  linkedin: {
+    feld: "3.182 3.459 17.828 17.828",
+    inhalt: `<path d="M6.85 21H3.6V8.98h3.25V21zM5.22 7.54a1.9 1.9 0 1 1 0-3.79 1.9 1.9 0 0 1 0 3.79zM21 21h-3.24v-6.4c0-1.35-.49-2.27-1.68-2.27-.92 0-1.46.62-1.7 1.22-.09.21-.11.5-.11.8V21H11.1s.04-11.1 0-12.02h3.24v1.7c.43-.67 1.2-1.62 2.93-1.62 2.14 0 3.74 1.4 3.74 4.42V21z"/>`
+  }
 };
+
 
 export function sozialLeiste({ klasse = "", titel = "", einzug = "      " } = {}) {
   const glieder = company.social.map((s) => {
     const ziel = s.url ? ` href="${s.url}" target="_blank" rel="noopener"` : "";
     return `${einzug}    <li><a class="sozial__link sozial__link--${s.key}"${ziel} aria-label="${s.name}" title="${s.name}">
-${einzug}      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${sozialZeichen[s.key]}</svg>
+${einzug}      <svg viewBox="${sozialZeichen[s.key].feld}" fill="currentColor" aria-hidden="true">${sozialZeichen[s.key].inhalt}</svg>
 ${einzug}    </a></li>`;
   }).join("\n");
   return `${einzug}<div class="sozial${klasse ? " " + klasse : ""}">

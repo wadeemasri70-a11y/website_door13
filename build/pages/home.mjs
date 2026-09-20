@@ -22,18 +22,14 @@ export function homeBody() {
         <a class="btn btn--ghost" href="#unser-angebot">Leistungen ansehen</a>
       </div>
 
+${partnerStrip(partners)}
+
       <div class="hero__meta">
         <div><b data-zahl>11</b><span>Kolleginnen &amp; Kollegen</span></div>
         <div><b data-zahl>7</b><span>Servicetechniker</span></div>
         <div><b data-zahl>4</b><span>Regionen im Einsatz</span></div>
         <div><b data-zahl>24 h</b><span>Störungsannahme</span></div>
       </div>
-    </div>
-  </section>
-
-  <section class="section section--white section--slim" aria-label="Partner und Mitgliedschaften">
-    <div class="shell">
-${partnerStrip(partners)}
     </div>
   </section>
 
