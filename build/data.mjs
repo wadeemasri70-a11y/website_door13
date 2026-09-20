@@ -250,8 +250,8 @@ export const certificate = {
    Leistungsübersicht. `file` bleibt leer, solange die Logodatei fehlt;
    dann zeigt die Leiste eine Textplakette in gleicher Form. */
 export const partners = [
-  { name: "FAT", note: "Fachverband Türautomation · Partner", file: "" },
-  { name: "MARX", note: "Fortschritt mit System", file: "" },
-  { name: "WÜRTH", note: "Partner-Betrieb", file: "" },
-  { name: "GEZE", note: "Servicepartner", file: "" }
+  { name: "FAT",   note: "Fachverband Türautomation · Partner", color: "#0069b4", file: "" },
+  { name: "MARX",  note: "Fortschritt mit System",              color: "#004f9f", file: "" },
+  { name: "WÜRTH", note: "Partner-Betrieb",                     color: "#cc0000", file: "" },
+  { name: "GEZE",  note: "Servicepartner",                      color: "#003882", file: "" }
 ];

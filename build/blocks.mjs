@@ -226,11 +226,13 @@ ${c.facts.map((f) => `            <div><b>${f.b}</b><span>${f.span}</span></div>
 
 export function partnerStrip(partners, { heading = "Partner & Mitgliedschaften" } = {}) {
   const items = partners.map((p) => {
+    /* Sobald die Logodatei vorliegt, ersetzt sie die Textplakette –
+       dazu in data.mjs nur `file` setzen. */
     const body = p.file
       ? `<img src="${p.file}" alt="${esc(p.name)} – ${esc(p.note)}" loading="lazy">`
       : `<span class="partner__name">${p.name}</span>
           <span class="partner__note">${p.note}</span>`;
-    return `        <li class="partner">
+    return `        <li class="partner${p.file ? " partner--logo" : ""}" style="--partner-color:${p.color}">
           ${body}
         </li>`;
   }).join("\n");

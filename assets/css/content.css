@@ -551,15 +551,26 @@
 }
 
 .partner {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: var(--sp-3) var(--sp-5);
+  padding: var(--sp-4) var(--sp-5);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
   background: var(--card-bg);
+  overflow: hidden;
   transition: border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out);
 }
+/* Schmaler Streifen in der Hausfarbe des Partners */
+.partner::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--partner-color, var(--accent));
+}
+.partner--logo::before { display: none; }
 .partner:hover { border-color: var(--line-strong); transform: translateY(-2px); }
 .partner img { max-height: 42px; width: auto; }
 .partner__name {
