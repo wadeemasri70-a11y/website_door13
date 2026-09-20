@@ -3,7 +3,7 @@ export const galerie = [
     src: "assets/img/ueber-uns/servicefahrzeug.jpg",
     alt: "Servicetechniker von Falke Türautomation am Servicefahrzeug",
     text: "Ausrüstung am Servicefahrzeug",
-    breit: true, mass: [1760, 640]
+    mass: [1760, 640]
   },
   {
     src: "assets/img/ueber-uns/schiebetuer-montage.jpg",

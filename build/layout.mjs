@@ -36,7 +36,7 @@ ${sub}
 }
 
 const sozialZeichen = {
-  facebook: `<path d="M13.6 21v-7.9h2.66l.4-3.09H13.6V8.04c0-.9.25-1.5 1.53-1.5h1.64V3.77a22 22 0 0 0-2.39-.12c-2.36 0-3.98 1.44-3.98 4.09v2.27H7.73v3.09h2.67V21h3.2z"/>`,
+  facebook: `<path fill-rule="evenodd" d="M12 2.1a9.9 9.9 0 1 0 0 19.8 9.9 9.9 0 0 0 0-19.8zm1.29 10.83v6.87a9.9 9.9 0 0 1-2.5 0v-6.87H8.7v-2.6h2.09V8.55c0-2.06 1.24-3.2 3.13-3.2.9 0 1.84.16 1.84.16v2.02h-1.04c-1.02 0-1.34.64-1.34 1.29v1.51h2.28l-.36 2.6h-1.92z"/>`,
   instagram: `<rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5.2" fill="none" stroke="currentColor" stroke-width="1.9"/>
           <circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.9"/>
           <circle cx="16.9" cy="7.1" r="1.25"/>`,

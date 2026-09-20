@@ -201,6 +201,10 @@ auf Rot. Gerechnet wird nur, solange der Abschnitt sichtbar ist
 (`IntersectionObserver` plus `requestAnimationFrame`). Bei
 `prefers-reduced-motion` steht die Tür von vornherein offen.
 
+Der Melder zeigt drei Zustände: grau bei geschlossener Tür, rot sobald sie
+aufgeht, und grün (`--melder-frei`), sobald eine Anfrage aus dem Formular
+heraus ist – `assets/js/main.js` setzt dafür die Klasse `tuer--frei`.
+
 ## Soziale Netzwerke
 
 Unter den Kontaktdaten und über der Fußzeile steht eine Leiste mit vier
@@ -237,6 +241,10 @@ nachgeschärft, wobei die EXIF-Daten (samt GPS) wegfallen.
 
 Die Bildunterschriften beschreiben, was zu sehen ist; wer die Aufnahmen kennt,
 sollte sie durchgehen und genauer fassen.
+
+Die Strecke läuft dreispaltig und quadratisch: `grid-template-columns:
+repeat(3, minmax(0, 1fr))`, jedes Bild `aspect-ratio: 1 / 1` mit
+`object-fit: cover`. Unter 52rem sind es zwei Spalten, unter 30rem eine.
 
 ## Bilder auf den Projektkacheln
 

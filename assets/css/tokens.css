@@ -6,6 +6,7 @@
   --red-tint: rgba(224, 28, 14, 0.12);
   --gruen-600: #197F15;
   --gruen-300: #6BC85F;
+  --gruen-melder: #25BE5A;
 
   --grey-900: #0b0c0d;
   --grey-800: #121415;
@@ -45,6 +46,7 @@
   --accent-gradient: linear-gradient(96deg, var(--red-600) 10%, var(--red-500) 90%);
 
   --planet: var(--gruen-600);
+  --melder-frei: var(--gruen-melder);
 
   --btn-solid-bg: var(--grey-900);
   --btn-solid-fg: var(--white);

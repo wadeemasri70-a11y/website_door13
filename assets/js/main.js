@@ -88,6 +88,11 @@
     status.textContent = text;
   }
 
+  function tuerFreigeben() {
+    const tuer = document.querySelector("[data-doors]");
+    if (tuer) tuer.classList.add("tuer--frei");
+  }
+
   if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -108,7 +113,7 @@
             say(r.ok
               ? "Danke – Ihre Anfrage ist eingegangen. Wir melden uns zurück."
               : "Das Senden hat nicht geklappt. Bitte rufen Sie uns kurz an: 02272 908 92 70.");
-            if (r.ok) form.reset();
+            if (r.ok) { form.reset(); tuerFreigeben(); }
           })
           .catch(function () {
             say("Keine Verbindung. Bitte rufen Sie uns an: 02272 908 92 70.");
@@ -131,6 +136,7 @@
         "?subject=" + encodeURIComponent(subject) +
         "&body=" + encodeURIComponent(body);
       say("Ihr E-Mail-Programm öffnet sich mit der fertigen Anfrage. Alternativ: 02272 908 92 70.");
+      tuerFreigeben();
     });
   }
 

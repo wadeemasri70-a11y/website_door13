@@ -310,6 +310,11 @@
   background: var(--accent);
   box-shadow: 0 0 10px 2px rgba(224, 28, 14, .75);
 }
+.tuer--frei .tuer__led,
+.tuer--offen.tuer--frei .tuer__led {
+  background: var(--melder-frei);
+  box-shadow: 0 0 12px 3px rgba(37, 190, 90, .8);
+}
 
 .tuer__rahmen {
   position: relative;

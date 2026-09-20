@@ -226,7 +226,7 @@ ${c.facts.map((f) => `            <div><b data-zahl>${f.b}</b><span>${f.span}</s
 }
 
 export function galerieBlock() {
-  const stuecke = galerie.map((g, i) => `        <li class="galerie__stueck${g.breit ? " galerie__stueck--breit" : ""}"${i ? ` style="--reveal-delay:${(i % 3) * 70}ms"` : ""} data-reveal>
+  const stuecke = galerie.map((g, i) => `        <li class="galerie__stueck"${i ? ` style="--reveal-delay:${(i % 3) * 70}ms"` : ""} data-reveal>
           <figure>
             <a class="galerie__bild" href="${g.src}" target="_blank" rel="noopener">
               <img src="${g.src}" alt="${esc(g.alt)}" width="${g.mass[0]}" height="${g.mass[1]}" loading="lazy" decoding="async">
