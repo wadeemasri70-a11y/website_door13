@@ -47,18 +47,18 @@
       <div class="stage__scene" data-scene aria-hidden="true"></div>
 
       <!-- Fallback ohne JavaScript: flache Seitenansicht -->
-      <svg class="van-fallback" viewBox="0 0 960 420" role="img"
-           aria-label="Servicefahrzeug von Falke Türautomation">
-        <rect x="60" y="90" width="620" height="230" rx="14" fill="#f4f6f9"/>
-        <path d="M680 200h120l30 40v80H680z" fill="#e4e9ef"/>
-        <path d="M680 200 760 120h-80z" fill="#1b2634"/>
-        <rect x="60" y="250" width="740" height="70" fill="#ff6a1f"/>
-        <rect x="60" y="300" width="740" height="20" fill="#16202d"/>
-        <text x="96" y="180" font-family="Inter, sans-serif" font-size="54" font-weight="800" fill="#0b1017">FALKE</text>
-        <text x="100" y="212" font-family="Inter, sans-serif" font-size="19" font-weight="600" letter-spacing="5" fill="#e8551a">TÜRAUTOMATION</text>
-        <circle cx="250" cy="330" r="56" fill="#14191f"/><circle cx="250" cy="330" r="24" fill="#8d96a3"/>
-        <circle cx="700" cy="330" r="56" fill="#14191f"/><circle cx="700" cy="330" r="24" fill="#8d96a3"/>
-      </svg>
+      <div class="van-fallback">
+        <svg viewBox="0 0 960 420" role="img" aria-label="Servicefahrzeug von Falke Türautomation">
+          <rect x="60" y="90" width="620" height="230" rx="14" fill="#f4f5f6"/>
+          <path d="M680 200h120l30 40v80H680z" fill="#e4e6e7"/>
+          <path d="M680 200 760 120h-80z" fill="#1c1f20"/>
+          <rect x="60" y="250" width="740" height="70" fill="#e01c0e"/>
+          <rect x="60" y="300" width="740" height="20" fill="#1c1f20"/>
+          <circle cx="250" cy="330" r="56" fill="#14191f"/><circle cx="250" cy="330" r="24" fill="#8d9192"/>
+          <circle cx="700" cy="330" r="56" fill="#14191f"/><circle cx="700" cy="330" r="24" fill="#8d9192"/>
+        </svg>
+        <img src="assets/img/logo-falke.png" alt="" width="600" height="200">
+      </div>
 
       <div class="hotspots">
         <div class="hotspot" style="left:7%;top:26%" data-from="0.18" data-to="0.52">
@@ -137,17 +137,17 @@
     </div>
   </section>
 
-  <!-- ========================= ZERTIFIKATE =========================
-       Platzhalter: assets/img/zertifikat-1…4.svg gegen Scans der echten
-       Urkunden tauschen (JPG/PNG/PDF-Export, Hochformat) und Titel sowie
-       Aussteller unten eintragen. Weitere Karten einfach duplizieren.       -->
+  <!-- ======================== ZERTIFIZIERUNG ========================
+       Inhalt und Urkunde stammen aus dem bestehenden Auftritt
+       (Partnerschaft mit Planet Tree). Weitere Nachweise lassen sich
+       über build/data.mjs als zusätzliche Karten ergänzen.            -->
   <section class="section section--paper" id="zertifizierung">
     <div class="shell">
       <div class="section__head" data-reveal>
-        <p class="eyebrow">Qualifikationen</p>
-        <h2>Zertifikate und Nachweise – auf Verlangen jederzeit vorlegbar.</h2>
-        <p>Wer an Fluchtwegtüren, Brandschutz und Feststellanlagen arbeitet, muss es
-           belegen können. Unsere Nachweise liegen digital vor und begleiten jedes Protokoll.</p>
+        <p class="eyebrow">Zertifizierung</p>
+        <h2>Ein Wartungsvertrag. Ein Baum.</h2>
+        <p>Für jeden abgeschlossenen Wartungsvertrag pflanzen wir gemeinsam mit unserem
+           Partner Planet Tree einen Baum – mit Urkunde, Standort und Koordinaten.</p>
       </div>
 
 <!--CERTS-->

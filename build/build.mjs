@@ -1,7 +1,7 @@
 import { writeFileSync, readFileSync, mkdirSync } from "node:fs";
 import { page, arrowIcon } from "./layout.mjs";
 import { company } from "./nav.mjs";
-import { services, projects, certificates } from "./data.mjs";
+import { services, projects, certificate } from "./data.mjs";
 import * as B from "./blocks.mjs";
 
 const out = (slug, html) => { writeFileSync(new URL(`../${slug}.html`, import.meta.url), html); console.log("→", slug + ".html"); };
@@ -27,14 +27,18 @@ ${projects.slice(0, 3).map((p, i) => `        <article class="ref" data-reveal${
       </div>
       <p style="margin-top:var(--sp-7)"><a class="btn btn--ghost" href="referenzen.html">Alle Projekte ansehen</a></p>`;
 
-const certGrid = `      <ul class="certs">
-${certificates.map((c, i) => `        <li class="cert" data-reveal${i ? ` style="--reveal-delay:${i * 80}ms"` : ""}>
-          <a class="cert__sheet" href="${c.file}" target="_blank" rel="noopener">
-            <img src="${c.file}" alt="${c.title}" loading="lazy" width="595" height="842">
-          </a>
-          <div><h3>${c.title}</h3><p>${c.meta}</p></div>
-        </li>`).join("\n")}
-      </ul>`;
+const certGrid = `      <div class="tree" data-reveal>
+        <figure class="tree__sheet">
+          <img src="${certificate.sheet}" alt="${certificate.alt}" loading="lazy" width="774" height="1024">
+        </figure>
+        <div class="tree__body">
+${certificate.text.map((t) => `          <p>${t}</p>`).join("\n")}
+          <div class="tree__facts">
+${certificate.facts.map((f) => `            <div><b>${f.b}</b><span>${f.span}</span></div>`).join("\n")}
+          </div>
+          <img class="tree__partner" src="${certificate.partner}" alt="Planet Tree – offizieller Partner" loading="lazy" width="205" height="206">
+        </div>
+      </div>`;
 
 let home = readFileSync(new URL("./_home-raw.html", import.meta.url), "utf8");
 home = home.replace("<!--SERVICES-->", serviceCards)

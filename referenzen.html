@@ -11,7 +11,12 @@
 <meta property="og:locale" content="de_DE">
 <meta property="og:title" content="Projekte & Referenzen – Türlösungen von Falke im Einsatz">
 <meta property="og:description" content="Einblicke in unsere Projekte: Türsysteme für öffentliche Gebäude, Schulen, Kliniken, Banken und Kultur – individuell umgesetzt.">
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-falke.png" type="image/png">
+<!-- Markenschrift des bestehenden Auftritts. VOR DEM LIVEGANG selbst hosten:
+     Dateien herunterladen, in assets/fonts/ legen, per @font-face einbinden und
+     die beiden Zeilen hier entfernen (DSGVO: Google Fonts lädt IP-Adressen). -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&display=swap">
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/components.css">
@@ -43,15 +48,10 @@
 <header class="site-header" data-header>
   <div class="site-header__inner">
     <a class="brand" href="index.html" aria-label="Falke Türautomation – Startseite">
-      <svg viewBox="0 0 48 48" width="34" height="34" aria-hidden="true">
-        <path d="M6 40 30 6l6 12-18 22z" fill="currentColor"/>
-        <path d="M22 40 44 10l2 13-13 17z" fill="#ff6a1f"/>
-      </svg>
-      <span class="brand__text">
-        <span class="brand__name">Falke</span>
-        <span class="brand__sub">Türautomation</span>
-      </span>
-    </a>
+      <img class="brand__logo" src="assets/img/logo-falke.png"
+           alt="Falke Türautomation" width="600" height="200">
+      <img class="brand__logo brand__logo--invers" src="assets/img/logo-falke-invers.png"
+           alt="" aria-hidden="true" width="600" height="200"></a>
 
     <nav class="nav" id="nav" aria-label="Hauptnavigation" data-nav>
       <div class="nav__group">
@@ -131,7 +131,7 @@
       <div class="projects">
         <article class="project" data-reveal>
           <!-- Originalbild der bestehenden Seite: heinrich-2-225x300.jpg -->
-          <div class="project__img" style="background-image:url('assets/img/ref-schule.svg')" role="img" aria-label="Die neue automatische Schiebetüranlage, farblich an die bestehende Fassade angepasst"></div>
+          <div class="project__img" style="background-image:url('assets/img/referenz/heinrich-hanselmann-schule.jpg')" role="img" aria-label="Die neue automatische Schiebetüranlage, farblich an die bestehende Fassade angepasst"></div>
           <div class="project__body">
             <span class="ref__tag">Schule</span>
             <h2>Vom Drehflügel zur Schiebetür: Haupteingang der Heinrich-Hanselmann-Schule</h2>
@@ -141,7 +141,7 @@
         </article>
         <article class="project" data-reveal style="--reveal-delay:80ms">
           <!-- Originalbild der bestehenden Seite: 20260410_171406635_iOS-300x225.jpg -->
-          <div class="project__img" style="background-image:url('assets/img/ref-hochschule.svg')" role="img" aria-label="Nachgerüstete Doppelflügeltür im Gymnasium Schleiden"></div>
+          <div class="project__img" style="background-image:url('assets/img/referenz/gymnasium-schleiden.jpg')" role="img" aria-label="Nachgerüstete Doppelflügeltür im Gymnasium Schleiden"></div>
           <div class="project__body">
             <span class="ref__tag">Schule</span>
             <h2>Gymnasium Schleiden: Doppelflügeltür mit dormakaba ED 250 nachgerüstet</h2>
@@ -151,7 +151,7 @@
         </article>
         <article class="project" data-reveal style="--reveal-delay:0ms">
           <!-- Originalbild der bestehenden Seite: 20250903_134232905_iOS-225x300.jpg -->
-          <div class="project__img" style="background-image:url('assets/img/ref-verwaltung.svg')" role="img" aria-label="Neue Aluminium-Türanlage am Ordnungsamt Stolberg"></div>
+          <div class="project__img" style="background-image:url('assets/img/referenz/ordnungsamt-stolberg.jpg')" role="img" aria-label="Neue Aluminium-Türanlage am Ordnungsamt Stolberg"></div>
           <div class="project__body">
             <span class="ref__tag">Öffentliche Hand</span>
             <h2>Ordnungsamt Stolberg: Eingangsbereich mit GEZE Powerturn modernisiert</h2>
@@ -161,7 +161,7 @@
         </article>
         <article class="project" data-reveal style="--reveal-delay:80ms">
           <!-- Originalbild der bestehenden Seite: Foto-20.12.23-14-35-27-225x300.jpg -->
-          <div class="project__img" style="background-image:url('assets/img/ref-klinik.svg')" role="img" aria-label="Automatische Drehflügeltür der Bundeskunsthalle Bonn"></div>
+          <div class="project__img" style="background-image:url('assets/img/referenz/bundeskunsthalle-bonn.jpg')" role="img" aria-label="Automatische Drehflügeltür der Bundeskunsthalle Bonn"></div>
           <div class="project__body">
             <span class="ref__tag">Kultur</span>
             <h2>Bundeskunsthalle Bonn: Drehflügeltür zur Barrierefreiheit nachgerüstet</h2>
@@ -171,7 +171,7 @@
         </article>
         <article class="project" data-reveal style="--reveal-delay:0ms">
           <!-- Originalbild der bestehenden Seite: 20240716_142920402_iOS-300x225.jpg -->
-          <div class="project__img" style="background-image:url('assets/img/ref-bank.svg')" role="img" aria-label="Schiebetüranlage der Volksbank Köln"></div>
+          <div class="project__img" style="background-image:url('assets/img/referenz/volksbank-koeln-bonn.jpg')" role="img" aria-label="Schiebetüranlage der Volksbank Köln"></div>
           <div class="project__body">
             <span class="ref__tag">Bank</span>
             <h2>Volksbank Köln Bonn: GEZE ECdrive Schiebetürantrieb</h2>
@@ -181,7 +181,7 @@
         </article>
         <article class="project" data-reveal style="--reveal-delay:80ms">
           <!-- Originalbild der bestehenden Seite: 20250219_154333067_iOS-300x225.jpg -->
-          <div class="project__img" style="background-image:url('assets/img/ref-industrie.svg')" role="img" aria-label="Automatische Drehflügeltür für die Gastronomie der BayArena"></div>
+          <div class="project__img" style="background-image:url('assets/img/referenz/bayarena-leverkusen.jpg')" role="img" aria-label="Automatische Drehflügeltür für die Gastronomie der BayArena"></div>
           <div class="project__body">
             <span class="ref__tag">Gastronomie</span>
             <h2>BayArena Leverkusen: dormakaba ED 250 F in der Gastronomie</h2>
@@ -211,15 +211,10 @@
     <div class="footer__grid">
       <div>
         <a class="brand footer__brand" href="index.html">
-      <svg viewBox="0 0 48 48" width="34" height="34" aria-hidden="true">
-        <path d="M6 40 30 6l6 12-18 22z" fill="currentColor"/>
-        <path d="M22 40 44 10l2 13-13 17z" fill="#ff6a1f"/>
-      </svg>
-          <span class="brand__text">
-            <span class="brand__name">Falke</span>
-            <span class="brand__sub">Türautomation</span>
-          </span>
-        </a>
+      <img class="brand__logo" src="assets/img/logo-falke.png"
+           alt="Falke Türautomation" width="600" height="200">
+      <img class="brand__logo brand__logo--invers" src="assets/img/logo-falke-invers.png"
+           alt="" aria-hidden="true" width="600" height="200"></a>
         <p style="margin-top:var(--sp-5)">
           Service, Wartung und Modernisierung automatischer Türsysteme, Rettungswegtechnik,
           Zutrittskontrolle und Türschließer – herstellerunabhängig im Rheinland.

@@ -35,18 +35,8 @@
 
   /* Falke-Markenzeichen für die Fahrzeugbeschriftung (Platzhalter –
      gegen das Original-Logo in assets/img/ austauschbar). */
-  const LOGO = `
-  <svg viewBox="0 0 260 64" role="img" aria-label="Falke Türautomation">
-    <g fill="#0b1017">
-      <path d="M6 56 34 8l7 14L21 56z"/>
-      <path d="M26 56 54 8l7 14-20 34z" opacity=".55"/>
-      <path d="M54 8h22v10H54z" opacity="0"/>
-    </g>
-    <g fill="#0b1017" font-family="Inter, system-ui, sans-serif">
-      <text x="78" y="34" font-size="30" font-weight="800" letter-spacing="-0.5">FALKE</text>
-      <text x="79" y="52" font-size="12.5" font-weight="600" letter-spacing="3.1" fill="#e8551a">TÜRAUTOMATION</text>
-    </g>
-  </svg>`;
+  /* Fahrzeugbeschriftung: das Original-Logo */
+  const LOGO = '<img src="assets/img/logo-falke.png" alt="" width="600" height="200" style="width:100%;height:auto">';
 
   /* ---- kleine Helfer ----------------------------------------------------- */
   const px = (n) => n + "px";
@@ -213,12 +203,12 @@
 
     /* Logo, Claim, Kontakt */
     const logo = el("div", "livery__logo", liv);
-    logo.style.cssText = `left:${px(lx(-250))};top:${px(ly(-122))};width:${px(252)}`;
+    logo.style.cssText = `left:${px(lx(-252))};top:${px(ly(-126))};width:${px(246)}`;
     logo.innerHTML = LOGO;
 
     const claim = el("div", "livery__claim", liv);
     claim.textContent = "Wir öffnen Türen";
-    claim.style.cssText = `left:${px(lx(-248))};top:${px(ly(-56))};font-size:17px;color:#1b2431`;
+    claim.style.cssText = `left:${px(lx(-246))};top:${px(ly(-28))};font-size:16px;color:#4f5455`;
 
     const contact = el("div", "livery__contact", liv);
     contact.innerHTML =
@@ -231,7 +221,7 @@
 
   function liveryNose(nose, h) {
     const w = G.W;
-    detail(nose, "", w, 12, 0, 26, "background:linear-gradient(90deg,#ff6a1f,#e8551a);opacity:.9");
+    detail(nose, "", w, 12, 0, 26, "background:linear-gradient(90deg,var(--signal),var(--signal-600));opacity:.92");
     detail(nose, "detail--grille", 150, 30, (w - 150) / 2, 46);
     detail(nose, "detail--light", 46, 20, 14, 42, "border-radius:4px 10px 10px 4px");
     detail(nose, "detail--light", 46, 20, w - 60, 42, "border-radius:10px 4px 4px 10px");
@@ -249,7 +239,7 @@
     detail(rear, "detail--handle", 36, 8, w / 2 - 46, h / 2 + 10);
     detail(rear, "detail--handle", 36, 8, w / 2 + 10, h / 2 + 10);
     detail(rear, "", w - 40, 34, 20, h - 92,
-      "background:linear-gradient(90deg,#ff6a1f,#e8551a);border-radius:3px");
+      "background:linear-gradient(90deg,var(--signal),var(--signal-600));border-radius:3px");
   }
 
   function wheel(parent, x, y, z) {

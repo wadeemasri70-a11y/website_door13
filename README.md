@@ -95,30 +95,31 @@ ein Thema ist damit ein Satz Variablen, kein zweites Stylesheet.
 Ein neues Thema (z. B. ein Kundenthema) entsteht, indem der Rollenblock unter
 `:root[data-theme="…"]` kopiert und mit anderen Werten gefüllt wird.
 
-## Zertifikate
+## Zertifizierung
 
-Der Abschnitt „Qualifikationen“ zeigt vier Nachweise als Dokumentkarten;
-ein Klick öffnet die volle Datei. Die mitgelieferten
-`assets/img/zertifikat-1…4.svg` sind **ausdrücklich als Platzhalter markiert** –
-sie müssen gegen die echten Urkunden getauscht und Titel und Aussteller im
-HTML eingetragen werden. Weitere Karten entstehen durch Duplizieren eines
-`<li class="cert">`.
+Der Abschnitt „Zertifizierung“ auf der Startseite zeigt die Partnerschaft mit
+Planet Tree: je Wartungsvertrag ein Baum im Hessen Forst, mit Musterurkunde und
+Partnerlogo aus dem bestehenden Auftritt. Inhalt und Kennzahlen stehen in
+`build/data.mjs` unter `certificate`; weitere Nachweise lassen sich dort
+ergänzen.
 
 ## Anpassen
 
 **Farben, Schrift, Abstände** stehen ausschließlich in `assets/css/tokens.css`.
-Die Signalfarbe (`--signal`) ist ein Vorschlag – ein Firmenton wird dort einmal
-gesetzt und gilt sofort überall (Buttons, Lackierung des Wagens, Akzente).
+Die Signalfarbe `--signal` ist das am Original-Logo gemessene Rot `#E01C0E`,
+das Grau `#4F5455` stammt aus der Wortmarke. Ergänzt um die Theme-Farben des
+bestehenden Auftritts (`#C22724`, `#575A5B`, `#EAEBEC`).
 
-**Schriftart:** Der Stack beginnt mit „Inter“ und fällt sonst auf die Systemschrift
-zurück. Soll Inter garantiert erscheinen, die Schriftdateien selbst hosten
-(`@font-face`, `font-display: swap`) – bewusst keine Google-Fonts-Einbindung,
-das spart eine Fremdverbindung und ist datenschutzfreundlicher.
+**Schriftart:** Montserrat wie im bestehenden Auftritt. Für die Vorschau lädt
+`build/layout.mjs` sie von Google Fonts – **vor dem Livegang selbst hosten**
+(Dateien nach `assets/fonts/`, per `@font-face` einbinden, die beiden
+`<link>`-Zeilen entfernen). In Deutschland ist das Einbinden über Google
+datenschutzrechtlich heikel.
 
-**Logo:** `assets/img/logo-falke.svg` (hell) und `-invers.svg` (dunkel) sind
-Platzhalter im Falke-Duktus. Das Original ersetzt sie an drei Stellen:
-Kopfzeile und Footer (Inline-SVG in `index.html`) sowie die Fahrzeugbeschriftung
-(Konstante `LOGO` am Anfang von `assets/js/van.js`).
+**Logo:** `assets/img/logo-falke.png` ist das Original aus dem bestehenden
+Auftritt. Die helle Fassung fürs Nachtthema und das Favicon wurden daraus mit
+`build/pngtool.py` erzeugt. Verwendet wird es in `build/layout.mjs`
+(Kopf, Fuß) und in `assets/js/van.js` (Konstante `LOGO`, Fahrzeugbeschriftung).
 
 **Bilder:** siehe `assets/img/README.md` – die Referenzkarten erwarten je ein Bild
 über `--ref-img` direkt im HTML.
@@ -148,13 +149,13 @@ Netlify, Vercel). `index.html` ist der Einstieg. Fehlende Unterseiten
 - كل شي ستاتيك: بتفتح `index.html` بالمتصفّح مباشرة، بدون build وبدون مكتبات.
 - في ثيمين كاملين (نهاري وليلي). الافتراضي بيتبع إعداد الجهاز، وزر الشمس/القمر
   بالهيدر بيبدّل وبيتذكّر الاختيار. كل الألوان أدوار (roles) بملف `tokens.css`.
-- قسم الشهادات جاهز: بدّل `assets/img/zertifikat-1…4.svg` بالشهادات الحقيقية
-  واكتب العنوان والجهة المانحة بالـHTML.
+- قسم الشهادات صار عن شراكة Planet Tree (شجرة لكل عقد صيانة) بالشهادة الأصلية.
 - السيارة ثلاثية الأبعاد مبنية بـ CSS 3D (مش WebGL) — أخفّ وبتشتغل على كل الأجهزة.
   بعد أول scroll بتتحوّل من رسمة مسطّحة لمجسّم بيدور حواليه.
 - الألوان والخطوط والمسافات كلها بملف واحد: `assets/css/tokens.css`.
 - بدّل اللوغو بـ 3 أماكن: الهيدر والفوتر داخل `index.html`، وثابت `LOGO`
   بأول `assets/js/van.js` (اللي عالسيارة).
-- الصور: حطّ صورهم الأصلية بمجلد `assets/img/` حسب الشرح بـ `assets/img/README.md`.
-  الصور الحالية placeholders لأنّ الموقع الأصلي كان محجوب عن هالبيئة فما قدرت أنزّلها.
+- الصور واللوغو والألوان كلها من الموقع الأصلي (وصلت كملف محفوظ). التفاصيل
+  والمقاسات المطلوبة بـ `assets/img/README.md`. صور المشاريع مصغّرة
+  (225×300) — لازم النسخ الأصلية للعرض الكبير.
 - النصوص وأرقام التلفون والعنوان مجموعة من مصادر عامة — لازم تتأكّد منها قبل النشر.

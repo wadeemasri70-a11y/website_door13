@@ -32,6 +32,16 @@
 }
 .brand { display: inline-flex; align-items: center; gap: var(--sp-3); margin-right: auto; }
 .brand svg { height: 34px; width: auto; }
+.brand__logo { height: 44px; width: auto; }
+.brand__logo--invers { display: none; }
+:root[data-theme="dark"] .brand__logo { display: none; }
+:root[data-theme="dark"] .brand__logo--invers { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .brand__logo { display: none; }
+  :root:not([data-theme="light"]) .brand__logo--invers { display: block; }
+}
+.footer__brand .brand__logo { height: 40px; }
+@media (max-width: 560px) { .brand__logo { height: 34px; } }
 .brand__text { display: flex; flex-direction: column; line-height: 1.05; }
 .brand__name { font-size: var(--step-1); font-weight: 750; letter-spacing: -0.02em; }
 .brand__sub {
@@ -762,3 +772,41 @@
 }
 @media (min-width: 56rem) { .contact-strip { grid-template-columns: minmax(0, 1fr) auto; } }
 .contact-strip__actions { display: flex; flex-wrap: wrap; gap: var(--sp-4); }
+
+/* ---- Zertifizierung: ein Baum je Wartungsvertrag ------------------------- */
+.tree {
+  display: grid;
+  gap: clamp(1.75rem, 1rem + 3vw, 3.5rem);
+  align-items: center;
+}
+@media (min-width: 52rem) { .tree { grid-template-columns: 20rem minmax(0, 1fr); } }
+.tree__sheet { margin: 0; }
+.tree__sheet img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-1.5deg);
+  transition: transform var(--dur-2) var(--ease-out);
+}
+.tree__sheet img:hover { transform: rotate(0deg) scale(1.02); }
+.tree__body p { font-size: var(--step-1); line-height: var(--lh-loose); color: var(--fg-muted); }
+.tree__body p + p { margin-top: var(--sp-4); }
+.tree__body strong { color: var(--fg-strong); }
+.tree__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: var(--sp-5);
+  margin-top: var(--sp-7);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--line);
+}
+.tree__facts b {
+  display: block;
+  font-size: var(--step-2);
+  font-weight: 700;
+  letter-spacing: var(--ls-head);
+  color: var(--fg-strong);
+}
+.tree__facts span { display: block; margin-top: var(--sp-1); font-size: var(--step--1); color: var(--fg-muted); }
+.tree__partner { width: 84px; height: auto; margin-top: var(--sp-7); }

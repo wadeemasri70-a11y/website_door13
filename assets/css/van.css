@@ -235,7 +235,7 @@
   bottom: -14%;
   width: 118%;
   height: 62%;
-  background: linear-gradient(100deg, var(--signal) 0%, var(--signal-600) 62%, #b93d10 100%);
+  background: linear-gradient(100deg, var(--signal) 0%, var(--signal-600) 62%, #8f1a13 100%);
   transform: skewY(-5.5deg);
 }
 .livery__sweep--dark {
@@ -298,9 +298,9 @@
 .beacon__dome {
   position: absolute; left: 0; top: 0;
   opacity: var(--vol, 0);
-  background: linear-gradient(180deg, #ffb069, #ff6a1f);
+  background: linear-gradient(180deg, #ff8d7f, var(--signal));
   border-radius: 40% 40% 6px 6px;
-  box-shadow: 0 0 26px rgba(255,120,40, calc(.85 * var(--depth, 0)));
+  box-shadow: 0 0 26px rgba(224, 28, 14, calc(.85 * var(--depth, 0)));
 }
 
 /* Bodenschatten */
@@ -409,4 +409,14 @@
   }
   .hotspot { position: static; max-width: none; opacity: 1; transform: none; }
   .hotspot span { display: block; }
+}
+
+/* Fallback ohne JavaScript: flache Seitenansicht mit Beschriftung */
+.van-fallback { position: relative; }
+.van-fallback img {
+  position: absolute;
+  left: 12%;
+  top: 26%;
+  width: 26%;
+  height: auto;
 }

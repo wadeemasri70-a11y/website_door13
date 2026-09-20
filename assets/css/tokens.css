@@ -4,28 +4,33 @@
    ========================================================================= */
 
 :root {
-  /* ---- Farbe ---------------------------------------------------------- */
-  --ink-900: #080b11;
-  --ink-800: #0d121b;
-  --ink-700: #141b27;
-  --ink-600: #1d2736;
-  --ink-500: #2a3648;
+  /* ---- Farbe -----------------------------------------------------------
+     Gemessen am Original-Logo (Rot #E01C0E, Grau #4F5455) und an den
+     Theme-Farben des bestehenden Auftritts (#C22724, #575A5B, #EAEBEC).   */
+  --ink-900: #0b0c0d;
+  --ink-800: #121415;
+  --ink-700: #1a1d1e;
+  --ink-600: #242728;
+  --ink-500: #33383a;
 
-  --steel-500: #5d6b7f;
-  --steel-400: #7d8a9c;
-  --steel-300: #a7b2c0;
-  --steel-200: #cbd3dd;
-  --steel-100: #e6eaf0;
+  --steel-500: #575a5b;   /* Textgrau des bestehenden Auftritts */
+  --steel-400: #7d8182;
+  --steel-300: #a8acad;
+  --steel-200: #cbcecf;
+  --steel-100: #eaebec;   /* helles Grau des bestehenden Auftritts */
 
-  --paper: #f5f7fa;
-  --paper-warm: #fbfcfd;
+  --paper: #f4f5f6;
+  --paper-warm: #fbfbfc;
   --white: #ffffff;
 
-  /* Signalfarbe: Technik, Sicherheit, Notdienst */
-  --signal: #ff6a1f;
-  --signal-600: #e8551a;
-  --signal-300: #ffa06b;
-  --signal-tint: rgba(255, 106, 31, 0.12);
+  /* Signalfarbe: das Rot des Falken */
+  --signal: #e01c0e;
+  --signal-600: #c22724;  /* dunkleres Rot des bestehenden Auftritts */
+  --signal-300: #ff6c5c;
+  --signal-tint: rgba(224, 28, 14, 0.12);
+
+  --brand-grey: #4f5455;  /* Wortmarke „FALKE“ */
+  --brand-sand: #f3e1d2;  /* warmer Akzent des bestehenden Auftritts */
 
   /* ---- Rollen: Tag- und Nachtthema --------------------------------------
      Alle Bausteine greifen NUR auf diese Rollen zu, nie auf die Palette.
@@ -33,50 +38,50 @@
      data-theme="light" | "dark" auf <html>.                                  */
   --bg-1: var(--paper);            /* Seitengrund / ruhige Abschnitte */
   --bg-2: var(--white);            /* abgesetzte Abschnitte */
-  --bg-contrast: #e9edf5;          /* Hero, Bühne, Footer, Kontrastflächen */
+  --bg-contrast: #eaebec;          /* Hero, Bühne, Footer, Kontrastflächen */
   --card-bg: var(--white);
-  --card-border: rgba(13, 18, 27, 0.10);
+  --card-border: rgba(11, 12, 13, 0.11);
 
-  --fg: #1b2433;
-  --fg-strong: #0b1017;
+  --fg: #24282a;
+  --fg-strong: #0b0c0d;
   --fg-muted: var(--steel-500);
-  --fg-on-contrast: #16202e;
-  --fg-muted-on-contrast: #56657a;
+  --fg-on-contrast: #1c1f20;
+  --fg-muted-on-contrast: #5c6162;
 
-  --line: rgba(13, 18, 27, 0.10);
-  --line-strong: rgba(13, 18, 27, 0.18);
-  --line-on-contrast: rgba(13, 18, 27, 0.13);
+  --line: rgba(11, 12, 13, 0.11);
+  --line-strong: rgba(11, 12, 13, 0.20);
+  --line-on-contrast: rgba(11, 12, 13, 0.14);
 
   --accent-ink: var(--signal-600);   /* Signalfarbe als Textfarbe */
   --accent-gradient: linear-gradient(96deg, var(--signal-600) 10%, var(--signal) 90%);
-  --btn-solid-bg: #0b1017;
+  --btn-solid-bg: #0b0c0d;
   --btn-solid-fg: #ffffff;
 
   --glass: rgba(255, 255, 255, 0.86);
-  --header-fg: #16202e;
-  --nav-panel-bg: rgba(248, 250, 252, 0.98);
-  --nav-panel-fg: #0b1017;
+  --header-fg: #1c1f20;
+  --nav-panel-bg: rgba(250, 250, 251, 0.98);
+  --nav-panel-fg: #0b0c0d;
 
   --hero-bg:
-    radial-gradient(70% 60% at 78% 16%, rgba(255, 106, 31, 0.18), transparent 62%),
-    radial-gradient(60% 55% at 10% 84%, rgba(80, 130, 210, 0.16), transparent 66%),
-    linear-gradient(180deg, #fdfdff 0%, #e7ecf4 68%, #dfe5ef 100%);
+    radial-gradient(70% 60% at 78% 16%, rgba(224, 28, 14, 0.14), transparent 62%),
+    radial-gradient(60% 55% at 10% 84%, rgba(120, 125, 127, 0.16), transparent 66%),
+    linear-gradient(180deg, #fdfdfd 0%, #eceded 68%, #e3e4e5 100%);
   --hero-line: rgba(13, 18, 27, 0.07);
   --hero-sheen: rgba(255, 255, 255, 0.55);
 
-  --stage-bg: linear-gradient(180deg, #fbfcfe 0%, #e6ebf3 48%, #dde3ee 100%);
-  --stage-glow: rgba(255, 106, 31, 0.16);
-  --stage-grid: rgba(13, 18, 27, 0.10);
-  --stage-scrim: rgba(240, 243, 248, 0.86);
+  --stage-bg: linear-gradient(180deg, #fcfcfc 0%, #eaebec 48%, #e0e1e2 100%);
+  --stage-glow: rgba(224, 28, 14, 0.14);
+  --stage-grid: rgba(11, 12, 13, 0.11);
+  --stage-scrim: rgba(241, 242, 243, 0.88);
 
-  --map-bg: #dfe5ef;
-  --map-grid: rgba(13, 18, 27, 0.07);
-  --map-fg: #16202e;
+  --map-bg: #e0e1e2;
+  --map-grid: rgba(11, 12, 13, 0.08);
+  --map-fg: #1c1f20;
 
   /* ---- Typografie ------------------------------------------------------
      Fluid Type Scale (Major Third ~1.25 bei großen Viewports).
      Ein Schriftsystem, zwei Gewichte pro Rolle – mehr braucht es nicht.     */
-  --font-sans: "Inter", "InterVariable", system-ui, -apple-system,
+  --font-sans: "Montserrat", "Montserrat Fallback", system-ui, -apple-system,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
     Consolas, monospace;
@@ -160,17 +165,17 @@
 /* Nachtthema – gleiche Rollen, andere Werte */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg-1: #0b0f17;
-    --bg-2: #121926;
-    --bg-contrast: #070a0f;
-    --card-bg: #151d2b;
+    --bg-1: #0d0e0f;
+    --bg-2: #151718;
+    --bg-contrast: #070808;
+    --card-bg: #191b1c;
     --card-border: rgba(255, 255, 255, 0.09);
 
-    --fg: #c6d0de;
+    --fg: #c9cccd;
     --fg-strong: #ffffff;
-    --fg-muted: #8b98ab;
-    --fg-on-contrast: #dde3ec;
-    --fg-muted-on-contrast: #7d8a9c;
+    --fg-muted: #8d9192;
+    --fg-on-contrast: #dfe1e2;
+    --fg-muted-on-contrast: #82878a;
 
     --line: rgba(255, 255, 255, 0.10);
     --line-strong: rgba(255, 255, 255, 0.20);
@@ -187,16 +192,16 @@
     --nav-panel-fg: #ffffff;
 
     --hero-bg:
-      radial-gradient(70% 60% at 78% 18%, rgba(255, 106, 31, 0.20), transparent 62%),
-      radial-gradient(60% 55% at 12% 82%, rgba(60, 110, 190, 0.22), transparent 66%),
-      linear-gradient(180deg, #070a10, #0c1119 70%, #080b11);
+      radial-gradient(70% 60% at 78% 18%, rgba(224, 28, 14, 0.22), transparent 62%),
+      radial-gradient(60% 55% at 12% 82%, rgba(90, 95, 97, 0.20), transparent 66%),
+      linear-gradient(180deg, #060707, #0d0f10 70%, #070808);
     --hero-line: rgba(255, 255, 255, 0.07);
     --hero-sheen: rgba(255, 255, 255, 0.05);
 
-    --stage-bg: linear-gradient(180deg, #05070b 0%, #0b1019 46%, #0d1420 100%);
-    --stage-glow: rgba(255, 106, 31, 0.16);
+    --stage-bg: linear-gradient(180deg, #050606 0%, #0f1112 46%, #121415 100%);
+    --stage-glow: rgba(224, 28, 14, 0.18);
     --stage-grid: rgba(255, 255, 255, 0.09);
-    --stage-scrim: rgba(6, 9, 14, 0.82);
+    --stage-scrim: rgba(7, 8, 8, 0.84);
 
     --map-bg: var(--ink-800);
     --map-grid: rgba(255, 255, 255, 0.05);
@@ -205,17 +210,17 @@
 }
 
 :root[data-theme="dark"] {
-  --bg-1: #0b0f17;
-  --bg-2: #121926;
-  --bg-contrast: #070a0f;
-  --card-bg: #151d2b;
+  --bg-1: #0d0e0f;
+  --bg-2: #151718;
+  --bg-contrast: #070808;
+  --card-bg: #191b1c;
   --card-border: rgba(255, 255, 255, 0.09);
 
-  --fg: #c6d0de;
+  --fg: #c9cccd;
   --fg-strong: #ffffff;
-  --fg-muted: #8b98ab;
-  --fg-on-contrast: #dde3ec;
-  --fg-muted-on-contrast: #7d8a9c;
+  --fg-muted: #8d9192;
+  --fg-on-contrast: #dfe1e2;
+  --fg-muted-on-contrast: #82878a;
 
   --line: rgba(255, 255, 255, 0.10);
   --line-strong: rgba(255, 255, 255, 0.20);
@@ -232,16 +237,16 @@
   --nav-panel-fg: #ffffff;
 
   --hero-bg:
-    radial-gradient(70% 60% at 78% 18%, rgba(255, 106, 31, 0.20), transparent 62%),
-    radial-gradient(60% 55% at 12% 82%, rgba(60, 110, 190, 0.22), transparent 66%),
-    linear-gradient(180deg, #070a10, #0c1119 70%, #080b11);
+    radial-gradient(70% 60% at 78% 18%, rgba(224, 28, 14, 0.22), transparent 62%),
+    radial-gradient(60% 55% at 12% 82%, rgba(90, 95, 97, 0.20), transparent 66%),
+    linear-gradient(180deg, #060707, #0d0f10 70%, #070808);
   --hero-line: rgba(255, 255, 255, 0.07);
   --hero-sheen: rgba(255, 255, 255, 0.05);
 
-  --stage-bg: linear-gradient(180deg, #05070b 0%, #0b1019 46%, #0d1420 100%);
-  --stage-glow: rgba(255, 106, 31, 0.16);
+  --stage-bg: linear-gradient(180deg, #050606 0%, #0f1112 46%, #121415 100%);
+  --stage-glow: rgba(224, 28, 14, 0.18);
   --stage-grid: rgba(255, 255, 255, 0.09);
-  --stage-scrim: rgba(6, 9, 14, 0.82);
+  --stage-scrim: rgba(7, 8, 8, 0.84);
 
   --map-bg: var(--ink-800);
   --map-grid: rgba(255, 255, 255, 0.05);

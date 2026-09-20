@@ -29,7 +29,7 @@ export const services = [
       "Übergabe und Einweisung des Kunden"
     ],
     norms: ["DIN 18650", "DIN EN 16005", "ASR A1.7", "DIN 18040 (Barrierefreiheit)"],
-    image: { src: "assets/img/ref-bank.svg", alt: "Automatische Schiebetüranlage im Eingangsbereich", caption: "Platzhalter – hier ein Foto einer montierten Schiebetüranlage einsetzen." }
+    image: { src: "assets/img/referenz/volksbank-koeln-bonn.jpg", alt: "Automatische Schiebetüranlage der Volksbank Köln Bonn", caption: "Projektbeispiel: Schiebetüranlage mit GEZE ECdrive, Volksbank Köln Bonn." }
   },
   {
     slug: "leistung-drehtuerantriebe",
@@ -57,7 +57,7 @@ export const services = [
       "Nebeneingänge und Durchgangstüren"
     ],
     norms: ["DIN 18650", "DIN EN 16005", "DIN 18040", "DIN SPEC 1104"],
-    image: { src: "assets/img/ref-klinik.svg", alt: "Automatischer Drehtürantrieb an einer Eingangstür", caption: "Platzhalter – hier ein Foto eines montierten Drehtürantriebs einsetzen." }
+    image: { src: "assets/img/referenz/bundeskunsthalle-bonn.jpg", alt: "Automatische Drehflügeltür der Bundeskunsthalle Bonn", caption: "Projektbeispiel: nachgerüsteter Drehflügelantrieb, Bundeskunsthalle Bonn." }
   },
   {
     slug: "leistung-zutrittskontrolle",
@@ -85,7 +85,7 @@ export const services = [
       "Ersatzteilverfügbarkeit statt Insellösung"
     ],
     norms: ["EltVTR", "DIN EN 179 / 1125", "DIN EN 16005", "DSGVO-konforme Protokollierung"],
-    image: { src: "assets/img/ref-verwaltung.svg", alt: "Zutrittsleser neben einer automatischen Tür", caption: "Platzhalter – hier ein Foto einer Zutrittslösung einsetzen." }
+    image: { src: "assets/img/referenz/ordnungsamt-stolberg.jpg", alt: "Neue Aluminium-Türanlage am Ordnungsamt Stolberg", caption: "Projektbeispiel: Eingangsbereich Ordnungsamt Stolberg." }
   },
   {
     slug: "leistung-rettungswegsysteme",
@@ -113,7 +113,7 @@ export const services = [
       "Mängel dokumentiert, priorisiert und beseitigt"
     ],
     norms: ["DIN 14677", "EltVTR", "DIN EN 179", "DIN EN 1125", "ASR A2.3"],
-    image: { src: "assets/img/ref-schule.svg", alt: "Fluchttür mit Not-Auf-Taster", caption: "Platzhalter – hier ein Foto einer Fluchttüranlage einsetzen." }
+    image: { src: "assets/img/referenz/heinrich-hanselmann-schule.jpg", alt: "Automatische Schiebetüranlage am Haupteingang der Heinrich-Hanselmann-Schule", caption: "Projektbeispiel: Haupteingang Heinrich-Hanselmann-Schule." }
   },
   {
     slug: "leistung-obentuerschliesser",
@@ -141,7 +141,7 @@ export const services = [
       "Der Standflügel schließt vor dem Gangflügel"
     ],
     norms: ["DIN EN 1154", "DIN EN 1158", "DIN 18040", "DIN 14677"],
-    image: { src: "assets/img/ref-hochschule.svg", alt: "Obentürschließer mit Gleitschiene", caption: "Platzhalter – hier ein Foto eines montierten Türschließers einsetzen." }
+    image: { src: "assets/img/referenz/gymnasium-schleiden.jpg", alt: "Nachgerüstete Doppelflügeltür im Gymnasium Schleiden", caption: "Projektbeispiel: Doppelflügeltür mit Schließfolgeregelung, Gymnasium Schleiden." }
   },
   {
     slug: "leistung-pruefung-wartung",
@@ -169,7 +169,7 @@ export const services = [
       "Protokoll, Prüfplakette und Eintrag ins Prüfbuch"
     ],
     norms: ["DIN EN 16005", "DIN 18650", "DIN 14677", "ASR A1.7", "DGUV Vorschrift 3"],
-    image: { src: "assets/img/ref-industrie.svg", alt: "Servicetechniker bei der Prüfung einer Türanlage", caption: "Platzhalter – hier ein Foto aus dem Serviceeinsatz einsetzen." }
+    image: { src: "assets/img/referenz/bayarena-leverkusen.jpg", alt: "Automatiktür in der Gastronomie der BayArena Leverkusen", caption: "Projektbeispiel: dormakaba ED 250 F, BayArena Leverkusen." }
   }
 ];
 
@@ -180,7 +180,7 @@ export const projects = [
     date: "29. Juli 2026",
     tag: "Schule",
     text: "Der Haupteingang war bereits mit einem automatischen Drehflügelantrieb ausgestattet. Technisch lief die Anlage, für die Nutzung war sie trotzdem die falsche Lösung: Ein Drehflügel schwenkt in den Bereich, in dem Menschen stehen und gehen. Ersetzt wurde sie durch eine automatische Schiebetüranlage, farblich an die bestehende Fassade angepasst.",
-    img: "assets/img/ref-schule.svg",
+    img: "assets/img/referenz/heinrich-hanselmann-schule.jpg",
     orig: "heinrich-2-225x300.jpg",
     alt: "Die neue automatische Schiebetüranlage, farblich an die bestehende Fassade angepasst"
   },
@@ -189,7 +189,7 @@ export const projects = [
     date: "14. April 2026",
     tag: "Schule",
     text: "Eine bestehende Doppelflügeltüranlage haben wir mit einem modernen Automatiktürantrieb ausgestattet. Zum Einsatz kam ein ED 250, der für stark frequentierte Bereiche wie Schulen ausgelegt ist. Ziel war ein komfortabler und vor allem barrierefreier Zugang im Schulalltag, wenn viele Personen gleichzeitig unterwegs sind.",
-    img: "assets/img/ref-hochschule.svg",
+    img: "assets/img/referenz/gymnasium-schleiden.jpg",
     orig: "20260410_171406635_iOS-300x225.jpg",
     alt: "Nachgerüstete Doppelflügeltür im Gymnasium Schleiden"
   },
@@ -198,7 +198,7 @@ export const projects = [
     date: "25. März 2026",
     tag: "Öffentliche Hand",
     text: "Für das Ordnungsamt Stolberg haben wir den Eingangsbereich umfassend modernisiert und ein bestehendes Türelement durch eine neue Aluminium-Türanlage ersetzt. Der Fokus lag auf einer langlebigen, sicheren und barrierefreien Lösung für den öffentlichen Bereich – mit einem GEZE Powerturn Drehtürantrieb.",
-    img: "assets/img/ref-verwaltung.svg",
+    img: "assets/img/referenz/ordnungsamt-stolberg.jpg",
     orig: "20250903_134232905_iOS-225x300.jpg",
     alt: "Neue Aluminium-Türanlage am Ordnungsamt Stolberg"
   },
@@ -207,7 +207,7 @@ export const projects = [
     date: "15. Mai 2025",
     tag: "Kultur",
     text: "Zur Verbesserung der Barrierefreiheit wurde der Eingangsbereich nachgerüstet und mit einem leistungsstarken automatischen Türantrieb ausgestattet. So wird allen Besucherinnen und Besuchern ein komfortabler und sicherer Zugang ermöglicht.",
-    img: "assets/img/ref-klinik.svg",
+    img: "assets/img/referenz/bundeskunsthalle-bonn.jpg",
     orig: "Foto-20.12.23-14-35-27-225x300.jpg",
     alt: "Automatische Drehflügeltür der Bundeskunsthalle Bonn"
   },
@@ -216,7 +216,7 @@ export const projects = [
     date: "15. Mai 2025",
     tag: "Bank",
     text: "Montage eines automatischen Schiebetürantriebs GEZE ECdrive: Vorbereitung der Befestigungspunkte, Montage von Laufschiene, Türflügel und Abdeckhaube, Anschluss und Programmierung der Steuerung, Einstellung der Laufparameter, Sicherheitsprüfung gemäß DIN 18650 / EN 16005 sowie Übergabe und Einweisung des Kunden.",
-    img: "assets/img/ref-bank.svg",
+    img: "assets/img/referenz/volksbank-koeln-bonn.jpg",
     orig: "20240716_142920402_iOS-300x225.jpg",
     alt: "Schiebetüranlage der Volksbank Köln"
   },
@@ -225,15 +225,23 @@ export const projects = [
     date: "15. Mai 2025",
     tag: "Gastronomie",
     text: "Montage eines ED 250 F in der BayArena: eine praktische Gastronomielösung, die den Küchenbetrieb unterstützt. Der Antrieb bringt moderne Technik und durchdachtes Design in die Küche und sorgt für reibungslose Abläufe im laufenden Betrieb.",
-    img: "assets/img/ref-industrie.svg",
+    img: "assets/img/referenz/bayarena-leverkusen.jpg",
     orig: "20250219_154333067_iOS-300x225.jpg",
     alt: "Automatische Drehflügeltür für die Gastronomie der BayArena"
   }
 ];
 
-export const certificates = [
-  { file: "assets/img/zertifikat-1.svg", title: "Zertifikat 1 – Titel eintragen", meta: "Aussteller · Jahr" },
-  { file: "assets/img/zertifikat-2.svg", title: "Zertifikat 2 – Titel eintragen", meta: "Aussteller · Jahr" },
-  { file: "assets/img/zertifikat-3.svg", title: "Zertifikat 3 – Titel eintragen", meta: "Aussteller · Jahr" },
-  { file: "assets/img/zertifikat-4.svg", title: "Zertifikat 4 – Titel eintragen", meta: "Aussteller · Jahr" }
-];
+export const certificate = {
+  sheet: "assets/img/zertifikat-planet-tree.png",
+  partner: "assets/img/partner-planet-tree.png",
+  alt: "Musterurkunde: Falke Türautomation hat einen Baum gepflanzt – Planet Tree, Hessen Forst",
+  text: [
+    "Wartung ist bei uns nicht nur eine Pflichtübung: Für jeden abgeschlossenen Wartungsvertrag pflanzen wir gemeinsam mit <strong>Planet Tree</strong> einen Baum im Hessen Forst.",
+    "Unsere Kundinnen und Kunden erhalten dafür eine persönliche Urkunde mit dem Standort des Baumes samt Koordinaten – nachvollziehbar statt nur behauptet."
+  ],
+  facts: [
+    { b: "1 Baum", span: "pro Wartungsvertrag" },
+    { b: "Hessen Forst", span: "Aufforstungsfläche" },
+    { b: "seit 2021", span: "Partnerschaft mit Planet Tree" }
+  ]
+};
