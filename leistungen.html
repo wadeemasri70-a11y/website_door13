@@ -19,18 +19,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&display=swap">
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/base.css">
-<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/content.css">
 <link rel="stylesheet" href="assets/css/van.css">
-<script>
-(function () {
-  var root = document.documentElement;
-  root.className = root.className.replace("no-js", "js");
-  try {
-    var saved = localStorage.getItem("falke-theme");
-    if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
-  } catch (e) {}
-})();
-</script>
+<script src="assets/js/theme.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
@@ -122,7 +114,7 @@
       <h1>Alles rund um die automatische Tür – aus einer Hand.</h1>
       <p class="page-hero__lead">Sechs Leistungsbereiche, ein Ansprechpartner. Wir betreuen Bestandsanlagen genauso sorgfältig wie neue Projekte – herstellerunabhängig und nach Norm.</p>
       <div class="hero__actions">
-        <a class="btn btn--signal" href="kontakt.html">Beratung anfragen<svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <a class="btn btn--accent" href="kontakt.html">Beratung anfragen<svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M5 12h13m-5-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
           </svg></a>
         <a class="btn btn--ghost" href="referenzen.html">Referenzen ansehen</a>
@@ -186,22 +178,45 @@
     </div>
   </section>
 
+  <section class="section section--white" id="partner">
+    <div class="shell">
+      
+      <div class="partners" data-reveal>
+        <p class="partners__label">Partner & Mitgliedschaften</p>
+        <ul class="partners__list">
+        <li class="partner">
+          <span class="partner__name">FAT</span>
+          <span class="partner__note">Fachverband Türautomation · Partner</span>
+        </li>
+        <li class="partner">
+          <span class="partner__name">MARX</span>
+          <span class="partner__note">Fortschritt mit System</span>
+        </li>
+        <li class="partner">
+          <span class="partner__name">WÜRTH</span>
+          <span class="partner__note">Partner-Betrieb</span>
+        </li>
+        <li class="partner">
+          <span class="partner__name">GEZE</span>
+          <span class="partner__note">Servicepartner</span>
+        </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section class="section section--dark" id="herstellerunabhaengig">
     <div class="shell">
       <div class="section__head" data-reveal>
         <p class="eyebrow">Herstellerunabhängig</p>
         <h2>Ein Vertrag für Ihren gesamten Anlagenbestand.</h2>
-        <p>Wir sind an keine Marke gebunden. Auch wenn in Ihrem Gebäude fünf Fabrikate hängen: eine Wartungsliste, ein Techniker, ein Protokoll.</p>
+        <p>Wir sind an keine Marke gebunden. Auch wenn in Ihrem Gebäude mehrere Fabrikate hängen: eine Wartungsliste, ein Techniker, ein Protokoll.</p>
       </div>
       <ul class="norms" data-reveal>
         <li>GEZE</li>
         <li>dormakaba</li>
         <li>Assa Abloy</li>
-        <li>Record</li>
-        <li>Tormax</li>
-        <li>Besam</li>
-        <li>Hörmann</li>
-        <li>weitere auf Anfrage</li>
+        <li>weitere Fabrikate auf Anfrage</li>
       </ul>
     </div>
   </section>
@@ -218,7 +233,7 @@
           </p>
         </div>
         <div class="contact-strip__actions">
-          <a class="btn btn--signal" href="tel:+4922729089270">02272 / 908 927 0</a>
+          <a class="btn btn--accent" href="tel:+4922729089270">02272 / 908 927 0</a>
           <a class="btn btn--ghost" href="mailto:info@falke-tuerautomation.de">info@falke-tuerautomation.de</a>
         </div>
       </div>

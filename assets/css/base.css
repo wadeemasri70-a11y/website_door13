@@ -47,10 +47,10 @@ img, svg, video { display: block; max-width: 100%; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 button, input, textarea, select { font: inherit; color: inherit; }
 
-::selection { background: var(--signal); color: #fff; }
+::selection { background: var(--accent); color: #fff; }
 
 :focus-visible {
-  outline: 2px solid var(--signal);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: var(--radius-xs);
 }
@@ -61,7 +61,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
   top: var(--sp-4);
   z-index: 200;
   padding: var(--sp-3) var(--sp-5);
-  background: var(--ink-900);
+  background: var(--grey-900);
   color: #fff;
   border-radius: var(--radius-pill);
   transform: translateY(-160%);
@@ -109,7 +109,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .eyebrow::before {
   content: "";
   width: 28px; height: 2px;
-  background: var(--signal);
+  background: var(--accent);
   border-radius: 2px;
 }
 .lede { font-size: var(--step-1); line-height: var(--lh-loose); color: var(--fg-muted); max-width: var(--measure); }
@@ -139,8 +139,8 @@ button, input, textarea, select { font: inherit; color: inherit; }
 }
 .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 .btn:active { transform: translateY(0); }
-.btn--signal { --btn-bg: var(--signal); --btn-fg: #fff; }
-.btn--signal:hover { --btn-bg: var(--signal-600); }
+.btn--accent { --btn-bg: var(--accent); --btn-fg: #fff; }
+.btn--accent:hover { --btn-bg: var(--accent-strong); }
 .btn--ghost {
   --btn-bg: transparent;
   --btn-fg: var(--fg-strong);
@@ -156,7 +156,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
   gap: var(--sp-2);
   font-weight: 600;
   color: var(--fg-strong);
-  background-image: linear-gradient(var(--signal), var(--signal));
+  background-image: linear-gradient(var(--accent), var(--accent));
   background-size: 0% 2px;
   background-position: 0 100%;
   background-repeat: no-repeat;

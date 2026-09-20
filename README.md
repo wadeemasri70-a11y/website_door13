@@ -15,22 +15,28 @@ Skripte – `index.html` im Browser öffnen genügt.
 ```
 build/                  Seitengenerator (Node, nur zur Entwicklung)
   nav.mjs               Navigation + Firmendaten – eine Quelle für alle Seiten
-  layout.mjs            Kopf, Topbar, Navigation, Footer
+  layout.mjs            Kopf, Topbar, Navigation, Fußzeile
   blocks.mjs            Wiederverwendbare Inhaltsbausteine
-  data.mjs              Leistungen, Referenzprojekte, Zertifikate
+  data.mjs              Leistungen, Referenzprojekte, Partner, Zertifizierung
+  pages/home.mjs        Rumpf der Startseite
   build.mjs             schreibt die HTML-Dateien
-  _home-raw.html        Rumpf der Startseite (Marker für generierte Raster)
-index.html              Startseite (Semantik, Inhalte, JSON-LD)
+  pngtool.py            PNG-Werkzeug (helle Logofassung, Favicon)
+
+assets/css/tokens.css   Palette, Rollen (Themen), Typografie, Raum, Bewegung
+assets/css/base.css     Reset, Typografie, Layout-Primitive, Buttons, Reveals
+assets/css/layout.css   Topbar, Kopfzeile, Navigation, Fußzeile
+assets/css/content.css  Hero, Abschnitte, Karten, Text, Projekte, Kontakt
+assets/css/van.css      Bühne und Aussehen des 3-D-Transporters
+
+assets/js/theme.js      Tag-/Nachtthema (ohne defer im <head>)
+assets/js/van.js        baut den Transporter, fährt ihn am Scroll entlang
+assets/js/main.js       Kopfzeile, Navigation, Reveals, Formular
+
+index.html              Startseite
 leistungen.html         Unser Angebot + 6 Leistungsseiten
-referenzen.html         Projekte (Inhalte des bestehenden Auftritts)
-ueber-uns/team/karriere/stellen/downloads/kontakt/impressum/datenschutz
-assets/css/tokens.css   Farbe, Typo-Skala, Abstände, Bewegung – eine Quelle der Wahrheit
-assets/css/base.css     Reset, Typografie-Rhythmus, Layout-Primitive, Buttons, Reveals
-assets/css/components.css  Header, Hero, Karten, Referenzen, Ablauf, Kontakt, Footer
-assets/css/van.css      Die Bühne und das Aussehen des 3-D-Transporters
-assets/js/van.js        Baut den Transporter aus CSS-3-D-Flächen und fährt ihn am Scroll entlang
-assets/js/main.js       Header, Navigation, Reveals, Formular
-assets/img/             Logo, Favicon, Platzhalter für Referenzbilder
+referenzen.html         Projekte des bestehenden Auftritts
+ueber-uns / team / karriere / stellen / downloads / kontakt /
+wartungsanfrage / impressum / datenschutz
 ```
 
 ## Seiten erzeugen
@@ -81,19 +87,33 @@ index.html?solo=1&p=0.45    zeigt nur die Bühne (praktisch für Screenshots)
 
 ## Tag- und Nachtthema
 
-Die Seite hat zwei vollwertige Themen. `assets/css/tokens.css` definiert erst die
-Palette, darüber eine **Rollen-Ebene** (`--bg-1`, `--fg`, `--bg-contrast`,
-`--card-bg`, `--stage-bg` …). Alle Bausteine greifen nur auf diese Rollen zu –
-ein Thema ist damit ein Satz Variablen, kein zweites Stylesheet.
+`assets/css/tokens.css` definiert erst die Palette, darüber eine **Rollen-Ebene**
+(`--bg-1`, `--fg`, `--bg-contrast`, `--card-bg`, `--stage-bg` …). Alle Bausteine
+greifen nur auf diese Rollen zu – ein Thema ist damit ein Satz Variablen, kein
+zweites Stylesheet.
 
-* Voreinstellung folgt dem Betriebssystem (`prefers-color-scheme`).
-* Der Schalter im Header setzt `data-theme="light"` oder `"dark"` auf `<html>`
-  und merkt sich die Wahl im Browser (`localStorage`, Schlüssel `falke-theme`).
-* Ein winziges Skript im `<head>` setzt das Thema vor dem ersten Bild – kein
-  Aufblitzen der falschen Farben.
+* **Die Seite startet immer hell.** Die Systemeinstellung wird bewusst nicht
+  ausgewertet: Wer nichts anklickt, sieht überall dasselbe.
+* Der Schalter im Kopf setzt `data-theme="dark"` auf `<html>` und merkt sich die
+  Wahl – in `localStorage` und zusätzlich in einem Cookie. Das Cookie springt
+  ein, wenn der Speicher gesperrt ist (privates Fenster, eingebettete Vorschau);
+  so bleibt die Wahl auch beim Seitenwechsel erhalten.
+* `assets/js/theme.js` steht **ohne `defer`** im `<head>` und setzt das Thema
+  vor dem ersten Bild – sonst blitzt die falsche Fassung auf.
 
-Ein neues Thema (z. B. ein Kundenthema) entsteht, indem der Rollenblock unter
+Ein weiteres Thema entsteht, indem der Rollenblock unter
 `:root[data-theme="…"]` kopiert und mit anderen Werten gefüllt wird.
+
+## Partner
+
+Die Leiste „Partner & Mitgliedschaften“ steht direkt unter dem Hero und in der
+Leistungsübersicht. Gepflegt wird sie in `build/data.mjs` (`partners`). Solange
+`file` leer ist, zeigt die Leiste eine Textplakette in gleicher Form; sobald ein
+Pfad eingetragen ist, erscheint das Logo:
+
+```js
+{ name: "GEZE", note: "Servicepartner", file: "assets/img/partner/geze.png" }
+```
 
 ## Zertifizierung
 

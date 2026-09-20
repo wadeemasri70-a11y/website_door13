@@ -41,6 +41,14 @@ als Beispielbild auf den Leistungsseiten:
 nachliefern – mindestens 1600 px Kantenlänge, als JPG oder WebP auf ≤ 300 KB
 komprimiert. Die Zuordnung steht in `build/data.mjs`.
 
+## Partnerlogos
+
+Die Logos der Partner (FAT – Fachverband Türautomation, MARX, WÜRTH,
+GEZE) fehlen noch. Dateien nach `assets/img/partner/` legen (PNG oder SVG,
+transparenter Hintergrund, Höhe mindestens 84 px) und in `build/data.mjs`
+beim jeweiligen Eintrag als `file` eintragen. Bis dahin zeigt die Leiste
+Textplaketten.
+
 ## Zertifizierung
 
 | Datei | Verwendung |

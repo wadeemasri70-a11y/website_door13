@@ -55,18 +55,10 @@ export function page({ slug, title, description, active = "", body, bodyClass = 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&display=swap">
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/base.css">
-<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/content.css">
 <link rel="stylesheet" href="assets/css/van.css">
-<script>
-(function () {
-  var root = document.documentElement;
-  root.className = root.className.replace("no-js", "js");
-  try {
-    var saved = localStorage.getItem("falke-theme");
-    if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
-  } catch (e) {}
-})();
-</script>${isHome ? `
+<script src="assets/js/theme.js"></script>${isHome ? `
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

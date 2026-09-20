@@ -19,18 +19,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&display=swap">
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/base.css">
-<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/content.css">
 <link rel="stylesheet" href="assets/css/van.css">
-<script>
-(function () {
-  var root = document.documentElement;
-  root.className = root.className.replace("no-js", "js");
-  try {
-    var saved = localStorage.getItem("falke-theme");
-    if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
-  } catch (e) {}
-})();
-</script>
+<script src="assets/js/theme.js"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -135,8 +127,6 @@
 </header>
 
 <main id="main">
-
-
   <!-- ============================ HERO ============================ -->
   <section class="hero" id="top">
     <div class="hero__doors" aria-hidden="true"><i></i><i></i></div>
@@ -149,7 +139,7 @@
         Servicetechnikern im Raum Köln, Düsseldorf, Bonn und Aachen.
       </p>
       <div class="hero__actions">
-        <a class="btn btn--signal" href="kontakt.html">
+        <a class="btn btn--accent" href="kontakt.html">
           Wartung anfragen
           <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M5 12h13m-5-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -163,6 +153,33 @@
         <div><b>7</b><span>Servicetechniker</span></div>
         <div><b>4</b><span>Regionen im Einsatz</span></div>
         <div><b>24 h</b><span>Störungsannahme</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== PARTNER ========================== -->
+  <section class="section section--white section--slim" aria-label="Partner und Mitgliedschaften">
+    <div class="shell">
+      <div class="partners" data-reveal>
+        <p class="partners__label">Partner & Mitgliedschaften</p>
+        <ul class="partners__list">
+        <li class="partner">
+          <span class="partner__name">FAT</span>
+          <span class="partner__note">Fachverband Türautomation · Partner</span>
+        </li>
+        <li class="partner">
+          <span class="partner__name">MARX</span>
+          <span class="partner__note">Fortschritt mit System</span>
+        </li>
+        <li class="partner">
+          <span class="partner__name">WÜRTH</span>
+          <span class="partner__note">Partner-Betrieb</span>
+        </li>
+        <li class="partner">
+          <span class="partner__name">GEZE</span>
+          <span class="partner__note">Servicepartner</span>
+        </li>
+        </ul>
       </div>
     </div>
   </section>
@@ -527,7 +544,7 @@
             <textarea id="nachricht" name="nachricht" placeholder="Fabrikat, Standort, seit wann besteht die Störung?" required></textarea>
           </div>
           <p class="form__status" data-form-status hidden role="status"></p>
-          <button class="btn btn--signal" type="submit">
+          <button class="btn btn--accent" type="submit">
             Anfrage senden
             <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="M5 12h13m-5-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -541,7 +558,6 @@
       </div>
     </div>
   </section>
-
 </main>
 
 <footer class="site-footer">

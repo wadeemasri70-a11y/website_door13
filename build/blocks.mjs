@@ -5,7 +5,7 @@ const esc = (s) => String(s).replace(/&(?![a-z#0-9]+;)/g, "&amp;");
 
 export function pageHero({ eyebrow, h1, lead, actions = [] }) {
   const btns = actions.map((a, i) =>
-    `<a class="btn ${i ? "btn--ghost" : "btn--signal"}" href="${a.href}">${a.label}${i ? "" : arrowIcon}</a>`
+    `<a class="btn ${i ? "btn--ghost" : "btn--accent"}" href="${a.href}">${a.label}${i ? "" : arrowIcon}</a>`
   ).join("\n        ");
   return `  <section class="page-hero">
     <div class="shell">
@@ -107,7 +107,7 @@ export function contactStrip() {
           </p>
         </div>
         <div class="contact-strip__actions">
-          <a class="btn btn--signal" href="tel:${company.phoneHref}">${company.phone}</a>
+          <a class="btn btn--accent" href="tel:${company.phoneHref}">${company.phone}</a>
           <a class="btn btn--ghost" href="mailto:${company.mail}">${company.mail}</a>
         </div>
       </div>
@@ -151,7 +151,7 @@ ${options.map((o) => `            <option>${o}</option>`).join("\n")}
           <textarea id="nachricht" name="nachricht" placeholder="Fabrikat, Standort, seit wann besteht die Störung?" required></textarea>
         </div>
         <p class="form__status" data-form-status hidden role="status"></p>
-        <button class="btn btn--signal" type="submit">Anfrage senden${arrowIcon}</button>
+        <button class="btn btn--accent" type="submit">Anfrage senden${arrowIcon}</button>
         <p class="form__note">
           Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung der Anfrage zu.
           Hinweise dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.
@@ -179,4 +179,66 @@ export function contactData() {
           <dd>${company.hours}<small>Störungsannahme darüber hinaus telefonisch</small></dd>
         </div>
       </dl>`;
+}
+
+/* ---- Raster der Startseite ---------------------------------------------- */
+
+export function serviceCards(services) {
+  return `      <div class="grid grid--3">
+${services.map((s, i) => `        <article class="card" data-reveal${i ? ` style="--reveal-delay:${(i % 3) * 80}ms"` : ""}>
+          <div class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">${s.icon}</svg>
+          </div>
+          <h3>${s.nav}</h3>
+          <p>${s.lead}</p>
+          <p style="margin-top:var(--sp-5)"><a class="link-line" href="${s.slug}.html">Zur Leistung →</a></p>
+        </article>`).join("\n")}
+      </div>`;
+}
+
+export function referenceTeaser(projects) {
+  return `      <div class="refs">
+${projects.slice(0, 3).map((p, i) => `        <article class="ref" data-reveal${i ? ` style="--reveal-delay:${i * 80}ms"` : ""} style="--ref-img:url('${p.img}')">
+          <span class="ref__tag">${p.tag}</span>
+          <h3>${p.title.split(":")[0]}</h3>
+          <p>${p.text.slice(0, 130)}…</p>
+        </article>`).join("\n")}
+      </div>
+      <p style="margin-top:var(--sp-7)"><a class="btn btn--ghost" href="referenzen.html">Alle Projekte ansehen</a></p>`;
+}
+
+export function treeBlock(c) {
+  return `      <div class="tree" data-reveal>
+        <figure class="tree__sheet">
+          <img src="${c.sheet}" alt="${c.alt}" loading="lazy" width="774" height="1024">
+        </figure>
+        <div class="tree__body">
+${c.text.map((t) => `          <p>${t}</p>`).join("\n")}
+          <div class="tree__facts">
+${c.facts.map((f) => `            <div><b>${f.b}</b><span>${f.span}</span></div>`).join("\n")}
+          </div>
+          <img class="tree__partner" src="${c.partner}" alt="Planet Tree – offizieller Partner" loading="lazy" width="205" height="206">
+        </div>
+      </div>`;
+}
+
+/* ---- Partnerleiste ------------------------------------------------------ */
+
+export function partnerStrip(partners, { heading = "Partner & Mitgliedschaften" } = {}) {
+  const items = partners.map((p) => {
+    const body = p.file
+      ? `<img src="${p.file}" alt="${esc(p.name)} – ${esc(p.note)}" loading="lazy">`
+      : `<span class="partner__name">${p.name}</span>
+          <span class="partner__note">${p.note}</span>`;
+    return `        <li class="partner">
+          ${body}
+        </li>`;
+  }).join("\n");
+
+  return `      <div class="partners" data-reveal>
+        <p class="partners__label">${heading}</p>
+        <ul class="partners__list">
+${items}
+        </ul>
+      </div>`;
 }

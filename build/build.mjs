@@ -1,55 +1,18 @@
-import { writeFileSync, readFileSync, mkdirSync } from "node:fs";
+import { writeFileSync } from "node:fs";
 import { page, arrowIcon } from "./layout.mjs";
 import { company } from "./nav.mjs";
-import { services, projects, certificate } from "./data.mjs";
+import { services, projects, partners } from "./data.mjs";
+import { homeBody } from "./pages/home.mjs";
 import * as B from "./blocks.mjs";
 
 const out = (slug, html) => { writeFileSync(new URL(`../${slug}.html`, import.meta.url), html); console.log("→", slug + ".html"); };
 
 /* ---------------------------------------------------------------- Startseite */
-const serviceCards = `      <div class="grid grid--3">
-${services.map((s, i) => `        <article class="card" data-reveal${i ? ` style="--reveal-delay:${(i % 3) * 80}ms"` : ""}>
-          <div class="card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">${s.icon}</svg>
-          </div>
-          <h3>${s.nav}</h3>
-          <p>${s.lead}</p>
-          <p style="margin-top:var(--sp-5)"><a class="link-line" href="${s.slug}.html">Zur Leistung →</a></p>
-        </article>`).join("\n")}
-      </div>`;
-
-const refTeaser = `      <div class="refs">
-${projects.slice(0, 3).map((p, i) => `        <article class="ref" data-reveal${i ? ` style="--reveal-delay:${i * 80}ms"` : ""} style="--ref-img:url('${p.img}')">
-          <span class="ref__tag">${p.tag}</span>
-          <h3>${p.title.split(":")[0]}</h3>
-          <p>${p.text.slice(0, 130)}…</p>
-        </article>`).join("\n")}
-      </div>
-      <p style="margin-top:var(--sp-7)"><a class="btn btn--ghost" href="referenzen.html">Alle Projekte ansehen</a></p>`;
-
-const certGrid = `      <div class="tree" data-reveal>
-        <figure class="tree__sheet">
-          <img src="${certificate.sheet}" alt="${certificate.alt}" loading="lazy" width="774" height="1024">
-        </figure>
-        <div class="tree__body">
-${certificate.text.map((t) => `          <p>${t}</p>`).join("\n")}
-          <div class="tree__facts">
-${certificate.facts.map((f) => `            <div><b>${f.b}</b><span>${f.span}</span></div>`).join("\n")}
-          </div>
-          <img class="tree__partner" src="${certificate.partner}" alt="Planet Tree – offizieller Partner" loading="lazy" width="205" height="206">
-        </div>
-      </div>`;
-
-let home = readFileSync(new URL("./_home-raw.html", import.meta.url), "utf8");
-home = home.replace("<!--SERVICES-->", serviceCards)
-           .replace("<!--REFS-->", refTeaser)
-           .replace("<!--CERTS-->", certGrid);
-
 out("index", page({
   slug: "index",
   title: "Falke Türautomation – Automatische Türen, Wartung & Service im Rheinland",
   description: "Falke Türautomation aus Bedburg montiert, wartet und repariert automatische Türen, Rettungswegsysteme, Zutrittskontrolle und Türschließer – herstellerunabhängig im Raum Köln, Düsseldorf, Bonn und Aachen.",
-  body: home
+  body: homeBody()
 }));
 
 /* --------------------------------------------------------- Leistungsübersicht */
@@ -64,13 +27,17 @@ out("leistungen", page({
       lead: "Sechs Leistungsbereiche, ein Ansprechpartner. Wir betreuen Bestandsanlagen genauso sorgfältig wie neue Projekte – herstellerunabhängig und nach Norm.",
       actions: [{ href: "kontakt.html", label: "Beratung anfragen" }, { href: "referenzen.html", label: "Referenzen ansehen" }]
     }),
-    B.section({ variant: "paper", html: serviceCards }),
+    B.section({ variant: "paper", html: B.serviceCards(services) }),
+    B.section({
+      variant: "white", id: "partner",
+      html: B.partnerStrip(partners)
+    }),
     B.section({
       variant: "dark", id: "herstellerunabhaengig",
       eyebrow: "Herstellerunabhängig",
       h2: "Ein Vertrag für Ihren gesamten Anlagenbestand.",
-      lead: "Wir sind an keine Marke gebunden. Auch wenn in Ihrem Gebäude fünf Fabrikate hängen: eine Wartungsliste, ein Techniker, ein Protokoll.",
-      html: B.norms(["GEZE", "dormakaba", "Assa Abloy", "Record", "Tormax", "Besam", "Hörmann", "weitere auf Anfrage"])
+      lead: "Wir sind an keine Marke gebunden. Auch wenn in Ihrem Gebäude mehrere Fabrikate hängen: eine Wartungsliste, ein Techniker, ein Protokoll.",
+      html: B.norms(["GEZE", "dormakaba", "Assa Abloy", "weitere Fabrikate auf Anfrage"])
     }),
     B.contactStrip()
   ].join("\n\n")

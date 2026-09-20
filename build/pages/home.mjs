@@ -1,6 +1,11 @@
+import { serviceCards, referenceTeaser, treeBlock, partnerStrip } from "../blocks.mjs";
+import { services, projects, certificate, partners } from "../data.mjs";
 
-
-  <!-- ============================ HERO ============================ -->
+/* Rumpf der Startseite. Die drei Raster (Leistungen, Referenzteaser,
+   Zertifizierung) entstehen aus den Daten in data.mjs – alles andere steht
+   hier, weil es genau einmal vorkommt. */
+export function homeBody() {
+  return `  <!-- ============================ HERO ============================ -->
   <section class="hero" id="top">
     <div class="hero__doors" aria-hidden="true"><i></i><i></i></div>
     <div class="shell hero__inner">
@@ -12,7 +17,7 @@
         Servicetechnikern im Raum Köln, Düsseldorf, Bonn und Aachen.
       </p>
       <div class="hero__actions">
-        <a class="btn btn--signal" href="kontakt.html">
+        <a class="btn btn--accent" href="kontakt.html">
           Wartung anfragen
           <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M5 12h13m-5-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -27,6 +32,13 @@
         <div><b>4</b><span>Regionen im Einsatz</span></div>
         <div><b>24 h</b><span>Störungsannahme</span></div>
       </div>
+    </div>
+  </section>
+
+  <!-- ========================== PARTNER ========================== -->
+  <section class="section section--white section--slim" aria-label="Partner und Mitgliedschaften">
+    <div class="shell">
+${partnerStrip(partners)}
     </div>
   </section>
 
@@ -89,7 +101,7 @@
            Wir betreuen Bestandsanlagen genauso sorgfältig wie neue Projekte.</p>
       </div>
 
-<!--SERVICES-->
+${serviceCards(services)}
         </div>
   </section>
 
@@ -150,7 +162,7 @@
            Partner Planet Tree einen Baum – mit Urkunde, Standort und Koordinaten.</p>
       </div>
 
-<!--CERTS-->
+${treeBlock(certificate)}
     </div>
   </section>
 
@@ -164,7 +176,7 @@
            Ein Auszug aus laufenden Projekten und Wartungsverträgen.</p>
       </div>
 
-<!--REFS-->
+${referenceTeaser(projects)}
         </div>
   </section>
 
@@ -310,7 +322,7 @@
             <textarea id="nachricht" name="nachricht" placeholder="Fabrikat, Standort, seit wann besteht die Störung?" required></textarea>
           </div>
           <p class="form__status" data-form-status hidden role="status"></p>
-          <button class="btn btn--signal" type="submit">
+          <button class="btn btn--accent" type="submit">
             Anfrage senden
             <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="M5 12h13m-5-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -323,4 +335,5 @@
         </form>
       </div>
     </div>
-  </section>
+  </section>`;
+}

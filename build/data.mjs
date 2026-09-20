@@ -245,3 +245,13 @@ export const certificate = {
     { b: "seit 2021", span: "Partnerschaft mit Planet Tree" }
   ]
 };
+
+/* Partner und Mitgliedschaften – prominent auf der Startseite und in der
+   Leistungsübersicht. `file` bleibt leer, solange die Logodatei fehlt;
+   dann zeigt die Leiste eine Textplakette in gleicher Form. */
+export const partners = [
+  { name: "FAT", note: "Fachverband Türautomation · Partner", file: "" },
+  { name: "MARX", note: "Fortschritt mit System", file: "" },
+  { name: "WÜRTH", note: "Partner-Betrieb", file: "" },
+  { name: "GEZE", note: "Servicepartner", file: "" }
+];

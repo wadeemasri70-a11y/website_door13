@@ -1,50 +1,48 @@
 /* =========================================================================
-   Design Tokens – Falke Türautomation
-   Eine Quelle der Wahrheit für Farbe, Typografie, Raster, Abstand, Bewegung.
+   Falke Türautomation – Design Tokens
+   -------------------------------------------------------------------------
+   1. Palette   feste Markenwerte, nirgends direkt verwendet
+   2. Rollen    was die Bausteine tatsächlich benutzen (Tagthema)
+   3. Nachtthema  dieselben Rollen, andere Werte
+   4. Typografie, Raum, Form, Bewegung
+
+   Regel: Bausteine greifen ausschließlich auf Rollen zu (--bg-1, --fg, …).
+   Wer eine Farbe ändern will, ändert sie hier – und nur hier.
    ========================================================================= */
 
 :root {
-  /* ---- Farbe -----------------------------------------------------------
-     Gemessen am Original-Logo (Rot #E01C0E, Grau #4F5455) und an den
-     Theme-Farben des bestehenden Auftritts (#C22724, #575A5B, #EAEBEC).   */
-  --ink-900: #0b0c0d;
-  --ink-800: #121415;
-  --ink-700: #1a1d1e;
-  --ink-600: #242728;
-  --ink-500: #33383a;
+  /* ---- 1. Palette ------------------------------------------------------
+     Rot und Grau sind am Original-Logo gemessen, die übrigen Werte stammen
+     aus dem Theme des bestehenden Auftritts.                              */
+  --red-500: #e01c0e;
+  --red-600: #c22724;
+  --red-300: #ff6c5c;
+  --red-tint: rgba(224, 28, 14, 0.12);
 
-  --steel-500: #575a5b;   /* Textgrau des bestehenden Auftritts */
-  --steel-400: #7d8182;
-  --steel-300: #a8acad;
-  --steel-200: #cbcecf;
-  --steel-100: #eaebec;   /* helles Grau des bestehenden Auftritts */
-
-  --paper: #f4f5f6;
-  --paper-warm: #fbfbfc;
+  --grey-900: #0b0c0d;
+  --grey-800: #121415;
+  --grey-700: #1a1d1e;
+  --grey-600: #24282a;
+  --grey-500: #4f5455;
+  --grey-400: #575a5b;
+  --grey-300: #8d9192;
+  --grey-200: #cbcecf;
+  --grey-100: #eaebec;
+  --grey-050: #f4f5f6;
   --white: #ffffff;
 
-  /* Signalfarbe: das Rot des Falken */
-  --signal: #e01c0e;
-  --signal-600: #c22724;  /* dunkleres Rot des bestehenden Auftritts */
-  --signal-300: #ff6c5c;
-  --signal-tint: rgba(224, 28, 14, 0.12);
+  /* ---- 2. Rollen: Tagthema (Voreinstellung) ---------------------------- */
+  color-scheme: light;
 
-  --brand-grey: #4f5455;  /* Wortmarke „FALKE“ */
-  --brand-sand: #f3e1d2;  /* warmer Akzent des bestehenden Auftritts */
-
-  /* ---- Rollen: Tag- und Nachtthema --------------------------------------
-     Alle Bausteine greifen NUR auf diese Rollen zu, nie auf die Palette.
-     Voreinstellung folgt dem Betriebssystem; der Schalter im Header setzt
-     data-theme="light" | "dark" auf <html>.                                  */
-  --bg-1: var(--paper);            /* Seitengrund / ruhige Abschnitte */
-  --bg-2: var(--white);            /* abgesetzte Abschnitte */
-  --bg-contrast: #eaebec;          /* Hero, Bühne, Footer, Kontrastflächen */
+  --bg-1: var(--grey-050);          /* Seitengrund, ruhige Abschnitte */
+  --bg-2: var(--white);             /* abgesetzte Abschnitte */
+  --bg-contrast: var(--grey-100);   /* Topbar, Hero, Bühne, Footer */
   --card-bg: var(--white);
   --card-border: rgba(11, 12, 13, 0.11);
 
-  --fg: #24282a;
-  --fg-strong: #0b0c0d;
-  --fg-muted: var(--steel-500);
+  --fg: var(--grey-600);
+  --fg-strong: var(--grey-900);
+  --fg-muted: var(--grey-400);
   --fg-on-contrast: #1c1f20;
   --fg-muted-on-contrast: #5c6162;
 
@@ -52,21 +50,25 @@
   --line-strong: rgba(11, 12, 13, 0.20);
   --line-on-contrast: rgba(11, 12, 13, 0.14);
 
-  --accent-ink: var(--signal-600);   /* Signalfarbe als Textfarbe */
-  --accent-gradient: linear-gradient(96deg, var(--signal-600) 10%, var(--signal) 90%);
-  --btn-solid-bg: #0b0c0d;
-  --btn-solid-fg: #ffffff;
+  --accent: var(--red-500);
+  --accent-strong: var(--red-600);
+  --accent-ink: var(--red-600);     /* Signalfarbe als Textfarbe */
+  --accent-tint: var(--red-tint);
+  --accent-gradient: linear-gradient(96deg, var(--red-600) 10%, var(--red-500) 90%);
+
+  --btn-solid-bg: var(--grey-900);
+  --btn-solid-fg: var(--white);
 
   --glass: rgba(255, 255, 255, 0.86);
   --header-fg: #1c1f20;
   --nav-panel-bg: rgba(250, 250, 251, 0.98);
-  --nav-panel-fg: #0b0c0d;
+  --nav-panel-fg: var(--grey-900);
 
   --hero-bg:
     radial-gradient(70% 60% at 78% 16%, rgba(224, 28, 14, 0.14), transparent 62%),
     radial-gradient(60% 55% at 10% 84%, rgba(120, 125, 127, 0.16), transparent 66%),
     linear-gradient(180deg, #fdfdfd 0%, #eceded 68%, #e3e4e5 100%);
-  --hero-line: rgba(13, 18, 27, 0.07);
+  --hero-line: rgba(11, 12, 13, 0.07);
   --hero-sheen: rgba(255, 255, 255, 0.55);
 
   --stage-bg: linear-gradient(180deg, #fcfcfc 0%, #eaebec 48%, #e0e1e2 100%);
@@ -78,13 +80,12 @@
   --map-grid: rgba(11, 12, 13, 0.08);
   --map-fg: #1c1f20;
 
-  /* ---- Typografie ------------------------------------------------------
-     Fluid Type Scale (Major Third ~1.25 bei großen Viewports).
-     Ein Schriftsystem, zwei Gewichte pro Rolle – mehr braucht es nicht.     */
-  --font-sans: "Montserrat", "Montserrat Fallback", system-ui, -apple-system,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
-    Consolas, monospace;
+  /* ---- 4. Typografie ---------------------------------------------------
+     Montserrat wie im bestehenden Auftritt. Fließende Skala per clamp(),
+     Verhältnis rund 1,25 bei großen Viewports.                            */
+  --font-sans: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --step--2: clamp(0.70rem, 0.68rem + 0.10vw, 0.76rem);
   --step--1: clamp(0.82rem, 0.79rem + 0.16vw, 0.92rem);
@@ -95,23 +96,20 @@
   --step-4:  clamp(2.00rem, 1.71rem + 1.40vw, 2.81rem);
   --step-5:  clamp(2.37rem, 1.92rem + 2.20vw, 3.58rem);
   --step-6:  clamp(2.81rem, 2.11rem + 3.45vw, 4.55rem);
-  --step-7:  clamp(3.34rem, 2.26rem + 5.30vw, 5.78rem);
 
   --lh-tight: 1.04;
   --lh-snug: 1.18;
   --lh-base: 1.65;
   --lh-loose: 1.75;
 
-  --ls-mega: -0.035em;   /* große Headlines enger setzen */
+  --ls-mega: -0.035em;
   --ls-head: -0.022em;
   --ls-base: -0.004em;
-  --ls-caps: 0.14em;     /* Kapitälchen / Labels weit setzen */
+  --ls-caps: 0.14em;
 
-  --measure: 64ch;       /* optimale Zeilenlänge für Fließtext */
-  --measure-tight: 46ch;
+  --measure: 64ch;
 
-  /* ---- Raum ------------------------------------------------------------
-     4-px-Basis, harmonisch gestuft. Sections atmen über --section-y.        */
+  /* ---- Raum ------------------------------------------------------------ */
   --sp-1: 0.25rem;
   --sp-2: 0.5rem;
   --sp-3: 0.75rem;
@@ -122,13 +120,14 @@
   --sp-8: 3rem;
   --sp-9: 4rem;
   --sp-10: 5rem;
-  --sp-11: 6.5rem;
-  --sp-12: 8rem;
 
   --section-y: clamp(4.5rem, 3rem + 7vw, 9rem);
   --gutter: clamp(1.15rem, 0.6rem + 2.6vw, 2.75rem);
   --container: 78rem;
   --container-narrow: 54rem;
+
+  --topbar-h: 38px;
+  --header-h: 72px;
 
   /* ---- Form ------------------------------------------------------------ */
   --radius-xs: 4px;
@@ -138,78 +137,24 @@
   --radius-xl: 32px;
   --radius-pill: 999px;
 
-  --shadow-sm: 0 1px 2px rgba(8, 11, 17, 0.06),
-               0 2px 8px rgba(8, 11, 17, 0.04);
-  --shadow-md: 0 2px 4px rgba(8, 11, 17, 0.05),
-               0 12px 28px -12px rgba(8, 11, 17, 0.20);
-  --shadow-lg: 0 4px 10px rgba(8, 11, 17, 0.06),
-               0 30px 60px -24px rgba(8, 11, 17, 0.35);
+  --shadow-sm: 0 1px 2px rgba(8, 9, 10, 0.06), 0 2px 8px rgba(8, 9, 10, 0.04);
+  --shadow-md: 0 2px 4px rgba(8, 9, 10, 0.05), 0 12px 28px -12px rgba(8, 9, 10, 0.20);
+  --shadow-lg: 0 4px 10px rgba(8, 9, 10, 0.06), 0 30px 60px -24px rgba(8, 9, 10, 0.35);
 
-  /* ---- Bewegung --------------------------------------------------------
-     Eine Bewegungssprache: drei Dauern, drei Kurven. Nie linear.            */
+  /* ---- Bewegung: drei Dauern, drei Kurven, nie linear ------------------- */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
   --dur-1: 0.3s;
   --dur-2: 0.6s;
   --dur-3: 1.2s;
-
-  --header-h: 72px;
-  --topbar-h: 38px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  :root { --dur-1: 0.01ms; --dur-2: 0.01ms; --dur-3: 0.01ms; }
-}
-
-/* Nachtthema – gleiche Rollen, andere Werte */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg-1: #0d0e0f;
-    --bg-2: #151718;
-    --bg-contrast: #070808;
-    --card-bg: #191b1c;
-    --card-border: rgba(255, 255, 255, 0.09);
-
-    --fg: #c9cccd;
-    --fg-strong: #ffffff;
-    --fg-muted: #8d9192;
-    --fg-on-contrast: #dfe1e2;
-    --fg-muted-on-contrast: #82878a;
-
-    --line: rgba(255, 255, 255, 0.10);
-    --line-strong: rgba(255, 255, 255, 0.20);
-    --line-on-contrast: rgba(255, 255, 255, 0.10);
-
-    --accent-ink: var(--signal-300);
-    --accent-gradient: linear-gradient(96deg, var(--signal) 10%, var(--signal-300) 90%);
-    --btn-solid-bg: #ffffff;
-    --btn-solid-fg: #0b1017;
-
-    --glass: rgba(10, 14, 21, 0.82);
-    --header-fg: #ffffff;
-    --nav-panel-bg: rgba(9, 12, 18, 0.97);
-    --nav-panel-fg: #ffffff;
-
-    --hero-bg:
-      radial-gradient(70% 60% at 78% 18%, rgba(224, 28, 14, 0.22), transparent 62%),
-      radial-gradient(60% 55% at 12% 82%, rgba(90, 95, 97, 0.20), transparent 66%),
-      linear-gradient(180deg, #060707, #0d0f10 70%, #070808);
-    --hero-line: rgba(255, 255, 255, 0.07);
-    --hero-sheen: rgba(255, 255, 255, 0.05);
-
-    --stage-bg: linear-gradient(180deg, #050606 0%, #0f1112 46%, #121415 100%);
-    --stage-glow: rgba(224, 28, 14, 0.18);
-    --stage-grid: rgba(255, 255, 255, 0.09);
-    --stage-scrim: rgba(7, 8, 8, 0.84);
-
-    --map-bg: var(--ink-800);
-    --map-grid: rgba(255, 255, 255, 0.05);
-    --map-fg: #ffffff;
-  }
-}
-
+/* ---- 3. Nachtthema ------------------------------------------------------
+   Gilt nur, wenn es ausdrücklich gewählt wurde. Die Seite startet hell –
+   unabhängig von der Systemeinstellung.                                    */
 :root[data-theme="dark"] {
+  color-scheme: dark;
+
   --bg-1: #0d0e0f;
   --bg-2: #151718;
   --bg-contrast: #070808;
@@ -217,8 +162,8 @@
   --card-border: rgba(255, 255, 255, 0.09);
 
   --fg: #c9cccd;
-  --fg-strong: #ffffff;
-  --fg-muted: #8d9192;
+  --fg-strong: var(--white);
+  --fg-muted: var(--grey-300);
   --fg-on-contrast: #dfe1e2;
   --fg-muted-on-contrast: #82878a;
 
@@ -226,15 +171,16 @@
   --line-strong: rgba(255, 255, 255, 0.20);
   --line-on-contrast: rgba(255, 255, 255, 0.10);
 
-  --accent-ink: var(--signal-300);
-  --accent-gradient: linear-gradient(96deg, var(--signal) 10%, var(--signal-300) 90%);
-  --btn-solid-bg: #ffffff;
-  --btn-solid-fg: #0b1017;
+  --accent-ink: var(--red-300);
+  --accent-gradient: linear-gradient(96deg, var(--red-500) 10%, var(--red-300) 90%);
+
+  --btn-solid-bg: var(--white);
+  --btn-solid-fg: var(--grey-900);
 
   --glass: rgba(10, 14, 21, 0.82);
-  --header-fg: #ffffff;
+  --header-fg: var(--white);
   --nav-panel-bg: rgba(9, 12, 18, 0.97);
-  --nav-panel-fg: #ffffff;
+  --nav-panel-fg: var(--white);
 
   --hero-bg:
     radial-gradient(70% 60% at 78% 18%, rgba(224, 28, 14, 0.22), transparent 62%),
@@ -248,7 +194,11 @@
   --stage-grid: rgba(255, 255, 255, 0.09);
   --stage-scrim: rgba(7, 8, 8, 0.84);
 
-  --map-bg: var(--ink-800);
+  --map-bg: var(--grey-800);
   --map-grid: rgba(255, 255, 255, 0.05);
-  --map-fg: #ffffff;
+  --map-fg: var(--white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-1: 0.01ms; --dur-2: 0.01ms; --dur-3: 0.01ms; }
 }

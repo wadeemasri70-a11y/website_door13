@@ -54,19 +54,7 @@
     return n;
   }
 
-  /* Eine Fläche: Größe + Transform. x/y/z ist der Flächenmittelpunkt. */
-  function face(parent, cls, w, h, x, y, z, rot) {
-    const n = el("div", "f " + cls, parent);
-    n.style.width = px(w);
-    n.style.height = px(h);
-    n.style.transform =
-      `translate3d(${px(x - w / 2)}, ${px(y - h / 2)}, 0px) ` +
-      `translate3d(${px(w / 2)}, ${px(h / 2)}, ${px(z)}) ` +
-      (rot || "") + ` translate3d(${px(-w / 2)}, ${px(-h / 2)}, 0px)`;
-    return n;
-  }
-
-  /* Bequemer: Fläche über Mittelpunkt + Rotation (Rotation um den Mittelpunkt) */
+  /* Eine Fläche: Größe, Mittelpunkt, Drehung um den eigenen Mittelpunkt. */
   function panel(parent, cls, w, h, cx, cy, cz, rot) {
     const n = el("div", "f " + cls, parent);
     n.style.width = px(w);
@@ -221,7 +209,7 @@
 
   function liveryNose(nose, h) {
     const w = G.W;
-    detail(nose, "", w, 12, 0, 26, "background:linear-gradient(90deg,var(--signal),var(--signal-600));opacity:.92");
+    detail(nose, "", w, 12, 0, 26, "background:linear-gradient(90deg,var(--accent),var(--accent-strong));opacity:.92");
     detail(nose, "detail--grille", 150, 30, (w - 150) / 2, 46);
     detail(nose, "detail--light", 46, 20, 14, 42, "border-radius:4px 10px 10px 4px");
     detail(nose, "detail--light", 46, 20, w - 60, 42, "border-radius:10px 4px 4px 10px");
@@ -239,7 +227,7 @@
     detail(rear, "detail--handle", 36, 8, w / 2 - 46, h / 2 + 10);
     detail(rear, "detail--handle", 36, 8, w / 2 + 10, h / 2 + 10);
     detail(rear, "", w - 40, 34, 20, h - 92,
-      "background:linear-gradient(90deg,var(--signal),var(--signal-600));border-radius:3px");
+      "background:linear-gradient(90deg,var(--accent),var(--accent-strong));border-radius:3px");
   }
 
   function wheel(parent, x, y, z) {
