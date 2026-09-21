@@ -866,7 +866,7 @@
 }
 .sozial__link svg { display: block; place-self: center; width: 21px; height: 21px; fill: currentColor; }
 .sozial__link--facebook { --knopf-y: 4px; }
-.sozial__link--facebook svg { transform: translateY(2px); }
+.sozial__link--facebook svg { transform: translate(1px, 1px); }
 .sozial__link:hover { transform: translateY(calc(var(--knopf-y, 0px) - 2px)); }
 .sozial__link:focus-visible { transform: translateY(calc(var(--knopf-y, 0px) - 2px)); }
 
