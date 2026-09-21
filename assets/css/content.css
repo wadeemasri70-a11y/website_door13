@@ -819,14 +819,16 @@
   border: 1px solid var(--sozial-rand, var(--line-strong));
   border-radius: var(--radius-pill);
   color: var(--sozial-ruhe, var(--fg-muted));
+  transform: translateY(var(--knopf-y, 0px));
   transition: color var(--dur-1) var(--ease-out),
               border-color var(--dur-1) var(--ease-out),
               transform var(--dur-1) var(--ease-out);
 }
 .sozial__link svg { display: block; place-self: center; width: 21px; height: 21px; fill: currentColor; }
+.sozial__link--facebook { --knopf-y: 2px; }
 .sozial__link--facebook svg { transform: translateY(3px); }
-.sozial__link:hover { transform: translateY(-2px); }
-.sozial__link:focus-visible { transform: translateY(-2px); }
+.sozial__link:hover { transform: translateY(calc(var(--knopf-y, 0px) - 2px)); }
+.sozial__link:focus-visible { transform: translateY(calc(var(--knopf-y, 0px) - 2px)); }
 
 .sozial__link--facebook:hover { color: #1877F2; border-color: #1877F2; }
 .sozial__link--facebook:hover svg { fill: #1877F2; }
@@ -879,8 +881,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sozial__link:hover { transform: none; }
-  .sozial__link:focus-visible { transform: none; }
+  .sozial__link:hover { transform: translateY(var(--knopf-y, 0px)); }
+  .sozial__link:focus-visible { transform: translateY(var(--knopf-y, 0px)); }
 }
 
 /* Einblicke */
