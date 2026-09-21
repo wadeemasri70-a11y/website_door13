@@ -1063,3 +1063,77 @@
 @media (prefers-reduced-motion: reduce) {
   .bewertung:hover { transform: none; }
 }
+
+/* ------------------------------------------------------------------
+   Telefon und Tablet: Raster enger fuehren, Effekte ohne Mauszeiger
+   ------------------------------------------------------------------ */
+
+/* Kennzahlen im Hero: festes Zweierraster statt ausgefranstem Umbruch */
+@media (max-width: 48rem) {
+  .hero__meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-6) var(--sp-5);
+  }
+  .hero__meta div { min-width: 0; }
+}
+
+/* Herstellerlogos: auf dem Telefon geordnetes Raster statt Fliesstext */
+@media (max-width: 48rem) {
+  .marken {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
+    align-items: center;
+    gap: clamp(1.25rem, 0.5rem + 3vw, 2rem) clamp(0.75rem, 0.25rem + 2vw, 1.5rem);
+  }
+  .marke { width: 100%; }
+  .marke img {
+    height: calc(clamp(26px, 7vw, 34px) * var(--marke-h, 1));
+    max-width: 100%;
+  }
+}
+@media (max-width: 23rem) {
+  .marken { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Ohne Mauszeiger gibt es kein Hovern: das Neon liegt dann leise dauerhaft an */
+@media (hover: none) {
+  .marke img {
+    filter: drop-shadow(0 0 4px color-mix(in srgb, var(--neon) 52%, transparent))
+            drop-shadow(0 5px 12px color-mix(in srgb, var(--neon) 40%, transparent));
+  }
+  :root[data-theme="dark"] .marke img {
+    filter: drop-shadow(0 0 7px rgba(255, 255, 255, 0.38))
+            drop-shadow(0 0 4px color-mix(in srgb, var(--neon) 62%, transparent))
+            drop-shadow(0 6px 14px color-mix(in srgb, var(--neon) 48%, transparent));
+  }
+}
+
+/* Gleiches gilt fuer die Sozialzeichen: auf dem Telefon gleich in ihrer Farbe */
+@media (hover: none) {
+  .sozial__link--facebook { color: #1877F2; border-color: color-mix(in srgb, #1877F2 55%, transparent); }
+  .sozial__link--facebook svg { fill: #1877F2; }
+  .sozial__link--youtube { color: #FF0000; border-color: color-mix(in srgb, #FF0000 55%, transparent); }
+  .sozial__link--youtube svg { fill: #FF0000; }
+  .sozial__link--linkedin { color: #0A66C2; border-color: color-mix(in srgb, #0A66C2 55%, transparent); }
+  .sozial__link--linkedin svg { fill: #0A66C2; }
+  .sozial__link--instagram { color: #DD2A7B; border-color: color-mix(in srgb, #DD2A7B 55%, transparent); }
+  .sozial__link--instagram svg { fill: none; }
+  .sozial__link--instagram rect,
+  .sozial__link--instagram circle { stroke: url(#instagram-verlauf); fill: none; }
+  .sozial__link--instagram circle:last-of-type { fill: url(#instagram-verlauf); stroke: none; }
+  .kreis-knopf--whatsapp { color: #25D366; border-color: color-mix(in srgb, #25D366 55%, transparent); }
+  .kreis-knopf--whatsapp svg { fill: #25D366; }
+}
+
+/* Galerie: zwei Bilder nebeneinander bis hinunter zu sehr schmalen Geraeten */
+@media (max-width: 30rem) { .galerie { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 22rem) { .galerie { grid-template-columns: minmax(0, 1fr); } }
+
+/* Kartenkachel: auf dem Telefon hoch statt breit, sonst laeuft der Hinweis raus */
+@media (max-width: 40rem) {
+  .map, .map--breit { aspect-ratio: 4 / 5; }
+  .map__vorschau { gap: var(--sp-3); padding: var(--sp-5); }
+  .map__pin { width: 24px; height: 32px; }
+}

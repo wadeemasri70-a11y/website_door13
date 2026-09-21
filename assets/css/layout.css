@@ -451,3 +451,9 @@
   .tuer__fluegel { display: none; }
   .tuer__inhalt { opacity: 1; }
 }
+
+/* Fussleiste: auf dem Telefon untereinander statt zwei enge Spalten */
+@media (max-width: 48rem) {
+  .footer__grid { grid-template-columns: minmax(0, 1fr); gap: var(--sp-7); }
+}
+.footer__grid h4 { overflow-wrap: normal; word-break: normal; hyphens: none; }
