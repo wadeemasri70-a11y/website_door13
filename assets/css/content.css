@@ -824,7 +824,7 @@
               transform var(--dur-1) var(--ease-out);
 }
 .sozial__link svg { display: block; place-self: center; width: 21px; height: 21px; fill: currentColor; }
-.sozial__link--facebook svg { transform: translateY(1px); }
+.sozial__link--facebook svg { transform: translateY(3px); }
 .sozial__link:hover { transform: translateY(-2px); }
 .sozial__link:focus-visible { transform: translateY(-2px); }
 
