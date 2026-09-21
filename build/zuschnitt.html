@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>zuschnitt</title>
+<body style="margin:0;background:#fff">
+<pre id="out" style="font:10px/1.1 monospace;word-break:break-all;white-space:pre-wrap">warte…</pre>
+<script>
+const q = new URLSearchParams(location.search);
+const img = new Image();
+img.onload = function () {
+  const sx = Math.round(parseFloat(q.get("sx")) * img.naturalWidth);
+  const sy = Math.round(parseFloat(q.get("sy")) * img.naturalHeight);
+  const sw = Math.round(parseFloat(q.get("sw")) * img.naturalWidth);
+  const sh = Math.round(parseFloat(q.get("sh")) * img.naturalHeight);
+  const zielW = parseInt(q.get("w") || "1800", 10);
+  const zielH = Math.round(zielW * sh / sw);
+  const schaerfe = parseFloat(q.get("sharpen") || "0.55");
+
+  let zwischen = document.createElement("canvas");
+  zwischen.width = Math.round(sw * Math.sqrt(zielW / sw));
+  zwischen.height = Math.round(sh * Math.sqrt(zielW / sw));
+  let zctx = zwischen.getContext("2d");
+  zctx.imageSmoothingEnabled = true;
+  zctx.imageSmoothingQuality = "high";
+  zctx.drawImage(img, sx, sy, sw, sh, 0, 0, zwischen.width, zwischen.height);
+
+  const aus = document.createElement("canvas");
+  aus.width = zielW; aus.height = zielH;
+  const actx = aus.getContext("2d");
+  actx.imageSmoothingEnabled = true;
+  actx.imageSmoothingQuality = "high";
+  actx.drawImage(zwischen, 0, 0, zielW, zielH);
+
+  const scharf = actx.getImageData(0, 0, zielW, zielH);
+  const weich = document.createElement("canvas");
+  weich.width = zielW; weich.height = zielH;
+  const wctx = weich.getContext("2d");
+  wctx.filter = "blur(1.1px)";
+  wctx.drawImage(aus, 0, 0);
+  const unscharf = wctx.getImageData(0, 0, zielW, zielH);
+  const a = scharf.data, b = unscharf.data;
+  for (let i = 0; i < a.length; i += 4) {
+    for (let k = 0; k < 3; k++) {
+      const v = a[i + k] + (a[i + k] - b[i + k]) * schaerfe;
+      a[i + k] = v < 0 ? 0 : v > 255 ? 255 : v;
+    }
+  }
+  actx.putImageData(scharf, 0, 0);
+
+  document.getElementById("out").textContent =
+    zielW + "x" + zielH + "|" + aus.toDataURL("image/jpeg", parseFloat(q.get("q") || "0.88"));
+};
+img.onerror = function () { document.getElementById("out").textContent = "FEHLER"; };
+img.src = q.get("src");
+</script>

@@ -4,6 +4,7 @@ import { services, projects, certificate, qualifications, partners } from "../co
 export function homeBody() {
   return `  <section class="hero" id="top">
     <div class="hero__doors" aria-hidden="true"><i></i><i></i></div>
+    <div class="hero__foto" aria-hidden="true"></div>
     <div class="shell hero__inner">
       <p class="eyebrow">Türautomation im Rheinland · seit 2020</p>
       <h1>Türen, die <em>zuverlässig</em> öffnen. Service, der ankommt.</h1>
