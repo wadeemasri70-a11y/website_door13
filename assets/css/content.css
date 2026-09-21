@@ -69,11 +69,11 @@
     transparent 72%);
 }
 @media (max-width: 60rem) {
-  .hero__foto { background-position: 58% 18%; opacity: 0.4; }
+  .hero__foto { background-position: 58% 18%; opacity: 0.5; }
   .hero::after {
     background: linear-gradient(180deg,
       var(--bg-contrast) 0%,
-      color-mix(in srgb, var(--bg-contrast) 66%, transparent) 42%,
+      color-mix(in srgb, var(--bg-contrast) 58%, transparent) 42%,
       color-mix(in srgb, var(--bg-contrast) 86%, transparent) 100%);
   }
 }
@@ -1136,4 +1136,13 @@
   .map, .map--breit { aspect-ratio: 4 / 5; }
   .map__vorschau { gap: var(--sp-3); padding: var(--sp-5); }
   .map__pin { width: 24px; height: 32px; }
+}
+
+/* Bandbild: auf dem Telefon hoeher anschneiden, sonst bleibt vom Team ein Streifen */
+@media (max-width: 48rem) {
+  .bandbild__bild img {
+    height: clamp(12rem, 46vw, 16rem);
+    max-height: none;
+    object-position: 50% 52%;
+  }
 }
