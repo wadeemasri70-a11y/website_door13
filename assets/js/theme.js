@@ -61,7 +61,7 @@
 
   root.className = root.className.replace("no-js", "js");
   var ausAdresseGesetzt = ausAdresse();
-  anwenden(ausAdresseGesetzt || ausSpeicher() || "light");
+  anwenden(ausAdresseGesetzt || ausSpeicher() || "dark");
 
   document.addEventListener("DOMContentLoaded", function () {
     if (ausAdresseGesetzt) verweiseMitnehmen(aktuell());

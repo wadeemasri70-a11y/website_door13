@@ -102,7 +102,8 @@
   font-size: var(--step--1);
   font-weight: 650;
 }
-.theme-toggle {
+.theme-toggle,
+.kreis-knopf {
   display: inline-grid;
   place-items: center;
   width: 42px; height: 42px;
@@ -116,6 +117,16 @@
 }
 .theme-toggle:hover { opacity: 1; transform: rotate(-12deg); }
 .theme-toggle svg { width: 18px; height: 18px; grid-area: 1 / 1; }
+
+/* WhatsApp im gleichen Rund wie der Tag-/Nacht-Schalter */
+.kreis-knopf { flex: none; }
+.kreis-knopf svg { width: 19px; height: 19px; grid-area: 1 / 1; }
+.kreis-knopf:hover,
+.kreis-knopf:focus-visible { opacity: 1; transform: translateY(-1px); }
+.kreis-knopf--whatsapp:hover,
+.kreis-knopf--whatsapp:focus-visible { color: #25D366; border-color: #25D366; }
+.kreis-knopf--whatsapp:hover svg,
+.kreis-knopf--whatsapp:focus-visible svg { fill: #25D366; }
 .theme-toggle .icon-sun { display: none; }
 :root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
 :root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }

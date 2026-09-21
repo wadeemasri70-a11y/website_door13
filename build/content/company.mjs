@@ -41,6 +41,8 @@ export const company = {
   phoneHref: "+4922729089270",
   mobile: "0151 165 675 04",
   mobileHref: "+4915116567504",
+  whatsapp: "0151 165 675 04",
+  whatsappHref: "4915116567504",
   mail: "info@falke-tuerautomation.de",
   hours: "Mo – Fr, 8:00 – 16:30 Uhr",
   owner: "Rene Falke",
