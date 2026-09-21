@@ -49,6 +49,8 @@
   --planet: var(--gruen-600);
   --melder-frei: var(--gruen-melder);
   --neon: var(--gelb-neon);
+  --kopf-von: #D99A00;
+  --kopf-bis: #7A5A0A;
 
   --btn-solid-bg: var(--grey-900);
   --btn-solid-fg: var(--white);
@@ -204,6 +206,8 @@
   --accent-gradient: linear-gradient(96deg, var(--red-500) 10%, var(--red-300) 90%);
 
   --planet: var(--gruen-300);
+  --kopf-von: #F7C948;
+  --kopf-bis: #ffffff;
 
   --btn-solid-bg: var(--white);
   --btn-solid-fg: var(--grey-900);

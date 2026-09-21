@@ -297,6 +297,19 @@ bleiben unangetastet. Bei `prefers-reduced-motion` passiert nichts, und wenn der
 Beobachter nach vier Sekunden nicht ausgelöst hat, steht die echte Zahl trotzdem
 da.
 
+## Google-Bewertung
+
+Unter jeder Karte steht die Bewertung bei Google: Sterne, Wert, Anzahl und das
+Datum des Stands. Gepflegt wird sie in `company.bewertung`. Der Verweis führt
+über die Kennung aus der Einbettungsadresse (`?cid=…`) direkt auf den Eintrag,
+nicht auf eine Suche.
+
+Der Wert wird **von Hand gepflegt** – ohne Schlüssel für die Places-Schnittstelle
+lässt er sich nicht abrufen. Deshalb steht das Datum dabei. In den
+strukturierten Daten taucht die Bewertung bewusst **nicht** auf: Wer eine auf
+einer fremden Plattform gesammelte Bewertung als eigene auszeichnet, riskiert
+bei Google eine manuelle Maßnahme.
+
 ## Planet Tree
 
 Der Abschnitt zur Baumpflanzung trägt das Grün des Partners: `--planet`
