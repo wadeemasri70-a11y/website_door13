@@ -824,6 +824,7 @@
               transform var(--dur-1) var(--ease-out);
 }
 .sozial__link svg { display: block; place-self: center; width: 21px; height: 21px; fill: currentColor; }
+.sozial__link--facebook svg { transform: translateY(1px); }
 .sozial__link:hover { transform: translateY(-2px); }
 .sozial__link:focus-visible { transform: translateY(-2px); }
 
@@ -969,4 +970,48 @@
 
 @media (prefers-reduced-motion: reduce) {
   .marke:hover img { transform: none; }
+}
+
+/* Google-Bewertung */
+.bewertung {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  margin-top: var(--sp-5);
+  padding: var(--sp-4) var(--sp-5);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  color: var(--fg-strong);
+  text-decoration: none;
+  transition: border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out);
+}
+.bewertung:hover {
+  border-color: color-mix(in srgb, var(--neon) 55%, transparent);
+  transform: translateY(-2px);
+}
+.bewertung__sterne { display: inline-flex; gap: 2px; flex: none; }
+.bewertung__stern { width: 17px; height: 17px; fill: #F0B429; }
+.bewertung__stern--leer { fill: var(--line-strong); }
+.bewertung__wert {
+  font-size: var(--step-2);
+  font-weight: 700;
+  letter-spacing: var(--ls-head);
+  font-variant-numeric: tabular-nums;
+}
+.bewertung__text {
+  font-size: var(--step--1);
+  line-height: 1.4;
+  color: var(--fg-muted);
+}
+.bewertung__text small { display: block; font-size: var(--step--2); }
+.bewertung .btn__icon { margin-left: auto; flex: none; width: 20px; height: 20px; color: var(--fg-muted); }
+
+@media (max-width: 30rem) {
+  .bewertung { flex-wrap: wrap; gap: var(--sp-3); }
+  .bewertung .btn__icon { margin-left: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bewertung:hover { transform: none; }
 }

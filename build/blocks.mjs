@@ -306,6 +306,25 @@ ${kopf}
   </section>`;
 }
 
+export function bewertungsBand() {
+  const b = company.bewertung;
+  if (!b || !b.anzahl) return "";
+  const voll = Math.round(b.wert);
+  const sterne = Array.from({ length: 5 }, (_, i) =>
+    `<svg class="bewertung__stern${i < voll ? "" : " bewertung__stern--leer"}" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2.6l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.44l-5.8 3.06 1.1-6.47L2.6 9.45l6.5-.95z"/>
+            </svg>`).join("\n            ");
+  const wert = b.wert.toFixed(1).replace(".", ",");
+  return `      <a class="bewertung" href="${b.link}" target="_blank" rel="noopener">
+        <span class="bewertung__sterne" role="img" aria-label="${wert} von 5 Sternen">
+            ${sterne}
+        </span>
+        <span class="bewertung__wert">${wert}</span>
+        <span class="bewertung__text">${b.anzahl} Bewertungen auf Google<small>Stand ${b.stand}</small></span>
+        ${arrowIcon}
+      </a>`;
+}
+
 export function map({ hoehe = "", variante = "adresse" } = {}) {
   const m = company.maps;
   const region = variante === "region";
@@ -342,5 +361,6 @@ export function map({ hoehe = "", variante = "adresse" } = {}) {
             <a href="${m.link}" target="_blank" rel="noopener">In Google Maps öffnen</a>
           </p>
         </div>
-      </div>`;
+      </div>
+${bewertungsBand()}`;
 }

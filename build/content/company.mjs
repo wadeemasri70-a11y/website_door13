@@ -50,6 +50,12 @@ export const company = {
     { key: "youtube", name: "YouTube", url: "" },
     { key: "linkedin", name: "LinkedIn", url: "" }
   ],
+  bewertung: {
+    wert: 5.0,
+    anzahl: 27,
+    stand: "September 2026",
+    link: "https://maps.google.com/?cid=14522240412467163909"
+  },
   maps: {
     key: "",
     address: "Kasterer Str. 12, 50181 Bedburg",
