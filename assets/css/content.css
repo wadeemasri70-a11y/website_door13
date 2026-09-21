@@ -46,7 +46,8 @@
   background-image: url("../img/team-banner.jpg");
   background-size: cover;
   background-position: 50% 20%;
-  opacity: 0.3;
+  opacity: 0.52;
+  filter: contrast(1.12) saturate(1.08);
   pointer-events: none;
   -webkit-mask-image: linear-gradient(180deg,
     rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 14%, #000 38%,
@@ -63,17 +64,17 @@
   pointer-events: none;
   background: linear-gradient(95deg,
     var(--bg-contrast) 0%,
-    color-mix(in srgb, var(--bg-contrast) 88%, transparent) 34%,
-    color-mix(in srgb, var(--bg-contrast) 42%, transparent) 58%,
-    transparent 78%);
+    color-mix(in srgb, var(--bg-contrast) 92%, transparent) 30%,
+    color-mix(in srgb, var(--bg-contrast) 45%, transparent) 52%,
+    transparent 72%);
 }
 @media (max-width: 60rem) {
-  .hero__foto { background-position: 58% 18%; opacity: 0.22; }
+  .hero__foto { background-position: 58% 18%; opacity: 0.4; }
   .hero::after {
     background: linear-gradient(180deg,
       var(--bg-contrast) 0%,
-      color-mix(in srgb, var(--bg-contrast) 72%, transparent) 46%,
-      color-mix(in srgb, var(--bg-contrast) 88%, transparent) 100%);
+      color-mix(in srgb, var(--bg-contrast) 66%, transparent) 42%,
+      color-mix(in srgb, var(--bg-contrast) 86%, transparent) 100%);
   }
 }
 
