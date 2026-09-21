@@ -973,11 +973,17 @@
 }
 
 /* Google-Bewertung */
+.karte {
+  display: grid;
+  gap: var(--sp-4);
+  align-content: start;
+  min-width: 0;
+}
+
 .bewertung {
   display: flex;
   align-items: center;
   gap: var(--sp-4);
-  margin-top: var(--sp-5);
   padding: var(--sp-4) var(--sp-5);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-md);

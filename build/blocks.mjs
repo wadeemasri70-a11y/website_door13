@@ -331,7 +331,8 @@ export function map({ hoehe = "", variante = "adresse" } = {}) {
   const ziel = region
     ? `${m.region.lat},${m.region.lng}`
     : m.address;
-  return `      <div class="map${hoehe ? " map--" + hoehe : ""}${region ? " map--region" : ""}" data-map data-reveal
+  return `      <div class="karte" data-reveal>
+        <div class="map${hoehe ? " map--" + hoehe : ""}${region ? " map--region" : ""}" data-map
            data-variante="${variante}"
            data-maps-key="${m.key}"
            data-address="${esc(m.address)}"
@@ -361,6 +362,7 @@ export function map({ hoehe = "", variante = "adresse" } = {}) {
             <a href="${m.link}" target="_blank" rel="noopener">In Google Maps öffnen</a>
           </p>
         </div>
-      </div>
-${bewertungsBand()}`;
+        </div>
+${bewertungsBand()}
+      </div>`;
 }
