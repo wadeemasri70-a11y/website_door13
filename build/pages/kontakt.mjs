@@ -21,6 +21,18 @@ export const pages = [
           </div>
 ${B.map({ hoehe: "breit" })}`
           })
+        }),
+        B.section({
+          variant: "paper",
+          eyebrow: "Wer abnimmt",
+          h2: "Am anderen Ende sitzt jemand, der Türen kennt.",
+          lead: "Störungsmeldung, Wartungsfrage oder ein Angebot – Ihre Anfrage landet direkt bei der Disposition.",
+          html: B.media({
+            src: "assets/img/ueber-uns/buero-kollege.jpg",
+            alt: "Kollege im Buero von Falke Tuerautomation",
+            caption: "Im Büro in Bedburg: Hier laufen Termine und Störungsmeldungen zusammen.",
+            ratio: "3 / 2"
+          })
         })
       ].join("\n\n")
   }

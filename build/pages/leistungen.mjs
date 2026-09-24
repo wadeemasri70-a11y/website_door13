@@ -86,6 +86,18 @@ const wartungsanfrage = {
   ${B.form({ id: "wartung", kind: "wartung" })}
         </div>`
         })
+      }),
+      B.section({
+        variant: "paper",
+        eyebrow: "Was danach passiert",
+        h2: "Ein Termin, ein Techniker, ein Protokoll.",
+        lead: "Wir prüfen die Anlage nach Norm, halten Mängel schriftlich fest und kleben die Prüfplakette erst, wenn alles stimmt.",
+        html: B.media({
+          src: "assets/img/leistung/pruefung-wartung.jpg",
+          alt: "Servicetechniker bei der wiederkehrenden Pruefung einer Tueranlage",
+          caption: "Jede Prüfung endet mit Protokoll, Mängelliste und Prüfplakette.",
+          ratio: "1 / 1", hoch: true
+        })
       })
     ].join("\n\n")
 };

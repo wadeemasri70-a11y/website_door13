@@ -62,8 +62,8 @@ ${items.map((i) => `          <li>${i}</li>`).join("\n")}
       </div>`;
 }
 
-export function media({ src, alt, caption = "", ratio = "4 / 3", note = "" }) {
-  return `      <figure class="media" data-reveal style="--media-ratio:${ratio}">
+export function media({ src, alt, caption = "", ratio = "4 / 3", note = "", hoch = false }) {
+  return `      <figure class="media${hoch ? " media--hoch" : ""}" data-reveal style="--media-ratio:${ratio}">
         <img src="${src}" alt="${esc(alt)}" loading="lazy" decoding="async">
         ${caption ? `<figcaption>${caption}</figcaption>` : ""}
         ${note ? `` : ""}

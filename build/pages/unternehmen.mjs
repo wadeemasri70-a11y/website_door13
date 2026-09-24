@@ -69,7 +69,12 @@ export const pages = [
             <p>Im Rheinland unterwegs, mit Ersatzteilen an Bord und regelmäßig geschult auf die gängigen Fabrikate.</p>
           </article>
         </div>
-`
+` + "\n" + B.media({
+          src: "assets/img/ueber-uns/team-marx.jpg",
+          alt: "Das Team von Falke Tuerautomation bei dem Partner MARX",
+          caption: "Zu Besuch bei unserem Partner MARX.",
+          ratio: "3 / 4", hoch: true
+        })
       }),
       B.bandImage({
         src: "assets/img/team-fuhrpark.jpg",
@@ -147,7 +152,12 @@ export const pages = [
             <p class="more"><a class="link-line" href="kontakt.html">Kontakt aufnehmen →</a></p>
           </article>
         </div>
-`
+` + "\n" + B.media({
+          src: "assets/img/ueber-uns/team-fahrzeug.jpg",
+          alt: "Ein Teil des Teams von Falke Tuerautomation vor dem Servicefahrzeug",
+          caption: "Ein Teil des Teams vor dem Servicefahrzeug.",
+          ratio: "3 / 4", hoch: true
+        })
       })
     ].join("\n\n")
   },
@@ -168,6 +178,11 @@ export const pages = [
           <li><a href="#"><span>Muster-Prüfprotokoll (PDF)</span><small>Platzhalter · Datei einsetzen</small></a></li>
           <li><a href="#"><span>Checkliste vor der Wartung (PDF)</span><small>Platzhalter · Datei einsetzen</small></a></li>
         </ul>`
+      }),
+      B.bandImage({
+        src: "assets/img/ueber-uns/servicefahrzeug.jpg",
+        alt: "Servicetechniker von Falke Tuerautomation am Servicefahrzeug",
+        width: 1760, height: 640
       })
     ].join("\n\n")
   }
